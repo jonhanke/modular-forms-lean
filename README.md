@@ -1,6 +1,6 @@
 # Modular forms in Lean 4
 
-[![Lean build](https://github.com/jonhanke/modular-forms-lean/actions/workflows/build.yml/badge.svg)](https://github.com/jonhanke/modular-forms-lean/actions/workflows/build.yml)
+[![Lean build](https://github.com/jonhanke/modular-forms-lean/actions/workflows/build.yml/badge.svg)](https://github.com/jonhanke/modular-forms-lean/actions/workflows/build.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24069385.svg)](https://doi.org/10.5281/zenodo.24069385)
 
 A Lean 4 library (built on Mathlib and [Tau Ceti](https://github.com/TauCetiProject/TauCeti)) that formalizes two
 texts on modular forms item by item: J. S. Milne's *Modular Functions and Modular Forms* (version 1.31) and
@@ -118,9 +118,9 @@ Corrections and reports of mis-formalizations are very welcome.
 
 ## Releases
 
-Releases are tagged with semantic versions; `main` continues to develop.
+Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24069385](https://doi.org/10.5281/zenodo.24069385) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
-- **v0.1.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`): the first release: the book maps of Milne
+- **[v0.1.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.1.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:10.5281/zenodo.24069386](https://doi.org/10.5281/zenodo.24069386): the first release: the book maps of Milne
   and Miyake and the 12 headline statements above.
 
 **Not in this release** (planned for a later release): half-integral weight forms (Shimura, Kohnen, Waldspurger,
