@@ -1,0 +1,31 @@
+name = "modular_forms_lean"
+version = "0.1.0"
+defaultTargets = ["ModularFormsKB", "Challenge", "Solution"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+
+# Tau Ceti: Fuchsian groups, the compactified modular curves as Riemann surfaces, Hecke operators and newforms at
+# level N, function fields. Built from source (no prebuilt cache).
+[[require]]
+name = "TauCeti"
+git = "https://github.com/TauCetiProject/TauCeti.git"
+rev = "4908b0344e1be5f7e9e5af7f7e640464843a2c84"
+
+# Mathlib last so that its dependency versions take precedence; rev = Tau Ceti's lake-manifest.json.
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "1b1ccf4b088b32fa3f23f2de1127433254a81e1e"
+
+[[lean_lib]]
+name = "ModularFormsKB"
+
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]

@@ -1,0 +1,7 @@
+Copyright 2026 Jonathan Hanke
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It depends on Mathlib (https://github.com/leanprover-community/mathlib4) and Tau Ceti
+(https://github.com/TauCetiProject/TauCeti), both licensed under the Apache License, Version 2.0, as Lake
+dependencies; no file of either is copied into this repository.

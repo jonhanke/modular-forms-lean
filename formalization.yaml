@@ -1,0 +1,180 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "modular-forms-lean (ModularFormsKB): modular functions and modular forms"
+  description: >-
+    A Lean 4 + Mathlib + Tau Ceti formalization of two texts on modular forms, item by item: J. S. Milne's
+    Modular Functions and Modular Forms (version 1.31) and T. Miyake's Modular Forms, with dimension bounds for
+    modular forms on Gamma_0(N) and Gamma_1(N). Principal results: Weil's Riemann hypothesis for curves over finite
+    fields (every genus); Kronecker's modular equation for every level N (C(X_0(N)) = C(j, j_N), the modular
+    polynomial in Z[X, Y], symmetric, with Kronecker's congruence); the integrality of singular moduli; Abel's
+    theorem and the field of elliptic functions for complex tori; the moduli of elliptic curves and of elliptic
+    curves with a cyclic subgroup of order N over an algebraically closed field; Hecke's theorem and Weil's converse
+    theorem. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
+    credits the results proved here that Mathlib, Tau Ceti or the Stacks Project formalization (Axiom) also prove.
+  authors:
+    - "Jonathan Hanke"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jonathan Hanke"
+
+classification:
+  arxiv: ["math.NT"]
+  # 11F03 modular and automorphic functions; 11F11 holomorphic modular forms of integral weight; 11F25 Hecke-Petersson
+  # operators; 11F66 Langlands L-functions, Dirichlet series attached to modular forms; 14G15 finite ground fields;
+  # 14H52 elliptic curves; 33E05 elliptic functions; 03B35 mechanization of proofs and logical operations.
+  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "03B35"]
+
+sources:
+  - title: "Modular Functions and Modular Forms (version 1.31)"
+    authors:
+      - "James S. Milne"
+    type: "lecture-notes"
+    location: "jmilne.org, 2017; every numbered item and the definitions in running text mapped in docs/results/books/milne-mf.md"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Modular Forms"
+    authors:
+      - "Toshitsune Miyake"
+    type: "book"
+    location: "Springer, 1989; every numbered item mapped in docs/results/books/miyake.md; formalized mainly in Chapters 1, 3 and 4 (section 4.3: L-functions, Hecke's and Weil's theorems)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "On the congruence of modular forms"
+    authors:
+      - "Jacob Sturm"
+    type: "paper"
+    location: "Lecture Notes in Mathematics 1240 (1987), 275-280 [unverified locator]; docs/results/books/dimension.md"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Further references"
+    type: "bibliography"
+    location: "references.bib in this repository; each result is tagged with @[kb \"<key>\" \"<locator>\"]"
+    relationship: "background"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: "Built on Mathlib at commit 1b1ccf4 (the commit Tau Ceti 4908b03 pins). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
+  - id: "https://github.com/TauCetiProject/TauCeti"
+    relationship: "builds-on"
+    note: >-
+      A Lake dependency at commit 4908b03 (built from source): Fuchsian groups and the compactified modular curves as
+      compact Riemann surfaces, the j-function, Hecke operators and newforms at level N, function fields over finite
+      fields and their genus, elliptic-curve schemes and the fine moduli variety Y_1(N). Tau Ceti also has the
+      Kronecker-Weber theorem and the addition theorem for the Weierstrass function, which are proved here too but
+      are not headlines. docs/results/comparison.md compares each headline with Tau Ceti main (686d0d7f, 2026-11-07).
+  - id: "https://github.com/jonhanke/algebraic-number-theory-lean"
+    relationship: "related"
+    note: "Independent (different Mathlib); both have the modular polynomial and X_0(N); see the overlap section of docs/results/comparison.md."
+
+status:
+  scope: >-
+    Formalized (the 12 statements of Challenge.lean, proved in Solution.lean): Milne 8 (Theorem 11.4, Theorem 6.1,
+    Corollary 12.16, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4 and 8.6), Miyake 4 (Theorems 4.3.6,
+    4.3.8 and 4.3.15, the last in two parts). The book maps give the status of every item. Some library files state
+    named results of the books without proof (named statements); no headline depends on them.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  # No custom axioms; the standard axioms used (checked by scripts/check_axioms.lean and lake comparator):
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5", "Claude Sonnet 5.5", "Claude Haiku 5.5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        Claude Code orchestrating parallel agents, each in its own git branch, with Lean kernel builds (lake build)
+        as the check and pull requests merged into the main branch; human direction throughout.
+      prompting_notes: >-
+        Human-chosen books and results; agents worked item by item from coverage tables of each book, with
+        written notes passed between sessions. Cited results that are not proved are named Lean structures, never assumed
+        silently; a kernel-level audit decides which are proved.
+  notes: >-
+    Jonathan Hanke designed and directed the project; the Lean code was written almost entirely by Claude Opus 5.5,
+    with a share by Claude Sonnet 5.5, in October and November 2026 (the paraphrases of Miyake's items in the book
+    map were first drafted by Claude Haiku 5.5). All proofs are checked by the Lean kernel; the headline statements
+    are collected in Challenge.lean for human review.
+
+fidelity:
+  divergences: >-
+    (1) Where the library states a result as a named structure, Challenge.lean unfolds the structure into its
+    field. (2) Weil's theorem is stated for function fields of one variable over a finite field (places, their
+    degrees and the genus), not for curves: the points over the extension of degree n are counted as the sum over
+    d dividing n of d times the number of places of degree d. (3) Theorems 8.4 and 8.6 are stated over an
+    algebraically closed field (Milne states 8.4 over a perfect field through his Remark 8.3, and 8.6 also describes
+    the solution over Q, which is not formalized); varieties are modelled as schemes over the field. (4) Miyake's
+    conditions on q-expansions (4.3.7) are stated as polynomial growth of the coefficients. (5) Values at poles
+    and other junk values follow Lean conventions; statements about elliptic functions hold off a discrete set
+    where the book says so implicitly. (6) Literature locators marked [unverified] have not been checked against
+    the sources; the book maps' one-line statements are paraphrases.
+
+review:
+  status: "not yet reviewed: the 12 headline statements of Challenge.lean and the definitions they use have not yet been reviewed by a human"
+  reviewers: []
+  notes: >-
+    The headline statements and the definitions they use have not yet been reviewed by a human; that review is
+    planned. The rest of the library has not been reviewed by a human, and there has been no external review. Lean
+    checks the proofs; lake comparator checks that Solution.lean proves exactly the Challenge.lean statements using
+    only the standard axioms.
+
+alignment:
+  namespace: "ModularFormsKB"
+  statements:
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 11.4"
+      lean: "ModularFormsKB.Headlines.weil_riemannHypothesis_curves"
+      module: "Challenge / Solution"
+      status: "proved"
+      note: "Function field form, every genus. Also proved in the Stacks Project formalization (Axiom), in étale-cohomological form (tag 03V8, Bombieri–Stepanov); ours is the function-field form of Milne 11.4 and includes the functional equation (Stacks match from its declaration index)."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 6.1"
+      lean: "ModularFormsKB.Headlines.kronecker_modularEquation"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Milne, Modular Functions and Modular Forms, Corollary 12.16"
+      lean: "ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Milne, Modular Functions and Modular Forms, Proposition 3.1"
+      lean: "ModularFormsKB.Headlines.doublyPeriodic_sums"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 3.8"
+      lean: "ModularFormsKB.Headlines.prescribedDivisor"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Milne, Modular Functions and Modular Forms, Proposition 3.11"
+      lean: "ModularFormsKB.Headlines.ellipticFunctionField"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 8.4"
+      lean: "ModularFormsKB.Headlines.ellipticModuli_jLine"
+      module: "Challenge / Solution"
+      status: "proved"
+      note: "Over an algebraically closed field."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 8.6"
+      lean: "ModularFormsKB.Headlines.cyclicModuli"
+      module: "Challenge / Solution"
+      status: "proved"
+      note: "Over an algebraically closed field, every N prime to the characteristic; the description over Q is not formalized."
+    - source: "Miyake, Modular Forms, Theorem 4.3.6"
+      lean: "ModularFormsKB.Headlines.hecke_converse"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Miyake, Modular Forms, Theorem 4.3.8"
+      lean: "ModularFormsKB.Headlines.hecke_converse_levelOne"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Miyake, Modular Forms, Theorem 4.3.15"
+      lean: "ModularFormsKB.Headlines.weil_converse"
+      module: "Challenge / Solution"
+      status: "proved"
+    - source: "Miyake, Modular Forms, Theorem 4.3.15, last sentence"
+      lean: "ModularFormsKB.Headlines.weil_converse_cusp"
+      module: "Challenge / Solution"
+      status: "proved"
+
+acknowledgements: >-
+  Mathlib and its contributors; the Tau Ceti contributors, on whose library this one is built; the Lean FRO for
+  Lean, Lake and lake comparator; Claude Code (Anthropic).

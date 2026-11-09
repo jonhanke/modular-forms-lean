@@ -1,0 +1,25 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.weil_riemannHypothesis_curves",
+    "ModularFormsKB.Headlines.kronecker_modularEquation",
+    "ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic",
+    "ModularFormsKB.Headlines.doublyPeriodic_sums",
+    "ModularFormsKB.Headlines.prescribedDivisor",
+    "ModularFormsKB.Headlines.ellipticFunctionField",
+    "ModularFormsKB.Headlines.ellipticModuli_jLine",
+    "ModularFormsKB.Headlines.cyclicModuli",
+    "ModularFormsKB.Headlines.hecke_converse",
+    "ModularFormsKB.Headlines.hecke_converse_levelOne",
+    "ModularFormsKB.Headlines.weil_converse",
+    "ModularFormsKB.Headlines.weil_converse_cusp"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
