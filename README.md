@@ -165,7 +165,7 @@ against the literature. Corrections and reports of mis-formalizations are very w
 
 Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24069385](https://doi.org/10.5281/zenodo.24069385) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
-- **v0.2.0** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`): statement maps, a new kind of map, for
+- **[v0.2.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.2.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:10.5281/zenodo.24121513](https://doi.org/10.5281/zenodo.24121513): statement maps, a new kind of map, for
   three more books: Shimura, *Elementary Dirichlet Series and Modular Forms* (12 central results stated in Lean;
   3 proved, 6 in part), Iwaniec, *Topics in Classical Automorphic Forms* (28; 6 proved, 2 in part, 2 conditional) and
   Andrianov–Zhuravlev, *Modular Forms and Hecke Operators* (26; 12 proved, 3 in part, 1 conditional); refreshed book
