@@ -1,4 +1,8 @@
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.Complex.UpperHalfPlane.Manifold
+import Mathlib.NumberTheory.ModularForms.SlashActions
+import Mathlib.RingTheory.DedekindDomain.Basic
 
 /-!
 # Invariance under an elliptic element of infinite order forces vanishing

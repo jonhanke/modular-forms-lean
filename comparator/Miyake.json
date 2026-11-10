@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge_Miyake",
+  "solution_module": "Solution_Miyake",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.hecke_converse",
+    "ModularFormsKB.Headlines.hecke_converse_levelOne",
+    "ModularFormsKB.Headlines.weil_converse",
+    "ModularFormsKB.Headlines.weil_converse_cusp"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

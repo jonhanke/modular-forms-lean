@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+import Mathlib.NumberTheory.DirichletCharacter.Basic
+import Mathlib.NumberTheory.LSeries.Basic
 import ModularFormsKB.Citation
 /-!
 # Milne, Section 11: twisted $L$-series

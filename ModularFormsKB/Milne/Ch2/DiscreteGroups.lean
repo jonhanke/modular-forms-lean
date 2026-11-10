@@ -1,4 +1,9 @@
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.Complex.UpperHalfPlane.Metric
+import Mathlib.Analysis.Complex.UpperHalfPlane.ProperAction
+import Mathlib.GroupTheory.Commensurable
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.Topology.GDelta.MetrizableSpace
 import ModularFormsKB.Citation
 /-!
 # Milne, Chapter 2: discrete subgroups of `SL₂(ℝ)` acting on `ℍ`

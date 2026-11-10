@@ -1,4 +1,10 @@
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Geometry.Manifold.Sheaf.Basic
+import Mathlib.LinearAlgebra.Projectivization.Basic
+import Mathlib.RingTheory.Henselian
+import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.RingTheory.SimpleRing.Principal
 import TauCeti.FieldTheory.FunctionField.Basic
 import TauCeti.FieldTheory.FunctionField.Place.Basic
 import TauCeti.Analysis.Complex.RiemannSurface.FunctionField.Order

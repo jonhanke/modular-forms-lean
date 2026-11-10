@@ -2,6 +2,8 @@ import Mathlib.Analysis.MellinInversion
 import Mathlib.NumberTheory.LSeries.MellinEqDirichlet
 import ModularFormsKB.Miyake.Sec4_3.Defs
 import ModularFormsKB.Citation
+import Mathlib.Algebra.Order.Star.Real
+
 /-!
 # Milne, Chapter 9: the Mellin transform (Proposition 9.1, Theorem 9.2)
 

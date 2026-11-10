@@ -1,4 +1,6 @@
 import ModularFormsKB.Miyake.Sec4_3.QSeries
+import Mathlib.NumberTheory.LSeries.PrimesInAP
+import Mathlib.RingTheory.SimpleRing.Principal
 
 /-!
 # Miyake §4.3: Gauss sums and twists; the set of moduli in Weil's theorem

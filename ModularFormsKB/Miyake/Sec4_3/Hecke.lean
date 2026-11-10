@@ -2,6 +2,7 @@ import ModularFormsKB.Miyake.Sec4_3.QSeries
 import ModularFormsKB.Miyake.Sec4_3.Strip
 import ModularFormsKB.Miyake.Sec4_3.HeckeCore
 import ModularFormsKB.Miyake.Sec4_3.ModularQ
+import Mathlib.NumberTheory.LSeries.Linearity
 
 /-!
 # Miyake §4.3: Hecke's converse theorem

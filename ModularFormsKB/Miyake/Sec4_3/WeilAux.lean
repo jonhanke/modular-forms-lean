@@ -1,4 +1,6 @@
 import ModularFormsKB.Miyake.Sec4_3.Gauss
+import Mathlib.Data.FunLike.Fintype
+import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Auxiliary results for Weil's converse theorem

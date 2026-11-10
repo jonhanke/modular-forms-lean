@@ -1,4 +1,5 @@
 import ModularFormsKB.Milne.Ch3.WeierstrassUniformization
+import Mathlib.Algebra.Order.Star.Int
 
 /-!
 # Milne, Chapter 3: the invariants `g₂, g₃` determine the lattice

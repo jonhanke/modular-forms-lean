@@ -1,25 +1,50 @@
 {
-  "challenge_module": "Challenge",
-  "solution_module": "Solution",
-  "theorem_names": [
-    "ModularFormsKB.Headlines.weil_riemannHypothesis_curves",
-    "ModularFormsKB.Headlines.kronecker_modularEquation",
-    "ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic",
-    "ModularFormsKB.Headlines.doublyPeriodic_sums",
-    "ModularFormsKB.Headlines.prescribedDivisor",
-    "ModularFormsKB.Headlines.ellipticFunctionField",
-    "ModularFormsKB.Headlines.ellipticModuli_jLine",
-    "ModularFormsKB.Headlines.cyclicModuli",
-    "ModularFormsKB.Headlines.hecke_converse",
-    "ModularFormsKB.Headlines.hecke_converse_levelOne",
-    "ModularFormsKB.Headlines.weil_converse",
-    "ModularFormsKB.Headlines.weil_converse_cusp"
+  "description": "One lake comparator check per book (a combined check of all headlines loads every book at once). Run one book with: ./scripts/verify-comparator.sh <book>. Each entry's config is a complete lake comparator configuration.",
+  "books": [
+    {
+      "book": "Milne",
+      "title": "Milne, Modular Functions and Modular Forms",
+      "config": "comparator/Milne.json",
+      "challenge_module": "Challenge_Milne",
+      "solution_module": "Solution_Milne",
+      "theorems": 9
+    },
+    {
+      "book": "Miyake",
+      "title": "Miyake, Modular Forms",
+      "config": "comparator/Miyake.json",
+      "challenge_module": "Challenge_Miyake",
+      "solution_module": "Solution_Miyake",
+      "theorems": 4
+    },
+    {
+      "book": "Shimura",
+      "title": "Shimura, Elementary Dirichlet Series and Modular Forms",
+      "config": "comparator/Shimura.json",
+      "challenge_module": "Challenge_Shimura",
+      "solution_module": "Solution_Shimura",
+      "theorems": 1
+    },
+    {
+      "book": "Iwaniec",
+      "title": "Iwaniec, Topics in Classical Automorphic Forms",
+      "config": "comparator/Iwaniec.json",
+      "challenge_module": "Challenge_Iwaniec",
+      "solution_module": "Solution_Iwaniec",
+      "theorems": 2
+    },
+    {
+      "book": "AndrianovZhuravlev",
+      "title": "Andrianov and Zhuravlev, Modular Forms and Hecke Operators",
+      "config": "comparator/AndrianovZhuravlev.json",
+      "challenge_module": "Challenge_AndrianovZhuravlev",
+      "solution_module": "Solution_AndrianovZhuravlev",
+      "theorems": 1
+    }
   ],
-  "definition_names": [],
   "permitted_axioms": [
     "propext",
     "Quot.sound",
     "Classical.choice"
-  ],
-  "enable_nanoda": true
+  ]
 }

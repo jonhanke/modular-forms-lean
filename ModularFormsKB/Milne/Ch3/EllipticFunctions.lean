@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Analysis.Meromorphic.RCLike
+import Mathlib.Geometry.Manifold.Sheaf.Basic
+import Mathlib.Order.CompletePartialOrder
 import TauCeti.Geometry.Manifold.Algebra.Quotient
 import TauCeti.Analysis.Complex.UpperHalfPlane.PeriodPair
 import TauCeti.Analysis.SpecialFunctions.Elliptic.Uniformization

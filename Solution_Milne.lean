@@ -10,15 +10,14 @@ import ModularFormsKB.Milne.Ch8.EllipticModuliProof
 import ModularFormsKB.Milne.Ch8.YOneSolution
 import ModularFormsKB.Milne.Ch11.WeilUnconditional
 import ModularFormsKB.Milne.Ch12.JIntegral
-import ModularFormsKB.Miyake.Sec4_3.Hecke
-import ModularFormsKB.Miyake.Sec4_3.WeilTheorem
+import ModularFormsKB.Milne.Wave4A.GenusZeroDifferentials
 
 /-!
-# Headline statements of ModularFormsKB 0.1.0, proved
+# Headline statements of modular-forms-lean 0.2.0: Milne, *Modular Functions and Modular Forms*, proved
 
-The statements of `Challenge.lean`, each proved by appeal to the library theorem. `lake comparator`
-(configured by `comparator.json`) checks that each statement here is exactly the one in
-`Challenge.lean` and that its proof uses only the standard axioms `propext`, `Classical.choice`
+The statements of `Challenge_Milne.lean`, each proved by appeal to the library theorem. `lake comparator`
+(configured by `comparator/Milne.json`) checks that each statement here is exactly the one in
+`Challenge_Milne.lean` and that its proof uses only the standard axioms `propext`, `Classical.choice`
 and `Quot.sound`.
 
 Each statement is the library's statement, copied, except that a named statement in the conclusion (a `Prop`
@@ -38,13 +37,14 @@ should check these too:
 * `ModularFormsKB.Milne.Variety`, `ModularFormsKB.Milne.Variety.point`, `ModularFormsKB.Milne.affineLine`,
   `ModularFormsKB.Milne.affineLineCoordinate`, `ModularFormsKB.Milne.ellipticFunctor`, `ModularFormsKB.Milne.jClass`,
   `ModularFormsKB.Milne.cyclicFunctor`, `ModularFormsKB.Milne.IsModuliSolution` (moduli of elliptic curves)
-* `Miyake.CoeffGrowth`, `Miyake.qSeries`, `Miyake.completedL`, `Miyake.BoundedOnVerticalStrips`,
-  `Miyake.HeckeCondition`, `Miyake.fricke`, `Miyake.twist`, `Miyake.twistedCompletedL`,
-  `Miyake.TwistedHeckeCondition`, `Miyake.gaussW`, `Miyake.weilConstant`, `Miyake.IsModularFormChar`,
-  `Miyake.IsCuspFormChar`, `Miyake.IsOddPrimeOrFour`, `Miyake.IsWeilSet` (converse theorems)
+* `ModularFormsKB.Milne.ModularCurveX` (the compactified quotient `Γ\ℍ*` of Tau Ceti, for the image of `Γ` in
+  `PSL₂(ℝ)`), `ModularFormsKB.Milne.RiemannSurface.holomorphicDifferentials` (families of chart coefficients,
+  holomorphic on each chart and satisfying the transformation rule) and `ModularFormsKB.Milne.RiemannSurface.genus`
+  (its dimension, `Module.finrank`) (the genus of `X(N)`)
 -/
 
 namespace ModularFormsKB.Headlines
+
 
 universe u v
 
@@ -177,60 +177,20 @@ theorem cyclicModuli (N : ℕ) (hN : (N : k) ≠ 0) :
 
 end Moduli
 
-section Converse
+section GenusZero
 
-open Complex Filter Asymptotics CongruenceSubgroup _root_.Miyake
-open UpperHalfPlane hiding I
-open scoped Real MatrixGroups ModularForm
+open CongruenceSubgroup ModularFormsKB.Milne
 
-/-- **Hecke's theorem with the Fricke involution** (Miyake, Theorem 4.3.6). For positive integers `k`, `N` and
-coefficients `a_n`, `b_n` of polynomial growth, with `f = ∑ a_n e^{2πinz}` and `g = ∑ b_n e^{2πinz}`:
-`g = f|_k ω_N` on `ℍ` if and only if `Λ_N(s; f)` and `Λ_N(s; g)` continue to the whole plane with
-`Λ_N(s; f) = i^k Λ_N(k - s; g)` and `Λ_N(s; f) + a_0/s + i^k b_0/(k - s)` entire and bounded on vertical strips. -/
-theorem hecke_converse {k N : ℕ} (hk : 0 < k) (hN : 0 < N) {a b : ℕ → ℂ}
-    (ha : CoeffGrowth a) (hb : CoeffGrowth b) :
-    (∀ z : ℂ, 0 < z.im → qSeries b z = fricke k N (qSeries a) z) ↔
-      HeckeCondition k N (I ^ k) a b := by
-  exact _root_.Miyake.hecke_fricke hk hN ha hb
+/-- **The modular curves `X(N)`, `N = 2, 3, 4, 5`, have genus zero** (Milne, Example 2.23): every holomorphic
+differential on the compact Riemann surface `X(N) = Γ(N)\ℍ*` is zero, so its genus (the dimension of the space of
+holomorphic differentials) is `0`. The first part is stated because `Module.finrank` is also `0` on an
+infinite-dimensional space. Tau Ceti (main) proves the Riemann–Hurwitz formula for Fuchsian groups in
+Euler-characteristic form, under finite-CW-type hypotheses; it does not state the genus of `X(N)`. -/
+theorem modularCurveX_Gamma_genus_eq_zero {N : ℕ} [NeZero N] (hN : 2 ≤ N) (hN5 : N ≤ 5) :
+    RiemannSurface.holomorphicDifferentials (ModularCurveX (Gamma N)) = ⊥ ∧
+      RiemannSurface.genus (ModularCurveX (Gamma N)) = 0 := by
+  exact ModularFormsKB.Milne.holomorphicDifferentials_modularCurveX_Gamma_eq_bot hN hN5
 
-/-- **Hecke's converse theorem at level one** (Miyake, Theorem 4.3.8). For even `k ≥ 2` and coefficients `a_n` of
-polynomial growth, `∑ a_n e^{2πinz}` is a modular form of weight `k` for `SL₂(ℤ)` if and only if
-`Λ(s) = (2π)^{-s} Γ(s) L(s)` continues to the whole plane with `Λ(s) = (-1)^{k/2} Λ(k - s)` and
-`Λ(s) + a_0/s + (-1)^{k/2} a_0/(k - s)` entire and bounded on vertical strips. -/
-theorem hecke_converse_levelOne {k : ℕ} (hk : Even k) (hk2 : 2 ≤ k) {a : ℕ → ℂ} (ha : CoeffGrowth a) :
-    (∃ F : ModularForm 𝒮ℒ k, ∀ τ : ℍ, F τ = qSeries a τ) ↔
-      HeckeCondition k 1 ((-1) ^ (k / 2)) a a := by
-  exact _root_.Miyake.levelOne_converse hk hk2 ha
-
-/-- **Weil's converse theorem** (Miyake, Theorem 4.3.15). Let `k`, `N` be positive integers, `χ` a Dirichlet
-character modulo `N` with `χ(-1) = (-1)^k`, `a_n`, `b_n` of polynomial growth, `f = ∑ a_n e^{2πinz}`,
-`g = ∑ b_n e^{2πinz}`, and `𝓜` a set of odd primes and `4`, prime to `N`, meeting every arithmetic progression of
-coprime positive integers. If `Λ_N(s; f)`, `Λ_N(s; g)` satisfy Hecke's condition with root number `i^k`, and for
-every primitive character `ψ` of conductor in `𝓜` the twisted functions satisfy the twisted condition with Weil's
-constant `χ(m_ψ) ψ(-N) W(ψ)/W(ψ̄)`, then `f ∈ M_k(N, χ)`, `g ∈ M_k(N, χ̄)` and `g = f|_k ω_N`. -/
-theorem weil_converse {k N : ℕ} (hk : 0 < k) (hN : 0 < N) (χ : DirichletCharacter ℂ N)
-    (hχ : χ (-1) = (-1) ^ k) {a b : ℕ → ℂ} (ha : CoeffGrowth a) (hb : CoeffGrowth b)
-    {M : Set ℕ} (hM : IsWeilSet N M) (h1 : HeckeCondition k N (I ^ k) a b)
-    (h2 : ∀ (m : ℕ) [NeZero m], m ∈ M → ∀ ψ : DirichletCharacter ℂ m, ψ.IsPrimitive →
-      TwistedHeckeCondition k N ψ (weilConstant χ ψ) a b) :
-    IsModularFormChar k N χ (fun τ : ℍ ↦ qSeries a τ) ∧
-      IsModularFormChar k N χ⁻¹ (fun τ : ℍ ↦ qSeries b τ) ∧
-      ∀ z : ℂ, 0 < z.im → qSeries b z = fricke k N (qSeries a) z := by
-  exact _root_.Miyake.weil hk hN χ hχ ha hb hM h1 h2
-
-/-- **Weil's converse theorem for cusp forms** (Miyake, Theorem 4.3.15, last sentence): under the hypotheses of
-`weil_converse`, if moreover `L(s; f)` converges absolutely at `s = k - δ` for some `δ > 0`, then `f` and `g` are
-cusp forms. -/
-theorem weil_converse_cusp {k N : ℕ} (hk : 0 < k) (hN : 0 < N) (χ : DirichletCharacter ℂ N)
-    (hχ : χ (-1) = (-1) ^ k) {a b : ℕ → ℂ} (ha : CoeffGrowth a) (hb : CoeffGrowth b)
-    {M : Set ℕ} (hM : IsWeilSet N M) (h1 : HeckeCondition k N (I ^ k) a b)
-    (h2 : ∀ (m : ℕ) [NeZero m], m ∈ M → ∀ ψ : DirichletCharacter ℂ m, ψ.IsPrimitive →
-      TwistedHeckeCondition k N ψ (weilConstant χ ψ) a b)
-    {δ : ℝ} (hδ : 0 < δ) (hL : LSeriesSummable a (k - δ)) :
-    IsCuspFormChar k N χ (fun τ : ℍ ↦ qSeries a τ) ∧
-      IsCuspFormChar k N χ⁻¹ (fun τ : ℍ ↦ qSeries b τ) := by
-  exact _root_.Miyake.weil_cusp hk hN χ hχ ha hb hM h1 h2 hδ hL
-
-end Converse
+end GenusZero
 
 end ModularFormsKB.Headlines

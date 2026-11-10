@@ -1,4 +1,8 @@
 import ModularFormsKB.Milne.Ch3.EllipticFunctions
+import Mathlib.Algebra.Order.Star.Int
+import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.Topology.Homotopy.Lifting
 
 /-!
 # Milne, Chapter 3: holomorphic maps of complex tori

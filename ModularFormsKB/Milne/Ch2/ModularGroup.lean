@@ -1,4 +1,8 @@
-import Mathlib
+import Mathlib.Algebra.Order.Star.Int
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.GroupTheory.Coprod.Basic
+import Mathlib.GroupTheory.CoprodI
+import Mathlib.LinearAlgebra.Matrix.FixedDetMatrices
 import TauCeti.NumberTheory.BinaryQuadraticForm.Reduction
 import TauCeti.NumberTheory.BinaryQuadraticForm.FiniteClasses
 import TauCeti.NumberTheory.Modular.Orbits

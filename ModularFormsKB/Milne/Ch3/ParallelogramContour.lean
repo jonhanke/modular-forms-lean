@@ -6,6 +6,11 @@ import TauCeti.Analysis.Contour.Winding.SegmentSum
 import TauCeti.Analysis.Contour.Winding.Integer
 import TauCeti.Analysis.Contour.Curve.Concat
 import TauCeti.Analysis.Contour.LogDerivFTC
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Milne, Chapter 3: contour integration around a fundamental parallelogram

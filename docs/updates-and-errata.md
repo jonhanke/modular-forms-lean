@@ -2,6 +2,21 @@
 
 Corrections to the books found while formalizing them: a statement of the book that is false as written (the library proves its negation for the literal formalization) or that needs an extra hypothesis, with the corrected form that the library proves or states. Gaps in the book's proofs of statements that are true are listed under Remarks at the end.
 
+## 2026-11-10: Shimura, *Elementary Dirichlet Series and Modular Forms* (2007), Theorem 4.9 and Corollary 4.16
+
+- **Theorem 4.9, (4.16a)**, p. 30. Printed for every Dirichlet character $\chi$ modulo $N > 1$ with
+  $\chi(-1) = (-1)^k$: $N^k(k-1)!(2\pi i)^{-k}L(k,\chi) = \sum_{a=1}^{m}\chi(a)\zeta^aE_{-\zeta^a,k-1}(0)/(\zeta^a-1)$,
+  $m = [(N-1)/2]$. Counterexample: $N = 2$, $\chi$ trivial, $k = 2$; the sum is empty but $L(2,\chi) \ne 0$
+  (Lean: `ModularFormsKB.Shimura2007.not_rootOfUnityValueBookStatement`). The proof's step $\chi(m+1) = 0$ for even
+  $N$ fails for $N = 2$. Corrected statement: assume $N > 2$ (`RootOfUnityValueStatement`, stated, not proved).
+- **Corollary 4.16, (4.45)**, p. 38. The denominator $d(\overline\chi(2) - 4)$ should be $d(\chi(2) - 4)$: (4.45) is
+  (4.32) at $k = 2$, and (4.32) (p. 35) has the factor $2^k - \chi(2)$ without bar, as its proof requires
+  ($2G(\overline\chi)(1-\chi(2)2^{-k})L(k,\chi) = G(\overline\chi)\sum_{m\text{ odd}}\chi(m)m^{-k}$). Checked on paper
+  only; (4.45) is not formalized.
+- (16.12), p. 125: $F^{k,n}_p$ is a typo for $F^{k,m}_p$.
+- (4.3g), p. 25: $E_{c^{-1},n}(0) = (-1)^{n+1}cE_{c,n}(0)$ is said to hold for $n \ge 0$, but at $n = 0$ it reads
+  $1 = -c$. Corrected: $n \ge 1$ (Lean: `eulerPoly_eval_zero_inv`, proved with $1 \le n$).
+
 ## 2026-11-08: the paper-only errata are now proved in Lean
 
 Two entries below were argued on paper only; both counterexamples are now Lean theorems, with the standard axioms only.

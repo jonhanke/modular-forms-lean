@@ -4,6 +4,8 @@ import ModularFormsKB.Miyake.Sec4_3.Gauss
 import ModularFormsKB.Miyake.Sec4_3.WeilAux
 import ModularFormsKB.Miyake.Sec4_3.Elliptic
 import ModularFormsKB.Miyake.Sec4_3.WeilPrep
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # Miyake §4.3: Weil's converse theorem

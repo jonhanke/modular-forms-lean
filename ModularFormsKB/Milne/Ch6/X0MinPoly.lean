@@ -2,6 +2,7 @@ import ModularFormsKB.Milne.Ch6.LevelTwo
 import ModularFormsKB.Milne.Ch6.CosetProduct
 import ModularFormsKB.Milne.Ch6.X0Degree
 import TauCeti.Analysis.Complex.RiemannSurface.IdentityTheorem
+import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
 # The degree of $j(Nz)$ over $\mathbb C(j)$ is $\psi$
