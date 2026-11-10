@@ -1,6 +1,10 @@
 import ModularFormsKB.Miyake.Sec4_3.QSeries
 import ModularFormsKB.Miyake.Sec4_3.Strip
 import ModularFormsKB.Miyake.Sec4_3.Decay
+import Mathlib.Analysis.MellinInversion
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Hecke's converse theorem: the analytic core

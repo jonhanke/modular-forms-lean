@@ -1,4 +1,8 @@
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.Complex.Polynomial.Basic
+import Mathlib.FieldTheory.IsAlgClosed.Classification
+import Mathlib.RingTheory.AlgebraicIndependent.RankAndCardinality
+import Mathlib.RingTheory.SimpleRing.Principal
 import ModularFormsKB.Citation
 /-!
 # Milne, Section 12: a complex number with finitely many conjugates under Aut(C) is algebraic

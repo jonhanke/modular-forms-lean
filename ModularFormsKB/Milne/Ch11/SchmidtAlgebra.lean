@@ -1,4 +1,10 @@
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Int
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.Algebra.Polynomial.RingDivision
+import Mathlib.Analysis.Normed.Field.Lemmas
+import Mathlib.RingTheory.PowerSeries.Basic
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # F. K. Schmidt's theorem: the algebraic steps

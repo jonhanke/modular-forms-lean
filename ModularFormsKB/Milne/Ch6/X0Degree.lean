@@ -6,6 +6,7 @@ import TauCeti.Analysis.Complex.RiemannSurface.FunctionField.Degree
 import Mathlib.FieldTheory.RatFunc.AsPolynomial
 import Mathlib.FieldTheory.PrimitiveElement
 import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.Topology.UniformSpace.Uniformizable
 
 /-!
 # $[\mathbb C(X_0(N)) : \mathbb C(j)] \le \psi$, and generation by $j$ and $j_N$

@@ -1,6 +1,7 @@
 import ModularFormsKB.Milne.Ch6.QSeries
 import ModularFormsKB.Milne.Ch6.JRational
 import ModularFormsKB.Milne.Ch6.Uniqueness
+import Mathlib.Algebra.Module.StablyFree.Basic
 
 /-!
 # The modular polynomial has rational coefficients

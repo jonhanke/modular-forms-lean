@@ -1,5 +1,6 @@
 import ModularFormsKB.Milne.Ch9.Mellin
 import ModularFormsKB.Miyake.Sec4_3.Hecke
+import Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected
 
 /-!
 # Milne, Chapter 9: Hecke's theorem (Theorem 9.3)

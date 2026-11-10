@@ -1,4 +1,6 @@
 import ModularFormsKB.Miyake.Sec4_3.Defs
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.NumberTheory.LSeries.AbstractFuncEq
 
 /-!
 # Decay of completed $L$-series on vertical lines; boundedness of Mellin transforms in strips

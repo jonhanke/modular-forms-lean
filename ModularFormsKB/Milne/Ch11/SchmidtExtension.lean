@@ -2,6 +2,7 @@ import ModularFormsKB.Milne.Ch11.SchmidtCount
 import ModularFormsKB.Milne.Ch11.WeilNewton
 import ModularFormsKB.Milne.Ch11.WeilConstantExtensionExists
 import ModularFormsKB.Milne.Ch11.WeilRationality
+import Mathlib.Algebra.Lie.OfAssociative
 
 /-!
 # F. K. Schmidt's theorem: constant field extensions

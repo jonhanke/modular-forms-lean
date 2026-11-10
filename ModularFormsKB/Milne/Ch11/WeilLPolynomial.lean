@@ -1,4 +1,8 @@
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.Complex.Polynomial.Basic
+import Mathlib.RingTheory.PowerSeries.Derivative
+import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+import Mathlib.RingTheory.SimpleRing.Principal
 
 /-!
 # Algebra of the $L$-polynomial: reciprocal roots and the logarithmic derivative

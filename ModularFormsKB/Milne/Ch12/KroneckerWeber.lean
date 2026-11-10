@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.RingTheory.SimpleRing.Principal
 import ModularFormsKB.Citation
 import TauCeti.NumberTheory.ClassFieldTheory.ClassFields.KroneckerWeber
 

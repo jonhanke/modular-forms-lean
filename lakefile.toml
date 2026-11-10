@@ -1,6 +1,6 @@
 name = "modular_forms_lean"
-version = "0.1.0"
-defaultTargets = ["ModularFormsKB", "Challenge", "Solution"]
+version = "0.2.0"
+defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -23,9 +23,41 @@ rev = "1b1ccf4b088b32fa3f23f2de1127433254a81e1e"
 name = "ModularFormsKB"
 
 [[lean_lib]]
-name = "Challenge"
-roots = ["Challenge"]
+name = "Challenge_Milne"
+roots = ["Challenge_Milne"]
 
 [[lean_lib]]
-name = "Solution"
-roots = ["Solution"]
+name = "Solution_Milne"
+roots = ["Solution_Milne"]
+
+[[lean_lib]]
+name = "Challenge_Miyake"
+roots = ["Challenge_Miyake"]
+
+[[lean_lib]]
+name = "Solution_Miyake"
+roots = ["Solution_Miyake"]
+
+[[lean_lib]]
+name = "Challenge_Shimura"
+roots = ["Challenge_Shimura"]
+
+[[lean_lib]]
+name = "Solution_Shimura"
+roots = ["Solution_Shimura"]
+
+[[lean_lib]]
+name = "Challenge_Iwaniec"
+roots = ["Challenge_Iwaniec"]
+
+[[lean_lib]]
+name = "Solution_Iwaniec"
+roots = ["Solution_Iwaniec"]
+
+[[lean_lib]]
+name = "Challenge_AndrianovZhuravlev"
+roots = ["Challenge_AndrianovZhuravlev"]
+
+[[lean_lib]]
+name = "Solution_AndrianovZhuravlev"
+roots = ["Solution_AndrianovZhuravlev"]

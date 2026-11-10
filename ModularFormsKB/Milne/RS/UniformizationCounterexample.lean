@@ -1,4 +1,6 @@
 import ModularFormsKB.Milne.Ch0.Introduction
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Topology.UniformSpace.Uniformizable
 
 /-!
 # Milne, Theorem 0.1: the named statement is false without the Hausdorff axiom

@@ -1,4 +1,6 @@
 import ModularFormsKB.Milne.Ch0.Introduction
+import Mathlib.RingTheory.Coalgebra.IsFrobenius
+import Mathlib.RingTheory.HopfAlgebra.Basic
 
 /-!
 # Milne, Proposition 0.4: the points of a nonsingular affine plane curve form a Riemann surface

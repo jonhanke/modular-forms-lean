@@ -1,4 +1,5 @@
 import ModularFormsKB.Miyake.Sec4_3.QSeries
+import Mathlib.NumberTheory.ModularForms.Bounds
 
 /-!
 # Fourier expansions of modular forms on $\Gamma_1(N)$ as `Miyake.qSeries`

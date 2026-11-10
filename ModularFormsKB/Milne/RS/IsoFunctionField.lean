@@ -1,4 +1,5 @@
 import ModularFormsKB.Milne.Ch7.Curves
+import TauCeti.AlgebraicGeometry.Morphisms.Dominant
 
 /-!
 # The automorphism of the function field induced by an automorphism of an integral scheme

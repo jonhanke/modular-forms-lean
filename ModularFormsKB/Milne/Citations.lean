@@ -1,4 +1,8 @@
-import Mathlib
+import Mathlib.Analysis.Complex.UpperHalfPlane.Metric
+import Mathlib.Analysis.Complex.UpperHalfPlane.ProperAction
+import Mathlib.LinearAlgebra.Matrix.FixedDetMatrices
+import Mathlib.NumberTheory.Modular
+import Mathlib.NumberTheory.ModularForms.Basic
 import ModularFormsKB.Citation
 /-!
 # Milne, Chapters 0–3: items already in Mathlib

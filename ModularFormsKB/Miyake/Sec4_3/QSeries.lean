@@ -1,5 +1,10 @@
 import ModularFormsKB.Miyake.Sec4_3.Defs
 import ModularFormsKB.Citation
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Complex.LocallyUniformLimit
+import Mathlib.NumberTheory.DirichletCharacter.Bounds
+import Mathlib.NumberTheory.LSeries.MellinEqDirichlet
+
 /-!
 # Miyake §4.3: $q$-series with coefficients of polynomial growth
 

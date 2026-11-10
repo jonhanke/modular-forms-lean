@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Challenge_AndrianovZhuravlev",
+  "solution_module": "Solution_AndrianovZhuravlev",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.siegelTheta_dominated"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

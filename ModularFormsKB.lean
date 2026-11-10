@@ -4,7 +4,35 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jonathan Hanke
 -/
 import ModularFormsKB.Citation
+import ModularFormsKB.Andrianov.CommonEigenvector
+import ModularFormsKB.Andrianov.Generators
+import ModularFormsKB.Andrianov.Hecke
+import ModularFormsKB.Andrianov.HeckeOperators
+import ModularFormsKB.Andrianov.Holomorphic
+import ModularFormsKB.Andrianov.ModularForms
+import ModularFormsKB.Andrianov.ModularGroup
+import ModularFormsKB.Andrianov.SiegelSpace
+import ModularFormsKB.Andrianov.ThetaSeries
 import ModularFormsKB.Dimension.SturmGamma0
+import ModularFormsKB.HalfIntegral.Abstract.BinaryForms
+import ModularFormsKB.HalfIntegral.Abstract.Kohnen
+import ModularFormsKB.HalfIntegral.Abstract.Multiplier
+import ModularFormsKB.HalfIntegral.Abstract.Shimura
+import ModularFormsKB.HalfIntegral.Abstract.Shintani
+import ModularFormsKB.HalfIntegral.Forms
+import ModularFormsKB.HalfIntegral.Hecke
+import ModularFormsKB.HalfIntegral.ShimuraLift
+import ModularFormsKB.HalfIntegral.Theta
+import ModularFormsKB.Iwaniec1997.CoeffBound
+import ModularFormsKB.Iwaniec1997.CoeffSums
+import ModularFormsKB.Iwaniec1997.Kloosterman
+import ModularFormsKB.Iwaniec1997.KloostermanBounds
+import ModularFormsKB.Iwaniec1997.KloostermanMoments
+import ModularFormsKB.Iwaniec1997.KloostermanMult
+import ModularFormsKB.Iwaniec1997.KloostermanSums
+import ModularFormsKB.Iwaniec1997.Petersson
+import ModularFormsKB.Iwaniec1997.Theta
+import ModularFormsKB.Iwaniec1997.ThetaCongruent
 import ModularFormsKB.Milne.Ch0.Example03
 import ModularFormsKB.Milne.Ch0.Introduction
 import ModularFormsKB.Milne.Ch1.GroupActions
@@ -245,8 +273,27 @@ import ModularFormsKB.Milne.RS.SphereConj
 import ModularFormsKB.Milne.RS.UniformizationCounterexample
 import ModularFormsKB.Milne.RiemannSurface.Basic
 import ModularFormsKB.Milne.RiemannSurface.Differential
+import ModularFormsKB.Milne.RiemannSurface.Examples
 import ModularFormsKB.Milne.RiemannSurface.Results
 import ModularFormsKB.Milne.RiemannSurface.RingedSpace
+import ModularFormsKB.Milne.Wave4A
+import ModularFormsKB.Milne.Wave4A.CanonicalClass
+import ModularFormsKB.Milne.Wave4A.CanonicalDegree
+import ModularFormsKB.Milne.Wave4A.DegreeOneTransfer
+import ModularFormsKB.Milne.Wave4A.GenusEuler
+import ModularFormsKB.Milne.Wave4A.GenusFormula
+import ModularFormsKB.Milne.Wave4A.GenusGammaN
+import ModularFormsKB.Milne.Wave4A.GenusZero
+import ModularFormsKB.Milne.Wave4A.GenusZeroDifferentials
+import ModularFormsKB.Milne.Wave4A.SphereGenus
+import ModularFormsKB.Milne.Wave4A.SphereRiemannRoch
+import ModularFormsKB.Milne.Wave4B.Faltings
+import ModularFormsKB.Milne.Wave4B.HasseWeil
+import ModularFormsKB.Milne.Wave4B.IsogenyDescent
+import ModularFormsKB.Milne.Wave4B.ModularFermat
+import ModularFormsKB.Milne.Wave4B.TateFreeAlgebra
+import ModularFormsKB.Milne.Wave4B.TateModuleFree
+import ModularFormsKB.Milne.Wave4B.WeightTwoDifferentials
 import ModularFormsKB.Miyake.CongruenceModularGroups
 import ModularFormsKB.Miyake.DirichletCharacters
 import ModularFormsKB.Miyake.GeneralizedBernoulli
@@ -270,10 +317,51 @@ import ModularFormsKB.Miyake.Sec4_3.WeilAux
 import ModularFormsKB.Miyake.Sec4_3.WeilPrep
 import ModularFormsKB.Miyake.Sec4_3.WeilTheorem
 import ModularFormsKB.Miyake.UpperHalfPlaneAutomorphisms
+import ModularFormsKB.Miyake.Wave2A.AutomorphicForms
+import ModularFormsKB.Miyake.Wave2A.Commensurator
+import ModularFormsKB.Miyake.Wave2A.CuspNeighborhoods
+import ModularFormsKB.Miyake.Wave2A.Homogeneous
+import ModularFormsKB.Miyake.Wave2A.HyperbolicGeometry
+import ModularFormsKB.Miyake.Wave2A.LpEstimates
+import ModularFormsKB.Miyake.Wave2A.ModularGroup
+import ModularFormsKB.Miyake.Wave2A.PoincareSeries
+import ModularFormsKB.Miyake.Wave2A.ProperDiscontinuity
+import ModularFormsKB.Miyake.Wave2B
+import ModularFormsKB.Miyake.Wave2B.EichlerOrders
+import ModularFormsKB.Miyake.Wave2B.EisensteinSeries
+import ModularFormsKB.Miyake.Wave2B.EisensteinSpaces
+import ModularFormsKB.Miyake.Wave2B.HeckeTrick
+import ModularFormsKB.Miyake.Wave2B.TraceClassNumbers
+import ModularFormsKB.Miyake.Wave2B.TraceFormulaLevelOne
+import ModularFormsKB.Miyake.Wave2B.TraceFormulaStatement
+import ModularFormsKB.Miyake.Wave2B.TraceLemmas
+import ModularFormsKB.Miyake.Wave3.CuspFormCriterion
+import ModularFormsKB.Miyake.Wave3.DirichletSeries
+import ModularFormsKB.Miyake.Wave3.GenusDimension
+import ModularFormsKB.Miyake.Wave3.HeckeLemma
+import ModularFormsKB.Miyake.Wave3.HeckeStatements
+import ModularFormsKB.Miyake.Wave3.HeckeSubalgebra
+import ModularFormsKB.Miyake.Wave3.LevelOneDimension
+import ModularFormsKB.Miyake.Wave3.PeterssonDecomposition
+import ModularFormsKB.Miyake.Wave3.RegularCusps
+import ModularFormsKB.Shimura2007.Ch1.HeckeFunctionalEquation
+import ModularFormsKB.Shimura2007.Ch1.PrimitiveCharacter
+import ModularFormsKB.Shimura2007.Ch2.CriticalValues
+import ModularFormsKB.Shimura2007.Ch2.EulerPolynomialProps
+import ModularFormsKB.Shimura2007.Ch2.EulerPolynomials
+import ModularFormsKB.Shimura2007.Ch2.FractionRange
+import ModularFormsKB.Shimura2007.Ch2.HalfRange
+import ModularFormsKB.Shimura2007.Ch2.HalfRangeEuler
+import ModularFormsKB.Shimura2007.Ch2.HalfRangeSums
+import ModularFormsKB.Shimura2007.Ch2.RootsOfUnity
+import ModularFormsKB.Shimura2007.Ch6.RankinCohen
 
 /-!
-# ModularFormsKB (modular-forms-lean 0.1.0)
+# ModularFormsKB (modular-forms-lean 0.2.0)
 
 Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *Modular Forms*
-(`ModularFormsKB.Miyake`) and the dimension bounds (`ModularFormsKB.Dimension`). See README.md.
+(`ModularFormsKB.Miyake`), the dimension bounds (`ModularFormsKB.Dimension`), and statements from Shimura,
+*Elementary Dirichlet Series and Modular Forms* (`ModularFormsKB.Shimura2007`), Iwaniec, *Topics in
+Classical Automorphic Forms* (`ModularFormsKB.Iwaniec1997`) and Andrianov and Zhuravlev, *Modular Forms
+and Hecke Operators* (`ModularFormsKB.Andrianov`). See README.md.
 -/

@@ -1,4 +1,7 @@
-import Mathlib
+import Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected
+import Mathlib.Analysis.Complex.OpenMapping
+import Mathlib.Analysis.Real.Pi.Bounds
+import Mathlib.Order.CompletePartialOrder
 import TauCeti.Analysis.Complex.ModularForms.LevelOne.JInputs
 
 /-!

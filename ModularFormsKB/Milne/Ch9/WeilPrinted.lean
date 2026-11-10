@@ -1,4 +1,5 @@
 import ModularFormsKB.Milne.Ch9.Weil
+import Mathlib.Analysis.Normed.Group.Tannery
 
 /-!
 # Milne, Theorem 9.6 as printed: the convergence hypothesis forces $f = 0$

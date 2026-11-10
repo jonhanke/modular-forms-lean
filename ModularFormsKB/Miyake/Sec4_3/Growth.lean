@@ -1,5 +1,8 @@
 import ModularFormsKB.Miyake.Sec4_3.Defs
 import ModularFormsKB.Citation
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Complex.Periodic
+
 /-!
 # Miyake Theorem 2.1.4 for $\Gamma_1(N)$: growth near the real axis gives holomorphy at the cusps
 

@@ -1,5 +1,6 @@
 import ModularFormsKB.Milne.Ch11.WeilRationality
 import ModularFormsKB.Milne.Ch11.WeilAssembly
+import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # Milne, Section 11: F. K. Schmidt's theorem from the Hasse–Weil bound, and Theorem 11.4

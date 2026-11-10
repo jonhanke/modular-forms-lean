@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Challenge_Shimura",
+  "solution_module": "Solution_Shimura",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.LFunction_halfRange"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

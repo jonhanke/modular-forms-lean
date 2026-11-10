@@ -1,5 +1,7 @@
 import ModularFormsKB.Milne.Ch11.WeilCount
 import ModularFormsKB.Milne.Ch11.WeilLSequence
+import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.RingTheory.SimpleRing.Principal
 
 /-!
 # Milne, Section 11: rationality and functional equation of the zeta function

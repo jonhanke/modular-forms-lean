@@ -1,4 +1,5 @@
 import ModularFormsKB.Milne.Ch0.Introduction
+import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-!
 # Milne, Example 0.3: nonsingularity of `Y² = 4X³ - aX - b`

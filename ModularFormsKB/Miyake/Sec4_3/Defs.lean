@@ -1,4 +1,10 @@
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+import Mathlib.NumberTheory.DirichletCharacter.Basic
+import Mathlib.NumberTheory.GaussSum
+import Mathlib.NumberTheory.LSeries.Basic
+import Mathlib.NumberTheory.ModularForms.Basic
 
 /-!
 # Miyake §4.3: definitions for the converse theorems

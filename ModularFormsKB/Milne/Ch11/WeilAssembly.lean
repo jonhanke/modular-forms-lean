@@ -1,6 +1,7 @@
 import ModularFormsKB.Milne.Ch11.WeilZeta
 import ModularFormsKB.Milne.Ch11.WeilLPolynomial
 import ModularFormsKB.Milne.Ch11.WeilNewton
+import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Milne, Section 11: `WeilZetaRationality` from the $L$-polynomial

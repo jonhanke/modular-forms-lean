@@ -1,5 +1,6 @@
 import ModularFormsKB.Miyake.Sec4_3.Hecke
 import ModularFormsKB.Miyake.Sec4_3.Gauss
+import Mathlib.Algebra.Order.Star.Int
 
 /-!
 # Miyake §4.3: twists by Dirichlet characters

@@ -1,4 +1,11 @@
-import Mathlib
+import Mathlib.Analysis.CStarAlgebra.CStarMatrix
+import Mathlib.LinearAlgebra.Charpoly.BaseChange
+import Mathlib.LinearAlgebra.Eigenspace.Basic
+import Mathlib.LinearAlgebra.FreeModule.Finite.CardQuotient
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.RingTheory.TensorProduct.Free
 import ModularFormsKB.Citation
 /-!
 # Milne, Section 11: two elementary results from linear algebra (Propositions 11.1, 11.2, Corollary 11.3)

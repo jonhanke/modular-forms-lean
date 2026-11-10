@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge_Iwaniec",
+  "solution_module": "Solution_Iwaniec",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.kloosterman_mul_of_coprime",
+    "ModularFormsKB.Headlines.kloostermanMoment_two"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

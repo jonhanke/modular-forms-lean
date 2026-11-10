@@ -1,4 +1,6 @@
 import ModularFormsKB.Milne.Ch6.Uniqueness
+import Mathlib.Algebra.AffineMonoid.UniqueSums
+import Mathlib.Algebra.Order.Star.Rat
 
 /-!
 # Symmetry of the modular polynomial

@@ -11,7 +11,11 @@ project:
     polynomial in Z[X, Y], symmetric, with Kronecker's congruence); the integrality of singular moduli; Abel's
     theorem and the field of elliptic functions for complex tori; the moduli of elliptic curves and of elliptic
     curves with a cyclic subgroup of order N over an algebraically closed field; Hecke's theorem and Weil's converse
-    theorem. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
+    theorem; the genus of X(N) for N = 2, 3, 4, 5. Since 0.2.0 the central results of Shimura's Elementary Dirichlet
+    Series and Modular Forms, Iwaniec's Topics in Classical Automorphic Forms and Andrianov and Zhuravlev's Modular
+    Forms and Hecke Operators are stated in Lean (statement maps), with first proofs: a half-range formula for
+    L(k, chi), twisted multiplicativity and the second moment of Kloosterman sums, and the convergence of Siegel theta
+    series. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
     credits the results proved here that Mathlib, Tau Ceti or the Stacks Project formalization (Axiom) also prove.
   authors:
     - "Jonathan Hanke"
@@ -38,7 +42,7 @@ sources:
     authors:
       - "Toshitsune Miyake"
     type: "book"
-    location: "Springer, 1989; every numbered item mapped in docs/results/books/miyake.md; formalized mainly in Chapters 1, 3 and 4 (section 4.3: L-functions, Hecke's and Weil's theorems)"
+    location: "Springer, 1989; every numbered item mapped in docs/results/books/miyake.md; formalized mainly in Chapters 1 to 4 (section 4.3: L-functions, Hecke's and Weil's theorems), with items of Chapters 5 to 7"
     relationship: "formalizes"
     author_endorsement: "n/a"
   - title: "On the congruence of modular forms"
@@ -46,6 +50,28 @@ sources:
       - "Jacob Sturm"
     type: "paper"
     location: "Lecture Notes in Mathematics 1240 (1987), 275-280 [unverified locator]; docs/results/books/dimension.md"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Elementary Dirichlet Series and Modular Forms"
+    authors:
+      - "Goro Shimura"
+    type: "book"
+    location: "Springer, 2007; central results stated in Lean (statement map docs/results/books/shimura2007.md)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Topics in Classical Automorphic Forms"
+    authors:
+      - "Henryk Iwaniec"
+    type: "book"
+    location: "American Mathematical Society, 1997; central results stated in Lean (statement map docs/results/books/iwaniec1997.md)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Modular Forms and Hecke Operators"
+    authors:
+      - "Anatolii N. Andrianov"
+      - "Vladimir G. Zhuravlev"
+    type: "book"
+    location: "American Mathematical Society, 1995; central results stated in Lean (statement map docs/results/books/andrianovzhuravlev1995.md)"
     relationship: "formalizes"
     author_endorsement: "n/a"
   - title: "Further references"
@@ -71,9 +97,12 @@ related_formalizations:
 
 status:
   scope: >-
-    Formalized (the 12 statements of Challenge.lean, proved in Solution.lean): Milne 8 (Theorem 11.4, Theorem 6.1,
-    Corollary 12.16, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4 and 8.6), Miyake 4 (Theorems 4.3.6,
-    4.3.8 and 4.3.15, the last in two parts). The book maps give the status of every item. Some library files state
+    Formalized (the 17 statements of the Challenge_<book>.lean files, proved in the Solution_<book>.lean files):
+    Milne 9 (Theorem 11.4, Theorem 6.1, Corollary 12.16, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4
+    and 8.6, Example 2.23), Miyake 4 (Theorems 4.3.6, 4.3.8 and 4.3.15, the last in two parts), Shimura 1
+    (Theorem 4.14 (i)), Iwaniec 2 ((4.12), (4.23)), Andrianov-Zhuravlev 1 (Chapter 1, Proposition 1.3). The book maps
+    give the status of every item of Milne and Miyake; the statement maps give the status of the central results of
+    Shimura, Iwaniec and Andrianov-Zhuravlev that are stated in Lean. Some library files state
     named results of the books without proof (named statements); no headline depends on them.
   sorry_count: 0
   sorry_in_definitions: 0
@@ -96,11 +125,11 @@ automation:
     Jonathan Hanke designed and directed the project; the Lean code was written almost entirely by Claude Opus 5.5,
     with a share by Claude Sonnet 5.5, in October and November 2026 (the paraphrases of Miyake's items in the book
     map were first drafted by Claude Haiku 5.5). All proofs are checked by the Lean kernel; the headline statements
-    are collected in Challenge.lean for human review.
+    are collected in the Challenge_<book>.lean files for human review.
 
 fidelity:
   divergences: >-
-    (1) Where the library states a result as a named structure, Challenge.lean unfolds the structure into its
+    (1) Where the library states a result as a named structure, the challenge files unfold the structure into its
     field. (2) Weil's theorem is stated for function fields of one variable over a finite field (places, their
     degrees and the genus), not for curves: the points over the extension of degree n are counted as the sum over
     d dividing n of d times the number of places of degree d. (3) Theorems 8.4 and 8.6 are stated over an
@@ -112,67 +141,89 @@ fidelity:
     the sources; the book maps' one-line statements are paraphrases.
 
 review:
-  status: "not yet reviewed: the 12 headline statements of Challenge.lean and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 17 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
     planned. The rest of the library has not been reviewed by a human, and there has been no external review. Lean
-    checks the proofs; lake comparator checks that Solution.lean proves exactly the Challenge.lean statements using
-    only the standard axioms.
+    checks the proofs; lake comparator checks, one book at a time, that each Solution_<book>.lean proves exactly the
+    statements of its Challenge_<book>.lean using only the standard axioms.
 
 alignment:
   namespace: "ModularFormsKB"
   statements:
     - source: "Milne, Modular Functions and Modular Forms, Theorem 11.4"
       lean: "ModularFormsKB.Headlines.weil_riemannHypothesis_curves"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
       note: "Function field form, every genus. Also proved in the Stacks Project formalization (Axiom), in étale-cohomological form (tag 03V8, Bombieri–Stepanov); ours is the function-field form of Milne 11.4 and includes the functional equation (Stacks match from its declaration index)."
     - source: "Milne, Modular Functions and Modular Forms, Theorem 6.1"
       lean: "ModularFormsKB.Headlines.kronecker_modularEquation"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Corollary 12.16"
       lean: "ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Proposition 3.1"
       lean: "ModularFormsKB.Headlines.doublyPeriodic_sums"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Theorem 3.8"
       lean: "ModularFormsKB.Headlines.prescribedDivisor"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Proposition 3.11"
       lean: "ModularFormsKB.Headlines.ellipticFunctionField"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Theorem 8.4"
       lean: "ModularFormsKB.Headlines.ellipticModuli_jLine"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
       note: "Over an algebraically closed field."
     - source: "Milne, Modular Functions and Modular Forms, Theorem 8.6"
       lean: "ModularFormsKB.Headlines.cyclicModuli"
-      module: "Challenge / Solution"
+      module: "Challenge_Milne / Solution_Milne"
       status: "proved"
       note: "Over an algebraically closed field, every N prime to the characteristic; the description over Q is not formalized."
     - source: "Miyake, Modular Forms, Theorem 4.3.6"
       lean: "ModularFormsKB.Headlines.hecke_converse"
-      module: "Challenge / Solution"
+      module: "Challenge_Miyake / Solution_Miyake"
       status: "proved"
     - source: "Miyake, Modular Forms, Theorem 4.3.8"
       lean: "ModularFormsKB.Headlines.hecke_converse_levelOne"
-      module: "Challenge / Solution"
+      module: "Challenge_Miyake / Solution_Miyake"
       status: "proved"
     - source: "Miyake, Modular Forms, Theorem 4.3.15"
       lean: "ModularFormsKB.Headlines.weil_converse"
-      module: "Challenge / Solution"
+      module: "Challenge_Miyake / Solution_Miyake"
       status: "proved"
     - source: "Miyake, Modular Forms, Theorem 4.3.15, last sentence"
       lean: "ModularFormsKB.Headlines.weil_converse_cusp"
-      module: "Challenge / Solution"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+
+    - source: "Milne, Modular Functions and Modular Forms, Example 2.23"
+      lean: "ModularFormsKB.Headlines.modularCurveX_Gamma_genus_eq_zero"
+      module: "Challenge_Milne / Solution_Milne"
+      status: "proved"
+      note: "N = 2, 3, 4, 5: the space of holomorphic differentials of X(N) is zero (new in 0.2.0)."
+    - source: "Shimura, Elementary Dirichlet Series and Modular Forms, Theorem 4.14 (i), (4.33)"
+      lean: "ModularFormsKB.Headlines.LFunction_halfRange"
+      module: "Challenge_Shimura / Solution_Shimura"
+      status: "proved"
+    - source: "Iwaniec, Topics in Classical Automorphic Forms, (4.12)"
+      lean: "ModularFormsKB.Headlines.kloosterman_mul_of_coprime"
+      module: "Challenge_Iwaniec / Solution_Iwaniec"
+      status: "proved"
+    - source: "Iwaniec, Topics in Classical Automorphic Forms, (4.23)"
+      lean: "ModularFormsKB.Headlines.kloostermanMoment_two"
+      module: "Challenge_Iwaniec / Solution_Iwaniec"
+      status: "proved"
+    - source: "Andrianov and Zhuravlev, Modular Forms and Hecke Operators, Chapter 1, Proposition 1.3"
+      lean: "ModularFormsKB.Headlines.siegelTheta_dominated"
+      module: "Challenge_AndrianovZhuravlev / Solution_AndrianovZhuravlev"
       status: "proved"
 
 acknowledgements: >-

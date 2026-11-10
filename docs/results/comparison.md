@@ -6,7 +6,8 @@ statements (not only the names) in Mathlib master at commit `df6966d0d` and Tau 
 (the files on analysis, field theory and number theory; Tau Ceti's algebraic geometry files were compared at the
 commit `4908b03` that this library depends on). This library is built on Tau Ceti `4908b03` and the Mathlib commit
 `1b1ccf4` that Tau Ceti pins; it uses Tau Ceti's Fuchsian groups, compactified modular curves, Hecke operators at
-level $N$, function fields and elliptic-curve schemes.
+level $N$, function fields and elliptic-curve schemes. The five headlines new in 0.2.0 were compared on 2026-11-10
+with Mathlib master at commit `666ab9b6` and Tau Ceti main at commit `46f63277`.
 
 The last column of the headline table and the column *Also in* of the book maps credit results that are also
 proved elsewhere: in Mathlib, in Tau Ceti, or in the Stacks Project formalization by Axiom
@@ -34,6 +35,11 @@ welcome.
 | `hecke_converse_levelOne` | as above | — | new: the converse direction at level one | related: as for `hecke_converse`, the forward direction for cusp forms (`CuspForm.frickeCompletedL_functional_equation`) |
 | `weil_converse` | — | — | new: Weil's converse theorem with character | none found |
 | `weil_converse_cusp` | — | — | new: Weil's converse theorem for cusp forms | none found |
+| `modularCurveX_Gamma_genus_eq_zero` (0.2.0) | — | the Riemann–Hurwitz formula for Fuchsian groups in Euler-characteristic form, under finite-CW-type hypotheses (`Analysis/Complex/Fuchsian/Compactification/RiemannHurwitz.lean`); the index $m$ of the genus formula (`Analysis/Complex/ModularForms/CongruenceSubgroups/Degree.lean`); no genus of $X(N)$ | new: for $N = 2, 3, 4, 5$ every holomorphic differential on $X(N)$ is zero (Milne, Example 2.23), from the canonical degree $2g_0 - 2 = -2$ | none found |
+| `LFunction_halfRange` (0.2.0) | $L(1-k,\chi)$ through Bernoulli polynomials (Hurwitz zeta values) | the value $\tau(\chi)\sum_{n \in \mathbb Z}\bar\chi(n)n^{-k}$ through the generalized Bernoulli number, a sum over all residues (`NumberTheory/DirichletCharacter/LValues.lean`) | new: Shimura's half-range formula (Theorem 4.14 (i)) | related: elementary-number-theory-lean proves $L(k,\chi)$ for primitive $\chi$ of matching parity through $B_{k,\bar\chi}$ |
+| `kloosterman_mul_of_coprime` (0.2.0) | — (no Kloosterman sums) | — | new: twisted multiplicativity (Iwaniec, (4.12)) | none found |
+| `kloostermanMoment_two` (0.2.0) | — | — | new: $V_2(p) = p^2 - p - 1$ (Iwaniec, (4.23)) | none found |
+| `siegelTheta_dominated` (0.2.0) | Jacobi's theta function in one and two variables (`NumberTheory/ModularForms/JacobiTheta/`); no Siegel upper half space | Siegel functions (units), not Siegel modular forms | new: theta series of degree $n$ of an even positive definite form converge absolutely and uniformly on $H_n(\varepsilon)$ (Andrianov–Zhuravlev, Chapter 1, Proposition 1.3) | none found |
 
 ## Results that are proved here but are not headlines
 
@@ -44,6 +50,9 @@ welcome.
 | Euler products and the Petersson adjoint of $T(n)$ at level $\Gamma(N)$ (Milne, 5.35–5.37) | `Milne.UncondLevelN.eulerProductLevelN`, `Milne.UncondLevelN.eulerProductLevelNt`, `Milne.UncondLevelN.peterssonHeckeLevelN` | Tau Ceti has the corresponding results for $\Gamma_0(N)$ and $\Gamma_1(N)$, with convergent Euler products |
 | Complex tori: biholomorphic iff the lattices are homothetic; $\operatorname{End}(\mathbb C/\Lambda)$ is $\mathbb Z$ or an order of an imaginary quadratic field (Milne, 3.5, 3.6) | `Milne.nonempty_biholomorphic_iff_isHomothetic`, `Milne.endRing_eq_int_or_imagQuadratic` | small; Tau Ceti has the holomorphic maps of tori (3.3, 3.4) |
 | The Sturm bound and dimension bounds for $\Gamma_0(N)$, $\Gamma_1(N)$ and a character | `ModularFormsKB.Dimension` | specializations of Tau Ceti's Sturm bound |
+| Fourier expansion of the Eisenstein series $E_k(z;\chi,\psi)$ (Miyake, Theorem 7.1.3) | `Miyake.Wave2B.hasSum_eisensteinChar` | Tau Ceti main has the $q$-expansion of Eisenstein series with character (`NumberTheory/ModularForms/EisensteinSeries/QExpansion.lean`) |
+| Hecke's bound $a_n = O(n^{k/2})$ for cusp forms (Miyake, Corollary 2.1.6) | `Miyake.qExpansion_slash_isBigO` | in Mathlib master (`CuspFormClass.qExpansion_isBigO`) |
+| Euler's formula and $L(k,\chi)$ at positive integers (Shimura, Theorem 4.12) | `Shimura2007.two_mul_factorial_gaussSum_mul_LFunction` | in Tau Ceti main (`NumberTheory/DirichletCharacter/LValues.lean`) |
 | Twisted functional equations with Weil's constant (Miyake, 4.3.11, 4.3.12) | `Miyake.fricke_twist`, `Miyake.twisted_completedL_cuspForm` | supporting results of `weil_converse` |
 
 **Not proved here.** The dimension formula for $M_{2k}(\Gamma)$, $\Gamma$ of finite index (Milne, Theorem 4.9), is
@@ -73,24 +82,24 @@ Ceti (dependencies of this library) already have, and how many this library prov
 | chapter | rows | in Mathlib | in Tau Ceti | proved here | proved in part | conditional | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|
 | 0 | 5 | 0 | 0 | 2 | 1 | 0 | 2 | 0 |
-| 1 | 22 | 0 | 0 | 8 | 4 | 1 | 9 | 2 |
-| 2 | 22 | 0 | 0 | 12 | 8 | 0 | 2 | 4 |
+| 1 | 23 | 0 | 0 | 13 | 7 | 2 | 1 | 2 |
+| 2 | 22 | 0 | 0 | 12 | 9 | 0 | 1 | 4 |
 | 3 | 13 | 1 | 0 | 11 | 0 | 1 | 0 | 2 |
-| 4 | 36 | 0 | 0 | 26 | 6 | 3 | 1 | 7 |
+| 4 | 36 | 0 | 0 | 26 | 8 | 1 | 1 | 7 |
 | 5 | 34 | 0 | 0 | 34 | 0 | 0 | 0 | 6 |
 | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 |
 | 7 | 5 | 1 | 0 | 3 | 1 | 0 | 0 | 1 |
 | 8 | 9 | 0 | 0 | 5 | 3 | 1 | 0 | 0 |
 | 9 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | 1 |
 | 10 | 2 | 0 | 0 | 1 | 0 | 0 | 1 | 1 |
-| 11 | 22 | 0 | 0 | 7 | 0 | 2 | 13 | 1 |
-| 12 | 116 | 21 | 4 | 36 | 1 | 6 | 48 | 4 |
+| 11 | 22 | 0 | 0 | 8 | 0 | 5 | 9 | 1 |
+| 12 | 116 | 21 | 4 | 37 | 2 | 6 | 46 | 4 |
 
 ### T. Miyake, *Modular Forms* (Springer, 1989)
 
 | chapter | rows | in Mathlib | in Tau Ceti | proved here | proved in part | conditional | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|
-| 0 | 279 | 25 | 47 | 22 | 9 | 0 | 176 | 2 |
+| 0 | 279 | 21 | 46 | 56 | 29 | 0 | 127 | 2 |
 
 ### Dimension bounds for modular forms on $\Gamma_0(N)$, $\Gamma_1(N)$ and with a character (Sturm)
 
