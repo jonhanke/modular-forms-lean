@@ -376,7 +376,7 @@ against the literature. Corrections and reports of mis-formalizations are very w
 
 Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24069385](https://doi.org/10.5281/zenodo.24069385) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
-- **[v0.3.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.3.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:ZENODO-DOI-v0.3.0](https://doi.org/ZENODO-DOI-v0.3.0): conditional
+- **[v0.3.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.3.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:10.5281/zenodo.24184587](https://doi.org/10.5281/zenodo.24184587): conditional
   theorems, of the form *(named inputs) → statement*, in a new section [Conditional theorems](#conditional-theorems):
   the class number one theorem of Heegner and Stark (the imaginary quadratic fields of class number one are
   $`\mathbb Q(\sqrt{-d})`$, $`d \in \{1, 2, 3, 7, 11, 19, 43, 67, 163\}`$), proved from eight named classical inputs
