@@ -13,7 +13,7 @@ import ModularFormsKB.Milne.Ch12.JIntegral
 import ModularFormsKB.Milne.Wave4A.GenusZeroDifferentials
 
 /-!
-# Headline statements of modular-forms-lean 0.2.0: Milne, *Modular Functions and Modular Forms*
+# Headline statements of modular-forms-lean 0.3.0: Milne, *Modular Functions and Modular Forms*
 
 The main results of the library for Milne's *Modular Functions and Modular Forms* (version 1.31), one theorem each, with every proof a deliberate `sorry`: to check what
 is claimed, read this file. `Solution_Milne.lean` proves the same statements from the library, and `lake comparator`

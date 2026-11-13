@@ -7,7 +7,11 @@ statements (not only the names) in Mathlib master at commit `df6966d0d` and Tau 
 commit `4908b03` that this library depends on). This library is built on Tau Ceti `4908b03` and the Mathlib commit
 `1b1ccf4` that Tau Ceti pins; it uses Tau Ceti's Fuchsian groups, compactified modular curves, Hecke operators at
 level $N$, function fields and elliptic-curve schemes. The five headlines new in 0.2.0 were compared on 2026-11-10
-with Mathlib master at commit `666ab9b6` and Tau Ceti main at commit `46f63277`.
+with Mathlib master at commit `666ab9b6` and Tau Ceti main at commit `46f63277`. The headlines new in 0.3.0 were
+compared on 2026-11-12 with Tau Ceti main at commit `a5f657a8` (class number one) and `3780371c` (Waldspurger's
+theorems, Gross's example and congruent numbers, by a search of its sources for half-integral weight, the metaplectic
+group, Brandt matrices, maximal orders, congruent numbers and Tunnell) and with the Mathlib commit `1b1ccf4` that
+this library pins (Mathlib master was not searched again for them).
 
 The last column of the headline table and the column *Also in* of the book maps credit results that are also
 proved elsewhere: in Mathlib, in Tau Ceti, or in the Stacks Project formalization by Axiom
@@ -41,7 +45,21 @@ welcome.
 | `kloostermanMoment_two` (0.2.0) | — | — | new: $V_2(p) = p^2 - p - 1$ (Iwaniec, (4.23)) | none found |
 | `siegelTheta_dominated` (0.2.0) | Jacobi's theta function in one and two variables (`NumberTheory/ModularForms/JacobiTheta/`); no Siegel upper half space | Siegel functions (units), not Siegel modular forms | new: theta series of degree $n$ of an even positive definite form converge absolutely and uniformly on $H_n(\varepsilon)$ (Andrianov–Zhuravlev, Chapter 1, Proposition 1.3) | none found |
 
-## Results that are proved here but are not headlines
+## Conditional theorems (0.3.0)
+
+Compared on 2026-11-12 with Tau Ceti main at commit `a5f657a8` and with the Mathlib commit `1b1ccf4` this library
+uses (Mathlib has `NumberField.classNumber` and `NumberField.classNumber_eq_one_iff`, class number one if and only if
+the ring of integers is a principal ideal domain; no classification).
+
+| headline | Mathlib | Tau Ceti | this release | other formalizations and related results |
+|---|---|---|---|---|
+| `heegnerStark_classNumber_eq_one_iff`, `heegnerStark_classNumber_eq_one_iff_isSquare` (conditional on named inputs) | the class number of a number field; no classification of imaginary quadratic fields of class number one | the nine fields have class number one, the classification for $d_K > -51$, the integer points of Heegner's equation and the enclosure of $j$ (`NumberTheory/ClassNumberOne/`); class numbers as numbers of reduced forms (`NumberTheory/BinaryQuadraticForm/Ideal/ClassNumber.lean`); Weber's cubic for a Siegel function (`NumberTheory/ModularForms/SiegelFunction/JInvariant.lean`) | new: the direction "class number one implies $d_K$ is one of the nine", by Heegner's proof, from named inputs (Weber's §§ 87–94, Dirichlet and Dedekind); Heegner's step from Weber's class invariants to $y^2 = 2u(u^3+1)$, in a cubic field without Galois theory; Gauss's reduction to $D = -p$, $p \equiv 3 \bmod 8$. The integer points of Heegner's equation and the enclosure of $j$ are ported from Tau Ceti | related, in Tau Ceti (at the pinned commit and on main): `TauCeti.NumberField.classNumber_eq_one_of_mem_heegnerDiscriminants` (the nine fields have $h_K = 1$), `TauCeti.NumberField.classNumber_eq_one_iff_of_neg_fifty_one_lt_discr` ($d_K > -51$), `TauCeti.BinaryQuadraticForm.classNumber_eq_card_primitiveReducedForms_of_discr_eq` (the class number part of the input `imaginaryQuadratic`, for Tau Ceti's reduced forms) and `TauCeti.ModularForm.siegelFunction_zero_half_pow_twelve_add_sixteen_pow_three` (the input `weber_cubic`, for $g_{(0,1/2)}^{12} = \mathfrak f_2^{24}$); none of them discharges an input here, since they are stated for Tau Ceti's own definitions |
+| `waldspurger_card_admissible`, `waldspurger_isAdmissible_iff_even`, `waldspurger_two_mul_fibreDim`, `waldspurger_fibreDim_le_one`, `waldspurger_prod_localSign`, `waldspurger_isAdmissible_localSign_iff` (0.3.0) | — (no half-integral weight forms, no metaplectic group) | — ; related: Hilbert symbols and quaternion algebras over local fields (`NumberTheory/HilbertSymbol/`) | new: the combinatorics of Waldspurger's admissible sign patterns (1991) for abstract local data: their number, the parity criterion, the closed form of the fibre dimension, multiplicity one, the product formula for the local signs of a square class | none found |
+| `waldspurger_kohnenPattern_isAdmissible`, `waldspurger_localSign_eq_kohnenPattern_iff`, `waldspurger_kohnen_fibreDim` (0.3.0) | — | — | new: Kohnen's plus space as Waldspurger's sign pattern for odd squarefree level; Kohnen's condition $(D/\ell) = w_\ell$ | none found |
+| `gross_grossCoeff_eq_zero_of_mod_four`, `gross_grossCoeff_eq_zero_of_split`, `gross_grossCoeff_values`, `gross_brandt_rowSum_symm`, `gross_brandt_eigen`, `gross_brandt_eisenstein` (0.3.0) | ternary quadratic forms only as general quadratic forms; no theta series of ternary forms, no Brandt matrices | — (no maximal orders of quaternion algebras over $\mathbb Q$, no Brandt matrices) | new: Gross's weight $3/2$ form for $p = 11$ from two ternary forms (plus condition, the local obstruction at $11$, coefficients by kernel computation) and the Brandt matrices $B(2), B(3), B(5)$ with the eigenvalues of the curve of conductor $11$; the forms and matrices are entered explicitly | none found |
+| `waldspurger_exists_constant`, `waldspurger_coeff_eq_zero_iff`, `waldspurger_kohnen_central_nonneg`, `waldspurger_kohnen_ratio`, `waldspurger_kohnen_coeff_ne_zero_iff`, `waldspurger_twistRoot_eq_one`, `waldspurger_carries_unique`, `waldspurger_finrank_plusFibre_eq_one`, `gross_grossCoeff_eq_zero_iff` (0.3.0; conditional on named inputs) | — | — | new: consequences of Waldspurger 1981 and 1991, Kohnen 1985 and Gross 1987, each from its named input: one constant per square class, nonnegativity of central values, multiplicity one in the plus space, Gross's vanishing criterion | none found |
+| `congruent_isCongruent_iff_point`, `congruent_five_six_seven_fortyOne`, `congruent_tunnell_counts`, `congruent_tunnell_five_consistent` (0.3.0) | Weierstrass curves and the group of their points; no congruent numbers | — (no congruent numbers) | new: $n$ is congruent if and only if $y^2 = x^3 - n^2x$ has a rational point with $y \ne 0$; the triangles for $5$, $6$, $7$, $41$; Tunnell's counts | none found |
+| `congruent_not_isCongruent_of_odd`, `congruent_not_isCongruent_of_even`, `congruent_not_isCongruent_one_three_eleven` (0.3.0; conditional on named inputs); `congruent_isCongruent_iff_odd`, `congruent_isCongruent_iff_even` (0.3.0; conditional on the weak Birch and Swinnerton-Dyer conjecture) | — (no $L$-functions of elliptic curves) | — | new: Tunnell's criterion from Tunnell's formula and the theorem of Coates and Wiles (named inputs); as an equivalence, from the weak Birch and Swinnerton-Dyer conjecture (a conjecture, a hypothesis) | none found |
 
 | result | here | why not a headline |
 |---|---|---|
@@ -89,7 +107,7 @@ Ceti (dependencies of this library) already have, and how many this library prov
 | 5 | 34 | 0 | 0 | 34 | 0 | 0 | 0 | 6 |
 | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 |
 | 7 | 5 | 1 | 0 | 3 | 1 | 0 | 0 | 1 |
-| 8 | 9 | 0 | 0 | 5 | 3 | 1 | 0 | 0 |
+| 8 | 9 | 0 | 0 | 6 | 3 | 0 | 0 | 0 |
 | 9 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | 1 |
 | 10 | 2 | 0 | 0 | 1 | 0 | 0 | 1 | 1 |
 | 11 | 22 | 0 | 0 | 8 | 0 | 5 | 9 | 1 |

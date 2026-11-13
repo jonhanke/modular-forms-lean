@@ -4,7 +4,7 @@ For each book of this release, a table from the items of the book to the Lean de
 
 | book | rows | proved | proved in part | conditional | definitions | in Mathlib | in Tau Ceti | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|---|
-| [J. S. Milne, *Modular Functions and Modular Forms* (version 1.31)](milne-mf.md) | 293 | 154 | 28 | 16 | 44 | 23 | 4 | 24 | 29 |
+| [J. S. Milne, *Modular Functions and Modular Forms* (version 1.31)](milne-mf.md) | 293 | 155 | 28 | 15 | 44 | 23 | 4 | 24 | 29 |
 | [T. Miyake, *Modular Forms* (Springer, 1989)](miyake.md) | 279 | 56 | 29 | 0 | 2 | 21 | 46 | 125 | 2 |
 | [Dimension bounds for modular forms on $\Gamma_0(N)$, $\Gamma_1(N)$ and with a character (Sturm)](dimension.md) | 22 | 21 | 0 | 0 | 1 | 0 | 0 | 0 | 12 |
 
@@ -19,3 +19,4 @@ For three more books, a first statement wave: the central results that the libra
 | [G. Shimura, *Elementary Dirichlet Series and Modular Forms* (Springer, 2007)](shimura2007.md) | 12 | 3 | 6 | 0 | 3 |
 | [H. Iwaniec, *Topics in Classical Automorphic Forms* (American Mathematical Society, 1997)](iwaniec1997.md) | 28 | 6 | 2 | 2 | 18 |
 | [A. N. Andrianov and V. G. Zhuravlev, *Modular Forms and Hecke Operators* (American Mathematical Society, 1995)](andrianovzhuravlev1995.md) | 26 | 12 | 3 | 1 | 10 |
+| [Waldspurger's theorems, the Shimura lift, Gross's example for $p = 11$ and Tunnell's theorem (papers of Waldspurger 1981 and 1991, Kohnen 1985, Gross 1987, Tunnell 1983, Coates and Wiles 1977)](waldspurger.md) | 17 | 7 | 0 | 8 | 2 |

@@ -7,7 +7,7 @@ import ModularFormsKB.Iwaniec1997.KloostermanMult
 import ModularFormsKB.Iwaniec1997.KloostermanMoments
 
 /-!
-# Headline statements of modular-forms-lean 0.2.0: Iwaniec, *Topics in Classical Automorphic Forms*
+# Headline statements of modular-forms-lean 0.3.0: Iwaniec, *Topics in Classical Automorphic Forms*
 
 The main results of the library for Iwaniec's *Topics in Classical Automorphic Forms* (1997), one theorem each, with
 every proof a deliberate `sorry`: to check what is claimed, read this file. `Solution_Iwaniec.lean` proves the same

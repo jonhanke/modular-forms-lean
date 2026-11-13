@@ -1,0 +1,37 @@
+{
+  "challenge_module": "Challenge_Waldspurger",
+  "solution_module": "Solution_Waldspurger",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.waldspurger_card_admissible",
+    "ModularFormsKB.Headlines.waldspurger_isAdmissible_iff_even",
+    "ModularFormsKB.Headlines.waldspurger_two_mul_fibreDim",
+    "ModularFormsKB.Headlines.waldspurger_fibreDim_le_one",
+    "ModularFormsKB.Headlines.waldspurger_prod_localSign",
+    "ModularFormsKB.Headlines.waldspurger_isAdmissible_localSign_iff",
+    "ModularFormsKB.Headlines.waldspurger_kohnenPattern_isAdmissible",
+    "ModularFormsKB.Headlines.waldspurger_localSign_eq_kohnenPattern_iff",
+    "ModularFormsKB.Headlines.waldspurger_kohnen_fibreDim",
+    "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_of_mod_four",
+    "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_of_split",
+    "ModularFormsKB.Headlines.gross_grossCoeff_values",
+    "ModularFormsKB.Headlines.gross_brandt_rowSum_symm",
+    "ModularFormsKB.Headlines.gross_brandt_eigen",
+    "ModularFormsKB.Headlines.gross_brandt_eisenstein",
+    "ModularFormsKB.Headlines.waldspurger_exists_constant",
+    "ModularFormsKB.Headlines.waldspurger_coeff_eq_zero_iff",
+    "ModularFormsKB.Headlines.waldspurger_kohnen_central_nonneg",
+    "ModularFormsKB.Headlines.waldspurger_kohnen_ratio",
+    "ModularFormsKB.Headlines.waldspurger_kohnen_coeff_ne_zero_iff",
+    "ModularFormsKB.Headlines.waldspurger_twistRoot_eq_one",
+    "ModularFormsKB.Headlines.waldspurger_carries_unique",
+    "ModularFormsKB.Headlines.waldspurger_finrank_plusFibre_eq_one",
+    "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_iff"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

@@ -23,6 +23,20 @@ import ModularFormsKB.HalfIntegral.Forms
 import ModularFormsKB.HalfIntegral.Hecke
 import ModularFormsKB.HalfIntegral.ShimuraLift
 import ModularFormsKB.HalfIntegral.Theta
+import ModularFormsKB.HalfIntegral.Waldspurger.Coefficients
+import ModularFormsKB.HalfIntegral.Waldspurger.Gross
+import ModularFormsKB.HalfIntegral.Waldspurger.Packets
+import ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
+import ModularFormsKB.Historical.WeberHeegnerStark
+import ModularFormsKB.Historical.WeberHeegnerStark.CubicField
+import ModularFormsKB.Historical.WeberHeegnerStark.Defs
+import ModularFormsKB.Historical.WeberHeegnerStark.Diophantine
+import ModularFormsKB.Historical.WeberHeegnerStark.Forms
+import ModularFormsKB.Historical.WeberHeegnerStark.Heegner
+import ModularFormsKB.Historical.WeberHeegnerStark.Inputs
+import ModularFormsKB.Historical.WeberHeegnerStark.Main
+import ModularFormsKB.Historical.WeberHeegnerStark.Numerics
+import ModularFormsKB.Historical.WeberHeegnerStark.QuadraticField
 import ModularFormsKB.Iwaniec1997.CoeffBound
 import ModularFormsKB.Iwaniec1997.CoeffSums
 import ModularFormsKB.Iwaniec1997.Kloosterman
@@ -357,11 +371,13 @@ import ModularFormsKB.Shimura2007.Ch2.RootsOfUnity
 import ModularFormsKB.Shimura2007.Ch6.RankinCohen
 
 /-!
-# ModularFormsKB (modular-forms-lean 0.2.0)
+# ModularFormsKB (modular-forms-lean 0.3.0)
 
 Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *Modular Forms*
 (`ModularFormsKB.Miyake`), the dimension bounds (`ModularFormsKB.Dimension`), and statements from Shimura,
 *Elementary Dirichlet Series and Modular Forms* (`ModularFormsKB.Shimura2007`), Iwaniec, *Topics in
 Classical Automorphic Forms* (`ModularFormsKB.Iwaniec1997`) and Andrianov and Zhuravlev, *Modular Forms
-and Hecke Operators* (`ModularFormsKB.Andrianov`). See README.md.
+and Hecke Operators* (`ModularFormsKB.Andrianov`), the class number one theorem of Heegner and Stark,
+conditional on named inputs (`ModularFormsKB.Historical.WeberHeegnerStark`), and Waldspurger's theorems,
+Gross's example and congruent numbers (`ModularFormsKB.HalfIntegral.Waldspurger`). See README.md.
 -/

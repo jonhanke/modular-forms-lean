@@ -15,7 +15,18 @@ project:
     Series and Modular Forms, Iwaniec's Topics in Classical Automorphic Forms and Andrianov and Zhuravlev's Modular
     Forms and Hecke Operators are stated in Lean (statement maps), with first proofs: a half-range formula for
     L(k, chi), twisted multiplicativity and the second moment of Kloosterman sums, and the convergence of Siegel theta
-    series. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
+    series. Release 0.3.0 adds the first conditional theorem, of the form (named inputs) -> statement: the class
+    number one theorem of Heegner (1952) and Stark (1967), that the imaginary quadratic fields of class number one
+    are exactly Q(sqrt(-d)) for d in {1, 2, 3, 7, 11, 19, 43, 67, 163}, proved from eight named classical inputs
+    (Weber's class invariants and the theory of binary quadratic forms), each a field of a Lean Prop structure with
+    its source. Release 0.3.0 also adds Waldspurger's theorems on the Fourier coefficients of half-integral weight
+    forms and the Shimura lift: unconditionally, the combinatorics of Waldspurger's admissible sign patterns and of
+    the fibre dimension, Kohnen's plus space as a sign pattern, Gross's weight 3/2 form and Brandt matrices for
+    p = 11, and congruent numbers (n is congruent iff y^2 = x^3 - n^2 x has a rational point with y != 0, explicit
+    triangles); conditionally on named inputs (Waldspurger 1981 and 1991, Kohnen 1985, Gross 1987, Tunnell 1983,
+    Coates-Wiles 1977), consequences such as nonnegativity of central values and that 1, 3 and 11 are not congruent;
+    and, conditional on the weak Birch and Swinnerton-Dyer conjecture (a conjecture), Tunnell's criterion as an
+    equivalence. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
     credits the results proved here that Mathlib, Tau Ceti or the Stacks Project formalization (Axiom) also prove.
   authors:
     - "Jonathan Hanke"
@@ -27,8 +38,11 @@ classification:
   arxiv: ["math.NT"]
   # 11F03 modular and automorphic functions; 11F11 holomorphic modular forms of integral weight; 11F25 Hecke-Petersson
   # operators; 11F66 Langlands L-functions, Dirichlet series attached to modular forms; 14G15 finite ground fields;
-  # 14H52 elliptic curves; 33E05 elliptic functions; 03B35 mechanization of proofs and logical operations.
-  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "03B35"]
+  # 14H52 elliptic curves; 33E05 elliptic functions; 11R29 class numbers; 11G15 complex multiplication;
+  # 03B35 mechanization of proofs and logical operations.
+  # 11F37 forms of half-integer weight; 11G05 elliptic curves over global fields (congruent numbers); 11R52 quaternion
+  # algebras.
+  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "11R29", "11G15", "11F37", "11G05", "11R52", "03B35"]
 
 sources:
   - title: "Modular Functions and Modular Forms (version 1.31)"
@@ -74,6 +88,62 @@ sources:
     location: "American Mathematical Society, 1995; central results stated in Lean (statement map docs/results/books/andrianovzhuravlev1995.md)"
     relationship: "formalizes"
     author_endorsement: "n/a"
+  - title: "Elliptische Functionen und algebraische Zahlen"
+    authors:
+      - "Heinrich Weber"
+    type: "book"
+    location: "Vieweg, Braunschweig, 1891 (second edition: Lehrbuch der Algebra, volume III, 1908); sections 87 to 94 are the named inputs of the class number one theorem (ModularFormsKB/Historical/WeberHeegnerStark/Inputs.lean), assumed, not proved"
+    relationship: "background"
+    author_endorsement: "n/a"
+  - title: "Diophantische Analysis und Modulfunktionen"
+    authors:
+      - "Kurt Heegner"
+    type: "paper"
+    location: "Mathematische Zeitschrift 56 (1952) [unverified locator]; Heegner's proof of the class number one theorem, formalized conditionally on Weber's theorems (Challenge_HeegnerStark.lean)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "A complete determination of the complex quadratic fields of class-number one"
+    authors:
+      - "Harold M. Stark"
+    type: "paper"
+    location: "Michigan Mathematical Journal 14 (1967) [unverified locator]; the class number one theorem, proved independently of Heegner"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Sur les coefficients de Fourier des formes modulaires de poids demi-entier"
+    authors:
+      - "Jean-Loup Waldspurger"
+    type: "paper"
+    location: "Journal de Mathématiques Pures et Appliquées 60 (1981) [unverified locator]; Corollaire 2 (square classes) is the named input WaldspurgerSquareClass, assumed; consequences proved (Challenge_Waldspurger.lean, statement map docs/results/books/waldspurger.md)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Correspondances de Shimura et quaternions"
+    authors:
+      - "Jean-Loup Waldspurger"
+    type: "paper"
+    location: "Forum Mathematicum 3 (1991) [unverified locator]; the combinatorics of admissible sign patterns and of the fibre dimension proved; the dimension formula and the coefficient criterion are the named inputs WaldspurgerFibreDimension and WaldspurgerCoefficients, assumed"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Fourier coefficients of modular forms of half-integral weight"
+    authors:
+      - "Winfried Kohnen"
+    type: "paper"
+    location: "Mathematische Annalen 271 (1985) [unverified locator]; Theorem 1 is the named input KohnenSquarefree (Petersson quotient abstracted to a positive constant), assumed; consequences proved"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Heights and the special values of L-series"
+    authors:
+      - "Benedict H. Gross"
+    type: "paper"
+    location: "Number Theory (Montreal 1985), CMS Conference Proceedings 7 (1987) [unverified locator]; the example p = 11: the weight 3/2 form and the Brandt matrices computed and proved; Gross's formula in ratio form is the named input GrossRatio, assumed"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "A classical Diophantine problem and modular forms of weight 3/2"
+    authors:
+      - "Jerrold B. Tunnell"
+    type: "paper"
+    location: "Inventiones Mathematicae 72 (1983) [unverified locator]; congruent numbers (Challenge_CongruentNumbers.lean): Tunnell's formula is the named input TunnellFormula, the theorem of Coates and Wiles the named input CoatesWiles, both assumed; the converse half of the criterion is conditional on the weak Birch and Swinnerton-Dyer conjecture (WeakBSD), a conjecture"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
   - title: "Further references"
     type: "bibliography"
     location: "references.bib in this repository; each result is tagged with @[kb \"<key>\" \"<locator>\"]"
@@ -90,20 +160,30 @@ related_formalizations:
       compact Riemann surfaces, the j-function, Hecke operators and newforms at level N, function fields over finite
       fields and their genus, elliptic-curve schemes and the fine moduli variety Y_1(N). Tau Ceti also has the
       Kronecker-Weber theorem and the addition theorem for the Weierstrass function, which are proved here too but
-      are not headlines. docs/results/comparison.md compares each headline with Tau Ceti main (686d0d7f, 2026-11-07).
+      are not headlines. docs/results/comparison.md compares each headline with Tau Ceti main (686d0d7f, 2026-11-07;
+      a5f657a8, 2026-11-12, for the class number one theorem: Tau Ceti proves that the nine fields have class number
+      one and the classification for discriminants above -51; the Diophantine and numerical steps of Heegner's proof
+      in this library are ported from Tau Ceti).
   - id: "https://github.com/jonhanke/algebraic-number-theory-lean"
     relationship: "related"
     note: "Independent (different Mathlib); both have the modular polynomial and X_0(N); see the overlap section of docs/results/comparison.md."
 
 status:
   scope: >-
-    Formalized (the 17 statements of the Challenge_<book>.lean files, proved in the Solution_<book>.lean files):
+    Release 0.3.0. Formalized (the 52 statements of the Challenge_<book>.lean files, proved in the
+    Solution_<book>.lean files):
     Milne 9 (Theorem 11.4, Theorem 6.1, Corollary 12.16, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4
     and 8.6, Example 2.23), Miyake 4 (Theorems 4.3.6, 4.3.8 and 4.3.15, the last in two parts), Shimura 1
-    (Theorem 4.14 (i)), Iwaniec 2 ((4.12), (4.23)), Andrianov-Zhuravlev 1 (Chapter 1, Proposition 1.3). The book maps
+    (Theorem 4.14 (i)), Iwaniec 2 ((4.12), (4.23)), Andrianov-Zhuravlev 1 (Chapter 1, Proposition 1.3), and the
+    class number one theorem in two forms, conditional (HeegnerStark 2: each takes the named inputs
+    WeberHeegnerStarkInputs, and the second also QuadraticDiscriminantInput, as hypotheses), Waldspurger 24
+    (15 unconditional; 9 conditional on the named inputs WaldspurgerSquareClass, KohnenSquarefree,
+    WaldspurgerCoefficients, WaldspurgerFibreDimension or GrossRatio) and CongruentNumbers 9 (4 unconditional; 3
+    conditional on TunnellFormula and CoatesWiles; 2 conditional in addition on WeakBSD, the weak Birch and
+    Swinnerton-Dyer conjecture). The book maps
     give the status of every item of Milne and Miyake; the statement maps give the status of the central results of
-    Shimura, Iwaniec and Andrianov-Zhuravlev that are stated in Lean. Some library files state
-    named results of the books without proof (named statements); no headline depends on them.
+    Shimura, Iwaniec and Andrianov-Zhuravlev, and of the papers on Waldspurger's theorems, that are stated in Lean. Some library files state
+    named results of the books without proof (named statements); no unconditional headline depends on them.
   sorry_count: 0
   sorry_in_definitions: 0
   # No custom axioms; the standard axioms used (checked by scripts/check_axioms.lean and lake comparator):
@@ -138,10 +218,19 @@ fidelity:
     conditions on q-expansions (4.3.7) are stated as polynomial growth of the coefficients. (5) Values at poles
     and other junk values follow Lean conventions; statements about elliptic functions hold off a discrete set
     where the book says so implicitly. (6) Literature locators marked [unverified] have not been checked against
-    the sources; the book maps' one-line statements are paraphrases.
+    the sources; the book maps' one-line statements are paraphrases. (7) The class number one theorem is
+    conditional: its named inputs (Weber's sections 87 to 94, Dirichlet and Dedekind) are hypotheses, not proved;
+    two of them are weaker than Weber's statements (Theorem VI with 3 not dividing m; Theorems I and VI only at
+    sqrt(-m)), which makes the theorem stronger. Weber's section numbers are those of the 1891 edition. (8) The
+    Waldspurger results: the local packets are not constructed (local data are parameters); the named inputs are
+    stated for coefficient sequences, entire continuations and abstract local data, not for objects constructed in
+    the library; Kohnen's Petersson quotient is an unspecified positive constant; WaldspurgerSquareClass is restricted
+    to quadratic characters and n prime to 4N; Gross's forms and Brandt matrices (p = 11 only) are entered
+    explicitly; L(E_n, 1) is an abstract function (Mathlib has no L-functions of elliptic curves); one result is
+    conditional on a conjecture (WeakBSD). See the README, Known restrictions.
 
 review:
-  status: "not yet reviewed: the 17 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 52 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
@@ -225,6 +314,182 @@ alignment:
       lean: "ModularFormsKB.Headlines.siegelTheta_dominated"
       module: "Challenge_AndrianovZhuravlev / Solution_AndrianovZhuravlev"
       status: "proved"
+    - source: "Heegner (1952), Stark (1967): the class number one theorem"
+      lean: "ModularFormsKB.Headlines.heegnerStark_classNumber_eq_one_iff"
+      module: "Challenge_HeegnerStark / Solution_HeegnerStark"
+      status: "proved"
+      note: "Conditional (new in 0.3.0): proved from the hypothesis WeberHeegnerStarkInputs (eight named classical theorems, assumed); the discriminant form."
+    - source: "Heegner (1952), Stark (1967): the class number one theorem, in Gauss's form"
+      lean: "ModularFormsKB.Headlines.heegnerStark_classNumber_eq_one_iff_isSquare"
+      module: "Challenge_HeegnerStark / Solution_HeegnerStark"
+      status: "proved"
+      note: "Conditional (new in 0.3.0): proved from WeberHeegnerStarkInputs and QuadraticDiscriminantInput (assumed); K = Q(sqrt(-d))."
+
+    - source: "Waldspurger (1991): number of admissible sign patterns"
+      lean: "ModularFormsKB.Headlines.waldspurger_card_admissible"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Waldspurger (1991): parity criterion for admissible patterns"
+      lean: "ModularFormsKB.Headlines.waldspurger_isAdmissible_iff_even"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Waldspurger (1991): closed form of the fibre dimension"
+      lean: "ModularFormsKB.Headlines.waldspurger_two_mul_fibreDim"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Waldspurger (1991): multiplicity one"
+      lean: "ModularFormsKB.Headlines.waldspurger_fibreDim_le_one"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Waldspurger (1991): product of the local signs of a square class"
+      lean: "ModularFormsKB.Headlines.waldspurger_prod_localSign"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Waldspurger (1991): the pattern of a square class is admissible iff its twisted root number is +1"
+      lean: "ModularFormsKB.Headlines.waldspurger_isAdmissible_localSign_iff"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Kohnen (1985): Kohnen's pattern is admissible"
+      lean: "ModularFormsKB.Headlines.waldspurger_kohnenPattern_isAdmissible"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Kohnen (1985): Kohnen's condition as a sign pattern"
+      lean: "ModularFormsKB.Headlines.waldspurger_localSign_eq_kohnenPattern_iff"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Kohnen (1985): the fibre of Kohnen's local data has dimension one"
+      lean: "ModularFormsKB.Headlines.waldspurger_kohnen_fibreDim"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Gross (1987), p = 11: plus condition"
+      lean: "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_of_mod_four"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Gross (1987), p = 11: local obstruction at 11"
+      lean: "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_of_split"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Gross (1987), p = 11: first coefficients"
+      lean: "ModularFormsKB.Headlines.gross_grossCoeff_values"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Gross (1987), p = 11: Brandt matrices, row sums and symmetry"
+      lean: "ModularFormsKB.Headlines.gross_brandt_rowSum_symm"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Gross (1987), p = 11: Brandt matrices, the eigenvector of the newform"
+      lean: "ModularFormsKB.Headlines.gross_brandt_eigen"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Gross (1987), p = 11: Brandt matrices, the Eisenstein eigenvector"
+      lean: "ModularFormsKB.Headlines.gross_brandt_eisenstein"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Waldspurger (1981), Corollaire 2: one constant per square class"
+      lean: "ModularFormsKB.Headlines.waldspurger_exists_constant"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on WaldspurgerSquareClass (assumed)."
+    - source: "Waldspurger (1981), Corollaire 2: c(n) = 0 iff L = 0"
+      lean: "ModularFormsKB.Headlines.waldspurger_coeff_eq_zero_iff"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on WaldspurgerSquareClass (assumed)."
+    - source: "Kohnen (1985), Theorem 1: nonnegativity of central values"
+      lean: "ModularFormsKB.Headlines.waldspurger_kohnen_central_nonneg"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on KohnenSquarefree (assumed)."
+    - source: "Kohnen (1985), Theorem 1: ratio form"
+      lean: "ModularFormsKB.Headlines.waldspurger_kohnen_ratio"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on KohnenSquarefree (assumed)."
+    - source: "Kohnen (1985), Theorem 1: c(|D|) != 0 iff L(f, D, k) != 0"
+      lean: "ModularFormsKB.Headlines.waldspurger_kohnen_coeff_ne_zero_iff"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on KohnenSquarefree (assumed)."
+    - source: "Waldspurger (1991): a carried square class has root number +1"
+      lean: "ModularFormsKB.Headlines.waldspurger_twistRoot_eq_one"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on WaldspurgerCoefficients (assumed)."
+    - source: "Waldspurger (1991): a square class is carried by one pattern"
+      lean: "ModularFormsKB.Headlines.waldspurger_carries_unique"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on WaldspurgerCoefficients (assumed)."
+    - source: "Waldspurger (1991), Kohnen (1985): multiplicity one in the plus space"
+      lean: "ModularFormsKB.Headlines.waldspurger_finrank_plusFibre_eq_one"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on WaldspurgerFibreDimension (assumed)."
+    - source: "Gross (1987), p = 11: c(|D|) = 0 iff L(f, D, 1) = 0 for inert D"
+      lean: "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_iff"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on GrossRatio (assumed)."
+    - source: "Congruent numbers: n is congruent iff y^2 = x^3 - n^2 x has a rational point with y != 0"
+      lean: "ModularFormsKB.Headlines.congruent_isCongruent_iff_point"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Congruent numbers: 5, 6, 7 and 41"
+      lean: "ModularFormsKB.Headlines.congruent_five_six_seven_fortyOne"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Tunnell (1983): the counts A, B, C, D for small n"
+      lean: "ModularFormsKB.Headlines.congruent_tunnell_counts"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Tunnell (1983): consistency for n = 5"
+      lean: "ModularFormsKB.Headlines.congruent_tunnell_five_consistent"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0."
+    - source: "Tunnell (1983): A(n) != 2B(n) implies n not congruent (odd n)"
+      lean: "ModularFormsKB.Headlines.congruent_not_isCongruent_of_odd"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on TunnellFormula and CoatesWiles (assumed)."
+    - source: "Tunnell (1983): C(n) != 2D(n) implies n not congruent (even n)"
+      lean: "ModularFormsKB.Headlines.congruent_not_isCongruent_of_even"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on TunnellFormula and CoatesWiles (assumed)."
+    - source: "Tunnell (1983): 1, 3 and 11 are not congruent"
+      lean: "ModularFormsKB.Headlines.congruent_not_isCongruent_one_three_eleven"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on TunnellFormula and CoatesWiles (assumed)."
+    - source: "Tunnell (1983): Tunnell's criterion, odd n"
+      lean: "ModularFormsKB.Headlines.congruent_isCongruent_iff_odd"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on TunnellFormula, CoatesWiles and WeakBSD; WeakBSD is the weak Birch and Swinnerton-Dyer conjecture, a conjecture, not a theorem."
+    - source: "Tunnell (1983): Tunnell's criterion, even n"
+      lean: "ModularFormsKB.Headlines.congruent_isCongruent_iff_even"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.3.0. Conditional on TunnellFormula, CoatesWiles and WeakBSD; WeakBSD is the weak Birch and Swinnerton-Dyer conjecture, a conjecture, not a theorem."
 
 acknowledgements: >-
   Mathlib and its contributors; the Tau Ceti contributors, on whose library this one is built; the Lean FRO for

@@ -7,7 +7,7 @@ import ModularFormsKB.Miyake.Sec4_3.Hecke
 import ModularFormsKB.Miyake.Sec4_3.WeilTheorem
 
 /-!
-# Headline statements of modular-forms-lean 0.2.0: Miyake, *Modular Forms*, proved
+# Headline statements of modular-forms-lean 0.3.0: Miyake, *Modular Forms*, proved
 
 The statements of `Challenge_Miyake.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Miyake.json`) checks that each statement here is exactly the one in
