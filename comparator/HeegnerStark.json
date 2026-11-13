@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge_HeegnerStark",
+  "solution_module": "Solution_HeegnerStark",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.heegnerStark_classNumber_eq_one_iff",
+    "ModularFormsKB.Headlines.heegnerStark_classNumber_eq_one_iff_isSquare"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

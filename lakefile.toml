@@ -1,6 +1,6 @@
 name = "modular_forms_lean"
-version = "0.2.0"
-defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev"]
+version = "0.3.0"
+defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -61,3 +61,27 @@ roots = ["Challenge_AndrianovZhuravlev"]
 [[lean_lib]]
 name = "Solution_AndrianovZhuravlev"
 roots = ["Solution_AndrianovZhuravlev"]
+
+[[lean_lib]]
+name = "Challenge_HeegnerStark"
+roots = ["Challenge_HeegnerStark"]
+
+[[lean_lib]]
+name = "Solution_HeegnerStark"
+roots = ["Solution_HeegnerStark"]
+
+[[lean_lib]]
+name = "Challenge_Waldspurger"
+roots = ["Challenge_Waldspurger"]
+
+[[lean_lib]]
+name = "Solution_Waldspurger"
+roots = ["Solution_Waldspurger"]
+
+[[lean_lib]]
+name = "Challenge_CongruentNumbers"
+roots = ["Challenge_CongruentNumbers"]
+
+[[lean_lib]]
+name = "Solution_CongruentNumbers"
+roots = ["Solution_CongruentNumbers"]

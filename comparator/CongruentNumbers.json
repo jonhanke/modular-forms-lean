@@ -1,0 +1,22 @@
+{
+  "challenge_module": "Challenge_CongruentNumbers",
+  "solution_module": "Solution_CongruentNumbers",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.congruent_isCongruent_iff_point",
+    "ModularFormsKB.Headlines.congruent_five_six_seven_fortyOne",
+    "ModularFormsKB.Headlines.congruent_tunnell_counts",
+    "ModularFormsKB.Headlines.congruent_tunnell_five_consistent",
+    "ModularFormsKB.Headlines.congruent_not_isCongruent_of_odd",
+    "ModularFormsKB.Headlines.congruent_not_isCongruent_of_even",
+    "ModularFormsKB.Headlines.congruent_not_isCongruent_one_three_eleven",
+    "ModularFormsKB.Headlines.congruent_isCongruent_iff_odd",
+    "ModularFormsKB.Headlines.congruent_isCongruent_iff_even"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

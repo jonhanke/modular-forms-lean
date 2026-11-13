@@ -7,6 +7,9 @@ import Solution_Miyake
 import Solution_Shimura
 import Solution_Iwaniec
 import Solution_AndrianovZhuravlev
+import Solution_HeegnerStark
+import Solution_Waldspurger
+import Solution_CongruentNumbers
 
 #print axioms ModularFormsKB.Headlines.weil_riemannHypothesis_curves
 #print axioms ModularFormsKB.Headlines.kronecker_modularEquation
@@ -25,3 +28,38 @@ import Solution_AndrianovZhuravlev
 #print axioms ModularFormsKB.Headlines.kloosterman_mul_of_coprime
 #print axioms ModularFormsKB.Headlines.kloostermanMoment_two
 #print axioms ModularFormsKB.Headlines.siegelTheta_dominated
+#print axioms ModularFormsKB.Headlines.heegnerStark_classNumber_eq_one_iff
+#print axioms ModularFormsKB.Headlines.heegnerStark_classNumber_eq_one_iff_isSquare
+#print axioms ModularFormsKB.Headlines.waldspurger_card_admissible
+#print axioms ModularFormsKB.Headlines.waldspurger_isAdmissible_iff_even
+#print axioms ModularFormsKB.Headlines.waldspurger_two_mul_fibreDim
+#print axioms ModularFormsKB.Headlines.waldspurger_fibreDim_le_one
+#print axioms ModularFormsKB.Headlines.waldspurger_prod_localSign
+#print axioms ModularFormsKB.Headlines.waldspurger_isAdmissible_localSign_iff
+#print axioms ModularFormsKB.Headlines.waldspurger_kohnenPattern_isAdmissible
+#print axioms ModularFormsKB.Headlines.waldspurger_localSign_eq_kohnenPattern_iff
+#print axioms ModularFormsKB.Headlines.waldspurger_kohnen_fibreDim
+#print axioms ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_of_mod_four
+#print axioms ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_of_split
+#print axioms ModularFormsKB.Headlines.gross_grossCoeff_values
+#print axioms ModularFormsKB.Headlines.gross_brandt_rowSum_symm
+#print axioms ModularFormsKB.Headlines.gross_brandt_eigen
+#print axioms ModularFormsKB.Headlines.gross_brandt_eisenstein
+#print axioms ModularFormsKB.Headlines.waldspurger_exists_constant
+#print axioms ModularFormsKB.Headlines.waldspurger_coeff_eq_zero_iff
+#print axioms ModularFormsKB.Headlines.waldspurger_kohnen_central_nonneg
+#print axioms ModularFormsKB.Headlines.waldspurger_kohnen_ratio
+#print axioms ModularFormsKB.Headlines.waldspurger_kohnen_coeff_ne_zero_iff
+#print axioms ModularFormsKB.Headlines.waldspurger_twistRoot_eq_one
+#print axioms ModularFormsKB.Headlines.waldspurger_carries_unique
+#print axioms ModularFormsKB.Headlines.waldspurger_finrank_plusFibre_eq_one
+#print axioms ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_iff
+#print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_point
+#print axioms ModularFormsKB.Headlines.congruent_five_six_seven_fortyOne
+#print axioms ModularFormsKB.Headlines.congruent_tunnell_counts
+#print axioms ModularFormsKB.Headlines.congruent_tunnell_five_consistent
+#print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_of_odd
+#print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_of_even
+#print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_one_three_eleven
+#print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_odd
+#print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_even

@@ -13,7 +13,7 @@ import ModularFormsKB.Milne.Ch12.JIntegral
 import ModularFormsKB.Milne.Wave4A.GenusZeroDifferentials
 
 /-!
-# Headline statements of modular-forms-lean 0.2.0: Milne, *Modular Functions and Modular Forms*, proved
+# Headline statements of modular-forms-lean 0.3.0: Milne, *Modular Functions and Modular Forms*, proved
 
 The statements of `Challenge_Milne.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Milne.json`) checks that each statement here is exactly the one in

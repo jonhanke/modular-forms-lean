@@ -40,6 +40,30 @@
       "challenge_module": "Challenge_AndrianovZhuravlev",
       "solution_module": "Solution_AndrianovZhuravlev",
       "theorems": 1
+    },
+    {
+      "book": "HeegnerStark",
+      "title": "The class number one theorem (Heegner 1952, Stark 1967), conditional on Weber's theorems",
+      "config": "comparator/HeegnerStark.json",
+      "challenge_module": "Challenge_HeegnerStark",
+      "solution_module": "Solution_HeegnerStark",
+      "theorems": 2
+    },
+    {
+      "book": "Waldspurger",
+      "title": "Waldspurger's theorems, the Shimura lift and Gross's example for p = 11 (unconditional and conditional on named inputs)",
+      "config": "comparator/Waldspurger.json",
+      "challenge_module": "Challenge_Waldspurger",
+      "solution_module": "Solution_Waldspurger",
+      "theorems": 24
+    },
+    {
+      "book": "CongruentNumbers",
+      "title": "Congruent numbers and Tunnell's criterion (unconditional, conditional on named inputs, and conditional on the weak Birch and Swinnerton-Dyer conjecture)",
+      "config": "comparator/CongruentNumbers.json",
+      "challenge_module": "Challenge_CongruentNumbers",
+      "solution_module": "Solution_CongruentNumbers",
+      "theorems": 9
     }
   ],
   "permitted_axioms": [

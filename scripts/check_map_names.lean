@@ -1,9 +1,12 @@
 import ModularFormsKB
 import Solution_AndrianovZhuravlev
+import Solution_CongruentNumbers
+import Solution_HeegnerStark
 import Solution_Iwaniec
 import Solution_Milne
 import Solution_Miyake
 import Solution_Shimura
+import Solution_Waldspurger
 
 /-! Every Lean name of the book maps, the statement maps and the comparison page exists. -/
 
@@ -74,6 +77,54 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @DirichletCharacter.IsPri
 open ModularFormsKB ModularFormsKB.Headlines in #check @EisensteinSeries.eisensteinSeriesSIF_mdifferentiable
 open ModularFormsKB ModularFormsKB.Headlines in #check @EisensteinSeries.eisensteinSeries_tendstoLocallyUniformly
 open ModularFormsKB ModularFormsKB.Headlines in #check @FractionalIdeal.spanSingleton
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.GrossRatio
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.brandt_eigen
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.brandt_eisenstein
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.brandt_rowSum_symm
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq_zero_iff
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq_zero_of_mod_four
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq_zero_of_split
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_sixteen
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_three
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_twelve_hecke
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree.central_nonneg
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree.coeff_ne_zero_iff
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree.ratio
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.card_admissible
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.fibreDim_le_one
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.fibreDim_of_not_discrete
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.isAdmissible_iff_even
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.prod_eq_neg_one_pow
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.two_mul_fibreDim
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.CoatesWiles
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.TunnellFormula
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_five
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_fortyOne
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_iff_even
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_iff_odd
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_iff_point
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_seven
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_six
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.lval_eq_zero_iff_even
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.lval_eq_zero_iff_odd
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.not_isCongruent_of_even
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.not_isCongruent_of_odd
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.not_isCongruent_one_three_eleven
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.TwistData.isAdmissible_localSign_iff
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.TwistData.prod_localSign
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerCoefficients
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerCoefficients.carries_unique
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerCoefficients.not_carries_of_twistRoot
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerCoefficients.twistRoot_eq_one
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerFibreDimension
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerSquareClass
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerSquareClass.coeff_eq_zero_iff
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.WaldspurgerSquareClass.exists_constant
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.finrank_plusFibre_eq_one
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.kohnenPattern_isAdmissible
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.kohnen_fibreDim
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.localSign_eq_kohnenPattern_iff
 open ModularFormsKB ModularFormsKB.Headlines in #check @HeckeAntiInvolution.multiplicity_comm
 open ModularFormsKB ModularFormsKB.Headlines in #check @HeckeCoset.sum_multiplicity_assoc
 open ModularFormsKB ModularFormsKB.Headlines in #check @HeckeCosetModule.mul_comm_of_antiInvolution
@@ -525,8 +576,8 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.isNormalizedEigenf
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.isSeparable_iff_pullback_invariantDifferential_ne_zero
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jFun_bijective
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jFun_eq
+open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jFun_eq_smul_J
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jFun_holomorphic
-open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jFun_isModularFunction
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jFun_qExpansion
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.jIntegralAtCM
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.j_map_mem_ellCM
