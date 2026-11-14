@@ -9,7 +9,7 @@ authors:
   - family-names: Hanke
     given-names: Jonathan
 license: Apache-2.0
-version: "0.3.0"
+version: "0.3.1"
 doi: 10.5281/zenodo.24069385
 repository-code: "https://github.com/jonhanke/modular-forms-lean"
 keywords:
@@ -27,3 +27,5 @@ keywords:
   - Dirichlet L-functions
   - class number one
   - complex multiplication
+  - theta functions
+  - little Picard theorem

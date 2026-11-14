@@ -27,6 +27,18 @@ import ModularFormsKB.HalfIntegral.Waldspurger.Coefficients
 import ModularFormsKB.HalfIntegral.Waldspurger.Gross
 import ModularFormsKB.HalfIntegral.Waldspurger.Packets
 import ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
+import ModularFormsKB.Historical.Jacobi
+import ModularFormsKB.Historical.Jacobi.ModularEquationODE
+import ModularFormsKB.Historical.Jacobi.ThetaFourier
+import ModularFormsKB.Historical.Kronecker
+import ModularFormsKB.Historical.Kronecker.AnalyticInvariant
+import ModularFormsKB.Historical.Kronecker.Ser
+import ModularFormsKB.Historical.Ramanujan
+import ModularFormsKB.Historical.Ramanujan.Basic
+import ModularFormsKB.Historical.Ramanujan.Equations
+import ModularFormsKB.Historical.Weber
+import ModularFormsKB.Historical.Weber.ClassInvariantTable
+import ModularFormsKB.Historical.Weber.ThetaEta
 import ModularFormsKB.Historical.WeberHeegnerStark
 import ModularFormsKB.Historical.WeberHeegnerStark.CubicField
 import ModularFormsKB.Historical.WeberHeegnerStark.Defs
@@ -290,6 +302,11 @@ import ModularFormsKB.Milne.RiemannSurface.Differential
 import ModularFormsKB.Milne.RiemannSurface.Examples
 import ModularFormsKB.Milne.RiemannSurface.Results
 import ModularFormsKB.Milne.RiemannSurface.RingedSpace
+import ModularFormsKB.Milne.Wave10
+import ModularFormsKB.Milne.Wave10.GenusGammaTop
+import ModularFormsKB.Milne.Wave10.LittlePicard
+import ModularFormsKB.Milne.Wave10.ModularCurveJ
+import ModularFormsKB.Milne.Wave10.RiemannRochInputs
 import ModularFormsKB.Milne.Wave4A
 import ModularFormsKB.Milne.Wave4A.CanonicalClass
 import ModularFormsKB.Milne.Wave4A.CanonicalDegree
@@ -308,6 +325,35 @@ import ModularFormsKB.Milne.Wave4B.ModularFermat
 import ModularFormsKB.Milne.Wave4B.TateFreeAlgebra
 import ModularFormsKB.Milne.Wave4B.TateModuleFree
 import ModularFormsKB.Milne.Wave4B.WeightTwoDifferentials
+import ModularFormsKB.Milne.Wave5
+import ModularFormsKB.Milne.Wave5.Bundles
+import ModularFormsKB.Milne.Wave5.CMUnconditional
+import ModularFormsKB.Milne.Wave5.EndomorphismLift
+import ModularFormsKB.Milne.Wave5.MultiplicationIsogeny
+import ModularFormsKB.Milne.Wave5.PointMapEval
+import ModularFormsKB.Milne.Wave5.Remark211
+import ModularFormsKB.Milne.Wave5.WPEval
+import ModularFormsKB.Milne.Wave6
+import ModularFormsKB.Milne.Wave6.Betti
+import ModularFormsKB.Milne.Wave6.Bundles
+import ModularFormsKB.Milne.Wave6.ConnectedFD
+import ModularFormsKB.Milne.Wave6.RingedSpaceIf
+import ModularFormsKB.Milne.Wave6.ValenceLevelOne
+import ModularFormsKB.Milne.Wave7
+import ModularFormsKB.Milne.Wave7.CMComplex
+import ModularFormsKB.Milne.Wave7.HomLift
+import ModularFormsKB.Milne.Wave7.LatticeIsogeny
+import ModularFormsKB.Milne.Wave7.OggTame
+import ModularFormsKB.Milne.Wave8
+import ModularFormsKB.Milne.Wave8.ClassGroupAction
+import ModularFormsKB.Milne.Wave8.ClassGroupActionField
+import ModularFormsKB.Milne.Wave8.DiffNormal
+import ModularFormsKB.Milne.Wave9
+import ModularFormsKB.Milne.Wave9.ClassGroupActionAll
+import ModularFormsKB.Milne.Wave9.ClassGroupActionDescent
+import ModularFormsKB.Milne.Wave9.FixedDescent
+import ModularFormsKB.Milne.Wave9.HomDescent
+import ModularFormsKB.Milne.Wave9.PuncturedSphere
 import ModularFormsKB.Miyake.CongruenceModularGroups
 import ModularFormsKB.Miyake.DirichletCharacters
 import ModularFormsKB.Miyake.GeneralizedBernoulli
@@ -358,6 +404,42 @@ import ModularFormsKB.Miyake.Wave3.HeckeSubalgebra
 import ModularFormsKB.Miyake.Wave3.LevelOneDimension
 import ModularFormsKB.Miyake.Wave3.PeterssonDecomposition
 import ModularFormsKB.Miyake.Wave3.RegularCusps
+import ModularFormsKB.Miyake.Wave4.EisensteinLSeries
+import ModularFormsKB.Miyake.Wave4.HeckeCoefficients
+import ModularFormsKB.Miyake.Wave4.MiyakeHecke
+import ModularFormsKB.Miyake.Wave4.Newforms
+import ModularFormsKB.Miyake.Wave4.Notation
+import ModularFormsKB.Miyake.Wave5.BadPrime
+import ModularFormsKB.Miyake.Wave5.CoprimeFilter
+import ModularFormsKB.Miyake.Wave5.CoprimeProduct
+import ModularFormsKB.Miyake.Wave5.DoubleCosetRelations
+import ModularFormsKB.Miyake.Wave5.GoodPrime
+import ModularFormsKB.Miyake.Wave5.HeckeGeneration
+import ModularFormsKB.Miyake.Wave5.SquarefreeDecomposition
+import ModularFormsKB.Miyake.Wave6.DescentCosets
+import ModularFormsKB.Miyake.Wave6.Discriminant
+import ModularFormsKB.Miyake.Wave6.HeckeIndependence
+import ModularFormsKB.Miyake.Wave6.KroneckerGauss
+import ModularFormsKB.Miyake.Wave6.LevelChange
+import ModularFormsKB.Miyake.Wave6.LevelLowering
+import ModularFormsKB.Miyake.Wave6.LevelOneBasis
+import ModularFormsKB.Miyake.Wave6.LevelOneFunctions
+import ModularFormsKB.Miyake.Wave6.OldSpace
+import ModularFormsKB.Miyake.Wave6.TwistLevel
+import ModularFormsKB.Miyake.Wave7.CoeffBound
+import ModularFormsKB.Miyake.Wave7.CosetReps
+import ModularFormsKB.Miyake.Wave7.Parity
+import ModularFormsKB.Miyake.Wave7.StarAdjoint
+import ModularFormsKB.Miyake.Wave7.StarHecke
+import ModularFormsKB.Miyake.Wave8.BadPrimeCoeff
+import ModularFormsKB.Miyake.Wave8.FrickePrimitive
+import ModularFormsKB.Miyake.Wave8.Gamma1Reps
+import ModularFormsKB.Miyake.Wave8.GeneralAdjoint
+import ModularFormsKB.Miyake.Wave8.StarEmbed
+import ModularFormsKB.Miyake.Wave9.EtaHecke
+import ModularFormsKB.Miyake.Wave9.EtaMatrix
+import ModularFormsKB.Miyake.Wave9.EtaOperator
+import ModularFormsKB.Miyake.Wave9.EtaPrimitive
 import ModularFormsKB.Shimura2007.Ch1.HeckeFunctionalEquation
 import ModularFormsKB.Shimura2007.Ch1.PrimitiveCharacter
 import ModularFormsKB.Shimura2007.Ch2.CriticalValues
@@ -371,7 +453,7 @@ import ModularFormsKB.Shimura2007.Ch2.RootsOfUnity
 import ModularFormsKB.Shimura2007.Ch6.RankinCohen
 
 /-!
-# ModularFormsKB (modular-forms-lean 0.3.0)
+# ModularFormsKB (modular-forms-lean 0.3.1)
 
 Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *Modular Forms*
 (`ModularFormsKB.Miyake`), the dimension bounds (`ModularFormsKB.Dimension`), and statements from Shimura,
@@ -379,5 +461,7 @@ Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *
 Classical Automorphic Forms* (`ModularFormsKB.Iwaniec1997`) and Andrianov and Zhuravlev, *Modular Forms
 and Hecke Operators* (`ModularFormsKB.Andrianov`), the class number one theorem of Heegner and Stark,
 conditional on named inputs (`ModularFormsKB.Historical.WeberHeegnerStark`), and Waldspurger's theorems,
-Gross's example and congruent numbers (`ModularFormsKB.HalfIntegral.Waldspurger`). See README.md.
+Gross's example and congruent numbers (`ModularFormsKB.HalfIntegral.Waldspurger`), and theorems of Jacobi,
+Ramanujan, Weber and Kronecker (`ModularFormsKB.Historical.Jacobi`, `.Ramanujan`, `.Weber`, `.Kronecker`).
+See README.md.
 -/

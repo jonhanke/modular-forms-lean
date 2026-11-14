@@ -113,7 +113,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        book: [Milne, Miyake, Shimura, Iwaniec, AndrianovZhuravlev, HeegnerStark, Waldspurger, CongruentNumbers]
+        book: [Milne, Miyake, Shimura, Iwaniec, AndrianovZhuravlev, HeegnerStark, Waldspurger, CongruentNumbers,
+               Historical]
     steps:
       - name: Free disk space (the comparator exports need it)
         run: |

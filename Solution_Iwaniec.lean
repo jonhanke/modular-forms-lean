@@ -7,7 +7,7 @@ import ModularFormsKB.Iwaniec1997.KloostermanMult
 import ModularFormsKB.Iwaniec1997.KloostermanMoments
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Iwaniec, *Topics in Classical Automorphic Forms*, proved
+# Headline statements of modular-forms-lean 0.3.1: Iwaniec, *Topics in Classical Automorphic Forms*, proved
 
 The statements of `Challenge_Iwaniec.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Iwaniec.json`) checks that each statement here is exactly the one in

@@ -100,24 +100,24 @@ Ceti (dependencies of this library) already have, and how many this library prov
 | chapter | rows | in Mathlib | in Tau Ceti | proved here | proved in part | conditional | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|
 | 0 | 5 | 0 | 0 | 2 | 1 | 0 | 2 | 0 |
-| 1 | 23 | 0 | 0 | 13 | 7 | 2 | 1 | 2 |
-| 2 | 22 | 0 | 0 | 12 | 9 | 0 | 1 | 4 |
+| 1 | 23 | 0 | 0 | 16 | 5 | 1 | 1 | 2 |
+| 2 | 22 | 0 | 0 | 18 | 4 | 0 | 0 | 4 |
 | 3 | 13 | 1 | 0 | 11 | 0 | 1 | 0 | 2 |
-| 4 | 36 | 0 | 0 | 26 | 8 | 1 | 1 | 7 |
+| 4 | 36 | 0 | 0 | 27 | 7 | 1 | 1 | 7 |
 | 5 | 34 | 0 | 0 | 34 | 0 | 0 | 0 | 6 |
 | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 |
 | 7 | 5 | 1 | 0 | 3 | 1 | 0 | 0 | 1 |
 | 8 | 9 | 0 | 0 | 6 | 3 | 0 | 0 | 0 |
 | 9 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | 1 |
 | 10 | 2 | 0 | 0 | 1 | 0 | 0 | 1 | 1 |
-| 11 | 22 | 0 | 0 | 8 | 0 | 5 | 9 | 1 |
-| 12 | 116 | 21 | 4 | 37 | 2 | 6 | 46 | 4 |
+| 11 | 22 | 0 | 0 | 9 | 0 | 5 | 8 | 1 |
+| 12 | 116 | 21 | 4 | 41 | 4 | 1 | 45 | 4 |
 
 ### T. Miyake, *Modular Forms* (Springer, 1989)
 
 | chapter | rows | in Mathlib | in Tau Ceti | proved here | proved in part | conditional | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|
-| 0 | 279 | 21 | 46 | 56 | 29 | 0 | 127 | 2 |
+| 0 | 279 | 18 | 25 | 83 | 41 | 0 | 112 | 2 |
 
 ### Dimension bounds for modular forms on $\Gamma_0(N)$, $\Gamma_1(N)$ and with a character (Sturm)
 

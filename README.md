@@ -11,41 +11,67 @@ A. N. Andrianov and V. G. Zhuravlev's *Modular Forms and Hecke Operators*. Since
 theorems*, proved from named classical inputs: the class number one theorem of Heegner and Stark (from Weber's class
 invariants), and consequences of Waldspurger's theorems on the Fourier coefficients of half-integral weight forms,
 among them Tunnell's theorem on congruent numbers; and, unconditionally, the combinatorics of Waldspurger's sign
-patterns, Gross's example for the prime $`11`$ and the elementary theory of congruent numbers. The Lean library is
-called `ModularFormsKB`.
+patterns, Gross's example for the prime $`11`$ and the elementary theory of congruent numbers. Since 0.3.1 it also
+has theorems read in the original papers of Jacobi, Ramanujan, Weber and Kronecker. The Lean library is called
+`ModularFormsKB`.
 
-## What's new in 0.3.0
+## What's new in 0.3.1
 
-- **A new section, [Conditional theorems](#conditional-theorems)**, and a sixth challenge file,
-  [`Challenge_HeegnerStark.lean`](Challenge_HeegnerStark.lean): the imaginary quadratic fields of class number one are
-  exactly $`\mathbb Q(\sqrt{-d})`$ for $`d \in \{1, 2, 3, 7, 11, 19, 43, 67, 163\}`$, proved in Lean from eight named
-  classical inputs (Weber, Dirichlet, Dedekind), each a field of a Lean `Prop` structure with its source. The theorem
-  has the form *(named inputs) → statement*; `#print axioms` shows only the standard axioms. Everything else in
-  Heegner's proof is proved: Gauss's reduction, Heegner's step from Weber's class invariants to a Diophantine
-  equation, that equation's integer points, and a certified numerical enclosure of $`j`$.
-- **Waldspurger's theorems and the Shimura lift**, in two more challenge files (one per topic):
-  [`Challenge_Waldspurger.lean`](Challenge_Waldspurger.lean) (24 headlines) and
-  [`Challenge_CongruentNumbers.lean`](Challenge_CongruentNumbers.lean) (9 headlines). *Unconditional:* the
-  combinatorics of Waldspurger's admissible sign patterns (1991) and of the dimension of the fibres of the Shimura
-  correspondence, Kohnen's plus space as a sign pattern, Gross's weight $`3/2`$ form for $`p = 11`$ with its Brandt
-  matrices, the equivalence "$`n`$ is congruent if and only if $`y^2 = x^3 - n^2x`$ has a rational point with
-  $`y \ne 0`$", and explicit congruent triangles ([Highlights](#highlights)). *Conditional on named inputs*
-  (Waldspurger 1981 and 1991, Kohnen 1985, Gross 1987, Tunnell 1983, Coates and Wiles 1977): one constant per square
-  class, nonnegativity of central values, multiplicity one in the plus space, Gross's vanishing criterion, and the
-  half of Tunnell's criterion that shows $`1`$, $`3`$ and $`11`$ are not congruent; and, *separately, conditional on
-  the weak Birch and Swinnerton-Dyer conjecture*, Tunnell's criterion as an equivalence
-  ([Conditional theorems](#conditional-theorems)). A new statement map lists the results of the six papers stated in
-  Lean ([docs/results/books/waldspurger.md](docs/results/books/waldspurger.md)).
+- **Eleven new headlines** (63 in all; the 52 of 0.3.0 are unchanged, including the conditional theorems and their
+  named inputs), each a result that neither Mathlib master nor Tau Ceti main (both checked on 2026-11-14) has:
+  - [`Challenge_Milne.lean`](Challenge_Milne.lean) (13, was 9): the little Picard theorem (Remark 2.25), Proposition
+    12.21 (the class group of an imaginary quadratic order acts on the $`j`$-invariants with complex multiplication,
+    over every algebraically closed field of characteristic zero; corrected form), Proposition 11.5 (Betti,
+    $`\ell`$-adic and tangent representations of an elliptic curve over $`\mathbb C`$), and the conductor exponent
+    $`2`$ at a cusp for $`p \ne 2, 3`$ (p. 111).
+  - [`Challenge_Miyake.lean`](Challenge_Miyake.lean) (6, was 4): Theorem 4.5.9 (the Hecke ring of $`\Gamma_0(N)`$ is a
+    polynomial ring) and Theorem 4.5.4 (2) ($`T(n)`$ and $`T^*(n)`$ are adjoint for every $`n`$).
+  - A ninth challenge file, [`Challenge_Historical.lean`](Challenge_Historical.lean) (5, a topic): Jacobi's
+    differential equation of the modular equations and the Fourier series of $`\Theta`$ and $`H`$, Ramanujan's
+    differential equations for $`P`$, $`Q`$, $`R`$, Kronecker's transformation law for $`\mathrm{Ser}_\rho`$
+    ($`\rho \ge 2`$), and, in [Conditional theorems](#conditional-theorems), Weber's formulas
+    $`\vartheta = \eta\,\mathfrak f^2`$ conditional on the Jacobi triple product. A new statement map,
+    [docs/results/books/historical.md](docs/results/books/historical.md) (8 rows).
+- **New in the library** since 0.3.0:
+  - Milne, waves 5 to 10 (`ModularFormsKB/Milne/Wave5/` … `Wave10/`): the analytic theory of complex tori connected
+    with Tau Ceti's elliptic curves, so that the complex-multiplication results of Section 12 (12.6 to 12.9, 12.14 to
+    12.16) are unconditional (wave 5); Proposition 11.5, Example 4.13 for meromorphic forms, Statement 1.9 and
+    Proposition 2.17 for $`\mathrm{SL}_2(\mathbb Z)`$ (wave 6); the conductor exponent at a cusp, morphisms between
+    complex tori, Propositions 12.20 and 12.21 over $`\mathbb C`$ (wave 7); Proposition 12.21 over every algebraically
+    closed field of characteristic zero with the cardinality of $`\mathbb C`$ (wave 8), and then over every such field
+    by Galois descent, Theorem 12.8 over every such field, and the Euler characteristic of a punctured $`X(\Gamma)`$
+    (wave 9); the little Picard theorem, Theorem 1.17 and Proposition 1.12 (b) on every $`X(\Gamma)`$, and Theorems
+    1.27, 2.22, 4.9 and Proposition 4.12 on $`X(\Gamma)`$ from Riemann–Roch alone (wave 10).
+  - Miyake, waves 4 to 9 (`ModularFormsKB/Miyake/Wave4/` … `Wave9/`): Miyake's notation for the spaces and Hecke
+    operators of $`\Gamma_0(N)`$ with a character, and the results of Sections 4.5 and 4.6 that Tau Ceti proves under
+    other names (wave 4); the double-coset relations of Lemmas 4.5.7 and 4.5.8 at every level, Lemmas 4.6.5 and 4.6.7
+    (wave 5); Theorems 4.1.7, 4.1.8, 4.5.9, 4.5.10, Lemmas 4.5.11, 4.6.1, 4.6.2, 4.6.6, 4.6.9 (wave 6); the adjoint
+    operators $`T^*(m, l)`$, $`T^*(n)`$, Theorems 4.5.4 and 4.5.5, Lemma 4.3.2, Theorem 4.7.3 for $`k \ge 2`$ (wave
+    7); Theorem 4.5.4 (2) for every $`n`$, (4.5.42), Theorems 4.5.18, 4.6.15, 4.6.17, and an erratum to Theorem 4.5.10
+    (wave 8); the operators $`\eta_q`$, Theorem 4.6.16, (4.6.22)–(4.6.23), Corollary 4.6.18 (2), and an erratum to
+    Theorem 4.6.16 (3) (wave 9).
+  - Four historical libraries, each importing Mathlib modules only (`ModularFormsKB/Historical/Jacobi/`, `Ramanujan/`,
+    `Weber/`, `Kronecker/`): the theorems of the new challenge file, Ramanujan's table of $`\Phi_{r,s}`$ (1.71)–(1.74),
+    the first rows of Weber's Table VI of class invariants (stated), and the invariance of Kronecker's lattice sums.
+- **Book maps regenerated** (rows of each status, 0.3.0 → 0.3.1):
+
+  | map | proved | proved in part | conditional | stated, not proved | not formalized |
+  |---|---|---|---|---|---|
+  | Milne (293 rows) | 155 → 170 | 28 → 22 | 15 → 9 | 6 → 4 | 11 → 10 |
+  | Miyake (279 rows) | 56 → 83 | 29 → 41 | 0 → 0 | 3 → 2 | 95 → 92 |
+  | dimension bounds (22 rows) | 21 → 21 | | | | |
+
+  In the Miyake map, rows that 0.3.0 listed as *in Tau Ceti* (46 → 25), as not resolved there (15 → 8), as *in
+  Mathlib* (21 → 18) or as not located (11 → 6) are now proved here, in Miyake's
+  terms. The statement maps of
+  Shimura, Iwaniec, Andrianov–Zhuravlev and the Waldspurger papers are unchanged; the new historical map has 8 rows
+  (3 proved, 3 in part, 1 conditional, 1 stated).
 - **[Known restrictions](#known-restrictions)** of the new headlines.
-- The book maps of Milne, Miyake and the dimension bounds and the statement maps of Shimura, Iwaniec and
-  Andrianov–Zhuravlev are regenerated. One status changed: Milne's Proposition 8.2 (a moduli problem has at most one
-  solution up to unique isomorphism) is now *proved*; 0.2.0 listed it as conditional on the definition of a solution,
-  which is a condition of the statement, not an assumed result (Milne: 155 rows proved, was 154). The 17 headlines of
-  0.2.0 are unchanged (52 headlines in all).
 
 - **Book maps**: for Milne and Miyake, a table from every item (theorem, proposition, lemma, corollary, definition) to
   the Lean declaration that formalizes it and its status: [docs/results/books/](docs/results/books/README.md).
-- **Statement maps**: for Shimura, Iwaniec and Andrianov–Zhuravlev, and for the papers on Waldspurger's theorems,
+- **Statement maps**: for Shimura, Iwaniec and Andrianov–Zhuravlev, for the papers on Waldspurger's theorems and for
+  the historical papers,
   each central result that the library states in Lean, with its declaration and whether it is proved, conditional or
   only stated (same page).
 - **Literature statements**: each result from a book or paper is a Lean declaration tagged
@@ -67,8 +93,8 @@ called `ModularFormsKB`.
 
 | book | rows | proved | proved in part | conditional | definitions | in Mathlib | in Tau Ceti | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|---|
-| [J. S. Milne, *Modular Functions and Modular Forms* (version 1.31)](docs/results/books/milne-mf.md) | 293 | 155 | 28 | 15 | 44 | 23 | 4 | 24 | 29 |
-| [T. Miyake, *Modular Forms* (Springer, 1989)](docs/results/books/miyake.md) | 279 | 56 | 29 | 0 | 2 | 21 | 46 | 125 | 2 |
+| [J. S. Milne, *Modular Functions and Modular Forms* (version 1.31)](docs/results/books/milne-mf.md) | 293 | 170 | 22 | 9 | 44 | 23 | 4 | 21 | 29 |
+| [T. Miyake, *Modular Forms* (Springer, 1989)](docs/results/books/miyake.md) | 279 | 83 | 41 | 0 | 3 | 18 | 25 | 109 | 2 |
 | [Dimension bounds for modular forms on $\Gamma_0(N)$, $\Gamma_1(N)$ and with a character (Sturm)](docs/results/books/dimension.md) | 22 | 21 | 0 | 0 | 1 | 0 | 0 | 0 | 12 |
 
 *Proved*: proved with only the standard axioms and no unproved input. *Other*: refuted as stated, stated without proof, formalized in the source library but not in this release, or not formalized (see each map). *Proved here, also elsewhere*: rows proved (in whole or in part) in this library whose result, or a part of it, is also proved in Mathlib, Tau Ceti or the Stacks Project formalization (Axiom); each map names the declarations in its column *Also in*. Rows that are not results are omitted from the maps.
@@ -81,13 +107,14 @@ called `ModularFormsKB`.
 | [H. Iwaniec, *Topics in Classical Automorphic Forms* (American Mathematical Society, 1997)](docs/results/books/iwaniec1997.md) | 28 | 6 | 2 | 2 | 18 |
 | [A. N. Andrianov and V. G. Zhuravlev, *Modular Forms and Hecke Operators* (American Mathematical Society, 1995)](docs/results/books/andrianovzhuravlev1995.md) | 26 | 12 | 3 | 1 | 10 |
 | [Waldspurger's theorems, the Shimura lift, Gross's example for $p = 11$ and Tunnell's theorem (papers of Waldspurger 1981 and 1991, Kohnen 1985, Gross 1987, Tunnell 1983, Coates and Wiles 1977)](docs/results/books/waldspurger.md) | 17 | 7 | 0 | 8 | 2 |
+| [Historical theorems: Jacobi, *Fundamenta nova* (1829); Ramanujan, *Collected Papers* (1927); Weber, *Elliptische Functionen und algebraische Zahlen* (1891) and *Lehrbuch der Algebra* III (1908); Kronecker, *Werke* 4 and 5](docs/results/books/historical.md) | 8 | 3 | 3 | 1 | 1 |
 
 ## Highlights
 
 Every result listed here is a headline theorem of a `Challenge_<book>.lean` file: it is checked by the Lean kernel
 with only the standard axioms and depends on no unproved input. Headlines are only results that are in neither Mathlib
-nor Tau Ceti (main branch, checked on 2026-11-10 for the headlines new in 0.2.0 and on 2026-11-12 for those new in
-0.3.0), or that are stronger here
+nor Tau Ceti (main branch, checked on 2026-11-10 for the headlines new in 0.2.0, on 2026-11-12 for those new in
+0.3.0 and on 2026-11-14 for those new in 0.3.1), or that are stronger here
 ([comparison](docs/results/comparison.md)). One of them, Weil's Riemann hypothesis for curves, is also proved in the
 Stacks Project formalization by Axiom, in another form; it is labelled below. Related results of other libraries are
 cited next to the headlines, and the book maps credit, in their column *Also in*, every result proved here that is
@@ -102,11 +129,17 @@ a human** (see Provenance).
 - **Elliptic functions:** on a fundamental parallelogram the orders and the residues of an elliptic function sum to $`0`$ and $`\sum \operatorname{ord}_P(f)P \in \Lambda`$ (`doublyPeriodic_sums`, Proposition 3.1); an elliptic function with prescribed zeros and poles exists when their sums agree modulo $`\Lambda`$, and is unique up to a constant (`prescribedDivisor`, Theorem 3.8); every elliptic function is a rational function of $`\wp`$ and $`\wp'`$ (`ellipticFunctionField`, Proposition 3.11).
 - **Moduli of elliptic curves:** over an algebraically closed field, the $`j`$-line solves the moduli problem of elliptic curves (`ellipticModuli_jLine`, Theorem 8.4), and the moduli problem of elliptic curves with a cyclic subgroup of order $`N`$ has a solution for every $`N`$ prime to the characteristic (`cyclicModuli`, Theorem 8.6). Related results: Tau Ceti's fine moduli scheme $`Y_1(N)`$, $`N \ge 4`$ (`TauCeti.AlgebraicGeometry.EllipticCurveGeom.existsUnique_yOne`), on which the proof of Theorem 8.6 for $`N \ge 4`$ is built, and the algebraic moduli stack $`\mathcal M_{1,1}`$ of the Stacks Project formalization (Axiom; Tag 072R, index match).
 - **The modular curves $`X(N)`$, $`N = 2, 3, 4, 5`$, have genus zero:** every holomorphic differential on the compact Riemann surface $`X(N) = \Gamma(N)\backslash\mathbb H^*`$ is zero (`modularCurveX_Gamma_genus_eq_zero`, Example 2.23; new in 0.2.0). Related: Tau Ceti (main) proves the Riemann–Hurwitz formula for Fuchsian groups in Euler-characteristic form, under finite-CW-type hypotheses.
+- **The little Picard theorem:** a nonconstant entire function omits at most one complex value (`littlePicard`, Remark 2.25; new in 0.3.1). Milne's covering argument, run with the level-one $`j`$ on the free locus of $`\mathrm{PSL}_2(\mathbb Z)`$ (a covering of $`\mathbb C \setminus \{0, 1728\}`$) instead of $`\lambda`$ on $`\Gamma(2)`$. Neither Mathlib nor Tau Ceti (main, checked on 2026-11-14) has it.
+- **The class group acts on the $`j`$-invariants with complex multiplication:** for an order $`O`$ of an imaginary quadratic field $`K`$, an algebraically closed field $`k`$ of characteristic zero and an embedding $`K \to k`$, there is a map $`\mathrm{Pic}(O) \times \mathrm{Ell}_k(O) \to \mathrm{Ell}_k(O)`$ sending $`([\mathfrak a], j(E))`$ to $`j(E')`$ for every $`\mathfrak a`$-isogeny $`E \to E'`$ with normalized complex multiplication, whose orbit maps are bijections (`classGroupAction_ellCM`, Proposition 12.21 in the corrected form; new in 0.3.1). The action laws are not stated ([Known restrictions](#known-restrictions)).
+- **Betti, $`\ell`$-adic and tangent representations:** for every elliptic curve $`E`$ over $`\mathbb C`$, with $`\Lambda`$ its lattice and $`\rho`$ the action of $`\mathrm{End}(E)`$ on the tangent space, $`\mathbb Z_\ell \otimes \Lambda \cong T_\ell E`$ and $`\mathbb C \otimes \Lambda \cong \rho \oplus \bar\rho`$, compatibly with every endomorphism (`betti_tate_comparison`, Proposition 11.5; new in 0.3.1).
+- **The conductor exponent at a cusp:** for an elliptic curve over $`\mathbb Q`$ and a prime $`p \ne 2, 3`$, the exponent of $`p`$ in the conductor is exactly $`2`$ if and only if the reduction at $`p`$ is additive (`conductor_exponent_eq_two_iff`, Milne p. 111; new in 0.3.1). The conductor is Tau Ceti's, from Tate's algorithm; Tau Ceti proves "at least $`2`$", not the equality.
 
 **Miyake, *Modular Forms*** ([`Challenge_Miyake.lean`](Challenge_Miyake.lean))
 
 - **Hecke's theorem:** for coefficients of polynomial growth, $`g = f|_k\omega_N`$ if and only if $`\Lambda_N(s; f)`$ and $`\Lambda_N(s; g)`$ continue to the plane, with $`\Lambda_N(s; f) = i^k\Lambda_N(k - s; g)`$ and the usual polar parts, bounded on vertical strips (`hecke_converse`, Theorem 4.3.6); at level one, $`\sum a_n q^n`$ is a modular form of weight $`k`$ if and only if its $`L`$-function has this analytic behaviour (`hecke_converse_levelOne`, Theorem 4.3.8). The forward direction for cusp forms (the Fricke relation gives the functional equation) is in Tau Ceti (`CuspForm.frickeCompletedL_functional_equation`); the converse direction is new here.
 - **Weil's converse theorem:** if $`L(s; f)`$, $`L(s; g)`$ and their twists by the primitive characters of conductor in a suitable set of primes satisfy the functional equations with Weil's constant, then $`f \in M_k(N, \chi)`$, $`g \in M_k(N, \bar\chi)`$ and $`g = f|_k\omega_N`$ (`weil_converse`), and $`f`$, $`g`$ are cusp forms when $`L(s; f)`$ converges absolutely at $`k - \delta`$ (`weil_converse_cusp`, Theorem 4.3.15).
+- **The Hecke ring of $`\Gamma_0(N)`$ is a polynomial ring:** $`\mathcal R(\Gamma_0(N), \Delta_0(N))`$ over $`\mathbb Z`$ is the polynomial ring in $`T(p)`$, $`T(p, p)`$ ($`p \nmid N`$) and $`T(q)`$ ($`q \mid N`$) (`heckeRing_gamma0_polynomial`, Theorem 4.5.9; new in 0.3.1). Tau Ceti has the local theorem at level one (Shimura, Theorem 3.20).
+- **$`T(n)`$ and $`T^*(n)`$ are adjoint for every $`n`$:** on $`S_k(N, \chi)`$, $`\langle f | T(n), g\rangle = \langle f, g | T^*(n)\rangle`$ for every $`n \ge 1`$, with no condition on $`(n, N)`$ (`hecke_adjoint_heckeTStar`, Theorem 4.5.4 (2); new in 0.3.1). Tau Ceti has the case $`(n, N) = 1`$.
 
 **Shimura, *Elementary Dirichlet Series and Modular Forms*** ([`Challenge_Shimura.lean`](Challenge_Shimura.lean)) (new in 0.2.0)
 
@@ -134,6 +167,14 @@ Neither Mathlib (at the pinned commit) nor Tau Ceti (main, checked on 2026-11-12
 - **Explicit congruent triangles:** $`5`$, $`6`$, $`7`$ and $`41`$ are congruent, by the triangles $`(3/2, 20/3, 41/6)`$, $`(3, 4, 5)`$, $`(24/5, 35/12, 337/60)`$ and $`(40/3, 123/20, 881/60)`$ (`congruent_five_six_seven_fortyOne`); Tunnell's counts $`A(n) = \#\{x^2 + 2y^2 + 8z^2 = n\}`$, $`B(n) = \#\{x^2 + 2y^2 + 32z^2 = n\}`$ (and $`C`$, $`D`$ for even $`n`$) for small $`n`$, by kernel computation (`congruent_tunnell_counts`), and the consistency check $`A(5) = 2B(5)`$ for the congruent number $`5`$ (`congruent_tunnell_five_consistent`).
 
 Neither Mathlib (at the pinned commit) nor Tau Ceti (main, checked on 2026-11-12) defines congruent numbers.
+
+**Historical theorems: Jacobi, Ramanujan, Kronecker** ([`Challenge_Historical.lean`](Challenge_Historical.lean)) (new in 0.3.1; Weber's formulas, conditional on the Jacobi triple product, are in [Conditional theorems](#conditional-theorems))
+
+- **Jacobi's differential equation of the modular equations** (*Fundamenta nova*, 1829, § 33): if $`\lambda(k)`$ is related to $`k`$ by a modular equation $`B(\lambda)/A(\lambda) = (aB(k)/A(k) + b)/(cB(k)/A(k) + d)`$, $`ad - bc \ne 0`$, for solutions $`A`$, $`B`$ of Legendre's equation with nonzero Wronskian, then $`3\lambda''^2 - 2\lambda'\lambda''' + \lambda'^2\big[\big(\tfrac{1+k^2}{k-k^3}\big)^2 - \big(\tfrac{1+\lambda^2}{\lambda-\lambda^3}\big)^2\lambda'^2\big] = 0`$ (`jacobi_modular_equation_ode`); and the Fourier series of $`\Theta`$ and $`H`$ (§ 62, `jacobi_theta_fourier`).
+- **Ramanujan's differential equations** in his variable $`x`$, $`|x| < 1`$: $`x\,P' = (P^2 - Q)/12`$, $`x\,Q' = (PQ - R)/3`$, $`x\,R' = (PR - Q^2)/2`$ (`ramanujan_differential_equations`). Mathlib proves them in the variable $`\tau`$ for the normalized Eisenstein series.
+- **Kronecker's transformation law for $`\mathrm{Ser}_\rho`$** (*Werke* 5, I, art. XXI, § 7, (E)) for $`\rho \ge 2`$, where the series converges absolutely (`kronecker_ser_transformation`).
+
+Neither Mathlib (at the pinned commit; master checked on 2026-11-14) nor Tau Ceti (main, checked on 2026-11-14) has Jacobi's equation, the theta functions $`\Theta`$, $`H`$ in Jacobi's form, Ramanujan's equations in the variable $`x`$, or Kronecker's series.
 
 ## Conditional theorems
 
@@ -255,7 +296,46 @@ reviewed by a human**.
   It is open; the library does not claim it. These two headlines say only: if the conjecture holds, Tunnell's
   criterion decides which $`n`$ are congruent.
 
+**Weber's theta functions as products of $`\eta`$ and his functions $`\mathfrak f`$** ([`Challenge_Historical.lean`](Challenge_Historical.lean)) (new in 0.3.1)
+
+- **Statement** (H. Weber, *Elliptische Functionen und algebraische Zahlen*, 1891, § 21, (9)): for $`\mathrm{Im}\,\omega > 0`$,
+  $`\vartheta_{00}(\omega) = \eta(\omega)\,\mathfrak f(\omega)^2`$, $`\vartheta_{01}(\omega) = \eta(\omega)\,\mathfrak f_1(\omega)^2`$ and
+  $`\vartheta_{10}(\omega) = \eta(\omega)\,\mathfrak f_2(\omega)^2`$.
+- **Headline:** `JacobiTripleProduct → (ϑ₀₀ = η f² ∧ ϑ₀₁ = η f₁² ∧ ϑ₁₀ = η f₂²)` (`weber_theta_eta`); axioms `propext`,
+  `Classical.choice`, `Quot.sound`.
+- **Named input** (assumed): `JacobiTripleProduct`, the Jacobi triple product identity
+  $`\sum_{n \in \mathbb Z} q^{n^2} e^{2\pi i n z} = \prod_{n \ge 1} (1 - q^{2n})(1 + q^{2n-1}e^{2\pi i z})(1 + q^{2n-1}e^{-2\pi i z})`$,
+  $`q = e^{\pi i \tau}`$, for Mathlib's `jacobiTheta₂` (C. G. J. Jacobi, *Fundamenta nova*, 1829). Neither
+  Mathlib (master, checked on 2026-11-14) nor Tau Ceti (main, checked on 2026-11-14) proves it.
+- **Proved here, from the input:** the specializations of the product at $`z = 0, \tfrac12, \tfrac\omega2`$ and their
+  rearrangement into Dedekind's $`\eta`$ and Weber's $`\mathfrak f`$, $`\mathfrak f_1`$, $`\mathfrak f_2`$.
+
 ## Known restrictions
+
+Of the headlines new in 0.3.1:
+
+- **Proposition 12.21** (`classGroupAction_ellCM`): the statement asserts a map
+  $`\mathrm{Pic}(O) \times \mathrm{Ell}_k(O) \to \mathrm{Ell}_k(O)`$ compatible with $`\mathfrak a`$-isogenies whose
+  orbit maps are bijective; that it is a group action is not stated (Milne says "acts simply transitively"). The
+  complex multiplication is normalized (the library's corrected form of Milne's statement; see the errata).
+- **Proposition 11.5** (`betti_tate_comparison`): $`H_1(E, \mathbb Z)`$ and the tangent space at $`0`$ are modelled by
+  the lattice $`\Lambda`$ and by $`\mathbb C`$ through the complex uniformization, as in Milne's proof; singular
+  homology is not used.
+- **The conductor exponent** (`conductor_exponent_eq_two_iff`): the conductor is Tau Ceti's, defined by Tate's
+  algorithm; Ogg's formula, which identifies it with the conductor of the $`\ell`$-adic representation, is not
+  formalized; $`p = 2, 3`$ are not treated.
+- **Theorem 4.5.4 (2)** (`hecke_adjoint_heckeTStar`): Miyake's $`T^*(n)`$ is defined by his formula (4.5.16) as a sum of
+  the double cosets $`T^*(m, l)`$, not as the sum of all double cosets of determinant $`n`$ (the analogue of Lemma
+  4.5.2 for $`\Delta_0^*(N)`$ is not formalized), and only on cusp forms.
+- **Jacobi** (`jacobi_modular_equation_ode`, `jacobi_theta_fourier`): the equation is proved for any two solutions
+  $`A`$, $`B`$ of Legendre's equation; that the complete elliptic integrals $`K`$, $`K'`$ are such solutions, and that a
+  modular equation of order $`n`$ is the relation $`\Lambda'/\Lambda = nK'/K`$, are not formalized, and $`\lambda`$ is
+  assumed three times continuously differentiable. $`\Theta`$ and $`H`$ are defined as values of Mathlib's theta
+  series; their identification with Jacobi's analytic definitions is not formalized.
+- **Weber** (`weber_theta_eta`): conditional on the Jacobi triple product (`JacobiTripleProduct`, assumed).
+- **Kronecker** (`kronecker_ser_transformation`): only for $`\rho \ge 2`$, where the series converges absolutely and the
+  law is a rearrangement; the cases $`\rho = 0, 1`$ (conditionally convergent square limits) are not proved.
+- **Comparator time:** the per-book `lake comparator` check of Milne takes about 37 minutes and 9.4 GB on 8 cores (see Usage); a split into two pairs is proposed.
 
 Of the headlines new in 0.3.0:
 
@@ -281,13 +361,13 @@ Of the headlines new in 0.3.0:
 - **Locators:** the theorem numbers cited from the papers of Waldspurger, Kohnen, Gross, Tunnell and Coates–Wiles
   have not been checked against the papers; the normalizations were checked numerically.
 
-**Main statements.** To check what is claimed, read the eight files [`Challenge_Milne.lean`](Challenge_Milne.lean),
+**Main statements.** To check what is claimed, read the nine files [`Challenge_Milne.lean`](Challenge_Milne.lean),
 [`Challenge_Miyake.lean`](Challenge_Miyake.lean), [`Challenge_Shimura.lean`](Challenge_Shimura.lean),
 [`Challenge_Iwaniec.lean`](Challenge_Iwaniec.lean),
 [`Challenge_AndrianovZhuravlev.lean`](Challenge_AndrianovZhuravlev.lean),
 [`Challenge_HeegnerStark.lean`](Challenge_HeegnerStark.lean), [`Challenge_Waldspurger.lean`](Challenge_Waldspurger.lean)
-and [`Challenge_CongruentNumbers.lean`](Challenge_CongruentNumbers.lean) (the last three per topic, with the
-conditional theorems): they state the results above, with a
+[`Challenge_CongruentNumbers.lean`](Challenge_CongruentNumbers.lean) and
+[`Challenge_Historical.lean`](Challenge_Historical.lean) (the last four per topic, with the conditional theorems): they state the results above, with a
 docstring for each and a list of the library definitions the statements use; every proof there is a deliberate
 `sorry`. The matching `Solution_<book>.lean` files prove the same statements by appeal to the library theorems, and
 `lake comparator`, configured per book by `comparator/<book>.json` (the books are listed in
@@ -304,7 +384,7 @@ library proves) are listed in [docs/updates-and-errata.md](docs/updates-and-erra
 ```
 Challenge_<book>.lean   the headline statements of one book or topic (proofs: deliberate sorry);
                         <book> = Milne, Miyake, Shimura, Iwaniec, AndrianovZhuravlev (books), HeegnerStark,
-                        Waldspurger, CongruentNumbers (topics)
+                        Waldspurger, CongruentNumbers, Historical (topics)
 Solution_<book>.lean    the same statements, proved from the library
 comparator.json         the books, each with its lake comparator configuration comparator/<book>.json
 formalization.yaml      scope, sources, divergences, provenance, review (formalization.yaml v0.4)
@@ -314,9 +394,12 @@ docs/updates-and-errata.md  corrections to the books
 ModularFormsKB/
   Milne/                Milne, Modular Functions and Modular Forms: Ch0/ ... Ch12/ by section;
                         RiemannSurface/, RS/: Riemann surfaces (Section 1 and supporting results);
-                        Wave4A/, Wave4B/: the genus of X(Gamma), Riemann-Roch on the sphere and X(1), Sections 11-12
+                        Wave4A/, Wave4B/: the genus of X(Gamma), Riemann-Roch on the sphere and X(1), Sections 11-12;
+                        Wave5/ ... Wave10/: complex multiplication (Section 12), Proposition 11.5, the conductor,
+                        the little Picard theorem, modular curves X(Gamma) (Sections 1-2)
   Miyake/               Miyake, Modular Forms (Chapters 1-7; Sec4_3/: L-functions and Weil's theorem;
-                        Wave2A/, Wave2B/, Wave3/: further items of Chapters 1-7)
+                        Wave2A/, Wave2B/, Wave3/: further items of Chapters 1-7; Wave4/ ... Wave9/: Hecke algebras
+                        and operators, primitive forms and the operators eta_q (Sections 4.1, 4.3, 4.5-4.7))
   Dimension/            the Sturm bound and dimension bounds for Gamma_0(N), Gamma_1(N) and a character
   Shimura2007/          Shimura, Elementary Dirichlet Series and Modular Forms (statements, Sections 1-4, 6, 16)
   Iwaniec1997/          Iwaniec, Topics in Classical Automorphic Forms (statements, Chapters 3-5, 9-10)
@@ -324,6 +407,8 @@ ModularFormsKB/
   Historical/WeberHeegnerStark/  the class number one theorem, conditional: Inputs.lean (the named inputs),
                         Defs.lean, Forms.lean, Heegner.lean, CubicField.lean, Diophantine.lean, Numerics.lean,
                         QuadraticField.lean, Main.lean
+  Historical/Jacobi/, Historical/Ramanujan/, Historical/Weber/, Historical/Kronecker/  theorems of the original
+                        papers (one Lean library per author; Mathlib modules only)
   HalfIntegral/         half-integral weight forms, theta series and the Shimura lift (supporting files, used by
                         Iwaniec1997/ and Waldspurger/)
   HalfIntegral/Waldspurger/  Waldspurger's theorems: Packets.lean (sign patterns), Coefficients.lean (square
@@ -346,26 +431,26 @@ lake build               # build and check everything
 lake env lean scripts/check_axioms.lean   # axioms of the headline theorems
 ./scripts/verify-comparator.sh Milne      # Solution_Milne against Challenge_Milne (Linux; needs bubblewrap);
                                           # likewise Miyake, Shimura, Iwaniec, AndrianovZhuravlev,
-                                          # HeegnerStark, Waldspurger, CongruentNumbers
+                                          # HeegnerStark, Waldspurger, CongruentNumbers, Historical
 ```
 
-Mathlib comes prebuilt from its cache; Tau Ceti and this library are built from source (about 18,900 build jobs
+Mathlib comes prebuilt from its cache; Tau Ceti and this library are built from source (about 19,500 build jobs
 besides Mathlib's cache; no file imports all of Mathlib, so only the parts of Tau Ceti that the library uses are
-built). A cold build took about 43 minutes on 8 cores (2026-11-12), with at most 5.1 GB of memory in use besides the
-page cache and a largest single Lean process of 4.9 GB. One `lake comparator` check per book or topic (build, export,
-and the Lean, NanoDa and con-ron kernels; measured without the bubblewrap sandbox, 2026-11-12): Milne 32 minutes, at
-most 9.0 GB in use (largest process `leanexport`, 7.2 GB; most of the time is Lean's own kernel); Miyake 9 minutes,
-4.0 GB; Shimura 5.5 minutes, 3.3 GB; Iwaniec 1.5 minutes, 1.9 GB; Andrianov–Zhuravlev 3 minutes, 2.4 GB;
-Heegner–Stark 7 minutes, 6.9 GB (largest process `con-ron`, 4.3 GB); Waldspurger 4.5 minutes, 2.7 GB; congruent
-numbers 2 minutes, 4.7 GB. GitHub's standard runner has 4 cores and 16 GB; the CI workflow adds swap space and saves partial
-builds, so a first run may need to be re-run to finish.
+built). A cold build took about 48 minutes on 8 cores (2026-11-14), with at most 5.2 GB of memory in use besides the
+page cache and a largest single Lean process of 6.2 GB. One `lake comparator` check per book or topic (build, export,
+and the Lean, NanoDa and con-ron kernels; measured without the bubblewrap sandbox, 2026-11-14): Milne 37 minutes, at
+most 9.4 GB in use (largest process `leanexport`, 7.2 GB; most of the time is Lean's own kernel); Miyake 11 minutes,
+4.2 GB; Shimura 5.5 minutes, 3.2 GB; Iwaniec 1.5 minutes, 1.8 GB; Andrianov–Zhuravlev 3 minutes, 2.4 GB;
+Heegner–Stark 7 minutes, 7.0 GB (largest process `con-ron`, 4.3 GB); Waldspurger 4.5 minutes, 2.7 GB; congruent
+numbers 2 minutes, 4.8 GB; historical theorems 6 minutes, 3.3 GB. GitHub's standard runner has 4 cores and 16 GB; the
+CI workflow adds swap space and saves partial builds, so a first run may need to be re-run to finish.
 
 ## Provenance
 
 ModularFormsKB was written by AI, with Claude Code (Anthropic): almost entirely by Claude Opus 5.5, with a share by
 Claude Sonnet 5.5, in October and November 2026. Jonathan Hanke designed and directed it: he chose the books, the
 results, the conventions and the proof routes. The proofs are checked by the Lean kernel, and CI checks that the
-headline theorems use only the standard axioms. The 52 headline statements of this release in the
+headline theorems use only the standard axioms. The 63 headline statements of this release in the
 `Challenge_<book>.lean` files, and the definitions they use, have **not yet been reviewed** by a human; that review is
 planned for a later release. `lake comparator` checks that each `Solution_<book>.lean` proves exactly the statements
 of its `Challenge_<book>.lean`. The rest of the library (its other definitions and intermediate results, and the
@@ -376,6 +461,7 @@ against the literature. Corrections and reports of mis-formalizations are very w
 
 Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24069385](https://doi.org/10.5281/zenodo.24069385) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
+- **[v0.3.1](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.3.1)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:ZENODO-DOI-v0.3.1](https://doi.org/ZENODO-DOI-v0.3.1): what was finished since v0.3.0. Eleven new headlines (63 in all, the 52 of v0.3.0 unchanged): for Milne, the little Picard theorem (Remark 2.25), Proposition 12.21 (the class group of an imaginary quadratic order acting on the $`j`$-invariants with complex multiplication, over every algebraically closed field of characteristic zero), Proposition 11.5 (the Betti, $`\ell`$-adic and tangent representations of an elliptic curve over $`\mathbb C`$) and the conductor exponent $`2`$ at additive primes $`p \ne 2, 3`$; for Miyake, Theorem 4.5.9 (the Hecke ring of $`\Gamma_0(N)`$ is a polynomial ring) and Theorem 4.5.4 (2) ($`T(n)`$ and $`T^*(n)`$ are adjoint for every $`n`$); and a ninth challenge file, `Challenge_Historical.lean`, with theorems of Jacobi, Ramanujan, Weber (conditional on the Jacobi triple product) and Kronecker, and its statement map. The book maps of Milne (170 rows proved and 22 in part, was 155 and 28) and Miyake (83 proved and 41 in part, was 56 and 29) are regenerated; the other statement maps are unchanged.
 - **[v0.3.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.3.0)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:10.5281/zenodo.24184587](https://doi.org/10.5281/zenodo.24184587): conditional
   theorems, of the form *(named inputs) → statement*, in a new section [Conditional theorems](#conditional-theorems):
   the class number one theorem of Heegner and Stark (the imaginary quadratic fields of class number one are
@@ -407,7 +493,7 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
 correspondence, Kohnen's isomorphism and the Kohnen–Zagier formula, Shintani's lift) beyond the files used by the
 Iwaniec statements and the Waldspurger headlines, Hurwitz class numbers and mock modular forms; the items of Shimura,
 Iwaniec and Andrianov–Zhuravlev not yet stated; proofs of the named inputs of the conditional theorems (the theory of
-complex multiplication; Waldspurger's theorems). This release is standalone: it does not depend
+complex multiplication; Waldspurger's theorems; the Jacobi triple product). This release is standalone: it does not depend
 on the algebraic number theory library
 [algebraic-number-theory-lean](https://github.com/jonhanke/algebraic-number-theory-lean), which is on a different
 Mathlib; the [comparison](docs/results/comparison.md) lists the results the two libraries share.

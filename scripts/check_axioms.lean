@@ -10,6 +10,7 @@ import Solution_AndrianovZhuravlev
 import Solution_HeegnerStark
 import Solution_Waldspurger
 import Solution_CongruentNumbers
+import Solution_Historical
 
 #print axioms ModularFormsKB.Headlines.weil_riemannHypothesis_curves
 #print axioms ModularFormsKB.Headlines.kronecker_modularEquation
@@ -20,10 +21,16 @@ import Solution_CongruentNumbers
 #print axioms ModularFormsKB.Headlines.ellipticModuli_jLine
 #print axioms ModularFormsKB.Headlines.cyclicModuli
 #print axioms ModularFormsKB.Headlines.modularCurveX_Gamma_genus_eq_zero
+#print axioms ModularFormsKB.Headlines.littlePicard
+#print axioms ModularFormsKB.Headlines.classGroupAction_ellCM
+#print axioms ModularFormsKB.Headlines.betti_tate_comparison
+#print axioms ModularFormsKB.Headlines.conductor_exponent_eq_two_iff
 #print axioms ModularFormsKB.Headlines.hecke_converse
 #print axioms ModularFormsKB.Headlines.hecke_converse_levelOne
 #print axioms ModularFormsKB.Headlines.weil_converse
 #print axioms ModularFormsKB.Headlines.weil_converse_cusp
+#print axioms ModularFormsKB.Headlines.heckeRing_gamma0_polynomial
+#print axioms ModularFormsKB.Headlines.hecke_adjoint_heckeTStar
 #print axioms ModularFormsKB.Headlines.LFunction_halfRange
 #print axioms ModularFormsKB.Headlines.kloosterman_mul_of_coprime
 #print axioms ModularFormsKB.Headlines.kloostermanMoment_two
@@ -63,3 +70,8 @@ import Solution_CongruentNumbers
 #print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_one_three_eleven
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_odd
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_even
+#print axioms ModularFormsKB.Headlines.jacobi_modular_equation_ode
+#print axioms ModularFormsKB.Headlines.jacobi_theta_fourier
+#print axioms ModularFormsKB.Headlines.ramanujan_differential_equations
+#print axioms ModularFormsKB.Headlines.weber_theta_eta
+#print axioms ModularFormsKB.Headlines.kronecker_ser_transformation

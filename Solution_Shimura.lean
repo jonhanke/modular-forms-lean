@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.Shimura2007.Ch2.HalfRangeSums
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Shimura, *Elementary Dirichlet Series and Modular Forms*, proved
+# Headline statements of modular-forms-lean 0.3.1: Shimura, *Elementary Dirichlet Series and Modular Forms*, proved
 
 The statements of `Challenge_Shimura.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Shimura.json`) checks that each statement here is exactly the one in

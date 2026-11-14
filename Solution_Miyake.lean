@@ -5,9 +5,11 @@ Authors: Jonathan Hanke
 -/
 import ModularFormsKB.Miyake.Sec4_3.Hecke
 import ModularFormsKB.Miyake.Sec4_3.WeilTheorem
+import ModularFormsKB.Miyake.Wave6.HeckeIndependence
+import ModularFormsKB.Miyake.Wave8.GeneralAdjoint
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Miyake, *Modular Forms*, proved
+# Headline statements of modular-forms-lean 0.3.1: Miyake, *Modular Forms*, proved
 
 The statements of `Challenge_Miyake.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Miyake.json`) checks that each statement here is exactly the one in
@@ -27,6 +29,13 @@ should check these too:
   `Miyake.HeckeCondition`, `Miyake.fricke`, `Miyake.twist`, `Miyake.twistedCompletedL`,
   `Miyake.TwistedHeckeCondition`, `Miyake.gaussW`, `Miyake.weilConstant`, `Miyake.IsModularFormChar`,
   `Miyake.IsCuspFormChar`, `Miyake.IsOddPrimeOrFour`, `Miyake.IsWeilSet` (converse theorems)
+* (0.3.1) `ModularFormsKB.Miyake.HeckeGenerators`, `ModularFormsKB.Miyake.heckeGenerator` (the generators `T(p)`,
+  `T(p, p)` for `p ∤ N` and `T(q)` for `q ∣ N` of the Hecke ring of `Γ₀(N)`, Tau Ceti's double cosets); the
+  space `ModularFormsKB.Miyake.Wave4.cuspSpace` (Tau Ceti's `𝒮_k(N, χ)`), `ModularFormsKB.Miyake.Wave4.heckeT`
+  (Tau Ceti's `T(n)`), `ModularFormsKB.Miyake.Wave7.heckeTStar` and `ModularFormsKB.Miyake.Wave7.heckeTStarN`
+  (Miyake's `T*(m, l)`, the double coset `Γ₀(N) diag(m, l) Γ₀(N)` acting with the weight `conj χ(d)`, and
+  `T*(n) = Σ T*(m, l)` over `l m = n`, `l ∣ m`, (4.5.16)), `ModularFormsKB.Miyake.Wave7.pet` (Tau Ceti's Petersson
+  product on `Γ₁(N)`) (Theorem 4.5.4)
 -/
 
 namespace ModularFormsKB.Headlines
@@ -86,5 +95,39 @@ theorem weil_converse_cusp {k N : ℕ} (hk : 0 < k) (hN : 0 < N) (χ : Dirichlet
   exact _root_.Miyake.weil_cusp hk hN χ hχ ha hb hM h1 h2 hδ hL
 
 end Converse
+
+section HeckeAlgebra
+
+open CongruenceSubgroup Matrix.SpecialLinearGroup ModularFormsKB.Miyake
+open scoped MatrixGroups HeckeCosetModule
+
+/-- **The Hecke ring of `Γ₀(N)` is a polynomial ring** (Miyake, Theorem 4.5.9). For `N ≥ 1`, the Hecke ring
+`ℛ(N) = ℛ(Γ₀(N), Δ₀(N))` over `ℤ` is the polynomial ring over `ℤ` in `T(p)`, `T(p, p)` (`p` prime, `p ∤ N`) and
+`T(q)` (`q` prime, `q ∣ N`): there is a ring isomorphism from the polynomial ring on these symbols onto `ℛ(N)`
+sending each variable to its generator. Tau Ceti has the local polynomial-ring theorem at level one (Shimura,
+Theorem 3.20), not this one at level `N`. -/
+theorem heckeRing_gamma0_polynomial (N : ℕ) [NeZero N] :
+    ∃ e : MvPolynomial (HeckeGenerators N) ℤ ≃+*
+        𝕋 (HeckeRing.GL2.Delta0 N) ((Gamma0 N).map (mapGL ℚ)) ℤ,
+      ∀ i, e (MvPolynomial.X i) = heckeGenerator N i := by
+  exact (ModularFormsKB.Miyake.Wave6.heckeAlgebraPolynomial N).exists_equiv
+
+end HeckeAlgebra
+
+section Adjoint
+
+open ModularFormsKB.Miyake.Wave4 ModularFormsKB.Miyake.Wave7
+
+/-- **`T(n)` and `T*(n)` are adjoint for every `n`** (Miyake, Theorem 4.5.4 (2)). For a Dirichlet character `χ`
+modulo `N`, an integer weight `k` and every `n ≥ 1` (with no condition on `(n, N)`), the operators `T(n)` and `T*(n)`
+on `𝒮_k(N, χ)` are mutually adjoint for the Petersson product: `⟨f | T(n), g⟩ = ⟨f, g | T*(n)⟩` and
+`⟨f | T*(n), g⟩ = ⟨f, g | T(n)⟩`. Tau Ceti has the case `(n, N) = 1`. -/
+theorem hecke_adjoint_heckeTStar {N : ℕ} [NeZero N] (k : ℤ) (χ : DirichletCharacter ℂ N) {n : ℕ} (hn : 0 < n)
+    (f g : cuspSpace k χ) :
+    pet (heckeT k χ n f) g = pet f (heckeTStarN k χ n g) ∧
+      pet (heckeTStarN k χ n f) g = pet f (heckeT k χ n g) := by
+  exact ⟨ModularFormsKB.Miyake.Wave8.pet_heckeT_left_all k χ hn f g, ModularFormsKB.Miyake.Wave8.pet_heckeTStarN_left_all k χ hn f g⟩
+
+end Adjoint
 
 end ModularFormsKB.Headlines

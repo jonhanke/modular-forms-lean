@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Congruent numbers and Tunnell's criterion, proved
+# Headline statements of modular-forms-lean 0.3.1: Congruent numbers and Tunnell's criterion, proved
 
 The statements of `Challenge_CongruentNumbers.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/CongruentNumbers.json`) checks that each statement here is exactly the one in

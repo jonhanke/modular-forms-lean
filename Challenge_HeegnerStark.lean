@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.Historical.WeberHeegnerStark.Main
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: the class number one theorem (Heegner, Stark), conditional
+# Headline statements of modular-forms-lean 0.3.1: the class number one theorem (Heegner, Stark), conditional
 
 The main results of the library for the class number one theorem, one theorem each, with every proof a deliberate
 `sorry`: to check what is claimed, read this file. `Solution_HeegnerStark.lean` proves the same statements from the

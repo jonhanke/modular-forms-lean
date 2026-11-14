@@ -8,7 +8,7 @@ import ModularFormsKB.HalfIntegral.Waldspurger.Coefficients
 import ModularFormsKB.HalfIntegral.Waldspurger.Gross
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11, proved
+# Headline statements of modular-forms-lean 0.3.1: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11, proved
 
 The statements of `Challenge_Waldspurger.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Waldspurger.json`) checks that each statement here is exactly the one in

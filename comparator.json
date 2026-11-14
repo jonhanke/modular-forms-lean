@@ -7,7 +7,7 @@
       "config": "comparator/Milne.json",
       "challenge_module": "Challenge_Milne",
       "solution_module": "Solution_Milne",
-      "theorems": 9
+      "theorems": 13
     },
     {
       "book": "Miyake",
@@ -15,7 +15,7 @@
       "config": "comparator/Miyake.json",
       "challenge_module": "Challenge_Miyake",
       "solution_module": "Solution_Miyake",
-      "theorems": 4
+      "theorems": 6
     },
     {
       "book": "Shimura",
@@ -64,6 +64,14 @@
       "challenge_module": "Challenge_CongruentNumbers",
       "solution_module": "Solution_CongruentNumbers",
       "theorems": 9
+    },
+    {
+      "book": "Historical",
+      "title": "Historical theorems of Jacobi, Ramanujan, Weber and Kronecker (unconditional, and one conditional on the Jacobi triple product)",
+      "config": "comparator/Historical.json",
+      "challenge_module": "Challenge_Historical",
+      "solution_module": "Solution_Historical",
+      "theorems": 5
     }
   ],
   "permitted_axioms": [

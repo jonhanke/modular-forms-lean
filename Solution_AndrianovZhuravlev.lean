@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.Andrianov.ThetaSeries
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Andrianov and Zhuravlev, *Modular Forms and Hecke Operators*, proved
+# Headline statements of modular-forms-lean 0.3.1: Andrianov and Zhuravlev, *Modular Forms and Hecke Operators*, proved
 
 The statements of `Challenge_AndrianovZhuravlev.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/AndrianovZhuravlev.json`) checks that each statement here is exactly the one in

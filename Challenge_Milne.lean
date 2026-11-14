@@ -11,9 +11,13 @@ import ModularFormsKB.Milne.Ch8.YOneSolution
 import ModularFormsKB.Milne.Ch11.WeilUnconditional
 import ModularFormsKB.Milne.Ch12.JIntegral
 import ModularFormsKB.Milne.Wave4A.GenusZeroDifferentials
+import ModularFormsKB.Milne.Wave6.Betti
+import ModularFormsKB.Milne.Wave7.OggTame
+import ModularFormsKB.Milne.Wave9.ClassGroupActionAll
+import ModularFormsKB.Milne.Wave10.LittlePicard
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Milne, *Modular Functions and Modular Forms*
+# Headline statements of modular-forms-lean 0.3.1: Milne, *Modular Functions and Modular Forms*
 
 The main results of the library for Milne's *Modular Functions and Modular Forms* (version 1.31), one theorem each, with every proof a deliberate `sorry`: to check what
 is claimed, read this file. `Solution_Milne.lean` proves the same statements from the library, and `lake comparator`
@@ -41,6 +45,12 @@ should check these too:
   `PSL₂(ℝ)`), `ModularFormsKB.Milne.RiemannSurface.holomorphicDifferentials` (families of chart coefficients,
   holomorphic on each chart and satisfying the transformation rule) and `ModularFormsKB.Milne.RiemannSurface.genus`
   (its dimension, `Module.finrank`) (the genus of `X(N)`)
+* (0.3.1) `ModularFormsKB.Milne.EllCMOver` (the `j`-invariants over `k` of the elliptic curves with complex
+  multiplication by the order `O`), `ModularFormsKB.Milne.IsNormalizedCM` (the action of `O` on the invariant
+  differential is through the embedding `ι`), `ModularFormsKB.Milne.IsAIsogeny` (an isogeny with kernel
+  `E[𝔞]`) (Proposition 12.21); `ModularFormsKB.Milne.Wave6.TorusGroup`, `ModularFormsKB.Milne.Wave6.torusMul`,
+  `ModularFormsKB.Milne.Wave6.latticeMul`, `ModularFormsKB.Milne.tateRep` (Proposition 11.5);
+  `ModularFormsKB.Milne.Wave4B.geometricConductor` (the norm of Tau Ceti's conductor ideal, D116)
 -/
 
 namespace ModularFormsKB.Headlines
@@ -192,5 +202,86 @@ theorem modularCurveX_Gamma_genus_eq_zero {N : ℕ} [NeZero N] (hN : 2 ≤ N) (h
   sorry
 
 end GenusZero
+
+section LittlePicard
+
+open Set
+
+/-- **The little Picard theorem** (Milne, Remark 2.25). A nonconstant entire function `f : ℂ → ℂ` omits at most one
+value: the complement of its range has at most one point. Milne derives it from the covering `ℍ → ℂ ∖ {0, 1}` given
+by the modular function `λ` of `Γ(2)`; the library runs the same argument with the level-one `j` on the free locus
+of `PSL(2, ℤ)` (a covering of `ℂ ∖ {0, 1728}`). -/
+theorem littlePicard {f : ℂ → ℂ} (hf : Differentiable ℂ f) (hnc : ∃ z w, f z ≠ f w) :
+    (range f)ᶜ.Subsingleton := by
+  sorry
+
+end LittlePicard
+
+section ClassGroupAction
+
+open NumberField TauCeti TauCeti.Isogeny TauCeti.GlobalNumberFields WeierstrassCurve.Affine ModularFormsKB.Milne
+open scoped WeierstrassCurve Classical
+
+/-- **The class group acts on the `j`-invariants with complex multiplication** (Milne, Proposition 12.21, in the
+corrected form with a normalized `i`; Milne omits the proof). Let `k` be an algebraically closed field of
+characteristic zero, `K` an imaginary quadratic field with an embedding `ι : K → k`, and `O` an order of `K`. There is
+a map `Pic(O) × Ell_k(O) → Ell_k(O)` such that (1) for elliptic curves `E`, `E'` over `k` with complex
+multiplication by `O`, `i : O ≅ End(E)` normalized with respect to `ι`, an invertible ideal `𝔞` of `O` and an
+`𝔞`-isogeny `E → E'`, the class of `𝔞` sends `j(E)` to `j(E')`; and (2) for each `x₀ ∈ Ell_k(O)` the map
+`c ↦ c · x₀` is a bijection `Pic(O) → Ell_k(O)`. (The statement does not ask for the action laws; (1) and the
+existence of `𝔞`-isogenies determine the map.) -/
+theorem classGroupAction_ellCM (k : Type) [Field k] [IsAlgClosed k] [CharZero k] (K : Type) [Field K]
+    [NumberField K] (O : NumberFieldOrder K) (hK : Module.finrank ℚ K = 2) (hTC : IsTotallyComplex K)
+    (ι : K →+* k) :
+    ∃ act : Pic O → EllCMOver k O → EllCMOver k O,
+      (∀ (W W' : WeierstrassCurve.Affine k) [W.IsElliptic] [W'.IsElliptic] (i : O.toSubalgebra ≃+* Hom W W),
+          IsNormalizedCM ι i →
+          ∀ (I : (FractionalIdeal (nonZeroDivisors O.toSubalgebra) K)ˣ) (J : Ideal O.toSubalgebra),
+          ((J : FractionalIdeal (nonZeroDivisors O.toSubalgebra) K) = I) →
+          (hW : W.j ∈ EllCMOver k O) → (hW' : W'.j ∈ EllCMOver k O) → (φ : Hom W W') → IsAIsogeny i J φ →
+            act (ClassGroup.mk (K := K) I) ⟨W.j, hW⟩ = ⟨W'.j, hW'⟩) ∧
+      ∀ x₀, Function.Bijective fun c ↦ act c x₀ := by
+  sorry
+
+end ClassGroupAction
+
+section BettiTate
+
+open TauCeti TauCeti.Isogeny TensorProduct ModularFormsKB.Milne ModularFormsKB.Milne.Wave6
+open scoped WeierstrassCurve ComplexConjugate
+
+/-- **The Betti, ℓ-adic and tangent representations of an elliptic curve over `ℂ`** (Milne, Proposition 11.5). For
+every elliptic curve `E` over `ℂ` (Weierstrass model `W`) and every prime `ℓ` there are a lattice `Λ`, a group
+isomorphism `u : ℂ/Λ ≅ E(ℂ)` and a ring homomorphism `ρ : End(E) → ℂ` with `ρ(f)Λ ⊆ Λ` and `f(u(z)) = u(ρ(f) z)`,
+such that, with `ρ_B(f)` multiplication by `ρ(f)` on `H₁(E, ℤ) = Λ` and `ρ_ℓ(f)` the action on the Tate module
+`T_ℓE`: (a) `ρ_B ⊗ ℤ_ℓ ≅ ρ_ℓ` and (b) `ρ_B ⊗ ℂ ≅ ρ ⊕ ρ̄`, by linear isomorphisms `ℤ_ℓ ⊗ Λ ≅ T_ℓE` and
+`ℂ ⊗ Λ ≅ ℂ × ℂ` intertwining the actions of every endomorphism. -/
+theorem betti_tate_comparison (W : WeierstrassCurve ℂ) [W.IsElliptic] (ℓ : ℕ) [Fact ℓ.Prime] :
+    ∃ (L : PeriodPair) (u : TorusGroup L ≃+ W.toAffine.Point) (ρ : Hom W.toAffine W.toAffine →+* ℂ)
+      (hρ : ∀ f, ∀ x ∈ L.lattice, ρ f * x ∈ L.lattice),
+      (∀ f z, f.pointMap (u z) = u (torusMul L (ρ f) (hρ f) z)) ∧
+      (∃ Φ : ℤ_[ℓ] ⊗[ℤ] L.lattice ≃ₗ[ℤ_[ℓ]] TateModule ℓ W.toAffine.Point,
+        ∀ f, Φ.toLinearMap ∘ₗ (latticeMul L (ρ f) (hρ f)).baseChange ℤ_[ℓ] = tateRep W ℓ f ∘ₗ Φ.toLinearMap) ∧
+      (∃ Ψ : ℂ ⊗[ℤ] L.lattice ≃ₗ[ℂ] ℂ × ℂ, ∀ f (x : ℂ ⊗[ℤ] L.lattice),
+        Ψ ((latticeMul L (ρ f) (hρ f)).baseChange ℂ x) = (ρ f * (Ψ x).1, conj (ρ f) * (Ψ x).2)) := by
+  sorry
+
+end BettiTate
+
+section Conductor
+
+open WeierstrassCurve TauCeti IsLocalRing IsDiscreteValuationRing IsDedekindDomain ModularFormsKB.Milne
+
+/-- **The conductor exponent at a cusp is 2 for `p ≠ 2, 3`** (Milne, the geometric conductor, p. 111: "`f_p ≥ 2` if
+`E(p)` has a cusp, with equality unless `p = 2, 3`"). For an elliptic curve `E` over `ℚ` and a prime `p ≠ 2, 3`, the
+exponent of `p` in the conductor `N` of `E` (the norm of Tau Ceti's conductor ideal, defined by Tate's algorithm) is
+exactly `2` (`p² ∣ N`, `p³ ∤ N`) if and only if a minimal model of `E` at `p` has additive reduction. -/
+theorem conductor_exponent_eq_two_iff (E : WeierstrassCurve ℚ) [E.IsElliptic] {p : ℕ} (hp : p.Prime)
+    (hp2 : p ≠ 2) (hp3 : p ≠ 3) {v : HeightOneSpectrum ℤ} (hv : v.asIdeal = Ideal.span {(p : ℤ)}) :
+    (p ^ 2 ∣ Wave4B.geometricConductor E ∧ ¬ p ^ 3 ∣ Wave4B.geometricConductor E) ↔
+      (E.minimal (Localization.AtPrime v.asIdeal)).HasAdditiveReduction (Localization.AtPrime v.asIdeal) := by
+  sorry
+
+end Conductor
 
 end ModularFormsKB.Headlines

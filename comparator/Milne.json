@@ -10,7 +10,11 @@
     "ModularFormsKB.Headlines.ellipticFunctionField",
     "ModularFormsKB.Headlines.ellipticModuli_jLine",
     "ModularFormsKB.Headlines.cyclicModuli",
-    "ModularFormsKB.Headlines.modularCurveX_Gamma_genus_eq_zero"
+    "ModularFormsKB.Headlines.modularCurveX_Gamma_genus_eq_zero",
+    "ModularFormsKB.Headlines.littlePicard",
+    "ModularFormsKB.Headlines.classGroupAction_ellCM",
+    "ModularFormsKB.Headlines.betti_tate_comparison",
+    "ModularFormsKB.Headlines.conductor_exponent_eq_two_iff"
   ],
   "definition_names": [],
   "permitted_axioms": [

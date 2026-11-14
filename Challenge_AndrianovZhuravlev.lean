@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.Andrianov.ThetaSeries
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Andrianov and Zhuravlev, *Modular Forms and Hecke Operators*
+# Headline statements of modular-forms-lean 0.3.1: Andrianov and Zhuravlev, *Modular Forms and Hecke Operators*
 
 The main results of the library for Andrianov and Zhuravlev's *Modular Forms and Hecke Operators* (1995), one theorem
 each, with every proof a deliberate `sorry`: to check what is claimed, read this file.

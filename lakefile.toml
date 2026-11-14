@@ -1,6 +1,6 @@
 name = "modular_forms_lean"
-version = "0.3.0"
-defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers"]
+version = "0.3.1"
+defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers", "Challenge_Historical", "Solution_Historical"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -85,3 +85,11 @@ roots = ["Challenge_CongruentNumbers"]
 [[lean_lib]]
 name = "Solution_CongruentNumbers"
 roots = ["Solution_CongruentNumbers"]
+
+[[lean_lib]]
+name = "Challenge_Historical"
+roots = ["Challenge_Historical"]
+
+[[lean_lib]]
+name = "Solution_Historical"
+roots = ["Solution_Historical"]
