@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Congruent numbers and Tunnell's criterion
+# Headline statements of modular-forms-lean 0.3.1: Congruent numbers and Tunnell's criterion
 
 The main results of the library for congruent numbers and Tunnell's criterion, one theorem each (a few closely related
 concrete facts are combined into one conjunction), with every proof a deliberate `sorry`: to check what is claimed,

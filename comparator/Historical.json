@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge_Historical",
+  "solution_module": "Solution_Historical",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.jacobi_modular_equation_ode",
+    "ModularFormsKB.Headlines.jacobi_theta_fourier",
+    "ModularFormsKB.Headlines.ramanujan_differential_equations",
+    "ModularFormsKB.Headlines.weber_theta_eta",
+    "ModularFormsKB.Headlines.kronecker_ser_transformation"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

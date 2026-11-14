@@ -6,7 +6,7 @@ Authors: Jonathan Hanke
 import ModularFormsKB.Shimura2007.Ch2.HalfRangeSums
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Shimura, *Elementary Dirichlet Series and Modular Forms*
+# Headline statements of modular-forms-lean 0.3.1: Shimura, *Elementary Dirichlet Series and Modular Forms*
 
 The main results of the library for Shimura's *Elementary Dirichlet Series and Modular Forms* (2007), one theorem
 each, with every proof a deliberate `sorry`: to check what is claimed, read this file. `Solution_Shimura.lean` proves

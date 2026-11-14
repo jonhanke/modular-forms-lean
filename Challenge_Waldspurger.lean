@@ -8,7 +8,7 @@ import ModularFormsKB.HalfIntegral.Waldspurger.Coefficients
 import ModularFormsKB.HalfIntegral.Waldspurger.Gross
 
 /-!
-# Headline statements of modular-forms-lean 0.3.0: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11
+# Headline statements of modular-forms-lean 0.3.1: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11
 
 The main results of the library for Waldspurger's theorems on the Shimura correspondence, Kohnen's formula for odd
 squarefree level, and Gross's weight 3/2 form for the prime 11, one theorem each (a few closely related concrete facts

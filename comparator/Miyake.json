@@ -5,7 +5,9 @@
     "ModularFormsKB.Headlines.hecke_converse",
     "ModularFormsKB.Headlines.hecke_converse_levelOne",
     "ModularFormsKB.Headlines.weil_converse",
-    "ModularFormsKB.Headlines.weil_converse_cusp"
+    "ModularFormsKB.Headlines.weil_converse_cusp",
+    "ModularFormsKB.Headlines.heckeRing_gamma0_polynomial",
+    "ModularFormsKB.Headlines.hecke_adjoint_heckeTStar"
   ],
   "definition_names": [],
   "permitted_axioms": [
