@@ -49,8 +49,8 @@ theorem regularCurveCompletion : RegularCurveCompletion k₀ := by
   obtain ⟨x, hxt⟩ := hF.exists_transcendental
   have hred := Completion.isReduced_tensor_functionField f hvar
   have hM := Completion.isCompleteRegularCurve_twoChartModel hF hxt hred
-  have : IsProper (twoChartModel hF hxt.ne_zero ↘ Spec (CommRingCat.of k₀)) := isProper hxt
-  have hMval := TauCeti.AlgebraicGeometry.twoChartModel.valuationRing_stalk (hF := hF) (hx := hxt.ne_zero) hxt
+  have : IsProper (twoChartModel hF hxt.ne_zero ↘ Spec (CommRingCat.of k₀)) := isProper
+  have hMval := fun p ↦ TauCeti.AlgebraicGeometry.twoChartModel.valuationRing_stalk (hF := hF) (hx := hxt.ne_zero) p
   let e : (twoChartModel hF hxt.ne_zero).functionField ≃ₐ[k₀] U.functionField := functionFieldEquiv hxt
   refine ⟨twoChartModel hF hxt.ne_zero, inferInstance, twoChartModel hF hxt.ne_zero ↘ Spec (CommRingCat.of k₀),
     Completion.ι hval e, Completion.isOpenImmersion_ι hval e hMval, hM,

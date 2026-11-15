@@ -103,7 +103,7 @@ theorem eq_kronecker (p : ℕ) (hp : 2 ≤ p) (G : MvPolynomial (Fin 2) K)
     have hA0 : MvPolynomial.aeval ![(X : K[X]), X ^ p] A = 0 := by simp [hA]
     rw [map_mul, hA0, zero_mul, hBe] at h1
     simp only [map_sub, map_pow, MvPolynomial.aeval_X, Matrix.cons_val_zero, Matrix.cons_val_one] at h1
-    have h2 := congrArg (Polynomial.coeff · 1) h1
+    have h2 := congrArg (fun q ↦ q.coeff 1) h1
     simp only [coeff_sub, coeff_X_one, ← pow_mul, coeff_X_pow, coeff_zero] at h2
     have : ¬ (1 = p * p) := by nlinarith
     simp [this] at h2

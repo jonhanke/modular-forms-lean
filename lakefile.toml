@@ -1,6 +1,6 @@
 name = "modular_forms_lean"
-version = "0.3.1"
-defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers", "Challenge_Historical", "Solution_Historical"]
+version = "0.4.0"
+defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_MilneArithmetic", "Solution_MilneArithmetic", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers", "Challenge_Historical", "Solution_Historical", "MapNameDeps"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -11,13 +11,13 @@ autoImplicit = false
 [[require]]
 name = "TauCeti"
 git = "https://github.com/TauCetiProject/TauCeti.git"
-rev = "4908b0344e1be5f7e9e5af7f7e640464843a2c84"
+rev = "ca32605ff53921fa0689dd312618b7cfaafa7e43"
 
 # Mathlib last so that its dependency versions take precedence; rev = Tau Ceti's lake-manifest.json.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
-rev = "1b1ccf4b088b32fa3f23f2de1127433254a81e1e"
+rev = "e8ba86fa9744dd8d90f48c1752bc735f61a4ca81"
 
 [[lean_lib]]
 name = "ModularFormsKB"
@@ -29,6 +29,14 @@ roots = ["Challenge_Milne"]
 [[lean_lib]]
 name = "Solution_Milne"
 roots = ["Solution_Milne"]
+
+[[lean_lib]]
+name = "Challenge_MilneArithmetic"
+roots = ["Challenge_MilneArithmetic"]
+
+[[lean_lib]]
+name = "Solution_MilneArithmetic"
+roots = ["Solution_MilneArithmetic"]
 
 [[lean_lib]]
 name = "Challenge_Miyake"
@@ -93,3 +101,7 @@ roots = ["Challenge_Historical"]
 [[lean_lib]]
 name = "Solution_Historical"
 roots = ["Solution_Historical"]
+
+[[lean_lib]]
+name = "MapNameDeps"
+roots = ["MapNameDeps"]

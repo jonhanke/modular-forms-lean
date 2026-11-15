@@ -545,7 +545,7 @@ theorem inclHecke_mul (x y : 𝕋 (DeltaPrime N) (SLnZ 2) ℤ) :
 theorem inclHecke_heckeLevelMap_heckeTNDiag [NeZero N] {a d : ℕ} (ha : 0 < a) (hd : 0 < d)
     (had : a ∣ d) (hcop : (a * d).Coprime N) :
     inclHecke N (heckeLevelMap N (heckeTNDiag N a d)) = heckeTDiag a d := by
-  rw [heckeLevelMap_heckeTNDiag N ha hd had hcop, inclHecke_single, heckeTDiag_eq_diagElem ha hd had,
+  rw [heckeLevelMap_heckeTNDiag N ha hd had hcop, inclHecke_single, heckeTDiag_eq_diagElem hd had,
     diagElem_def]
   rfl
 

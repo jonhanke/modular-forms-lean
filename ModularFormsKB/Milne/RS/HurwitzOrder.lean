@@ -140,7 +140,7 @@ theorem ord_differential_pullbackFun (f : FiniteHolomorphicMap Y X) (h : Meromor
         ((localMultiplicity f y : ℤ) - 1 : ℤ) := by
   have hfd : ∀ᶠ v in 𝓝 y, MDifferentiableAt 𝓘(ℂ) 𝓘(ℂ) f v := .of_forall fun v ↦ f.holomorphic v
   have hnc : ¬ EventuallyConst f (𝓝 y) := f.not_eventuallyConst y
-  have hmult := natCast_localMultiplicity hfd hnc
+  have hmult := natCast_localMultiplicity (f.holomorphic y).continuousAt hnc
   set φ : ℂ → ℂ := fun v ↦ chartAt ℂ (f y) (f ((chartAt ℂ y).symm v)) with hφ
   set G : ℂ → ℂ := h.finitePart ∘ (chartAt ℂ (f y)).symm with hG
   set z0 := chartAt ℂ y y with hz0

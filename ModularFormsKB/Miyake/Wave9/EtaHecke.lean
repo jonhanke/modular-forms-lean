@@ -375,7 +375,7 @@ theorem exists_isPrimitive_eta_all (k : ℤ) (hQ : Q ∥ N) (hM : IsEtaMatrix N 
     -- `W' ∘ W'` is a nonzero scalar on the character space of `W F`
     have hmemWF := atkinLehnerOperatorGamma1Cusp_mem_cuspFormCharSpace hQ.pos hQ.dvd hAL
       F.mem_charSpace
-    obtain ⟨γ', hγ', hsq⟩ := hAL'.exists_mem_Gamma0_mul_self hQ'.ne_zero hQ'.dvd
+    obtain ⟨γ', hγ', hsq⟩ := hAL'.exists_mem_Gamma0_mul_self
     have hWW := atkinLehnerOperatorGamma1Cusp_atkinLehnerOperatorGamma1Cusp hQ'.pos hQ'.dvd hAL'
       (hAL'.unitsMap_toHomUnits_gamma0Map_of_mul_self_eq hQ'.ne_zero hQ'.dvd hγ' hsq)
       (hAL'.natCast_mul_toHomUnits_gamma0Map_of_mul_self_eq hγ' hsq) (W F.toCuspForm)

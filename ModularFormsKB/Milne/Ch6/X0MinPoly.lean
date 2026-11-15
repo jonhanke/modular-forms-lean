@@ -247,7 +247,7 @@ theorem natDegree_minpoly_jNX :
   have hinj : Function.Injective (algebraMap ℂ[X] (RatFunc ℂ)) := IsFractionRing.injective _ _
   have hGcoeff : G.coeff m.natDegree = b := by
     apply hinj
-    rw [← coeff_map, hbG, coeff_smul, ← hm₀deg, hm₀monic.coeff_natDegree, Algebra.smul_def, mul_one]
+    rw [← coeff_map, hbG, Polynomial.coeff_smul, ← hm₀deg, hm₀monic.coeff_natDegree, Algebra.smul_def, mul_one]
   have hGdeg : G.natDegree ≤ m.natDegree := by
     have h := congrArg natDegree hbG
     rw [natDegree_map_eq_of_injective hinj] at h

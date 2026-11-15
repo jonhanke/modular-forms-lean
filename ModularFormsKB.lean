@@ -15,22 +15,75 @@ import ModularFormsKB.Andrianov.SiegelSpace
 import ModularFormsKB.Andrianov.ThetaSeries
 import ModularFormsKB.Dimension.SturmGamma0
 import ModularFormsKB.HalfIntegral.Abstract.BinaryForms
+import ModularFormsKB.HalfIntegral.Abstract.CuspDecay
+import ModularFormsKB.HalfIntegral.Abstract.FourierLine
+import ModularFormsKB.HalfIntegral.Abstract.FundamentalDomainVolume
 import ModularFormsKB.HalfIntegral.Abstract.Kohnen
+import ModularFormsKB.HalfIntegral.Abstract.KohnenDimension
+import ModularFormsKB.HalfIntegral.Abstract.KohnenEigen
+import ModularFormsKB.HalfIntegral.Abstract.KohnenReduction
 import ModularFormsKB.HalfIntegral.Abstract.Multiplier
+import ModularFormsKB.HalfIntegral.Abstract.PeterssonConvergence
+import ModularFormsKB.HalfIntegral.Abstract.PeterssonFour
 import ModularFormsKB.HalfIntegral.Abstract.Shimura
+import ModularFormsKB.HalfIntegral.Abstract.ShimuraRankin
+import ModularFormsKB.HalfIntegral.Abstract.ShimuraWeil
 import ModularFormsKB.HalfIntegral.Abstract.Shintani
+import ModularFormsKB.HalfIntegral.Abstract.ThetaInstance
+import ModularFormsKB.HalfIntegral.Branch
+import ModularFormsKB.HalfIntegral.Cocycle
+import ModularFormsKB.HalfIntegral.CoeffFromBound
+import ModularFormsKB.HalfIntegral.Cusps
 import ModularFormsKB.HalfIntegral.Forms
+import ModularFormsKB.HalfIntegral.GaussSign
 import ModularFormsKB.HalfIntegral.Hecke
+import ModularFormsKB.HalfIntegral.HeckeBound
+import ModularFormsKB.HalfIntegral.HeckeCoeff
+import ModularFormsKB.HalfIntegral.HeckeCoset
+import ModularFormsKB.HalfIntegral.HeckeCusp
+import ModularFormsKB.HalfIntegral.HeckeMult
+import ModularFormsKB.HalfIntegral.HeckeOp
+import ModularFormsKB.HalfIntegral.HeckePhi
+import ModularFormsKB.HalfIntegral.HeckeStable
+import ModularFormsKB.HalfIntegral.JointEigen
+import ModularFormsKB.HalfIntegral.KohnenLift
+import ModularFormsKB.HalfIntegral.Law
+import ModularFormsKB.HalfIntegral.Products
+import ModularFormsKB.HalfIntegral.QExpUnique
+import ModularFormsKB.HalfIntegral.Rankin.Assembly
+import ModularFormsKB.HalfIntegral.Rankin.Character
+import ModularFormsKB.HalfIntegral.Rankin.Decay
+import ModularFormsKB.HalfIntegral.Rankin.Factors
+import ModularFormsKB.HalfIntegral.Rankin.Holo
+import ModularFormsKB.HalfIntegral.Rankin.Strip
+import ModularFormsKB.HalfIntegral.Rankin.Theta
+import ModularFormsKB.HalfIntegral.Rankin.ThetaShimura
+import ModularFormsKB.HalfIntegral.Rankin.Unfolding
+import ModularFormsKB.HalfIntegral.SerreStark
 import ModularFormsKB.HalfIntegral.ShimuraLift
+import ModularFormsKB.HalfIntegral.ShimuraTwist
+import ModularFormsKB.HalfIntegral.Symbol
 import ModularFormsKB.HalfIntegral.Theta
+import ModularFormsKB.HalfIntegral.ThetaBound
+import ModularFormsKB.HalfIntegral.ThetaForms
+import ModularFormsKB.HalfIntegral.UnaryTheta
 import ModularFormsKB.HalfIntegral.Waldspurger.Coefficients
 import ModularFormsKB.HalfIntegral.Waldspurger.Gross
 import ModularFormsKB.HalfIntegral.Waldspurger.Packets
 import ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
+import ModularFormsKB.HalfIntegral.WeilBridge
+import ModularFormsKB.Historical.Eisenstein
+import ModularFormsKB.Historical.Eisenstein.LatticeSums
+import ModularFormsKB.Historical.Eisenstein.LatticeSumsAux
+import ModularFormsKB.Historical.Eisenstein.ThetaProducts
 import ModularFormsKB.Historical.Jacobi
+import ModularFormsKB.Historical.Jacobi.ModularEquationK
 import ModularFormsKB.Historical.Jacobi.ModularEquationODE
 import ModularFormsKB.Historical.Jacobi.ThetaFourier
+import ModularFormsKB.Historical.Jacobi.ThetaIdentification
+import ModularFormsKB.Historical.Jacobi.TripleProduct
 import ModularFormsKB.Historical.Kronecker
+import ModularFormsKB.Historical.Kronecker.AInvariance
 import ModularFormsKB.Historical.Kronecker.AnalyticInvariant
 import ModularFormsKB.Historical.Kronecker.Ser
 import ModularFormsKB.Historical.Ramanujan
@@ -307,6 +360,39 @@ import ModularFormsKB.Milne.Wave10.GenusGammaTop
 import ModularFormsKB.Milne.Wave10.LittlePicard
 import ModularFormsKB.Milne.Wave10.ModularCurveJ
 import ModularFormsKB.Milne.Wave10.RiemannRochInputs
+import ModularFormsKB.Milne.Wave11
+import ModularFormsKB.Milne.Wave11.Bijection
+import ModularFormsKB.Milne.Wave11.PointPlace
+import ModularFormsKB.Milne.Wave11.RiemannRochTransfer
+import ModularFormsKB.Milne.Wave11.Separation
+import ModularFormsKB.Milne.Wave11.Surjective
+import ModularFormsKB.Milne.Wave11.X0RiemannRoch
+import ModularFormsKB.Milne.Wave12
+import ModularFormsKB.Milne.Wave12.EisensteinLimit
+import ModularFormsKB.Milne.Wave12.FiberDescent
+import ModularFormsKB.Milne.Wave12.GammaNRiemannRoch
+import ModularFormsKB.Milne.Wave12.PrimePower
+import ModularFormsKB.Milne.Wave12.ScalarRiemannRoch
+import ModularFormsKB.Milne.Wave13
+import ModularFormsKB.Milne.Wave13.AllFiniteIndex
+import ModularFormsKB.Milne.Wave13.MiyakeDimension
+import ModularFormsKB.Milne.Wave13.PolePoincare
+import ModularFormsKB.Milne.Wave13.PoleSeries
+import ModularFormsKB.Milne.Wave14
+import ModularFormsKB.Milne.Wave14.DbarUpper
+import ModularFormsKB.Milne.Wave14.HalfPlaneTriv
+import ModularFormsKB.Milne.Wave14.LineBundles
+import ModularFormsKB.Milne.Wave14.SmoothCocycle
+import ModularFormsKB.Milne.Wave14.SmoothLog
+import ModularFormsKB.Milne.Wave15
+import ModularFormsKB.Milne.Wave15.AdaptedSystem
+import ModularFormsKB.Milne.Wave15.Cochains
+import ModularFormsKB.Milne.Wave15.Corollaries
+import ModularFormsKB.Milne.Wave15.Existence
+import ModularFormsKB.Milne.Wave15.Finiteness
+import ModularFormsKB.Milne.Wave15.MittagLeffler
+import ModularFormsKB.Milne.Wave15.PointsPlaces
+import ModularFormsKB.Milne.Wave15.Splitting
 import ModularFormsKB.Milne.Wave4A
 import ModularFormsKB.Milne.Wave4A.CanonicalClass
 import ModularFormsKB.Milne.Wave4A.CanonicalDegree
@@ -358,9 +444,28 @@ import ModularFormsKB.Miyake.CongruenceModularGroups
 import ModularFormsKB.Miyake.DirichletCharacters
 import ModularFormsKB.Miyake.GeneralizedBernoulli
 import ModularFormsKB.Miyake.HeckeAlgebras
+import ModularFormsKB.Miyake.HeckeTrick.EisensteinFE
+import ModularFormsKB.Miyake.HeckeTrick.EisensteinFEMain
+import ModularFormsKB.Miyake.HeckeTrick.ExpIntegral
+import ModularFormsKB.Miyake.HeckeTrick.FourierExpansion
+import ModularFormsKB.Miyake.HeckeTrick.FourierRows
+import ModularFormsKB.Miyake.HeckeTrick.FourierTerms
+import ModularFormsKB.Miyake.HeckeTrick.HeckeLimit
+import ModularFormsKB.Miyake.HeckeTrick.HeckeLimitHolomorphic
+import ModularFormsKB.Miyake.HeckeTrick.LatticeInversion
+import ModularFormsKB.Miyake.HeckeTrick.Omega
+import ModularFormsKB.Miyake.HeckeTrick.PoissonS
+import ModularFormsKB.Miyake.HeckeTrick.Poles
+import ModularFormsKB.Miyake.HeckeTrick.Sigma
+import ModularFormsKB.Miyake.HeckeTrick.ThetaBounds
+import ModularFormsKB.Miyake.HeckeTrick.TsumHolomorphic
+import ModularFormsKB.Miyake.HeckeTrick.Xi
 import ModularFormsKB.Miyake.InvariantMetric
+import ModularFormsKB.Miyake.LValueZero
 import ModularFormsKB.Miyake.LinearFractionalTransformations
 import ModularFormsKB.Miyake.QuotientSpaces
+import ModularFormsKB.Miyake.Sec3_1.Splitting
+import ModularFormsKB.Miyake.Sec3_3.DedekindZeta
 import ModularFormsKB.Miyake.Sec4_3.Decay
 import ModularFormsKB.Miyake.Sec4_3.Defs
 import ModularFormsKB.Miyake.Sec4_3.Elliptic
@@ -376,7 +481,42 @@ import ModularFormsKB.Miyake.Sec4_3.Weil
 import ModularFormsKB.Miyake.Sec4_3.WeilAux
 import ModularFormsKB.Miyake.Sec4_3.WeilPrep
 import ModularFormsKB.Miyake.Sec4_3.WeilTheorem
+import ModularFormsKB.Miyake.Sec4_5.RightCosetHeckeRing
+import ModularFormsKB.Miyake.Sec4_6.HeckeLemma
+import ModularFormsKB.Miyake.Sec4_6.NewformSpan
+import ModularFormsKB.Miyake.Sec4_6.PseudoEigenvalue
+import ModularFormsKB.Miyake.Sec4_8.KroneckerGaussPrime
+import ModularFormsKB.Miyake.Sec4_8.ThetaStatementFix
+import ModularFormsKB.Miyake.Sec4_9.EvenUnimodular
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Basic
+import ModularFormsKB.Miyake.Sec4_9.Spherical.CosetSplitting
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Cusps
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Forms
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Fricke
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Inversion
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Odd
+import ModularFormsKB.Miyake.Sec4_9.Spherical.RankOne
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Unary
+import ModularFormsKB.Miyake.Sec4_9.Spherical.UnaryLaw
+import ModularFormsKB.Miyake.Sec4_9.Spherical.UnaryModular
+import ModularFormsKB.Miyake.Sec4_9.ThetaConstant
+import ModularFormsKB.Miyake.Sec6_7.OrderClassNumber
 import ModularFormsKB.Miyake.UpperHalfPlaneAutomorphisms
+import ModularFormsKB.Miyake.Wave10.EisensteinSpace
+import ModularFormsKB.Miyake.Wave10.LowWeight
+import ModularFormsKB.Miyake.Wave10.WeightOne
+import ModularFormsKB.Miyake.Wave10.WeightOneComplement
+import ModularFormsKB.Miyake.Wave10.WeightTwo
+import ModularFormsKB.Miyake.Wave11.ConstantTerm
+import ModularFormsKB.Miyake.Wave11.EisensteinHecke
+import ModularFormsKB.Miyake.Wave11.QuadraticTheta
+import ModularFormsKB.Miyake.Wave12.ConstantTermHigh
+import ModularFormsKB.Miyake.Wave12.ConstantTermTwo
+import ModularFormsKB.Miyake.Wave12.Gamma1Delta1
+import ModularFormsKB.Miyake.Wave12.HeckeRingIso
+import ModularFormsKB.Miyake.Wave13.EisensteinEigenCusp
+import ModularFormsKB.Miyake.Wave13.HeckeConstantTerm
+import ModularFormsKB.Miyake.Wave13.LevelChangeAllWeights
 import ModularFormsKB.Miyake.Wave2A.AutomorphicForms
 import ModularFormsKB.Miyake.Wave2A.Commensurator
 import ModularFormsKB.Miyake.Wave2A.CuspNeighborhoods
@@ -453,7 +593,7 @@ import ModularFormsKB.Shimura2007.Ch2.RootsOfUnity
 import ModularFormsKB.Shimura2007.Ch6.RankinCohen
 
 /-!
-# ModularFormsKB (modular-forms-lean 0.3.1)
+# ModularFormsKB (modular-forms-lean 0.4.0)
 
 Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *Modular Forms*
 (`ModularFormsKB.Miyake`), the dimension bounds (`ModularFormsKB.Dimension`), and statements from Shimura,
@@ -461,7 +601,9 @@ Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *
 Classical Automorphic Forms* (`ModularFormsKB.Iwaniec1997`) and Andrianov and Zhuravlev, *Modular Forms
 and Hecke Operators* (`ModularFormsKB.Andrianov`), the class number one theorem of Heegner and Stark,
 conditional on named inputs (`ModularFormsKB.Historical.WeberHeegnerStark`), and Waldspurger's theorems,
-Gross's example and congruent numbers (`ModularFormsKB.HalfIntegral.Waldspurger`), and theorems of Jacobi,
-Ramanujan, Weber and Kronecker (`ModularFormsKB.Historical.Jacobi`, `.Ramanujan`, `.Weber`, `.Kronecker`).
+Gross's example and congruent numbers (`ModularFormsKB.HalfIntegral.Waldspurger`), Shimura's theorem for
+the theta multiplier (`ModularFormsKB.HalfIntegral.Rankin`), and theorems of Jacobi, Ramanujan, Weber,
+Kronecker and Eisenstein (`ModularFormsKB.Historical.Jacobi`, `.Ramanujan`, `.Weber`, `.Kronecker`,
+`.Eisenstein`).
 See README.md.
 -/

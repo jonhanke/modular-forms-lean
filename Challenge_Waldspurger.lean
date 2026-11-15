@@ -6,9 +6,12 @@ Authors: Jonathan Hanke
 import ModularFormsKB.HalfIntegral.Waldspurger.Packets
 import ModularFormsKB.HalfIntegral.Waldspurger.Coefficients
 import ModularFormsKB.HalfIntegral.Waldspurger.Gross
+import ModularFormsKB.HalfIntegral.Rankin.ThetaShimura
+import ModularFormsKB.HalfIntegral.Rankin.Unfolding
+import ModularFormsKB.Miyake.HeckeTrick.LatticeInversion
 
 /-!
-# Headline statements of modular-forms-lean 0.3.1: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11
+# Headline statements of modular-forms-lean 0.4.0: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11
 
 The main results of the library for Waldspurger's theorems on the Shimura correspondence, Kohnen's formula for odd
 squarefree level, and Gross's weight 3/2 form for the prime 11, one theorem each (a few closely related concrete facts
@@ -30,7 +33,10 @@ standard axioms):
 * Gross's example for p = 11: the coefficients of `g = (θ₁ - θ₂)/2` vanish unless `-n ≡ 0, 1 mod 4` (Kohnen's plus
   condition) and whenever 11 splits in `ℚ(√-n)`, they take the listed values for `n ≤ 16`, and the Brandt matrices
   `B(2)`, `B(3)`, `B(5)` of the two maximal order classes of the quaternion algebra ramified at `{11, ∞}` have the
-  stated row sums, symmetry and eigenvectors.
+  stated row sums, symmetry and eigenvectors;
+* (0.4.0) two former named inputs of Shimura's theorem, now proved: Hecke's functional equation of the lattice
+  Eisenstein series with a character (`eisensteinLattice_functionalEquation`) and the Rankin–Selberg unfolding
+  (`rankin_unfolding`).
 
 **Conditional theorems.** Each has the form *(named inputs) → statement*: its first hypothesis is a named `Prop`
 structure whose fields are classical theorems that the library does not prove, each with its source. The inputs are
@@ -62,7 +68,13 @@ were not checked.
 * `ModularFormsKB.HalfIntegral.Waldspurger.Gross.GrossRatio`: B. H. Gross, *Heights and the special values of
   L-series*, 1987 (Gross 1987; locator unverified): for fundamental discriminants `D₁, D₂ < 0` in which 11 is inert,
   `c(|D₁|)² √|D₂| L(f, D₂, 1) = c(|D₂|)² √|D₁| L(f, D₁, 1)`, where `f` is the newform of level 11. The ratio form was
-  checked numerically for the discriminants tested (it is Waldspurger's theorem on the inert square classes).
+  checked numerically for the discriminants tested (it is Waldspurger's theorem on the inert square classes);
+* (0.4.0) `ModularFormsKB.HalfIntegral.ShimuraDualUnfolding`: the dual side of the Rankin integral in Shimura's proof
+  of his Main Theorem (G. Shimura, *On modular forms of half integral weight*, Ann. of Math. 97 (1973); locator
+  unverified): for `k ≥ 2`, squarefree `t` and a cusp form `f` of weight `k + 1/2`, the Rankin integral at the cusps
+  other than `∞`, twisted by every primitive character `ψ` of odd prime conductor prime to `4N`, is
+  `i^{2k}` (times Weil's constant) times the completed Dirichlet series of one sequence `b` (and of its twist by
+  `ψ̄`). It is the input of `shimuraLift_theta_of_dualUnfolding`, Shimura's theorem for the theta multiplier.
 
 Mathlib has no L-functions of elliptic curves or of modular forms of half-integral weight in this setting. The central
 values enter only through abstract functions (`L` in `KohnenSquarefree`, `Lval` in `GrossRatio`, and the entire
@@ -88,6 +100,11 @@ too (all in the namespace `ModularFormsKB.HalfIntegral.Waldspurger` unless noted
   `Gross.brandt₂`, `Gross.brandt₃`, `Gross.brandt₅`, `Gross.brandtWeight`, `Gross.grossEigen`, `Gross.GrossRatio`. The
   identification of `Q₁`, `Q₂` and the Brandt matrices with the quaternionic objects of Gross is checked numerically by
   a script, not in Lean.
+* (0.4.0) in the namespace `ModularFormsKB.HalfIntegral`, for Shimura's theorem: `eisensteinLattice`,
+  `eisensteinDual` (the lattice Eisenstein series and its Poisson dual), `IsGamma0Reps`, `UnitaryLaw`, `stripPt`,
+  `repsIntegral`, `stripMellin` (the unfolding), `thetaMultiplierSystem`, `MultiplierSystem.cuspForms`,
+  `Abstract.HasQExp`, `IsIntCuspForm`, `shimuraCoeff`, and in the input `ShimuraDualUnfolding`: `CoeffGrowth`,
+  `rankinLevel`, `rankinDualFactor`, `rankinDual`, `rankinS`, `gammaFactor`, `weilConstant`, `twist`.
 -/
 
 namespace ModularFormsKB.Headlines
@@ -296,5 +313,60 @@ theorem gross_grossCoeff_eq_zero_iff {Lval : ℤ → ℝ} (hG : GrossRatio Lval)
   sorry
 
 end Waldspurger
+
+section ShimuraTheta
+
+open Complex MatrixGroups CongruenceSubgroup MeasureTheory Set ModularFormsKB.HalfIntegral
+open scoped Real UpperHalfPlane
+
+/-- **Hecke's functional equation of the lattice Eisenstein series with a character** (Hecke 1927; Miyake, §7.2),
+unconditional since 0.4.0 (it was a named input of Shimura's theorem). For `L ≥ 2`, `λ ≥ 1` and a Dirichlet character
+`ω` modulo `L` with `ω(-1) = (-1)^λ`, there is `E*(z, s)`, entire in `s` and continuous in `z`, with
+`E*(z, s) = L^s π^{-s} Γ(s + λ/2) E(z, s)` for `Re s > 1` (`E` the series
+`y^s ∑_{(c,d) ∈ Lℤ × ℤ} ω(d) (cz+d)^λ |cz+d|^{-λ-2s}`), `E*(z, s) = L^{-s} π^{-(1-s)} Γ(1 - s + λ/2) Ě(z, 1 - s)` for
+`Re s < 0` (`Ě` the Poisson dual series with Gauss sums), and `|E*(z, s)| ≤ B (y^A + y^{-A})` on every vertical strip.
+The library proves it by Poisson summation on the lattice `ℤz + ℤ` (the lattice theta inversion) and Mellin
+transform. -/
+theorem eisensteinLattice_functionalEquation :
+    ∀ (L lam : ℕ) (ω : DirichletCharacter ℂ L), 2 ≤ L → 1 ≤ lam → ω (-1) = (-1) ^ lam →
+      ∃ E : ℍ → ℂ → ℂ, (∀ z, Differentiable ℂ (E z)) ∧ (∀ s, Continuous fun z ↦ E z s) ∧
+        (∀ z s, 1 < s.re →
+          E z s = (L : ℂ) ^ s * (π : ℂ) ^ (-s) * Gamma (s + lam / 2) * eisensteinLattice L lam ω z s) ∧
+        (∀ z s, s.re < 0 →
+          E z s = (L : ℂ) ^ (-s) * (π : ℂ) ^ (-(1 - s)) * Gamma (1 - s + lam / 2) *
+            eisensteinDual L lam ω z (1 - s)) ∧
+        ∀ σ₁ σ₂ : ℝ, ∃ A B : ℝ, ∀ z s, σ₁ ≤ s.re → s.re ≤ σ₂ → ‖E z s‖ ≤ B * (z.im ^ A + z.im ^ (-A)) := by
+  sorry
+
+/-- **The Rankin–Selberg unfolding** (Rankin 1939, Selberg 1940), unconditional since 0.4.0 (it was a named input of
+Shimura's theorem). Let `L ≥ 1`, `ω` a Dirichlet character modulo `L`, `R` a list of right coset representatives of
+`Γ₀(L)` in `SL₂(ℤ)`, and `G` continuous on `ℍ` with the unitary weight-`λ` law
+`G(γz) = ω(d) ((cz+d)/|cz+d|)^λ G(z)` on `Γ₀(L)`. For `Re s > 1`, if `|G(x + iy)| y^{Re s - 2}` is integrable on the
+strip `[0, 1] × (0, ∞)`, then the integral of `G(z) E(z, s)` over `Γ₀(L)\ℍ` (as `∑_{γ ∈ R} ∫_𝓕 (…)(γτ) dμ(τ)`, `𝓕` the
+standard fundamental domain, `dμ = dx dy / y²`) equals `2 L(2s, ω) ∫_0^∞ ∫_0^1 G(x + iy) y^{s-2} dx dy`. -/
+theorem rankin_unfolding :
+    ∀ (L lam : ℕ) (ω : DirichletCharacter ℂ L) (R : List SL(2, ℤ)), 1 ≤ L → IsGamma0Reps L R →
+      ∀ G : ℍ → ℂ, Continuous G → UnitaryLaw L lam ω G → ∀ s : ℂ, 1 < s.re →
+        IntegrableOn (fun p : ℝ × ℝ ↦ ‖G (stripPt p.1 p.2)‖ * p.2 ^ (s.re - 2)) (Icc 0 1 ×ˢ Ioi 0) →
+        repsIntegral R (fun τ ↦ G τ * eisensteinLattice L lam ω τ s) =
+          2 * LSeries (fun n ↦ ω n) (2 * s) * stripMellin G s := by
+  sorry
+
+/-- **Shimura's theorem for the theta multiplier, conditional on the dual unfolding identity** (Shimura 1973, Main
+Theorem; new in 0.4.0). Assume the named input `ShimuraDualUnfolding thetaMultiplierSystem k N χ` (the dual side of
+the Rankin integral at the cusps other than `∞`; the only named input left: the twisted theta law, Hecke's
+functional equation and the Rankin unfolding are proved). Then for `k ≥ 2`, squarefree `t ≥ 1` and every cusp form
+`f` of weight `k + 1/2` on `Γ₀(4N)` with character `χ` (theta multiplier) and `q`-expansion coefficients `a`, there
+is a cusp form `F` of weight `2k` on `Γ₀(4N)` with character `χ²` whose coefficients `c(n)`, `n ≥ 1`, are Shimura's
+`∑_{d ∣ n} χ_t(d) d^{k-1} a(tn²/d²)` (`shimuraCoeff`). -/
+theorem shimuraLift_theta_of_dualUnfolding (k N : ℕ) (χ : DirichletCharacter ℂ (4 * N)) (hN : 0 < N)
+    (hD : ShimuraDualUnfolding thetaMultiplierSystem k N χ) :
+    2 ≤ k → ∀ t : ℕ, 1 ≤ t → Squarefree t → ∀ f ∈ thetaMultiplierSystem.cuspForms k N χ, ∀ a : ℕ → ℂ,
+      Abstract.HasQExp f a →
+      ∃ F : ℍ → ℂ, IsIntCuspForm (2 * k) (4 * N) (χ ^ 2) F ∧
+        ∃ c : ℕ → ℂ, Abstract.HasQExp F c ∧ ∀ n, 1 ≤ n → c n = shimuraCoeff k N χ t a n := by
+  sorry
+
+end ShimuraTheta
 
 end ModularFormsKB.Headlines

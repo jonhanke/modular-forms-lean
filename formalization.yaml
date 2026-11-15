@@ -33,7 +33,7 @@ project:
     Gamma_0(N) is a polynomial ring) and Theorem 4.5.4 (2) (T(n) and T*(n) adjoint for every n); and historical
     theorems of Jacobi (the differential equation of modular equations, the Fourier series of Theta and H),
     Ramanujan (his differential equations for P, Q, R), Weber (theta functions as eta times his functions f,
-    conditional on the Jacobi triple product) and Kronecker (the transformation law of Ser_rho for rho >= 2). Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
+    conditional on the Jacobi triple product) and Kronecker (the transformation law of Ser_rho for rho >= 2). Release 0.4.0 adds the existence theorem and the Riemann-Roch theorem on every compact Riemann surface, the dimension and genus formulas for every subgroup of finite index of SL_2(Z), the triviality of holomorphic line bundles on the upper half plane, theta series with spherical functions in every rank (half-integral weight for odd rank), Shimura's twisted theta law for every character, Hecke's continuation of Eisenstein series in s and his limits in weights two and one, Hecke's lemma, Hecke's functional equation of the lattice Eisenstein series, the Rankin-Selberg unfolding, Shimura's theorem for the theta multiplier conditional on one named input (ShimuraDualUnfolding), and the Jacobi triple product, with which Weber's formulas become unconditional. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
     credits the results proved here that Mathlib, Tau Ceti or the Stacks Project formalization (Axiom) also prove.
   authors:
     - "Jonathan Hanke"
@@ -48,8 +48,8 @@ classification:
   # 14H52 elliptic curves; 33E05 elliptic functions; 11R29 class numbers; 11G15 complex multiplication;
   # 03B35 mechanization of proofs and logical operations.
   # 11F37 forms of half-integer weight; 11G05 elliptic curves over global fields (congruent numbers); 11R52 quaternion
-  # algebras.
-  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "11R29", "11G15", "11F37", "11G05", "11R52", "03B35"]
+  # algebras; 11F27 theta series; 30F10 compact Riemann surfaces; 14H55 Riemann surfaces (Riemann-Roch).
+  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "11R29", "11G15", "11F37", "11G05", "11R52", "11F27", "30F10", "14H55", "03B35"]
 
 sources:
   - title: "Modular Functions and Modular Forms (version 1.31)"
@@ -99,7 +99,7 @@ sources:
     authors:
       - "Heinrich Weber"
     type: "book"
-    location: "Vieweg, Braunschweig, 1891 (second edition: Lehrbuch der Algebra, volume III, 1908); sections 87 to 94 are the named inputs of the class number one theorem (ModularFormsKB/Historical/WeberHeegnerStark/Inputs.lean), assumed, not proved; since 0.3.1, section 21 (9) (theta functions as products) is proved conditionally on the Jacobi triple product (ModularFormsKB/Historical/Weber/)"
+    location: "Vieweg, Braunschweig, 1891 (second edition: Lehrbuch der Algebra, volume III, 1908); sections 87 to 94 are the named inputs of the class number one theorem (ModularFormsKB/Historical/WeberHeegnerStark/Inputs.lean), assumed, not proved; since 0.3.1, section 21 (9) (theta functions as products) is proved (ModularFormsKB/Historical/Weber/), conditionally on the Jacobi triple product in 0.3.1 and unconditionally since 0.4.0"
     relationship: "formalizes"
     author_endorsement: "n/a"
   - title: "Diophantische Analysis und Modulfunktionen"
@@ -155,7 +155,7 @@ sources:
     authors:
       - "Carl Gustav Jacob Jacobi"
     type: "book"
-    location: "Königsberg, 1829; section 33 (the differential equation of modular equations) and section 62 (Fourier series of Theta and H) (ModularFormsKB/Historical/Jacobi/, Challenge_Historical.lean)"
+    location: "Königsberg, 1829; section 33 (the differential equation of modular equations), section 62 (Fourier series of Theta and H) and section 64 (the triple product identity, since 0.4.0) (ModularFormsKB/Historical/Jacobi/, Challenge_Historical.lean)"
     relationship: "formalizes"
     author_endorsement: "n/a"
   - title: "On certain arithmetical functions"
@@ -172,6 +172,20 @@ sources:
     location: "Werke, volume 5 (1930), I, article XXI, section 7, (E), and volume 4 (1929), article XXXI, section V [unverified locator] (ModularFormsKB/Historical/Kronecker/)"
     relationship: "formalizes"
     author_endorsement: "n/a"
+  - title: "On modular forms of half integral weight"
+    authors:
+      - "Goro Shimura"
+    type: "paper"
+    location: "Annals of Mathematics 97 (1973) [unverified locator]; Proposition 2.2 (the twisted theta law) proved; the Main Theorem proved for the theta multiplier conditionally on the named input ShimuraDualUnfolding (since 0.4.0; Challenge_Waldspurger.lean)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "Mathematische Abhandlungen, besonders aus dem Gebiete der höheren Arithmetik und der elliptischen Functionen"
+    authors:
+      - "Gotthold Eisenstein"
+    type: "book"
+    location: "Reimer, Berlin, 1847 [unverified locator]; lattice sums and their addition theorems, Theorem B for g >= 3 (ModularFormsKB/Historical/Eisenstein/, since 0.4.0; no headline)"
+    relationship: "formalizes"
+    author_endorsement: "n/a"
   - title: "Further references"
     type: "bibliography"
     location: "references.bib in this repository; each result is tagged with @[kb \"<key>\" \"<locator>\"]"
@@ -180,16 +194,16 @@ sources:
 related_formalizations:
   - id: "https://github.com/leanprover-community/mathlib4"
     relationship: "builds-on"
-    note: "Built on Mathlib at commit 1b1ccf4 (the commit Tau Ceti 4908b03 pins). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
+    note: "Built on Mathlib at commit e8ba86f (the commit Tau Ceti ca32605 pins; until 0.3.1: 1b1ccf4). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
   - id: "https://github.com/TauCetiProject/TauCeti"
     relationship: "builds-on"
     note: >-
-      A Lake dependency at commit 4908b03 (built from source): Fuchsian groups and the compactified modular curves as
+      A Lake dependency at commit ca32605 (Tau Ceti main of 2026-11-14; until 0.3.1: 4908b03; built from source): Fuchsian groups and the compactified modular curves as
       compact Riemann surfaces, the j-function, Hecke operators and newforms at level N, function fields over finite
       fields and their genus, elliptic-curve schemes and the fine moduli variety Y_1(N). Tau Ceti also has the
       Kronecker-Weber theorem and the addition theorem for the Weierstrass function, which are proved here too but
       are not headlines. docs/results/comparison.md compares each headline with Tau Ceti main (686d0d7f, 2026-11-07; 71ce0a33,
-      2026-11-14, for the headlines new in 0.3.1;
+      2026-11-14, for the headlines new in 0.3.1; main of 2026-11-15 for those new in 0.4.0;
       a5f657a8, 2026-11-12, for the class number one theorem: Tau Ceti proves that the nine fields have class number
       one and the classification for discriminants above -51; the Diophantine and numerical steps of Heegner's proof
       in this library are ported from Tau Ceti).
@@ -199,20 +213,23 @@ related_formalizations:
 
 status:
   scope: >-
-    Release 0.3.1. Formalized (the 63 statements of the Challenge_<book>.lean files, proved in the
+    Release 0.4.0. Formalized (the 79 statements of the Challenge_<book>.lean files, proved in the
     Solution_<book>.lean files):
-    Milne 13 (Theorem 11.4, Theorem 6.1, Corollary 12.16, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4
-    and 8.6, Example 2.23; new in 0.3.1: Remark 2.25, Proposition 12.21, Proposition 11.5, the geometric conductor
-    on p. 111), Miyake 6 (Theorems 4.3.6, 4.3.8 and 4.3.15, the last in two parts; new in 0.3.1: Theorems 4.5.9
-    and 4.5.4 (2)), Shimura 1
+    Milne sections 0 to 10, 13 (Theorem 6.1, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4 and 8.6,
+    Example 2.23; new in 0.3.1: Remark 2.25; new in 0.4.0: Theorems 1.17, 1.20, 4.9, 2.22, Remark 4.26), Milne
+    sections 11 and 12, 5 (Theorem 11.4, Corollary 12.16; new in 0.3.1: Proposition 12.21, Proposition 11.5, the
+    geometric conductor on p. 111; a separate pair since 0.4.0), Miyake 13 (Theorems 4.3.6, 4.3.8 and 4.3.15, the
+    last in two parts; new in 0.3.1: Theorems 4.5.9 and 4.5.4 (2); new in 0.4.0: Theorem 4.9.3 with Corollary 4.9.4
+    in even and odd rank, Corollary 4.9.7 (1), Theorems 7.2.9, 7.2.12, 7.2.13, Lemma 4.6.3), Shimura 1
     (Theorem 4.14 (i)), Iwaniec 2 ((4.12), (4.23)), Andrianov-Zhuravlev 1 (Chapter 1, Proposition 1.3), and the
     class number one theorem in two forms, conditional (HeegnerStark 2: each takes the named inputs
-    WeberHeegnerStarkInputs, and the second also QuadraticDiscriminantInput, as hypotheses), Waldspurger 24
-    (15 unconditional; 9 conditional on the named inputs WaldspurgerSquareClass, KohnenSquarefree,
-    WaldspurgerCoefficients, WaldspurgerFibreDimension or GrossRatio) and CongruentNumbers 9 (4 unconditional; 3
+    WeberHeegnerStarkInputs, and the second also QuadraticDiscriminantInput, as hypotheses), Waldspurger 27
+    (17 unconditional, of which 2 new in 0.4.0; 10 conditional on the named inputs WaldspurgerSquareClass,
+    KohnenSquarefree, WaldspurgerCoefficients, WaldspurgerFibreDimension, GrossRatio or, new in 0.4.0,
+    ShimuraDualUnfolding) and CongruentNumbers 9 (4 unconditional; 3
     conditional on TunnellFormula and CoatesWiles; 2 conditional in addition on WeakBSD, the weak Birch and
-    Swinnerton-Dyer conjecture), and Historical 5 (new in 0.3.1: Jacobi 2, Ramanujan 1, Kronecker 1, unconditional;
-    Weber 1, conditional on the named input JacobiTripleProduct). The book maps
+    Swinnerton-Dyer conjecture), and Historical 6 (new in 0.3.1: Jacobi 2, Ramanujan 1, Weber 1, Kronecker 1; new in 0.4.0:
+    the Jacobi triple product; all unconditional since 0.4.0). The book maps
     give the status of every item of Milne and Miyake; the statement maps give the status of the central results of
     Shimura, Iwaniec and Andrianov-Zhuravlev, and of the papers on Waldspurger's theorems and the historical papers, that are stated in Lean. Some library files state
     named results of the books without proof (named statements); no unconditional headline depends on them.
@@ -264,12 +281,16 @@ fidelity:
     maps are bijective; the action laws are not stated. Proposition 11.5 models H_1(E, Z) and the tangent space
     through the complex uniformization. The conductor is the one of Tate's algorithm (Tau Ceti); Ogg's formula is not
     formalized. Miyake's T*(n) is defined by (4.5.16). Jacobi's equation is proved for any two solutions of
-    Legendre's equation (K, K' are not constructed); his Theta and H are Mathlib's theta series. Weber's formulas
-    assume the Jacobi triple product (JacobiTripleProduct). Kronecker's law is proved for rho >= 2 only. See the
-    README, Known restrictions.
+    Legendre's equation (K, K' are not constructed); his Theta and H are Mathlib's theta series. Kronecker's law is proved
+    for rho >= 2 only. (10) New in 0.4.0: theta series with spherical functions are stated in lattice form (not
+    Miyake's Gram-matrix form), with spherical functions the isotropic powers (the spanning theorem for harmonic
+    polynomials is not formalized); in odd rank the level is 4N and the character is not identified with
+    Miyake's formula. Shimura's theorem is conditional on ShimuraDualUnfolding and stated for the theta
+    multiplier only. Riemann-Roch is stated as in Milne, with an integer g; Corollary 1.21 identifies it with the
+    genus but is not part of the headline. See the README, Known restrictions.
 
 review:
-  status: "not yet reviewed: the 63 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 79 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
@@ -282,7 +303,7 @@ alignment:
   statements:
     - source: "Milne, Modular Functions and Modular Forms, Theorem 11.4"
       lean: "ModularFormsKB.Headlines.weil_riemannHypothesis_curves"
-      module: "Challenge_Milne / Solution_Milne"
+      module: "Challenge_MilneArithmetic / Solution_MilneArithmetic"
       status: "proved"
       note: "Function field form, every genus. Also proved in the Stacks Project formalization (Axiom), in étale-cohomological form (tag 03V8, Bombieri–Stepanov); ours is the function-field form of Milne 11.4 and includes the functional equation (Stacks match from its declaration index)."
     - source: "Milne, Modular Functions and Modular Forms, Theorem 6.1"
@@ -291,7 +312,7 @@ alignment:
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Corollary 12.16"
       lean: "ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic"
-      module: "Challenge_Milne / Solution_Milne"
+      module: "Challenge_MilneArithmetic / Solution_MilneArithmetic"
       status: "proved"
     - source: "Milne, Modular Functions and Modular Forms, Proposition 3.1"
       lean: "ModularFormsKB.Headlines.doublyPeriodic_sums"
@@ -537,17 +558,17 @@ alignment:
       note: "New in 0.3.1."
     - source: "Milne, Modular Functions and Modular Forms, Proposition 12.21 (corrected form)"
       lean: "ModularFormsKB.Headlines.classGroupAction_ellCM"
-      module: "Challenge_Milne / Solution_Milne"
+      module: "Challenge_MilneArithmetic / Solution_MilneArithmetic"
       status: "proved"
       note: "New in 0.3.1. Every algebraically closed field of characteristic zero; the normalized form of the library's corrected statement; the action laws are not stated."
     - source: "Milne, Modular Functions and Modular Forms, Proposition 11.5"
       lean: "ModularFormsKB.Headlines.betti_tate_comparison"
-      module: "Challenge_Milne / Solution_Milne"
+      module: "Challenge_MilneArithmetic / Solution_MilneArithmetic"
       status: "proved"
       note: "New in 0.3.1. Every elliptic curve over C; H_1(E, Z) and the tangent space through the uniformization."
     - source: "Milne, Modular Functions and Modular Forms, geometric conductor (p. 111)"
       lean: "ModularFormsKB.Headlines.conductor_exponent_eq_two_iff"
-      module: "Challenge_Milne / Solution_Milne"
+      module: "Challenge_MilneArithmetic / Solution_MilneArithmetic"
       status: "proved"
       note: "New in 0.3.1. p != 2, 3; the conductor of Tate's algorithm (Tau Ceti)."
     - source: "Miyake, Modular Forms, Theorem 4.5.9"
@@ -579,12 +600,93 @@ alignment:
       lean: "ModularFormsKB.Headlines.weber_theta_eta"
       module: "Challenge_Historical / Solution_Historical"
       status: "proved"
-      note: "New in 0.3.1. Conditional on JacobiTripleProduct (the Jacobi triple product identity, assumed)."
+      note: "New in 0.3.1, conditional on the Jacobi triple product there; unconditional since 0.4.0."
     - source: "Kronecker, Werke 5, I, article XXI, section 7, (E)"
       lean: "ModularFormsKB.Headlines.kronecker_ser_transformation"
       module: "Challenge_Historical / Solution_Historical"
       status: "proved"
       note: "New in 0.3.1. rho >= 2 (absolute convergence); rho = 0, 1 not proved."
+
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 1.17 (existence of meromorphic functions)"
+      lean: "ModularFormsKB.Headlines.meromorphicFunctions_separate_points"
+      module: "Challenge_Milne / Solution_Milne"
+      status: "proved"
+      note: "New in 0.4.0. Every compact connected Riemann surface: separation of points and M(X) a function field of one variable over C."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 1.20 (Riemann-Roch)"
+      lean: "ModularFormsKB.Headlines.riemannRoch"
+      module: "Challenge_Milne / Solution_Milne"
+      status: "proved"
+      note: "New in 0.4.0. Every compact connected Riemann surface."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 4.9 (the dimension formula)"
+      lean: "ModularFormsKB.Headlines.dimensionFormula"
+      module: "Challenge_Milne / Solution_Milne"
+      status: "proved"
+      note: "New in 0.4.0. Every subgroup of finite index of SL_2(Z); weights 2k, k >= 1."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 2.22 (the genus formula)"
+      lean: "ModularFormsKB.Headlines.genusFormula"
+      module: "Challenge_Milne / Solution_Milne"
+      status: "proved"
+      note: "New in 0.4.0. Every subgroup of finite index of SL_2(Z); the analytic genus."
+    - source: "Milne, Modular Functions and Modular Forms, Remark 4.26"
+      lean: "ModularFormsKB.Headlines.holomorphicLineBundle_upperHalfPlane_trivial"
+      module: "Challenge_Milne / Solution_Milne"
+      status: "proved"
+      note: "New in 0.4.0. Cited by Milne without proof."
+    - source: "Miyake, Modular Forms, Theorem 4.9.3 and Corollary 4.9.4 (even rank)"
+      lean: "ModularFormsKB.Headlines.thetaSpherical_even"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0. Lattice form; spherical functions as isotropic powers."
+    - source: "Miyake, Modular Forms, Theorem 4.9.3 and Corollary 4.9.4 (odd rank)"
+      lean: "ModularFormsKB.Headlines.thetaSpherical_odd"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0. Half-integral weight, level 4N; the character is the library's oddThetaChar."
+    - source: "Miyake, Modular Forms, Corollary 4.9.7 (1); Shimura (1973), Proposition 2.2"
+      lean: "ModularFormsKB.Headlines.thetaTwist_transformation"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0. Every Dirichlet character, primitive or not."
+    - source: "Miyake, Modular Forms, Theorem 7.2.9"
+      lean: "ModularFormsKB.Headlines.heckeEisenstein_continuation"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0. Every integer k."
+    - source: "Miyake, Modular Forms, Theorem 7.2.12"
+      lean: "ModularFormsKB.Headlines.heckeLimit_weightTwo"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0."
+    - source: "Miyake, Modular Forms, Theorem 7.2.13"
+      lean: "ModularFormsKB.Headlines.heckeLimit_weightOne"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0."
+    - source: "Miyake, Modular Forms, Lemma 4.6.3 (Hecke's lemma)"
+      lean: "ModularFormsKB.Headlines.hecke_lemma"
+      module: "Challenge_Miyake / Solution_Miyake"
+      status: "proved"
+      note: "New in 0.4.0. k > 0; Mathlib's slash operator."
+    - source: "Hecke (1927); Miyake, Modular Forms, section 7.2: functional equation of the lattice Eisenstein series"
+      lean: "ModularFormsKB.Headlines.eisensteinLattice_functionalEquation"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.4.0 (a named input of Shimura's theorem until 0.3.1). The library's normalization, checked numerically."
+    - source: "Rankin (1939), Selberg (1940): the unfolding of the Rankin integral"
+      lean: "ModularFormsKB.Headlines.rankin_unfolding"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.4.0 (a named input of Shimura's theorem until 0.3.1)."
+    - source: "Shimura (1973), Main Theorem, for the theta multiplier"
+      lean: "ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.4.0. Conditional on ShimuraDualUnfolding (the dual unfolding identity, assumed)."
+    - source: "Jacobi, Fundamenta nova (1829), section 64 (the triple product identity)"
+      lean: "ModularFormsKB.Headlines.jacobi_triple_product"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.4.0."
 
 acknowledgements: >-
   Mathlib and its contributors; the Tau Ceti contributors, on whose library this one is built; the Lean FRO for

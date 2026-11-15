@@ -66,7 +66,7 @@ theorem isAffineVariety_opensRange {M : Scheme.{u}} (f : M ⟶ Spec (CommRingCat
 theorem isCompleteRegularCurve_twoChartModel (hF : IsFunctionField k F) {x : F} (hxt : Transcendental k x)
     (hred : IsReduced (TensorProduct k (AlgebraicClosure k) F)) :
     IsCompleteRegularCurve k (twoChartModel hF hxt.ne_zero ↘ Spec (CommRingCat.of k)) := by
-  have hP := isProper (hF := hF) (hx := hxt.ne_zero) hxt
+  have hP := isProper (hF := hF) (hx := hxt.ne_zero)
   have hxt' : Transcendental k x⁻¹ := fun h ↦ hxt (IsAlgebraic.inv_iff.mp h)
   refine ⟨⟨⟨⟨2, ![(ιFinite hF hxt.ne_zero).opensRange, (ιInfinity hF hxt.ne_zero).opensRange], ?_, ?_⟩,
     inferInstance⟩, ?_⟩, ?_, (show UniversallyClosed _ from inferInstance)⟩
@@ -90,6 +90,6 @@ theorem isCompleteRegularCurve_twoChartModel (hF : IsFunctionField k F) {x : F} 
     rw [functionFieldAlgebraMap_eq]
     exact Cardinal.toNat_eq_one.1 h2
   · intro p _
-    exact isRegularLocalRing_stalk hxt p
+    exact isRegularLocalRing_stalk p
 
 end ModularFormsKB.Milne.Completion

@@ -438,7 +438,7 @@ theorem trace_T_levelOne {k : ℕ} (hk : 4 ≤ k) (hke : Even k) (n : ℕ) [NeZe
     have hP2 : (dickson 2 (n : ℂ) (k - 2)).eval ((-(2 * (s : ℤ)) : ℤ) : ℂ) =
         ((k : ℂ) - 1) * (s : ℂ) ^ (k - 2) := by
       rw [← hP1]; push_cast
-      exact dickson_eval_neg_of_even 2 _ _ hw
+      rw [dickson_eval_neg, hw.neg_one_pow, one_mul]
     rw [hH _ (Or.inl rfl), hH _ (Or.inr rfl), hP1, hP2]
     have hA1 := aPar_sq hke (by omega) hs0 (ε := 2 * (s : ℤ)) (Or.inl rfl)
     have hA2 := aPar_sq hke (by omega) hs0 (ε := -(2 * (s : ℤ))) (Or.inr rfl)

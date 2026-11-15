@@ -210,6 +210,7 @@ Ceti's `TauCeti.volume_image_eq_lintegral_enorm_deriv_sq`. -/
 theorem volume_image_eq_lintegral_norm_deriv_sq {U s : Set ℂ} {w : ℂ → ℂ} (hU : IsOpen U)
     (hw : DifferentiableOn ℂ w U) (hs : NullMeasurableSet s volume) (hsU : s ⊆ U) (hinj : Set.InjOn w s) :
     volume (w '' s) = ∫⁻ z in s, ‖deriv w z‖ₑ ^ 2 :=
-  TauCeti.volume_image_eq_lintegral_enorm_deriv_sq hU hw hs hsU hinj
+  TauCeti.volume_image_eq_lintegral_enorm_deriv_sq
+    (fun z hz ↦ hw.differentiableAt (hU.mem_nhds (hsU hz))) hs hinj
 
 end ModularFormsKB.Milne

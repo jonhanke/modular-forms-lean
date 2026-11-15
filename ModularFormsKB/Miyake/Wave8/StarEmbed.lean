@@ -136,14 +136,8 @@ theorem slash_natDiagGL_swap_eq_raise (k : ℤ) (χ : DirichletCharacter ℂ N) 
     ⇑(f : CuspForm ((Gamma1 N).map (mapGL ℝ)) k) ∣[k] natDiagGL 2 ![p, 1] =
       ((p : ℂ) ^ (k - 1)) • ⇑((Wave6.raise k χ p f : cuspSpace (N := p * N) k _) :
         CuspForm ((Gamma1 (p * N)).map (mapGL ℝ)) k) := by
-  have hp : 0 < p := Nat.pos_of_ne_zero (NeZero.ne p)
-  have hδ : natDiagGL 2 ![p, 1] = scaleGLRat p := by
-    apply Units.ext
-    rw [natDiagGL_coe 2 ![p, 1] (fun i ↦ by fin_cases i <;> simp [hp]), scaleGLRat, diagGL_coe]
-    ext i j
-    fin_cases i <;> fin_cases j <;> simp
   have hd : (p : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne p)
-  rw [hδ, ModularForm.rat_slash, map_ratCast_scaleGLRat]
+  rw [ModularForm.rat_slash, TauCeti.map_natDiagGL_d_one_eq_scaleGL]
   change _ = _ • ⇑(TauCeti.CuspForm.levelRaise p (TauCeti.Gamma1_map_le_conjAct_scaleGL N p)
     (f : CuspForm ((Gamma1 N).map (mapGL ℝ)) k))
   rw [TauCeti.CuspForm.coe_levelRaise, smul_smul, ← zpow_add₀ hd]

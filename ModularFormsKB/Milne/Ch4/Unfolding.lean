@@ -133,7 +133,7 @@ private lemma integral_stripH (h : ℝ) (F : ℍ → ℂ) :
   simp_rw [stripH_eq]
   exact (Complex.volume_preserving_equiv_real_prod.symm).integral_comp' (g := (stripTarget h).indicator (stripG F))
 
-private lemma integrable_stripH_iff (h : ℝ) (F : ℍ → ℂ) :
+lemma integrable_stripH_iff (h : ℝ) (F : ℍ → ℂ) :
     Integrable (stripH h F) ↔ IntegrableOn F (stripSet h) := by
   rw [integrableOn_stripSet_iff, ← integrable_indicator_iff (measurableSet_stripTarget h)]
   have : stripH h F = (stripTarget h).indicator (stripG F) ∘ Complex.measurableEquivRealProd.symm := by
@@ -178,7 +178,7 @@ private lemma continuousOn_ofComplex' : ContinuousOn ofComplex {w : ℂ | 0 < w.
   rw [this]
   exact continuous_subtype_val
 
-private lemma continuousOn_stripH (h : ℝ) {F : ℍ → ℂ} (hF : Continuous F) :
+lemma continuousOn_stripH (h : ℝ) {F : ℍ → ℂ} (hF : Continuous F) :
     ContinuousOn (fun p : ℝ × ℝ => ((p.2 ^ 2)⁻¹ : ℝ) • F (ofComplex ((p.1 : ℂ) + (p.2 : ℂ) * Complex.I)))
       (Set.Ico 0 h ×ˢ Set.Ioi (0 : ℝ)) := by
   have hc : Continuous fun p : ℝ × ℝ => ((p.1 : ℂ) + (p.2 : ℂ) * Complex.I) := by fun_prop
@@ -749,7 +749,7 @@ private lemma isFundamentalDomain_Eset [Γ.FiniteIndex] :
     (r := fun x : StabInftyCosets Γ => psi Γ (x.out : Γ))
     (fun x => hD.nullMeasurableSet_smul _) (transversal_bijective Γ)
 
-private lemma setIntegral_smul_set' {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+lemma setIntegral_smul_set' {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
     (g : PSL(2, ℤ)) (s : Set ℍ) (G : ℍ → E) :
     ∫ z in g • s, G z = ∫ z in s, G (g • z) := by
   rw [← Set.image_smul]
@@ -809,6 +809,55 @@ theorem unfolding_core [Γ.FiniteIndex] (F : ℍ → ℂ)
   rw [h1, show Eset Γ = ⋃ x : StabInftyCosets Γ, psi Γ (x.out : Γ) • Dset Γ from rfl,
     ← hsum.tsum_eq,← integral_tsum_of_summable_integral_norm hint_x hsumm]
   exact tsum_congr fun x => (hcv x F).symm
+
+/-- **The unfolding, termwise** (job mf-040-shimura): under the hypotheses of `unfolding_core`, each term
+`z ↦ F(γ_x z)` is integrable on the coset domain, the integrals of their norms are summable, and the sum of the
+integrals is the strip integral. -/
+theorem unfolding_terms [Γ.FiniteIndex] (F : ℍ → ℂ)
+    (hinv : ∀ β ∈ stabInfty Γ, ∀ z : ℍ, F (((β : Γ) : SL(2, ℤ)) • z) = F z)
+    (hint : IntegrableOn F (stripSet (widthAtInfty Γ))) :
+    (∀ x : StabInftyCosets Γ, IntegrableOn (fun z ↦ F ((((x.out : Γ)) : SL(2, ℤ)) • z))
+        (⋃ q : SL(2, ℤ) ⧸ Γ.withCenter, (q.out)⁻¹ • (fdo : Set ℍ))) ∧
+      Summable (fun x : StabInftyCosets Γ ↦
+        ∫ z in (⋃ q : SL(2, ℤ) ⧸ Γ.withCenter, (q.out)⁻¹ • (fdo : Set ℍ)),
+          ‖F ((((x.out : Γ)) : SL(2, ℤ)) • z)‖) ∧
+      ∑' x : StabInftyCosets Γ, ∫ z in (⋃ q : SL(2, ℤ) ⧸ Γ.withCenter, (q.out)⁻¹ • (fdo : Set ℍ)),
+          F ((((x.out : Γ)) : SL(2, ℤ)) • z) =
+        ∫ z in stripSet (widthAtInfty Γ), F z := by
+  have hD := isFundamentalDomain_Dset Γ
+  have hS := isFundamentalDomain_stripSet Γ
+  have hE := isFundamentalDomain_Eset Γ
+  have hinvH : ∀ (g : Hgrp Γ) (z : ℍ), F (g • z) = F z := by
+    rintro ⟨g, β, hβ, rfl⟩ z
+    exact hinv β hβ z
+  have hintE : IntegrableOn F (Eset Γ) volume := (hS.integrableOn_iff hE hinvH).1 hint
+  have hrinj : Function.Injective (fun x : StabInftyCosets Γ => psi Γ (x.out : Γ)) := by
+    intro x y hxy
+    apply (transversal_bijective Γ).1
+    exact congrArg (fun g : Kgrp Γ => (QuotientGroup.mk g⁻¹ : Kgrp Γ ⧸ Hgrp Γ)) hxy
+  have hdisj : Pairwise (Function.onFun (AEDisjoint volume)
+      (fun x : StabInftyCosets Γ => psi Γ (x.out : Γ) • Dset Γ)) :=
+    fun x y hxy => hD.aedisjoint (fun h => hxy (hrinj h))
+  have hnull : ∀ x : StabInftyCosets Γ, NullMeasurableSet (psi Γ (x.out : Γ) • Dset Γ) volume :=
+    fun x => hD.nullMeasurableSet_smul _
+  have hsumN := hasSum_integral_iUnion_ae hnull hdisj hintE.norm
+  have hcv : ∀ x : StabInftyCosets Γ, ∀ {E : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
+      (G : ℍ → E), ∫ z in psi Γ (x.out : Γ) • Dset Γ, G z =
+        ∫ z in Dset Γ, G ((((x.out : Γ)) : SL(2, ℤ)) • z) := by
+    intro x E _ _ G
+    exact setIntegral_smul_set' ((psi Γ (x.out : Γ) : Kgrp Γ) : PSL(2, ℤ)) (Dset Γ) G
+  have hint_x : ∀ x : StabInftyCosets Γ,
+      Integrable (fun z => F ((((x.out : Γ)) : SL(2, ℤ)) • z)) (volume.restrict (Dset Γ)) := by
+    intro x
+    have h2 : IntegrableOn F (psi Γ (x.out : Γ) • Dset Γ) volume :=
+      hintE.mono_set (Set.subset_iUnion (fun x : StabInftyCosets Γ => psi Γ (x.out : Γ) • Dset Γ) x)
+    exact integrableOn_smul_set' ((psi Γ (x.out : Γ) : Kgrp Γ) : PSL(2, ℤ)) (Dset Γ) F h2
+  have hsumm : Summable fun x : StabInftyCosets Γ =>
+      ∫ z in Dset Γ, ‖F ((((x.out : Γ)) : SL(2, ℤ)) • z)‖ := by
+    refine hsumN.summable.congr fun x => ?_
+    exact hcv x (fun z => ‖F z‖)
+  refine ⟨hint_x, hsumm, ?_⟩
+  exact (integral_tsum_of_summable_integral_norm hint_x hsumm).trans (unfolding_core Γ F hinv hint)
 
 /-- Step (b): the Petersson product as an integral over the coset domain. -/
 private lemma milnePetersson_eq_integral [Γ.FiniteIndex] {k : ℤ}

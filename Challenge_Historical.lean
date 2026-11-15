@@ -9,7 +9,7 @@ import ModularFormsKB.Historical.Weber
 import ModularFormsKB.Historical.Kronecker
 
 /-!
-# Headline statements of modular-forms-lean 0.3.1: historical theorems of Jacobi, Ramanujan, Weber and Kronecker
+# Headline statements of modular-forms-lean 0.4.0: historical theorems of Jacobi, Ramanujan, Weber and Kronecker
 
 A topic, not a book: theorems read in the original papers (Jacobi, *Fundamenta nova*, 1829; Ramanujan, *On certain
 arithmetical functions*, 1916, paper 18 of his *Collected Papers*, 1927; Weber, *Elliptische Functionen und
@@ -23,9 +23,8 @@ here and uses only the standard axioms `propext`, `Classical.choice` and `Quot.s
 Each statement is the library's statement, copied, except that a named statement in the conclusion is unfolded. The
 statements were not yet reviewed by a human (see the README). These libraries import Mathlib modules only.
 
-One theorem is **conditional**: `weber_theta_eta` assumes the Jacobi triple product identity as the named input
-`ModularFormsKB.Historical.Weber.JacobiTripleProduct` (a hypothesis of the theorem, a `Prop` structure, not an
-axiom; neither Mathlib nor Tau Ceti proves the identity). The others are unconditional.
+All theorems are unconditional. (In 0.3.1 `weber_theta_eta` assumed the Jacobi triple product identity as a named
+input; the identity is now proved, `jacobi_triple_product`, and the hypothesis is gone.)
 
 ## Definitions used
 
@@ -79,6 +78,14 @@ theorem jacobi_theta_fourier (x : ℂ) {τ : ℂ} (hτ : 0 < τ.im) :
       (-1 : ℂ) ^ n * cexp (π * I * ((n : ℂ) + 1 / 2) ^ 2 * τ) * Complex.sin ((2 * n + 1) * x) := by
   sorry
 
+/-- **Jacobi's triple product identity** (Jacobi, *Fundamenta nova*, § 64), in Jacobi's variables: for `|q| < 1`
+and `z ≠ 0`, `∑_{n ∈ ℤ} q^{n²} zⁿ = ∏_{n ≥ 1} (1 - q^{2n})(1 + q^{2n-1} z)(1 + q^{2n-1}/z)` (the product indexed
+from `0`). Neither Mathlib nor Tau Ceti proves it. -/
+theorem jacobi_triple_product {q z : ℂ} (hq : ‖q‖ < 1) (hz : z ≠ 0) :
+    HasSum (fun n : ℤ ↦ q ^ (n.natAbs ^ 2) * z ^ n)
+      (∏' n : ℕ, (1 - q ^ (2 * n + 2)) * (1 + q ^ (2 * n + 1) * z) * (1 + q ^ (2 * n + 1) / z)) := by
+  sorry
+
 end Jacobi
 
 section Ramanujan
@@ -100,10 +107,11 @@ section Weber
 open Complex ModularFormsKB.Historical.Weber ModularFormsKB.WeberHeegnerStark
 open scoped Real
 
-/-- **Weber's theta functions as products of `η` and his functions `f`** (Weber 1891, § 21, (9)),
-**conditional on the Jacobi triple product identity** (the named input `JacobiTripleProduct`): for `Im ω > 0`,
-`ϑ₀₀(ω) = η(ω) f(ω)²`, `ϑ₀₁(ω) = η(ω) f₁(ω)²` and `ϑ₁₀(ω) = η(ω) f₂(ω)²`. -/
-theorem weber_theta_eta (hJ : JacobiTripleProduct) {ω : ℂ} (hω : 0 < ω.im) :
+/-- **Weber's theta functions as products of `η` and his functions `f`** (Weber 1891, § 21, (9)): for `Im ω > 0`,
+`ϑ₀₀(ω) = η(ω) f(ω)²`, `ϑ₀₁(ω) = η(ω) f₁(ω)²` and `ϑ₁₀(ω) = η(ω) f₂(ω)²`. Unconditional since 0.4.0: in 0.3.1 it
+assumed the Jacobi triple product identity as a named input, which the library now proves
+(`jacobi_triple_product` above). -/
+theorem weber_theta_eta {ω : ℂ} (hω : 0 < ω.im) :
     weberTheta00 ω = ModularForm.eta ω * weberF ω ^ 2 ∧
       weberTheta01 ω = ModularForm.eta ω * weberF₁ ω ^ 2 ∧
       weberTheta10 ω = ModularForm.eta ω * weberF₂ ω ^ 2 := by

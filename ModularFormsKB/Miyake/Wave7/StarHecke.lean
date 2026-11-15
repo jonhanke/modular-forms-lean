@@ -279,7 +279,6 @@ theorem IsCosetReps.det_pos_natDiagGL {l m : ℕ} (hl : 0 < l) (hm : 0 < m) {ι 
     rw [← RingHom.map_det, σ.det_coe, map_one]
   have hd : 0 < ((natDiagGL 2 ![m, l] : GL (Fin 2) ℚ) : Matrix (Fin 2) (Fin 2) ℚ).det := by
     apply natDiagGL_det_pos
-    intro j; fin_cases j <;> simp [hl, hm]
   rw [h, Matrix.GeneralLinearGroup.coe_mul, Matrix.GeneralLinearGroup.coe_mul, Matrix.det_mul,
     Matrix.det_mul, hdet x hx, hdet y hy]
   simpa using hd
