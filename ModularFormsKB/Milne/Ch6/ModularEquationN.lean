@@ -40,7 +40,7 @@ theorem eq_of_eval_j_eq {p q : ℂ[X]} (h : ∀ z : ℍ, p.eval (j z) = q.eval (
 /-- Two polynomials in $\mathbb C[X][Y]$ with the same specializations at all values of $j$ are equal. -/
 theorem eq_of_map_eval_j_eq {P Q : ℂ[X][X]}
     (h : ∀ z : ℍ, P.map (evalRingHom (j z)) = Q.map (evalRingHom (j z))) : P = Q := by
-  ext1 k
+  refine Polynomial.ext fun k ↦ ?_
   refine eq_of_eval_j_eq fun z ↦ ?_
   have := congrArg (fun R ↦ R.coeff k) (h z)
   simpa only [coeff_map, coe_evalRingHom] using this

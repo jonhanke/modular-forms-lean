@@ -1,4 +1,5 @@
 import ModularFormsKB.Historical.WeberHeegnerStark.Defs
+import ModularFormsKB.Historical.Jacobi.TripleProduct
 import Mathlib.NumberTheory.ModularForms.JacobiTheta.TwoVariable
 import ModularFormsKB.Citation
 /-!
@@ -16,9 +17,9 @@ where `η(ω) = q^{1/12} ∏ (1 - q^{2ν})`, `f(ω) = q^{-1/24} ∏ (1 + q^{2ν-
 Weber obtains (9) from the product formulas § 21 (1)–(5): `ϑ₀₀(v) = Q ∏ (1 + q^{2ν-1} e^{2πiv})(1 + q^{2ν-1} e^{-2πiv})`
 with `Q` independent of `v` (two functions with the same zeros and multipliers, § 17), and `Q = q^{-1/12} η(ω)`
 (§ 21 (6)–(8), from Jacobi's `ϑ₁₁' = π ϑ₀₀ ϑ₀₁ ϑ₁₀`). Together these are **Jacobi's triple product identity**
-(Jacobi, *Fundamenta nova* 1829, § 64), which is neither in Mathlib nor in Tau Ceti. It is the named input
-`JacobiTripleProduct` here; Weber's (9) is proved from it (`weberTheta00_eq`, `weberTheta01_eq`,
-`weberTheta10_eq`). Proving the triple product is the loose end.
+(Jacobi, *Fundamenta nova* 1829, § 64), which is neither in Mathlib nor in Tau Ceti. It is stated here as
+`JacobiTripleProduct` and proved (`jacobiTripleProduct`, from `Historical.Jacobi.jacobiTheta₂_eq_tprod`, job
+mf-hist-2); Weber's (9) is therefore unconditional (`weberTheta00_eq`, `weberTheta01_eq`, `weberTheta10_eq`).
 
 `f` and `f₂` are the definitions `weberF`, `weberF₂` of the Weber–Heegner–Stark pilot (via Mathlib's `η`);
 `f₁ = η(ω/2)/η(ω)` is new here.
@@ -54,6 +55,12 @@ structure JacobiTripleProduct : Prop where
   eq : ∀ z τ : ℂ, 0 < τ.im → jacobiTheta₂ z τ =
     ∏' n : ℕ, (1 - cexp (2 * π * I * (n + 1) * τ)) * (1 + cexp (π * I * (2 * n + 1) * τ + 2 * π * I * z)) *
       (1 + cexp (π * I * (2 * n + 1) * τ - 2 * π * I * z))
+
+/-- **The triple product holds** (Jacobi, *Fundamenta nova* § 64; proved in
+`Historical.Jacobi.TripleProduct`). -/
+@[kb "jacobi1829" "§ 64, p. 182"]
+theorem jacobiTripleProduct : JacobiTripleProduct :=
+  ⟨fun z τ hτ ↦ Historical.Jacobi.jacobiTheta₂_eq_tprod z τ hτ⟩
 
 section Products
 
@@ -211,8 +218,9 @@ end Products
 
 /-- **Weber § 21 (9), first formula**: `ϑ₀₀ = η f²`, from the triple product. -/
 @[kb "weber1891" "§ 21, (9), p. 63"]
-theorem weberTheta00_eq (hJ : JacobiTripleProduct) {ω : ℂ} (hω : 0 < ω.im) :
+theorem weberTheta00_eq {ω : ℂ} (hω : 0 < ω.im) :
     weberTheta00 ω = ModularForm.eta ω * weberF ω ^ 2 := by
+  have hJ := jacobiTripleProduct
   obtain ⟨q, hq⟩ : ∃ q, q = cexp (π * I * ω) := ⟨_, rfl⟩
   obtain ⟨s, hs⟩ : ∃ s, s = cexp (π * I * ω / 24) := ⟨_, rfl⟩
   have hqn : ‖q‖ < 1 := hq ▸ norm_cexp_pi_mul_lt_one hω
@@ -230,8 +238,9 @@ theorem weberTheta00_eq (hJ : JacobiTripleProduct) {ω : ℂ} (hω : 0 < ω.im) 
 
 /-- **Weber § 21 (9), second formula**: `ϑ₀₁ = η f₁²`, from the triple product. -/
 @[kb "weber1891" "§ 21, (9), p. 63"]
-theorem weberTheta01_eq (hJ : JacobiTripleProduct) {ω : ℂ} (hω : 0 < ω.im) :
+theorem weberTheta01_eq {ω : ℂ} (hω : 0 < ω.im) :
     weberTheta01 ω = ModularForm.eta ω * weberF₁ ω ^ 2 := by
+  have hJ := jacobiTripleProduct
   obtain ⟨q, hq⟩ : ∃ q, q = cexp (π * I * ω) := ⟨_, rfl⟩
   obtain ⟨s, hs⟩ : ∃ s, s = cexp (π * I * ω / 24) := ⟨_, rfl⟩
   have hqn : ‖q‖ < 1 := hq ▸ norm_cexp_pi_mul_lt_one hω
@@ -251,8 +260,9 @@ theorem weberTheta01_eq (hJ : JacobiTripleProduct) {ω : ℂ} (hω : 0 < ω.im) 
 
 /-- **Weber § 21 (9), third formula**: `ϑ₁₀ = η f₂²`, from the triple product. -/
 @[kb "weber1891" "§ 21, (9), p. 63"]
-theorem weberTheta10_eq (hJ : JacobiTripleProduct) {ω : ℂ} (hω : 0 < ω.im) :
+theorem weberTheta10_eq {ω : ℂ} (hω : 0 < ω.im) :
     weberTheta10 ω = ModularForm.eta ω * weberF₂ ω ^ 2 := by
+  have hJ := jacobiTripleProduct
   obtain ⟨q, hq⟩ : ∃ q, q = cexp (π * I * ω) := ⟨_, rfl⟩
   obtain ⟨s, hs⟩ : ∃ s, s = cexp (π * I * ω / 24) := ⟨_, rfl⟩
   have hqn : ‖q‖ < 1 := hq ▸ norm_cexp_pi_mul_lt_one hω

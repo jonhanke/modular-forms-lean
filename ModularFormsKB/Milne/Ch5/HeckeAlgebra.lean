@@ -1,6 +1,6 @@
 import TauCeti.NumberTheory.HeckeRing.GL2.Recurrence
 import TauCeti.NumberTheory.HeckeRing.GL2.MultiplicationTable
-import TauCeti.NumberTheory.HeckeRing.GLn.DiagonalCosets
+import TauCeti.NumberTheory.HeckeRing.GLn.Diagonal.Cosets
 import ModularFormsKB.Miyake.HeckeAlgebras
 
 /-!
@@ -210,7 +210,7 @@ theorem heckeBasis_apply (a : CanonicalDiagonal 2) : heckeBasis a = heckeTDiag (
   have hv : a = ![a 0, a 1] := by
     funext i
     fin_cases i <;> rfl
-  rw [heckeTDiag_eq_diagElem h0 h1 hd, ← hv, diagElem_def]
+  rw [heckeTDiag_eq_diagElem h1 hd, ← hv, diagElem_def]
   unfold heckeBasis HeckeCosetModule.single
   exact (Module.Basis.reindex_apply (Finsupp.basisSingleOne (R := ℤ)) diagCosetEquiv.symm _).trans
     (by simp)

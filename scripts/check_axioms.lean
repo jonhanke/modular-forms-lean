@@ -3,6 +3,7 @@ Prints the axioms of every headline theorem (run in CI: `lake env lean scripts/c
 Each must depend only on `propext`, `Classical.choice` and `Quot.sound`.
 -/
 import Solution_Milne
+import Solution_MilneArithmetic
 import Solution_Miyake
 import Solution_Shimura
 import Solution_Iwaniec
@@ -12,9 +13,7 @@ import Solution_Waldspurger
 import Solution_CongruentNumbers
 import Solution_Historical
 
-#print axioms ModularFormsKB.Headlines.weil_riemannHypothesis_curves
 #print axioms ModularFormsKB.Headlines.kronecker_modularEquation
-#print axioms ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic
 #print axioms ModularFormsKB.Headlines.doublyPeriodic_sums
 #print axioms ModularFormsKB.Headlines.prescribedDivisor
 #print axioms ModularFormsKB.Headlines.ellipticFunctionField
@@ -22,6 +21,13 @@ import Solution_Historical
 #print axioms ModularFormsKB.Headlines.cyclicModuli
 #print axioms ModularFormsKB.Headlines.modularCurveX_Gamma_genus_eq_zero
 #print axioms ModularFormsKB.Headlines.littlePicard
+#print axioms ModularFormsKB.Headlines.meromorphicFunctions_separate_points
+#print axioms ModularFormsKB.Headlines.riemannRoch
+#print axioms ModularFormsKB.Headlines.dimensionFormula
+#print axioms ModularFormsKB.Headlines.genusFormula
+#print axioms ModularFormsKB.Headlines.holomorphicLineBundle_upperHalfPlane_trivial
+#print axioms ModularFormsKB.Headlines.weil_riemannHypothesis_curves
+#print axioms ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic
 #print axioms ModularFormsKB.Headlines.classGroupAction_ellCM
 #print axioms ModularFormsKB.Headlines.betti_tate_comparison
 #print axioms ModularFormsKB.Headlines.conductor_exponent_eq_two_iff
@@ -31,6 +37,13 @@ import Solution_Historical
 #print axioms ModularFormsKB.Headlines.weil_converse_cusp
 #print axioms ModularFormsKB.Headlines.heckeRing_gamma0_polynomial
 #print axioms ModularFormsKB.Headlines.hecke_adjoint_heckeTStar
+#print axioms ModularFormsKB.Headlines.thetaSpherical_even
+#print axioms ModularFormsKB.Headlines.thetaSpherical_odd
+#print axioms ModularFormsKB.Headlines.thetaTwist_transformation
+#print axioms ModularFormsKB.Headlines.heckeEisenstein_continuation
+#print axioms ModularFormsKB.Headlines.heckeLimit_weightTwo
+#print axioms ModularFormsKB.Headlines.heckeLimit_weightOne
+#print axioms ModularFormsKB.Headlines.hecke_lemma
 #print axioms ModularFormsKB.Headlines.LFunction_halfRange
 #print axioms ModularFormsKB.Headlines.kloosterman_mul_of_coprime
 #print axioms ModularFormsKB.Headlines.kloostermanMoment_two
@@ -61,6 +74,9 @@ import Solution_Historical
 #print axioms ModularFormsKB.Headlines.waldspurger_carries_unique
 #print axioms ModularFormsKB.Headlines.waldspurger_finrank_plusFibre_eq_one
 #print axioms ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_iff
+#print axioms ModularFormsKB.Headlines.eisensteinLattice_functionalEquation
+#print axioms ModularFormsKB.Headlines.rankin_unfolding
+#print axioms ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_point
 #print axioms ModularFormsKB.Headlines.congruent_five_six_seven_fortyOne
 #print axioms ModularFormsKB.Headlines.congruent_tunnell_counts
@@ -72,6 +88,7 @@ import Solution_Historical
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_even
 #print axioms ModularFormsKB.Headlines.jacobi_modular_equation_ode
 #print axioms ModularFormsKB.Headlines.jacobi_theta_fourier
+#print axioms ModularFormsKB.Headlines.jacobi_triple_product
 #print axioms ModularFormsKB.Headlines.ramanujan_differential_equations
 #print axioms ModularFormsKB.Headlines.weber_theta_eta
 #print axioms ModularFormsKB.Headlines.kronecker_ser_transformation

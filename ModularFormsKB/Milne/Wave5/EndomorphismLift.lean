@@ -158,7 +158,7 @@ noncomputable def cubicPoly : ℂ[X] := X ^ 3 - C (L.g₂ / 4) * X - C (L.g₃ /
 
 theorem cubicPoly_ne_zero : cubicPoly L ≠ 0 := by
   intro h
-  have := congrArg (Polynomial.coeff · 3) h
+  have := congrArg (fun q ↦ q.coeff 3) h
   simp [cubicPoly] at this
 
 theorem sq_eq_cubicPoly {x y : ℂ} (h : L.weierstrassCurve.toAffine.Equation x y) :

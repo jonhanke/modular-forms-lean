@@ -101,8 +101,8 @@ $1 - tX + cX^2 = (1 - aX)(1 - a'X)$ in $\mathbb C[X]$. -/
 theorem eulerFactor_tfae_of_poly {t c : ℝ} (hc : 0 < c) {a a' : ℂ}
     (h : (1 - C (t : ℂ) * X + C (c : ℂ) * X ^ 2 : ℂ[X]) = (1 - C a * X) * (1 - C a' * X)) :
     [|t| ≤ 2 * √c, ‖a‖ = √c ∧ ‖a'‖ = √c, a' = (starRingEnd ℂ) a].TFAE := by
-  have h1 := congrArg (Polynomial.coeff · 1) h
-  have h2 := congrArg (Polynomial.coeff · 2) h
+  have h1 := congrArg (fun q ↦ q.coeff 1) h
+  have h2 := congrArg (fun q ↦ q.coeff 2) h
   simp only [coeff_sub, coeff_add, coeff_one, coeff_C_mul, coeff_X, coeff_X_pow] at h1 h2
   have e : (1 - C a * X) * (1 - C a' * X) = (1 : ℂ[X]) - C (a + a') * X + C (a * a') * X ^ 2 := by
     simp only [C_add, C_mul]; ring

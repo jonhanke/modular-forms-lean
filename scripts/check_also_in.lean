@@ -42,7 +42,6 @@ import TauCeti.NumberTheory.ModularForms.SturmBound
 #check @CuspForm.differentiable_frickeCompletedL
 #check @CuspForm.frickeCompletedL_functional_equation
 #check @CuspForm.frickeCompletedL_functional_equation_gamma1
-#check @CuspForm.frickeCompletedL_sub_eq_I_zpow_mul
 #check @CuspForm.frickeCompletedL_sub_eq_of_normalizedFrickeOperatorCusp_eq_smul
 #check @DirichletCharacter.generalizedBernoulli_eq_zero_of_apply_neg_one_eq_neg
 #check @HeckeRing.GL2.Eigenform.L_eulerProduct_tprod

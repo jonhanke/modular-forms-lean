@@ -7,9 +7,15 @@ import ModularFormsKB.Miyake.Sec4_3.Hecke
 import ModularFormsKB.Miyake.Sec4_3.WeilTheorem
 import ModularFormsKB.Miyake.Wave6.HeckeIndependence
 import ModularFormsKB.Miyake.Wave8.GeneralAdjoint
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Forms
+import ModularFormsKB.Miyake.Sec4_9.Spherical.Odd
+import ModularFormsKB.Miyake.Sec4_9.Spherical.UnaryLaw
+import ModularFormsKB.Miyake.HeckeTrick.FourierTerms
+import ModularFormsKB.Miyake.HeckeTrick.HeckeLimit
+import ModularFormsKB.Miyake.Sec4_6.HeckeLemma
 
 /-!
-# Headline statements of modular-forms-lean 0.3.1: Miyake, *Modular Forms*, proved
+# Headline statements of modular-forms-lean 0.4.0: Miyake, *Modular Forms*, proved
 
 The statements of `Challenge_Miyake.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Miyake.json`) checks that each statement here is exactly the one in
@@ -36,6 +42,19 @@ should check these too:
   (Miyake's `T*(m, l)`, the double coset `Γ₀(N) diag(m, l) Γ₀(N)` acting with the weight `conj χ(d)`, and
   `T*(n) = Σ T*(m, l)` over `l m = n`, `l ∣ m`, (4.5.16)), `ModularFormsKB.Miyake.Wave7.pet` (Tau Ceti's Petersson
   product on `Γ₁(N)`) (Theorem 4.5.4)
+* (0.4.0) `ModularFormsKB.Miyake.Sec4_9.thetaSph` (the theta series `∑_{v ∈ L} P(v) e^{πi‖v‖²τ}` of a lattice with
+  the spherical weight `P(x) = (⟪u, x⟫ + i⟪w, x⟫)^ν`), `ModularFormsKB.Miyake.Sec4_9.IsSphericalDatum` (`ν ≤ 1` or
+  `u + iw` isotropic, so that `P` is harmonic), `ModularFormsKB.Miyake.Sec4_9.oddThetaChar` (the character of the
+  odd-rank theta series), with Tau Ceti's `ZLattice.IsEven`, `ZLattice.level` and `ZLattice.IsEven.thetaCharacter`
+  and the half-integral weight spaces `ModularFormsKB.HalfIntegral.halfIntModularForms`,
+  `ModularFormsKB.HalfIntegral.halfIntCuspForms` (Shimura's `M_{k+1/2}(4N, χ)`, `S_{k+1/2}(4N, χ)`) (Corollary 4.9.4);
+  `ModularFormsKB.HalfIntegral.thetaTwist` (`∑_{n ∈ ℤ} ψ(n) n^ν e^{2πitn²z}`), `ModularFormsKB.HalfIntegral.charParity`,
+  `ModularFormsKB.HalfIntegral.thetaMult` (the theta multiplier `j(γ, z)`) (Corollary 4.9.7);
+  `ModularFormsKB.Miyake.HeckeTrick.eisensteinCharS` (`E_k(z, s; χ, ψ)` as a series), its continuation
+  `ModularFormsKB.Miyake.HeckeTrick.eisensteinCharSCont` (the Fourier expansion of Theorem 7.2.9),
+  `ModularFormsKB.Miyake.Wave2B.IsHeckeLimit` (Hecke's limit `lim_{s → 0} E_k(z, s; χ, ψ)`),
+  `ModularFormsKB.Miyake.Wave2B.eisensteinCharA`, `.eisensteinCharCoeff`, `.eisensteinCharConst` (the constants and
+  coefficients of (7.2.12)) (Theorems 7.2.9, 7.2.12, 7.2.13)
 -/
 
 namespace ModularFormsKB.Headlines
@@ -129,5 +148,120 @@ theorem hecke_adjoint_heckeTStar {N : ℕ} [NeZero N] (k : ℤ) (χ : DirichletC
   exact ⟨ModularFormsKB.Miyake.Wave8.pet_heckeT_left_all k χ hn f g, ModularFormsKB.Miyake.Wave8.pet_heckeTStarN_left_all k χ hn f g⟩
 
 end Adjoint
+
+section SphericalTheta
+
+open Module ModularFormsKB.Miyake.Sec4_9 Matrix.SpecialLinearGroup
+open scoped MatrixGroups
+
+/-- **Theta series with a spherical function, even rank** (Miyake, Theorem 4.9.3 and Corollary 4.9.4, in lattice
+form). Let `L` be an even lattice of rank `2k` in a Euclidean space, of level `N`, and `P(x) = (⟪u, x⟫ + i⟪w, x⟫)^ν`
+a spherical function of degree `ν` (`ν ≤ 1`, or `u + iw` isotropic). Then `θ_L(τ; P) = ∑_{v ∈ L} P(v) e^{πi‖v‖²τ}`
+is a modular form of weight `k + ν` on `Γ₁(N)` lying in the character space of the theta character `χ_L`
+(so in `M_{k+ν}(Γ₀(N), χ_L)`), and a cusp form when `ν ≥ 1`. Tau Ceti main has the case `P = 1`. -/
+theorem thetaSpherical_even {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
+    {L : Submodule ℤ E} [DiscreteTopology L] [IsZLattice ℝ L] {k : ℕ} (hL : ZLattice.IsEven L)
+    (hk : finrank ℝ E = 2 * k) {ν : ℕ} {u w : E} (hsph : IsSphericalDatum ν u w) :
+    (∃ f : ModularForm ((CongruenceSubgroup.Gamma1 (ZLattice.level L)).map (mapGL ℝ)) (k + ν : ℕ),
+        f ∈ TauCeti.modFormCharSpace (k + ν : ℕ) (MulChar.equivToUnitHom (hL.thetaCharacter ⟨k, by omega⟩)) ∧
+          ⇑f = thetaSph L ν u w 0) ∧
+      (1 ≤ ν → ∃ f : CuspForm ((CongruenceSubgroup.Gamma1 (ZLattice.level L)).map (mapGL ℝ)) (k + ν : ℕ),
+        ⇑f = thetaSph L ν u w 0) := by
+  exact ⟨⟨ModularFormsKB.Miyake.Sec4_9.thetaSphForm hL hk hsph, ModularFormsKB.Miyake.Sec4_9.thetaSphForm_mem_modFormCharSpace hL hk hsph, rfl⟩, fun hν ↦ ⟨ModularFormsKB.Miyake.Sec4_9.thetaSphCuspForm hL hk hν hsph, rfl⟩⟩
+
+/-- **Theta series with a spherical function, odd rank** (Miyake, Theorem 4.9.3 and Corollary 4.9.4 for odd `r`, in
+lattice form). Let `L` be an even lattice of rank `2k + 1`, of level `N`, and `P` a spherical function of degree
+`ν` as above. Then `θ_L(τ; P)` lies in Shimura's space `M_{k+ν+1/2}(4N, χ)` of half-integral weight (theta
+multiplier), `χ = oddThetaChar`, and in the cusp forms `S_{k+ν+1/2}(4N, χ)` when `ν ≥ 1`. -/
+theorem thetaSpherical_odd {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
+    {L : Submodule ℤ E} [DiscreteTopology L] [IsZLattice ℝ L] {k : ℕ} (hL : ZLattice.IsEven L)
+    (hk : finrank ℝ E = 2 * k + 1) {ν : ℕ} {u w : E} (hsph : IsSphericalDatum ν u w) :
+    (fun τ : UpperHalfPlane ↦ thetaSph L ν u w 0 τ) ∈
+        ModularFormsKB.HalfIntegral.halfIntModularForms (k + ν) (ZLattice.level L) (oddThetaChar hL hk ν) ∧
+      (1 ≤ ν → (fun τ : UpperHalfPlane ↦ thetaSph L ν u w 0 τ) ∈
+        ModularFormsKB.HalfIntegral.halfIntCuspForms (k + ν) (ZLattice.level L) (oddThetaChar hL hk ν)) := by
+  exact ⟨ModularFormsKB.Miyake.Sec4_9.thetaSph_mem_halfIntModularForms hL hk hsph, fun hν ↦ ModularFormsKB.Miyake.Sec4_9.thetaSph_mem_halfIntCuspForms hL hk hν hsph⟩
+
+end SphericalTheta
+
+section TwistedTheta
+
+open ModularFormsKB.HalfIntegral
+open scoped MatrixGroups
+
+/-- **Shimura's transformation law of the twisted theta series, for every character** (Miyake, Corollary 4.9.7 (1);
+Shimura 1973, Proposition 2.2). For a Dirichlet character `ψ` modulo `r ≥ 1` (primitive or not) of parity `ν`
+(`ψ(-1) = (-1)^ν`), `t ≥ 1`, and `γ = [a b; c d] ∈ Γ₀(4tr²)`, the series `θ_{ψ,t}(z) = ∑_{n ∈ ℤ} ψ(n) n^ν e^{2πitn²z}`
+satisfies `θ_{ψ,t}(γz) = ψ̄(d) (t/|d|) (cz + d)^ν j(γ, z) θ_{ψ,t}(z)`, with `(t/|d|)` the Jacobi symbol and `j` the
+theta multiplier. -/
+theorem thetaTwist_transformation {r : ℕ} (ψ : DirichletCharacter ℂ r) (hr : 1 ≤ r) {t : ℕ} (ht : 1 ≤ t)
+    {γ : SL(2, ℤ)} (hγ : γ ∈ CongruenceSubgroup.Gamma0 (4 * t * r ^ 2)) (τ : UpperHalfPlane) :
+    thetaTwist ψ t ((γ • τ : UpperHalfPlane) : ℂ) = ψ⁻¹ (γ 1 1 : ZMod r) * (jacobiSym t (γ 1 1).natAbs : ℂ) *
+      ((γ 1 0 : ℂ) * τ + γ 1 1) ^ charParity ψ * thetaMult γ τ * thetaTwist ψ t τ := by
+  exact ModularFormsKB.HalfIntegral.thetaTwist_law ψ hr ht hγ τ
+
+end TwistedTheta
+
+section HeckeTrick
+
+open Set Complex ModularFormsKB.Miyake.HeckeTrick ModularFormsKB.Miyake.Wave2B
+open scoped Real UpperHalfPlane
+
+/-- **Hecke's continuation of the Eisenstein series in `s`** (Miyake, Theorem 7.2.9). For Dirichlet characters `χ`
+modulo `L` and `ψ` modulo `M` and an integer `k` with `χ(-1)ψ(-1) = (-1)^k`, and every `z ∈ ℍ`, the function
+`s ↦ E_k(z, s; χ, ψ)`, defined by its series for `k + 2 Re s > 2`, continues to a meromorphic function on the whole
+`s`-plane, given by its Fourier expansion `eisensteinCharSCont`. -/
+theorem heckeEisenstein_continuation {L M : ℕ} (k : ℤ) [NeZero L] [NeZero M] (χ : DirichletCharacter ℂ L)
+    (ψ : DirichletCharacter ℂ M) (hpar : χ (-1) * ψ (-1) = (-1) ^ k) (z : ℍ) :
+    MeromorphicOn (eisensteinCharSCont k χ ψ z) univ ∧
+      ∀ s : ℂ, 2 < (k : ℝ) + 2 * s.re → eisensteinCharS k s χ ψ z = eisensteinCharSCont k χ ψ z s := by
+  exact ModularFormsKB.Miyake.HeckeTrick.miyake_7_2_9 k χ ψ hpar z
+
+/-- **Hecke's limit in weight two** (Miyake, Theorem 7.2.12). If `χ(-1)ψ(-1) = 1`, then for every `z ∈ ℍ` the limit
+`E₂(z; χ, ψ) = lim_{s → 0} E₂(z, s; χ, ψ)` exists and equals `C + A ∑_{n ≥ 1} a_n e^{2πinz/M}` plus, when `χ` and `ψ`
+are both trivial, the non-holomorphic term `-π ∏_{p ∣ M}(1 - p⁻¹) ∏_{p ∣ L}(1 - p⁻¹) / Im z`. -/
+theorem heckeLimit_weightTwo (L M : ℕ) [NeZero L] [NeZero M] (χ : DirichletCharacter ℂ L)
+    (ψ : DirichletCharacter ℂ M) (hχψ : χ (-1) * ψ (-1) = 1) (z : ℍ) :
+    ∃ w : ℂ, IsHeckeLimit 2 χ ψ z w ∧
+      HasSum (fun n : ℕ+ ↦ eisensteinCharA 2 ψ * eisensteinCharCoeff 2 χ ψ n *
+          cexp (2 * π * Complex.I * (n : ℕ) * z / M))
+        (w - eisensteinCharConst 2 (L := L) ψ -
+          (if χ = 1 ∧ ψ = 1 then -π * (∏ p ∈ M.primeFactors, (1 - (p : ℂ)⁻¹)) *
+            ∏ p ∈ L.primeFactors, (1 - (p : ℂ)⁻¹) else 0) / (z.im : ℂ)) := by
+  exact by convert ModularFormsKB.Miyake.HeckeTrick.miyakeTheorem7_2_12 L M χ ψ hχψ z
+
+/-- **Hecke's limit in weight one** (Miyake, Theorem 7.2.13). If `χ(-1)ψ(-1) = -1`, then for every `z ∈ ℍ` the limit
+`E₁(z; χ, ψ) = lim_{s → 0} E₁(z, s; χ, ψ)` exists and equals `C + D + A ∑_{n ≥ 1} a_n e^{2πinz/M}`, with
+`C = 2 L(1, ψ)` if `L = 1` (else `0`) and `D = -2πi ∏_{p ∣ M}(1 - p⁻¹) L(0, χ)` if `ψ` is trivial (else `0`). -/
+theorem heckeLimit_weightOne (L M : ℕ) [NeZero L] [NeZero M] (χ : DirichletCharacter ℂ L)
+    (ψ : DirichletCharacter ℂ M) (hχψ : χ (-1) * ψ (-1) = -1) (z : ℍ) :
+    ∃ w : ℂ, IsHeckeLimit 1 χ ψ z w ∧
+      HasSum (fun n : ℕ+ ↦ eisensteinCharA 1 ψ * eisensteinCharCoeff 1 χ ψ n *
+          cexp (2 * π * Complex.I * (n : ℕ) * z / M))
+        (w - (if L = 1 then 2 * DirichletCharacter.LFunction ψ 1 else 0) -
+          (if ψ = 1 then -2 * π * Complex.I * (∏ p ∈ M.primeFactors, (1 - (p : ℂ)⁻¹)) *
+            DirichletCharacter.LFunction χ 0 else 0)) := by
+  exact by convert ModularFormsKB.Miyake.HeckeTrick.miyakeTheorem7_2_13 L M χ ψ hχψ z
+
+end HeckeTrick
+
+section HeckeLemma
+
+open UpperHalfPlane ModularForm CongruenceSubgroup Matrix.SpecialLinearGroup
+open scoped MatrixGroups ModularForm
+
+/-- **Hecke's lemma** (Miyake, Lemma 4.6.3). Let `k > 0`, `f ∈ 𝒢_k(N, χ)` (Tau Ceti's `modFormCharSpace`), and
+`α = [a b; c d]` a primitive integer matrix with `N ∣ c`, `gcd(a, N) = 1` and `det α > 1` prime to `N`. If
+`f |_k α ∈ 𝒢_k(N, χ)`, then `f = 0`. (Mathlib's slash operator differs from Miyake's by a nonzero constant.) Tau
+Ceti's newform theory goes around this lemma. -/
+theorem hecke_lemma (N : ℕ) [NeZero N] (k : ℤ) (χ : (ZMod N)ˣ →* ℂˣ) (hk : 0 < k)
+    (f : ModularForm ((Gamma1 N).map (mapGL ℝ)) k) (hf : f ∈ TauCeti.modFormCharSpace k χ)
+    (α : Matrix (Fin 2) (Fin 2) ℤ) (hN : (N : ℤ) ∣ α 1 0) (hco : IsCoprime (α 0 0) N) (hdet1 : 1 < α.det)
+    (hdetco : IsCoprime α.det N) (hprim : ∀ m : ℤ, (∀ i j, m ∣ α i j) → IsUnit m) (g : GL (Fin 2) ℝ)
+    (hg : (g : Matrix (Fin 2) (Fin 2) ℝ) = α.map (Int.cast))
+    (hF : ∃ F ∈ TauCeti.modFormCharSpace k χ, ⇑F = ⇑f ∣[k] g) : f = 0 := by
+  exact ModularFormsKB.Miyake.Sec4_6.heckeLemma N k χ hk f hf α hN hco hdet1 hdetco hprim g hg hF
+
+end HeckeLemma
 
 end ModularFormsKB.Headlines

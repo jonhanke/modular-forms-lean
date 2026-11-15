@@ -2,7 +2,7 @@
 
 A topic from several papers, not a book: each row is a central result of one of the papers (the section heading) that the library states in Lean, with its declarations and its status, computed from the Lean kernel: *proved* means proved with only the standard axioms and no unproved input; *conditional* names the unproved inputs (named statements) still assumed; *stated, not proved* that the library states the result as a named structure (a `Prop`) without proof. The theorem numbers in the papers are not yet checked against the papers, and only the results stated in Lean are shown. The statements in the third column are short descriptions, not quotations; read the papers for the exact wording.
 
-Rows: 8. proved: 3; proved in part: 3; proved, conditional: 1; stated, not proved: 1.
+Rows: 8. proved: 4; proved in part: 3; stated, not proved: 1.
 
 ## Jacobi 1829
 
@@ -22,7 +22,7 @@ Rows: 8. proved: 3; proved in part: 3; proved, conditional: 1; stated, not prove
 
 | Item | Page | Statement | Lean declaration | Status |
 |---|---|---|---|---|
-| § 21, (9) | 63 | Weber's theta functions as products: $\vartheta_{00} = \eta f^2$, $\vartheta_{01} = \eta f_1^2$, $\vartheta_{10} = \eta f_2^2$. | `Historical.Weber.weberTheta00_eq`, `Historical.Weber.weberTheta01_eq`, `Historical.Weber.weberTheta10_eq` | proved, conditional on `Historical.Weber.JacobiTripleProduct` |
+| § 21, (9) | 63 | Weber's theta functions as products: $\vartheta_{00} = \eta f^2$, $\vartheta_{01} = \eta f_1^2$, $\vartheta_{10} = \eta f_2^2$. | `Historical.Weber.weberTheta00_eq`, `Historical.Weber.weberTheta01_eq`, `Historical.Weber.weberTheta10_eq` | proved |
 
 ## Weber 1908
 

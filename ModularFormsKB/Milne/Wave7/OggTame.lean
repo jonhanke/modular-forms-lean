@@ -422,7 +422,7 @@ theorem algorithmicOggExponent_eq_two (W : WeierstrassCurve K) [W.IsElliptic] (h
     have b : ¬ m + 2 ≤ W.localMinimalDiscriminantValuation R := fun hh ↦ h2' (ENat.natCast_le_natCast.2 hh)
     omega
   have := natCast_algorithmicOggExponent (R := R) W
-  rw [ReductionSymbol.algorithmicOggExponent_eq, hm] at this
+  rw [ReductionSymbol.algorithmicOggExponent_def, hm] at this
   push_cast at this
   omega
 

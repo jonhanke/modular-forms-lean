@@ -8,21 +8,21 @@ import ModularFormsKB.Milne.Ch3.AbelJacobi
 import ModularFormsKB.Milne.Ch6.ModularEquationProof
 import ModularFormsKB.Milne.Ch8.EllipticModuliProof
 import ModularFormsKB.Milne.Ch8.YOneSolution
-import ModularFormsKB.Milne.Ch11.WeilUnconditional
-import ModularFormsKB.Milne.Ch12.JIntegral
 import ModularFormsKB.Milne.Wave4A.GenusZeroDifferentials
-import ModularFormsKB.Milne.Wave6.Betti
-import ModularFormsKB.Milne.Wave7.OggTame
-import ModularFormsKB.Milne.Wave9.ClassGroupActionAll
 import ModularFormsKB.Milne.Wave10.LittlePicard
+import ModularFormsKB.Milne.Wave13.AllFiniteIndex
+import ModularFormsKB.Milne.Wave14.LineBundles
+import ModularFormsKB.Milne.Wave15.Corollaries
 
 /-!
-# Headline statements of modular-forms-lean 0.3.1: Milne, *Modular Functions and Modular Forms*
+# Headline statements of modular-forms-lean 0.4.0: Milne, *Modular Functions and Modular Forms*, sections 0 to 10
 
-The main results of the library for Milne's *Modular Functions and Modular Forms* (version 1.31), one theorem each, with every proof a deliberate `sorry`: to check what
+The main results of the library for sections 0 to 10 of Milne's *Modular Functions and Modular Forms* (version 1.31), one theorem each, with every proof a deliberate `sorry`: to check what
 is claimed, read this file. `Solution_Milne.lean` proves the same statements from the library, and `lake comparator`
 (configured by `comparator/Milne.json`) checks that each proved statement is exactly the one here and uses only the
-standard axioms `propext`, `Classical.choice` and `Quot.sound`.
+standard axioms `propext`, `Classical.choice` and `Quot.sound`. Sections 11 and 12 (Weil's theorem, elliptic curves,
+complex multiplication) are in `Challenge_MilneArithmetic.lean` (until 0.3.1 one file held both; it was split in
+0.4.0 so that each comparator check stays under 30 minutes).
 
 Each statement is the library's statement, copied, except that a named statement in the conclusion (a `Prop`
 structure of the library) is unfolded into its field. The statements were not yet reviewed by a human (see the
@@ -33,8 +33,6 @@ README).
 Besides Mathlib and Tau Ceti, the statements use these definitions of the library; a reader checking a statement
 should check these too:
 
-* `ModularFormsKB.Milne.curvePointCount` (Weil's theorem; with Tau Ceti's places `TauCeti.Place`, their degrees and
-  the genus `TauCeti.genus` of a function field)
 * `ModularFormsKB.Milne.X0`, `ModularFormsKB.Milne.IsJOnX0`, `ModularFormsKB.Milne.IsJNOnX0`,
   `ModularFormsKB.Milne.IsModularPolynomial`, `ModularFormsKB.Milne.scaleH` (the modular equation)
 * `ModularFormsKB.Milne.IsDoublyPeriodic`, `ModularFormsKB.Milne.openParallelogram` (elliptic functions)
@@ -45,42 +43,19 @@ should check these too:
   `PSL₂(ℝ)`), `ModularFormsKB.Milne.RiemannSurface.holomorphicDifferentials` (families of chart coefficients,
   holomorphic on each chart and satisfying the transformation rule) and `ModularFormsKB.Milne.RiemannSurface.genus`
   (its dimension, `Module.finrank`) (the genus of `X(N)`)
-* (0.3.1) `ModularFormsKB.Milne.EllCMOver` (the `j`-invariants over `k` of the elliptic curves with complex
-  multiplication by the order `O`), `ModularFormsKB.Milne.IsNormalizedCM` (the action of `O` on the invariant
-  differential is through the embedding `ι`), `ModularFormsKB.Milne.IsAIsogeny` (an isogeny with kernel
-  `E[𝔞]`) (Proposition 12.21); `ModularFormsKB.Milne.Wave6.TorusGroup`, `ModularFormsKB.Milne.Wave6.torusMul`,
-  `ModularFormsKB.Milne.Wave6.latticeMul`, `ModularFormsKB.Milne.tateRep` (Proposition 11.5);
-  `ModularFormsKB.Milne.Wave4B.geometricConductor` (the norm of Tau Ceti's conductor ideal, D116)
+* (0.4.0) `ModularFormsKB.Milne.RiemannSurface.MeromorphicDifferential` (with `.IsZero`, `.divisor`),
+  `ModularFormsKB.Milne.RiemannSurface.rrSpace` (the space `L(D)`), `ModularFormsKB.Milne.RiemannSurface.ell`
+  (`ℓ(D) = dim L(D)`), with Tau Ceti's `TauCeti.RiemannSurface.MeromorphicFunction` and Weil divisors
+  (Riemann–Roch, the existence theorem); `ModularFormsKB.Milne.modularCurve`, `ModularFormsKB.Milne.genus`,
+  `ModularFormsKB.Milne.cuspCount`, `ModularFormsKB.Milne.ellipticTerm` (the dimension formula);
+  `ModularFormsKB.Milne.genusIndex`, `ModularFormsKB.Milne.nuTwo`, `ModularFormsKB.Milne.nuThree`,
+  `ModularFormsKB.Milne.nuInfty` (the genus formula)
 -/
 
 namespace ModularFormsKB.Headlines
 
 
 universe u v
-
-section Weil
-
-open TauCeti PowerSeries Polynomial ModularFormsKB.Milne
-
-/-- **Weil's Riemann hypothesis for curves over finite fields** (Milne, Theorem 11.4). Let `F` be a function field
-of one variable over a finite field `k` with `q` elements, `k` algebraically closed in `F` (the curve is
-geometrically irreducible), of genus `g`, and let `N_n` be the number of points over the extension of degree `n`
-(`∑_{d ∣ n} d B_d`, `B_d` the number of places of degree `d`). There are algebraic integers `α_1, …, α_{2g}` with
-`N_n = 1 + q^n - ∑ α_i^n` for all `n ≥ 1`, the `q/α_i` are a permutation of the `α_i`, and `|α_i| = √q`.
-
-Also proved in the Stacks Project formalization (Axiom), in étale-cohomological form (tag 03V8, Bombieri–Stepanov);
-ours is the function-field form of Milne 11.4 and includes the functional equation. (The Stacks theorems, e.g.
-`Stacks.BombieriStepanov.norm_curveEigenvalue_eq_sqrt`, are stated for smooth proper curves as schemes; they were
-matched from the Stacks declaration index, not from its source.) -/
-theorem weil_riemannHypothesis_curves (k : Type u) (F : Type v) [Field k] [Finite k] [Field F] [Algebra k F]
-    (hF : IsFunctionField k F) (hk : IsIntegrallyClosedIn k F) :
-    ∃ α : Fin (2 * genus k F) → ℂ, (∀ i, IsIntegral ℤ (α i)) ∧
-      (∀ n : ℕ, 1 ≤ n → (curvePointCount k F n : ℂ) = 1 + (Nat.card k : ℂ) ^ n - ∑ i, α i ^ n) ∧
-      (∃ σ : Equiv.Perm (Fin (2 * genus k F)), ∀ i, (Nat.card k : ℂ) / α i = α (σ i)) ∧
-      (∀ i, ‖α i‖ = Real.sqrt (Nat.card k)) := by
-  sorry
-
-end Weil
 
 section ModularEquation
 
@@ -104,18 +79,6 @@ theorem kronecker_modularEquation (N : ℕ) (hN : 0 < N) :
   sorry
 
 end ModularEquation
-
-section CM
-
-open UpperHalfPlane
-
-/-- **`j` is an algebraic integer at the points of complex multiplication** (Milne, Corollary 12.16): if `z ∈ ℍ` is
-quadratic over `ℚ` (so `ℚ(z)` is an imaginary quadratic field), then `j(z)` is an algebraic integer. -/
-theorem j_isIntegral_of_imaginaryQuadratic (z : ℍ) (hz : IsIntegral ℚ (z : ℂ))
-    (hz2 : (minpoly ℚ (z : ℂ)).natDegree = 2) : IsIntegral ℤ (TauCeti.ModularForm.j z) := by
-  sorry
-
-end CM
 
 section EllipticFunctions
 
@@ -217,71 +180,75 @@ theorem littlePicard {f : ℂ → ℂ} (hf : Differentiable ℂ f) (hnc : ∃ z 
 
 end LittlePicard
 
-section ClassGroupAction
+section RiemannSurfaces
 
-open NumberField TauCeti TauCeti.Isogeny TauCeti.GlobalNumberFields WeierstrassCurve.Affine ModularFormsKB.Milne
-open scoped WeierstrassCurve Classical
+open TauCeti.RiemannSurface TauCeti.AlgebraicGeometry ModularFormsKB.Milne.RiemannSurface
+open scoped Manifold
 
-/-- **The class group acts on the `j`-invariants with complex multiplication** (Milne, Proposition 12.21, in the
-corrected form with a normalized `i`; Milne omits the proof). Let `k` be an algebraically closed field of
-characteristic zero, `K` an imaginary quadratic field with an embedding `ι : K → k`, and `O` an order of `K`. There is
-a map `Pic(O) × Ell_k(O) → Ell_k(O)` such that (1) for elliptic curves `E`, `E'` over `k` with complex
-multiplication by `O`, `i : O ≅ End(E)` normalized with respect to `ι`, an invertible ideal `𝔞` of `O` and an
-`𝔞`-isogeny `E → E'`, the class of `𝔞` sends `j(E)` to `j(E')`; and (2) for each `x₀ ∈ Ell_k(O)` the map
-`c ↦ c · x₀` is a bijection `Pic(O) → Ell_k(O)`. (The statement does not ask for the action laws; (1) and the
-existence of `𝔞`-isogenies determine the map.) -/
-theorem classGroupAction_ellCM (k : Type) [Field k] [IsAlgClosed k] [CharZero k] (K : Type) [Field K]
-    [NumberField K] (O : NumberFieldOrder K) (hK : Module.finrank ℚ K = 2) (hTC : IsTotallyComplex K)
-    (ι : K →+* k) :
-    ∃ act : Pic O → EllCMOver k O → EllCMOver k O,
-      (∀ (W W' : WeierstrassCurve.Affine k) [W.IsElliptic] [W'.IsElliptic] (i : O.toSubalgebra ≃+* Hom W W),
-          IsNormalizedCM ι i →
-          ∀ (I : (FractionalIdeal (nonZeroDivisors O.toSubalgebra) K)ˣ) (J : Ideal O.toSubalgebra),
-          ((J : FractionalIdeal (nonZeroDivisors O.toSubalgebra) K) = I) →
-          (hW : W.j ∈ EllCMOver k O) → (hW' : W'.j ∈ EllCMOver k O) → (φ : Hom W W') → IsAIsogeny i J φ →
-            act (ClassGroup.mk (K := K) I) ⟨W.j, hW⟩ = ⟨W'.j, hW'⟩) ∧
-      ∀ x₀, Function.Bijective fun c ↦ act c x₀ := by
+/-- **The existence theorem on a compact Riemann surface** (Milne, Theorem 1.17; proof after Forster, *Lectures on
+Riemann Surfaces*, §14). On every compact connected Riemann surface `X` the meromorphic functions separate points,
+and the field `M(X)` of meromorphic functions is a function field of one variable over `ℂ` (finitely generated, of
+transcendence degree one). Tau Ceti main has the field `M(X)` but no existence theorem for nonconstant functions. -/
+theorem meromorphicFunctions_separate_points (X : Type u) [TopologicalSpace X] [ChartedSpace ℂ X]
+    [IsManifold 𝓘(ℂ) 1 X] [T2Space X] [CompactSpace X] [ConnectedSpace X] :
+    (∀ x y : X, x ≠ y → ∃ g : MeromorphicFunction X, g x ≠ g y) ∧
+      TauCeti.IsFunctionField ℂ (MeromorphicFunction X) := by
   sorry
 
-end ClassGroupAction
-
-section BettiTate
-
-open TauCeti TauCeti.Isogeny TensorProduct ModularFormsKB.Milne ModularFormsKB.Milne.Wave6
-open scoped WeierstrassCurve ComplexConjugate
-
-/-- **The Betti, ℓ-adic and tangent representations of an elliptic curve over `ℂ`** (Milne, Proposition 11.5). For
-every elliptic curve `E` over `ℂ` (Weierstrass model `W`) and every prime `ℓ` there are a lattice `Λ`, a group
-isomorphism `u : ℂ/Λ ≅ E(ℂ)` and a ring homomorphism `ρ : End(E) → ℂ` with `ρ(f)Λ ⊆ Λ` and `f(u(z)) = u(ρ(f) z)`,
-such that, with `ρ_B(f)` multiplication by `ρ(f)` on `H₁(E, ℤ) = Λ` and `ρ_ℓ(f)` the action on the Tate module
-`T_ℓE`: (a) `ρ_B ⊗ ℤ_ℓ ≅ ρ_ℓ` and (b) `ρ_B ⊗ ℂ ≅ ρ ⊕ ρ̄`, by linear isomorphisms `ℤ_ℓ ⊗ Λ ≅ T_ℓE` and
-`ℂ ⊗ Λ ≅ ℂ × ℂ` intertwining the actions of every endomorphism. -/
-theorem betti_tate_comparison (W : WeierstrassCurve ℂ) [W.IsElliptic] (ℓ : ℕ) [Fact ℓ.Prime] :
-    ∃ (L : PeriodPair) (u : TorusGroup L ≃+ W.toAffine.Point) (ρ : Hom W.toAffine W.toAffine →+* ℂ)
-      (hρ : ∀ f, ∀ x ∈ L.lattice, ρ f * x ∈ L.lattice),
-      (∀ f z, f.pointMap (u z) = u (torusMul L (ρ f) (hρ f) z)) ∧
-      (∃ Φ : ℤ_[ℓ] ⊗[ℤ] L.lattice ≃ₗ[ℤ_[ℓ]] TateModule ℓ W.toAffine.Point,
-        ∀ f, Φ.toLinearMap ∘ₗ (latticeMul L (ρ f) (hρ f)).baseChange ℤ_[ℓ] = tateRep W ℓ f ∘ₗ Φ.toLinearMap) ∧
-      (∃ Ψ : ℂ ⊗[ℤ] L.lattice ≃ₗ[ℂ] ℂ × ℂ, ∀ f (x : ℂ ⊗[ℤ] L.lattice),
-        Ψ ((latticeMul L (ρ f) (hρ f)).baseChange ℂ x) = (ρ f * (Ψ x).1, conj (ρ f) * (Ψ x).2)) := by
+/-- **The Riemann–Roch theorem** (Milne, Theorem 1.20), on every compact connected Riemann surface `X`: the spaces
+`L(D)` are finite-dimensional, and there is an integer `g ≥ 0` such that for every nonzero meromorphic differential
+form `ω` (canonical divisor `K = div(ω)`) and every divisor `D`, `ℓ(D) = deg D + 1 - g + ℓ(K - D)`. Milne refers to
+Gunning for the proof; the library derives it from Tau Ceti's Riemann–Roch for function fields through the
+existence theorem (points of `X` = places of `M(X)`). -/
+theorem riemannRoch (X : Type u) [TopologicalSpace X] [ChartedSpace ℂ X] [IsManifold 𝓘(ℂ) 1 X] [T2Space X]
+    [CompactSpace X] [ConnectedSpace X] :
+    (∀ D : WeilDivisor X, FiniteDimensional ℂ (rrSpace X D)) ∧
+      ∃ g : ℕ, ∀ ω : MeromorphicDifferential X, ¬ ω.IsZero → ∀ D : WeilDivisor X,
+        (ell X D : ℤ) = WeilDivisor.degree D + 1 - g + ell X (ω.divisor - D) := by
   sorry
 
-end BettiTate
+end RiemannSurfaces
 
-section Conductor
+section FiniteIndex
 
-open WeierstrassCurve TauCeti IsLocalRing IsDiscreteValuationRing IsDedekindDomain ModularFormsKB.Milne
+open CongruenceSubgroup ModularFormsKB.Milne
+open scoped MatrixGroups
 
-/-- **The conductor exponent at a cusp is 2 for `p ≠ 2, 3`** (Milne, the geometric conductor, p. 111: "`f_p ≥ 2` if
-`E(p)` has a cusp, with equality unless `p = 2, 3`"). For an elliptic curve `E` over `ℚ` and a prime `p ≠ 2, 3`, the
-exponent of `p` in the conductor `N` of `E` (the norm of Tau Ceti's conductor ideal, defined by Tate's algorithm) is
-exactly `2` (`p² ∣ N`, `p³ ∤ N`) if and only if a minimal model of `E` at `p` has additive reduction. -/
-theorem conductor_exponent_eq_two_iff (E : WeierstrassCurve ℚ) [E.IsElliptic] {p : ℕ} (hp : p.Prime)
-    (hp2 : p ≠ 2) (hp3 : p ≠ 3) {v : HeightOneSpectrum ℤ} (hv : v.asIdeal = Ideal.span {(p : ℤ)}) :
-    (p ^ 2 ∣ Wave4B.geometricConductor E ∧ ¬ p ^ 3 ∣ Wave4B.geometricConductor E) ↔
-      (E.minimal (Localization.AtPrime v.asIdeal)).HasAdditiveReduction (Localization.AtPrime v.asIdeal) := by
+/-- **The dimension formula** (Milne, Theorem 4.9), for every subgroup `Γ` of finite index in `SL₂(ℤ)`, congruence
+or not: for `k ≥ 1`, `dim M_{2k}(Γ) = (2k - 1)(g - 1) + ε_∞ k + ∑_P ⌊k(1 - 1/e_P)⌋`, with `g` the genus of `X(Γ)`,
+`ε_∞` the number of cusps and `P` running over the elliptic points of `Γ\ℍ` (stabilizer order `e_P`). -/
+theorem dimensionFormula (Γ : Subgroup SL(2, ℤ)) [Γ.FiniteIndex] :
+    ∀ k : ℕ, 1 ≤ k →
+      (Module.finrank ℂ (ModularForm (Γ : Subgroup (GL (Fin 2) ℝ)) (2 * k : ℕ)) : ℤ) =
+        (2 * k - 1) * ((ModularFormsKB.Milne.genus (modularCurve Γ) : ℤ) - 1) + cuspCount Γ * k +
+          ellipticTerm Γ k := by
   sorry
 
-end Conductor
+/-- **The genus formula** (Milne, Theorem 2.22), for every subgroup `Γ` of finite index in `SL₂(ℤ)`: the genus of
+`X(Γ)` (the dimension of its space of holomorphic differentials) is `1 + m/12 - ν₂/4 - ν₃/3 - ν_∞/2`, with `m` the
+index of `±Γ` in `SL₂(ℤ)`, `ν₂`, `ν₃` the numbers of elliptic points of order 2 and 3 and `ν_∞` the number of cusps. -/
+theorem genusFormula (Γ : Subgroup SL(2, ℤ)) [Γ.FiniteIndex] :
+    (ModularFormsKB.Milne.RiemannSurface.genus (ModularCurveX Γ) : ℚ) =
+      1 + (genusIndex Γ : ℚ) / 12 - (nuTwo Γ : ℚ) / 4 - (nuThree Γ : ℚ) / 3 - (nuInfty Γ : ℚ) / 2 := by
+  sorry
+
+end FiniteIndex
+
+section LineBundles
+
+open UpperHalfPlane
+open scoped Manifold ContDiff
+
+/-- **Every holomorphic line bundle on `ℍ` is trivial** (Milne, Remark 4.26, cited there without proof): a
+holomorphic line bundle on the upper half plane has a nowhere-vanishing holomorphic section. The library proves the
+multiplicative Cousin problem on `ℍ` (smooth logarithms and the `∂̄`-equation on `ℍ`, after Forster, §30). -/
+theorem holomorphicLineBundle_upperHalfPlane_trivial (E : ℍ → Type) [∀ x, NormedAddCommGroup (E x)]
+    [∀ x, NormedSpace ℂ (E x)] [TopologicalSpace (Bundle.TotalSpace ℂ E)] [FiberBundle ℂ E] [VectorBundle ℂ ℂ E]
+    [ContMDiffVectorBundle ω ℂ E 𝓘(ℂ)] :
+    ∃ s : (x : ℍ) → E x, ContMDiff 𝓘(ℂ) (𝓘(ℂ).prod 𝓘(ℂ)) ω (fun x ↦ (⟨x, s x⟩ : Bundle.TotalSpace ℂ E)) ∧
+      ∀ x, s x ≠ 0 := by
+  sorry
+
+end LineBundles
 
 end ModularFormsKB.Headlines

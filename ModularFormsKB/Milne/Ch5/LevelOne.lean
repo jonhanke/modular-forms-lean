@@ -39,7 +39,7 @@ theorem heckeT_rec (w : ℤ) {p : ℕ} (hp : p.Prime) (r : ℕ) (f : ModularForm
     heckeTCompositeGamma0_prime_pow 1 hp, heckeTCompositeGamma0_prime_pow 1 hp,
     heckeTCompositeGamma0_prime_pow 1 hp]
   rw [heckeTCompositeGamma0_prime 1 hp, LinearEquiv.symm_apply_apply,
-    heckeRingHomCharSpace_heckeTGeneratorRecGamma0_succ_succ_apply w 1 hp.pos (Nat.coprime_one_right p)]
+    heckeRingHomCharSpace_heckeTGeneratorRecGamma0_succ_succ_apply w 1 (Nat.coprime_one_right p)]
   simp [map_sub]
 
 /-- Prime case of the coefficient formula, any weight, any `m`. -/

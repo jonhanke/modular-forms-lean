@@ -1,6 +1,6 @@
 import ModularFormsKB.Milne.Ch7.Curves
 import Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic
-import Mathlib.AlgebraicGeometry.OrderOfVanishing
+import Mathlib.AlgebraicGeometry.OrderOfVanishing.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.RingTheory.RamificationInertia.Ramification
 import Mathlib.FieldTheory.PurelyInseparable.Basic

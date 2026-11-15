@@ -5,7 +5,7 @@ import Mathlib.Analysis.Complex.UpperHalfPlane.Metric
 import Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions
 import TauCeti.Analysis.Complex.Conformal.UnitDisc.Automorphism.Group
 import TauCeti.Analysis.Complex.UpperHalfPlane.Rotation
-import TauCeti.Analysis.SpecialFunctions.Trigonometric.MatrixFinTwo
+import TauCeti.Analysis.SpecialFunctions.Trigonometric.MatrixFinTwo.Basic
 import ModularFormsKB.Milne.Ch1.GroupActions
 import ModularFormsKB.Citation
 /-!

@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge_MilneArithmetic",
+  "solution_module": "Solution_MilneArithmetic",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.weil_riemannHypothesis_curves",
+    "ModularFormsKB.Headlines.j_isIntegral_of_imaginaryQuadratic",
+    "ModularFormsKB.Headlines.classGroupAction_ellCM",
+    "ModularFormsKB.Headlines.betti_tate_comparison",
+    "ModularFormsKB.Headlines.conductor_exponent_eq_two_iff"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

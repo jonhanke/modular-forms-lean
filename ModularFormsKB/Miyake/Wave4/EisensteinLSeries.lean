@@ -75,7 +75,7 @@ theorem exists_modSpace_coeff_eq {M₁ M₂ : ℕ} [NeZero M₁] [NeZero M₂] {
       TauCeti.EisensteinSeries.qExpansion_charEisensteinSeriesMF_coeff_of_isPrimitive χ₁ χ₂ hk'
         huv (by simpa using hpar) h₂ hn⟩
     have hg : gaussSum χ₂⁻¹ ZMod.stdAddChar ≠ 0 :=
-      DirichletCharacter.gaussSum_inv_ne_zero_of_isPrimitive (by exact_mod_cast NeZero.ne M₂) h₂
+      DirichletCharacter.gaussSum_inv_ne_zero_of_isPrimitive h₂
         (ZMod.isPrimitive_stdAddChar M₂)
     have hM : (M₂ : ℂ) ≠ 0 := by exact_mod_cast NeZero.ne M₂
     refine mul_ne_zero (div_ne_zero (mul_ne_zero two_ne_zero (pow_ne_zero _ ?_))

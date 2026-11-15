@@ -7,7 +7,14 @@
     "ModularFormsKB.Headlines.weil_converse",
     "ModularFormsKB.Headlines.weil_converse_cusp",
     "ModularFormsKB.Headlines.heckeRing_gamma0_polynomial",
-    "ModularFormsKB.Headlines.hecke_adjoint_heckeTStar"
+    "ModularFormsKB.Headlines.hecke_adjoint_heckeTStar",
+    "ModularFormsKB.Headlines.thetaSpherical_even",
+    "ModularFormsKB.Headlines.thetaSpherical_odd",
+    "ModularFormsKB.Headlines.thetaTwist_transformation",
+    "ModularFormsKB.Headlines.heckeEisenstein_continuation",
+    "ModularFormsKB.Headlines.heckeLimit_weightTwo",
+    "ModularFormsKB.Headlines.heckeLimit_weightOne",
+    "ModularFormsKB.Headlines.hecke_lemma"
   ],
   "definition_names": [],
   "permitted_axioms": [

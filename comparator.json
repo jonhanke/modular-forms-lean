@@ -3,11 +3,19 @@
   "books": [
     {
       "book": "Milne",
-      "title": "Milne, Modular Functions and Modular Forms",
+      "title": "Milne, Modular Functions and Modular Forms, sections 0 to 10",
       "config": "comparator/Milne.json",
       "challenge_module": "Challenge_Milne",
       "solution_module": "Solution_Milne",
       "theorems": 13
+    },
+    {
+      "book": "MilneArithmetic",
+      "title": "Milne, Modular Functions and Modular Forms, sections 11 and 12 (Weil's theorem, elliptic curves, complex multiplication)",
+      "config": "comparator/MilneArithmetic.json",
+      "challenge_module": "Challenge_MilneArithmetic",
+      "solution_module": "Solution_MilneArithmetic",
+      "theorems": 5
     },
     {
       "book": "Miyake",
@@ -15,7 +23,7 @@
       "config": "comparator/Miyake.json",
       "challenge_module": "Challenge_Miyake",
       "solution_module": "Solution_Miyake",
-      "theorems": 6
+      "theorems": 13
     },
     {
       "book": "Shimura",
@@ -55,7 +63,7 @@
       "config": "comparator/Waldspurger.json",
       "challenge_module": "Challenge_Waldspurger",
       "solution_module": "Solution_Waldspurger",
-      "theorems": 24
+      "theorems": 27
     },
     {
       "book": "CongruentNumbers",
@@ -67,11 +75,11 @@
     },
     {
       "book": "Historical",
-      "title": "Historical theorems of Jacobi, Ramanujan, Weber and Kronecker (unconditional, and one conditional on the Jacobi triple product)",
+      "title": "Historical theorems of Jacobi, Ramanujan, Weber and Kronecker (unconditional; since 0.4.0 with the Jacobi triple product)",
       "config": "comparator/Historical.json",
       "challenge_module": "Challenge_Historical",
       "solution_module": "Solution_Historical",
-      "theorems": 5
+      "theorems": 6
     }
   ],
   "permitted_axioms": [

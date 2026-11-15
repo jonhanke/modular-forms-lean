@@ -63,7 +63,7 @@ theorem lowerSlash_mul_left (k : ℤ) {p l N : ℕ} [NeZero p] (hp : p.Prime) (h
     lowerSlash k p (l * N) f = lowerSlash k p N f := by
   unfold lowerSlash
   rw [show p * (l * N) = l * (p * N) by ring]
-  exact TauCeti.descendSlash_mul_left_of_coprime k hp (dvd_mul_right p N) hpl hf
+  exact TauCeti.descendSlash_mul_left_of_coprime k hp hpl hf
 
 /-- A form in `𝒢_k(pN, χ)`, `χ` modulo `N`, transforms trivially under `Γ₀(pN) ∩ Γ₁(N)`. -/
 theorem slash_eq_self_of_mem_modSpace (k : ℤ) {p N : ℕ} [NeZero p] [NeZero N]
