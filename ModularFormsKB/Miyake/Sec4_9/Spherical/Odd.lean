@@ -6,7 +6,7 @@ import TauCeti.NumberTheory.ModularForms.ThetaSeries.Functoriality
 # Spherical theta series of odd rank: the half-integral weight law (Miyake §4.9, odd rank)
 
 Miyake, *Modular Forms* (Springer 1989), Theorem 4.9.3 and Corollary 4.9.4 for odd rank `r`.
-Miyake's Corollary 4.9.4 is stated for even `r`; the plan's headline 1 asks for every rank, with the half-integral weight space `HalfIntegral.halfIntModularForms`
+Miyake's Corollary 4.9.4 is stated for even `r`; here we treat every rank, with the half-integral weight space `HalfIntegral.halfIntModularForms`
 (Shimura's `M_{k+1/2}(4N, χ)`, theta multiplier `thetaMult`) as the target in odd rank.
 
 **Route (doubling).** Adjoin the even lattice `√2 ℤ ⊆ ℝ`, whose theta series is our `HalfIntegral.theta`

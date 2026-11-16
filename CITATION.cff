@@ -9,7 +9,7 @@ authors:
   - family-names: Hanke
     given-names: Jonathan
 license: Apache-2.0
-version: "0.4.0"
+version: "0.5.0"
 doi: 10.5281/zenodo.24069385
 repository-code: "https://github.com/jonhanke/modular-forms-lean"
 keywords:
@@ -33,3 +33,11 @@ keywords:
   - Eisenstein series
   - half-integral weight
   - Jacobi triple product
+  - Rankin-Selberg method
+  - symmetric square L-function
+  - modular elliptic curves
+  - congruent numbers
+  - Kohnen plus space
+  - Kohnen-Zagier formula
+  - theta series of quadratic forms
+  - Ramanujan congruences

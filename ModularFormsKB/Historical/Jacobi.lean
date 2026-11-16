@@ -3,6 +3,11 @@ import ModularFormsKB.Historical.Jacobi.ModularEquationODE
 import ModularFormsKB.Historical.Jacobi.ModularEquationK
 import ModularFormsKB.Historical.Jacobi.TripleProduct
 import ModularFormsKB.Historical.Jacobi.ThetaIdentification
+import ModularFormsKB.Historical.Jacobi.Section66
+import ModularFormsKB.Historical.Jacobi.Section66Proofs
+import ModularFormsKB.Historical.Jacobi.Clausen
+import ModularFormsKB.Historical.Jacobi.Multipliers
+import ModularFormsKB.Historical.Jacobi.LambertSeries
 
 /-!
 # Jacobi, *Fundamenta nova theoriae functionum ellipticarum* (1829): historical library

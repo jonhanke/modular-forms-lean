@@ -9,11 +9,14 @@ import ModularFormsKB.Historical.Weber
 import ModularFormsKB.Historical.Kronecker
 
 /-!
-# Headline statements of modular-forms-lean 0.4.0: historical theorems of Jacobi, Ramanujan, Weber and Kronecker, proved
+# Headline statements of modular-forms-lean 0.5.0: historical theorems of Jacobi, Ramanujan, Weber and Kronecker, proved
 
 A topic, not a book: theorems read in the original papers (Jacobi, *Fundamenta nova*, 1829; Ramanujan, *On certain
-arithmetical functions*, 1916, paper 18 of his *Collected Papers*, 1927; Weber, *Elliptische Functionen und
-algebraische Zahlen*, 1891; Kronecker, *Zur Theorie der elliptischen Functionen*, Werke 5).
+arithmetical functions*, 1916, *Some properties of p(n)*, 1919, *Congruence properties of partitions*, and
+Question 387, 1912: papers 18, 25 and 28 and a question of his *Collected Papers*, 1927; Weber, *Elliptische Functionen
+und algebraische Zahlen*, 1891; Kronecker, *Zur Theorie der elliptischen Functionen*, Werke 5). New in 0.5.0:
+`jacobi_cube`, `ramanujan_partition_congruences`, `ramanujan_tau_congruences`, `ramanujan_question387`,
+`jacobi_quartic_weber_eighth_powers` and `kronecker_theta_E2`.
 
 The statements of `Challenge_Historical.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Historical.json`) checks that each statement here is exactly the one in
@@ -21,7 +24,8 @@ The statements of `Challenge_Historical.lean`, each proved by appeal to the libr
 and `Quot.sound`.
 
 Each statement is the library's statement, copied, except that a named statement in the conclusion is unfolded. The
-statements were not yet reviewed by a human (see the README). These libraries import Mathlib modules only.
+statements were not yet reviewed by a human (see the README). These libraries import Mathlib, a few Tau Ceti modules
+and a few other modules of this library.
 
 All theorems are unconditional. (In 0.3.1 `weber_theta_eta` assumed the Jacobi triple product identity as a named
 input; the identity is now proved, `jacobi_triple_product`, and the hypothesis is gone.)
@@ -41,6 +45,10 @@ these too:
   of `jacobiTheta₂`), `ModularFormsKB.Historical.Weber.weberF₁`, `ModularFormsKB.WeberHeegnerStark.weberF`,
   `ModularFormsKB.WeberHeegnerStark.weberF₂` (Weber's functions `f`, `f₁`, `f₂`, quotients of Dedekind's `η`)
 * `ModularFormsKB.Historical.Kronecker.ser` (Kronecker's series `Ser_ρ`, the limit of the square partial sums)
+* (0.5.0) `ModularFormsKB.Historical.Ramanujan.partitionCount` (`p(n)`, the cardinality of Mathlib's
+  `Nat.Partition n`), `ModularFormsKB.Historical.Ramanujan.tau` (the coefficient of `xⁿ` in the formal power series
+  `x ∏_{n ≥ 1} (1 - xⁿ)²⁴` over `ℤ`), `ModularFormsKB.Historical.Kronecker.kroneckerTheta` (Kronecker's odd theta
+  function `ϑ(ζ, w) = ∑_{n ∈ ℤ} e^{((2n+1)² w + 4(2n+1)ζ - 2(2n+1)) πi/4}`)
 -/
 
 namespace ModularFormsKB.Headlines
@@ -86,6 +94,14 @@ theorem jacobi_triple_product {q z : ℂ} (hq : ‖q‖ < 1) (hz : z ≠ 0) :
       (∏' n : ℕ, (1 - q ^ (2 * n + 2)) * (1 + q ^ (2 * n + 1) * z) * (1 + q ^ (2 * n + 1) / z)) := by
   exact ModularFormsKB.Historical.Jacobi.triple_product hq hz
 
+/-- **Jacobi's identity for the cube of Euler's product** (Jacobi, *Fundamenta nova*, § 66, 5); new in 0.5.0): for
+`|q| < 1`, `∏_{n ≥ 1} (1 - qⁿ)³ = ∑_{n ≥ 0} (-1)ⁿ (2n + 1) q^{n(n+1)/2}` (the product indexed from `0`). The
+library derives it from the triple product identity. -/
+theorem jacobi_cube {q : ℂ} (hq : ‖q‖ < 1) :
+    HasSum (fun n : ℕ ↦ (-1 : ℂ) ^ n * (2 * n + 1) * q ^ (n * (n + 1) / 2))
+      ((∏' n : ℕ, (1 - q ^ (n + 1))) ^ 3) := by
+  exact ModularFormsKB.Historical.Jacobi.jacobi_cube hq
+
 end Jacobi
 
 section Ramanujan
@@ -99,6 +115,30 @@ theorem ramanujan_differential_equations {x : ℂ} (hx : ‖x‖ < 1) :
     x * deriv P x = (P x ^ 2 - Q x) / 12 ∧ x * deriv Q x = (P x * Q x - R x) / 3 ∧
       x * deriv R x = (P x * R x - Q x ^ 2) / 2 := by
   exact ⟨ModularFormsKB.Historical.Ramanujan.x_deriv_P hx, ModularFormsKB.Historical.Ramanujan.x_deriv_Q hx, ModularFormsKB.Historical.Ramanujan.x_deriv_R hx⟩
+
+/-- **Ramanujan's partition congruences** (Ramanujan, *Some properties of p(n), the number of partitions of n*,
+1919, paper 25 of his *Collected Papers*, (1)–(3), proofs §§ 2–3; new in 0.5.0): `p(5m + 4) ≡ 0 (mod 5)`,
+`p(7m + 5) ≡ 0 (mod 7)` and `p(35m + 19) ≡ 0 (mod 35)`, for `p(n)` the number of partitions of `n`. The library
+follows Ramanujan's proofs, from Jacobi's cube identity. -/
+theorem ramanujan_partition_congruences :
+    (∀ m : ℕ, 5 ∣ partitionCount (5 * m + 4)) ∧ (∀ m : ℕ, 7 ∣ partitionCount (7 * m + 5)) ∧
+      ∀ m : ℕ, 35 ∣ partitionCount (35 * m + 19) := by
+  exact ⟨ModularFormsKB.Historical.Ramanujan.ramanujanModFive, ModularFormsKB.Historical.Ramanujan.ramanujanModSeven, ModularFormsKB.Historical.Ramanujan.ramanujanModThirtyFive⟩
+
+/-- **Ramanujan's congruences for `τ(n)` modulo 5 and 7** (Ramanujan, *Congruence properties of partitions*, paper 28
+of his *Collected Papers*, p. 230; new in 0.5.0): `τ(5n) ≡ 0 (mod 5)`, and `τ(n) ≡ 0 (mod 7)` for
+`n ≡ 0, 3, 5, 6 (mod 7)`, where `Σ τ(n) xⁿ = x ∏_{n ≥ 1} (1 - xⁿ)²⁴` as formal power series. -/
+theorem ramanujan_tau_congruences :
+    (∀ n : ℕ, (5 : ℤ) ∣ tau (5 * n)) ∧
+      ∀ n : ℕ, n % 7 = 0 ∨ n % 7 = 3 ∨ n % 7 = 5 ∨ n % 7 = 6 → (7 : ℤ) ∣ tau n := by
+  exact ⟨ModularFormsKB.Historical.Ramanujan.tauModFive, ModularFormsKB.Historical.Ramanujan.tauModSeven⟩
+
+open scoped Real in
+/-- **Ramanujan's Question 387** (J. Indian Math. Soc. 4 (1912), p. 120; *Collected Papers*, p. 326; new in 0.5.0):
+`∑_{n ≥ 1} n / (e^{2πn} - 1) = 1/24 - 1/(8π)` (the sum indexed from `0`), equivalently `E₂(i) = 3/π`. -/
+theorem ramanujan_question387 :
+    HasSum (fun n : ℕ ↦ ((n + 1 : ℕ) : ℝ) / (Real.exp (2 * π * (n + 1 : ℕ)) - 1)) (1 / 24 - 1 / (8 * π)) := by
+  exact ModularFormsKB.Historical.Ramanujan.question387
 
 end Ramanujan
 
@@ -116,6 +156,14 @@ theorem weber_theta_eta {ω : ℂ} (hω : 0 < ω.im) :
       weberTheta01 ω = ModularForm.eta ω * weberF₁ ω ^ 2 ∧
       weberTheta10 ω = ModularForm.eta ω * weberF₂ ω ^ 2 := by
   exact ⟨ModularFormsKB.Historical.Weber.weberTheta00_eq hω, ModularFormsKB.Historical.Weber.weberTheta01_eq hω, ModularFormsKB.Historical.Weber.weberTheta10_eq hω⟩
+
+/-- **Jacobi's quartic identity and Weber's `f⁸ = f₁⁸ + f₂⁸`** (Jacobi, *Fundamenta nova*, § 36; Weber 1891, § 34;
+new in 0.5.0): for `Im ω > 0`, `ϑ₀₀(ω)⁴ = ϑ₀₁(ω)⁴ + ϑ₁₀(ω)⁴`, and `f(ω)⁸ = f₁(ω)⁸ + f₂(ω)⁸`. The library proves the
+duplication formulas of the theta constants and derives both. -/
+theorem jacobi_quartic_weber_eighth_powers :
+    (∀ ω : ℂ, 0 < ω.im → weberTheta00 ω ^ 4 = weberTheta01 ω ^ 4 + weberTheta10 ω ^ 4) ∧
+      ∀ ω : ℂ, 0 < ω.im → weberF ω ^ 8 = weberF₁ ω ^ 8 + weberF₂ ω ^ 8 := by
+  exact ⟨ModularFormsKB.Historical.Weber.jacobiQuartic, ModularFormsKB.Historical.Weber.weberEighthPowers⟩
 
 end Weber
 
@@ -141,6 +189,15 @@ theorem kronecker_ser_transformation {ρ : ℕ} (hρ : 2 ≤ ρ) :
             ((α * σ + β * τ + γ : ℝ) * (β' * v - α' * w) + (α' * σ + β' * τ + γ' : ℝ) * (-β * v + α * w))
             (β' * v - α' * w) (-β * v + α * w) := by
   exact ModularFormsKB.Historical.Kronecker.ser_transformation_of_two_le hρ
+
+open scoped UpperHalfPlane in
+/-- **Kronecker's `ϑ'''(0, w) = -π² E₂(w) ϑ'(0, w)`** (Kronecker, Werke 5, II, art. IV, pp. 146–147; new in 0.5.0),
+for his odd theta function `ϑ(ζ, w) = ∑_{ν odd} e^{(ν² w + 4νζ - 2ν) πi/4}`, derivatives in `ζ`, with Mathlib's
+weight-2 Eisenstein series `E₂`. -/
+theorem kronecker_theta_E2 :
+    ∀ w : ℍ, iteratedDeriv 3 (fun ζ ↦ kroneckerTheta ζ w) 0 =
+      -(π : ℂ) ^ 2 * EisensteinSeries.E2 w * deriv (fun ζ ↦ kroneckerTheta ζ w) 0 := by
+  exact ModularFormsKB.Historical.Kronecker.kroneckerThetaE2
 
 end Kronecker
 

@@ -2,13 +2,17 @@ import ModularFormsKB
 import MapNameDeps
 import Solution_AndrianovZhuravlev
 import Solution_CongruentNumbers
+import Solution_EllipticCurves
 import Solution_HeegnerStark
 import Solution_Historical
 import Solution_Iwaniec
+import Solution_KohnenPlusSpace
 import Solution_Milne
 import Solution_MilneArithmetic
 import Solution_Miyake
+import Solution_RankinSelberg
 import Solution_Shimura
+import Solution_ThetaGenus
 import Solution_Waldspurger
 
 /-! Every Lean name of the book maps, the statement maps and the comparison page exists. -/
@@ -53,6 +57,7 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @ArithmeticFunction.sigma
 open ModularFormsKB ModularFormsKB.Headlines in #check @CongruenceSubgroup.Gamma
 open ModularFormsKB ModularFormsKB.Headlines in #check @CongruenceSubgroup.Gamma0
 open ModularFormsKB ModularFormsKB.Headlines in #check @CongruenceSubgroup.IsCongruenceSubgroup
+open ModularFormsKB ModularFormsKB.Headlines in #check @CuspForm.peterssonInnerFd
 open ModularFormsKB ModularFormsKB.Headlines in #check @CuspFormClass.qExpansion_isBigO
 open ModularFormsKB ModularFormsKB.Headlines in #check @Dimension.Gamma0_index_eq_dedekindPsi
 open ModularFormsKB ModularFormsKB.Headlines in #check @Dimension.Gamma1_index_eq
@@ -79,17 +84,44 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Dimension.sturm_bound_ch
 open ModularFormsKB ModularFormsKB.Headlines in #check @DirichletCharacter.IsPrimitive.completedLFunction_one_sub
 open ModularFormsKB ModularFormsKB.Headlines in #check @EisensteinSeries.eisensteinSeriesSIF_mdifferentiable
 open ModularFormsKB ModularFormsKB.Headlines in #check @EisensteinSeries.eisensteinSeries_tendstoLocallyUniformly
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.EichlerShimuraCurve
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.HasNewform
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.HasNewform.strongHasseWeil
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.LevelEqConductor
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.ModularityTheorem
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.StrongHasseWeilUniform.isCuspFormChar
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.exists_curve_of_newform
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.exists_hasNewform_iff
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.isogenous_of_hasNewform
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.newform_eq_of_isogeny
+open ModularFormsKB ModularFormsKB.Headlines in #check @Elliptic.newform_of_conductor
 open ModularFormsKB ModularFormsKB.Headlines in #check @FractionalIdeal.spanSingleton
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.GaussImprimitive.gaussAt_eq_sum_primitive
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.ThetaCuspZero.thetaTwist_inversion_even
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.ThetaCuspZero.thetaTwist_inversion_odd
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.CoatesWilesL
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.F32Modular
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.f32Modular
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.isCongruent_iff_even_trueL
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.isCongruent_iff_odd_trueL
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.not_isCongruent_even_trueL
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.not_isCongruent_odd_trueL
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.CongruentCurves.tunnellFormula_trueL
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.BochererSchulzePillot
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.GrossFormula
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.GrossRatio
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.brandt_eigen
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.brandt_eisenstein
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.brandt_rowSum_symm
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq_zero_iff
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq_zero_of_mod_four
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_eq_zero_of_split
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_sixteen
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_three
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossCoeff_twelve_hecke
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossFormula_of_bochererSchulzePillot
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Gross.grossRatio_of_grossFormula
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree.central_nonneg
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.KohnenSquarefree.coeff_ne_zero_iff
@@ -100,6 +132,8 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.isAdmissible_iff_even
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.prod_eq_neg_one_pow
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.LocalData.two_mul_fibreDim
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.ShimuraTheoremThreeHalves
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.ShimuraTheoremThreeHalves.liftsTo_char
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.CoatesWiles
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.TunnellFormula
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.Tunnell.isCongruent_five
@@ -129,9 +163,17 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.kohnen_fibreDim
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.Waldspurger.localSign_eq_kohnenPattern_iff
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.WeilConverse
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.kohnenKernelConst_mul_unfold_mul_square
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.kohnenZagier_of_kernel
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.levelOneHeckeSelfAdjoint
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.shintaniCycleFormula_of_kernel
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.shintaniShimuraAdjoint_of_kernel
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.shintani_adjoint_of_kernel
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.thetaTwistLaw_thetaMultiplierSystem
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.thetaTwist_law
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.twistedL_nonneg_of_kernel
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.unaryThetaOf_mem
+open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.waldspurgerPlus_of_kernel
 open ModularFormsKB ModularFormsKB.Headlines in #check @HalfIntegral.weilConverse
 open ModularFormsKB ModularFormsKB.Headlines in #check @HeckeAntiInvolution.multiplicity_comm
 open ModularFormsKB ModularFormsKB.Headlines in #check @HeckeCoset.sum_multiplicity_assoc
@@ -396,8 +438,6 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.finrank_cus
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.forall_strongHasseWeil_iff_taniyamaWeil
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.geometricConductor
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.geometricConductor_exponent_eq_one_iff
-open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.isModularEllipticCurve_iff_strongHasseWeil
-open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.isModularOfLevel_geometricConductor
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.not_dvd_geometricConductor_iff
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.serreTateFreeTateModuleQuadratic
 open ModularFormsKB ModularFormsKB.Headlines in #check @Milne.Wave4B.sq_dvd_geometricConductor_iff
@@ -884,14 +924,18 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec3_3.theorem_3_
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec3_3.theorem_3_3_3_coeff
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_5.multiplicity_op_eq_natCard_rightCosetCount
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.corollary_4_6_18_one
+open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.corollary_4_6_18_one_primePow
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.corollary_4_6_20
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.heckeLemma
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.pseudo_core
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.theorem_4_6_19_of_new
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_6.theorem_4_6_19_span
-open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_8.ImaginaryQuadraticThetaStatement'
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_8.gaussW_kroneckerChar_oddPrimeDiscriminant
+open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_8.imaginaryQuadraticTheta'_trivial
+open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_8.kroneckerGaussSumStatement
+open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_8.kroneckerGaussW_mul
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_8.not_imaginaryQuadraticThetaStatement
+open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.IsEvenSph.thetaSph_coset_slash_of_mem_Gamma0
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.IsEvenSph.thetaSph_slash_eq_gaussSum_smul
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.IsEvenSph.thetaSph_slash_of_mem_Gamma0
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.IsEvenUnimodularGram
@@ -910,6 +954,7 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.thetaSph_S
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.thetaSph_fricke
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.thetaSph_mem_halfIntCuspForms
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.thetaSph_mem_halfIntModularForms
+open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.thetaSph_mem_halfIntModularForms_sharp
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec4_9.thetaSph_smul_of_odd
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec6_7.theorem_6_7_2
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Sec6_7.theorem_6_7_2_imaginary
@@ -923,8 +968,6 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave10.eisenstein
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave10.exists_modSpace_coeff_eq_weightOne
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave10.exists_modSpace_coeff_eq_weightTwo
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave10.exists_modSpace_coeff_eq_weightTwo_trivial
-open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave11.IdealHeckeChar
-open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave11.ImaginaryQuadraticThetaStatement
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave11.RealQuadraticThetaStatement
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave11.exists_modSpace_coeff_eq_weightOne_constTerm
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave11.exists_modSpace_weightOne_constTerm_eq_zero
@@ -1051,7 +1094,6 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave7.modSpace_eq
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave7.omega
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave7.pet_heckeTStarN_left
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave7.pet_heckeTStar_left
-open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave7.pet_heckeTT_left
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave7.sum_delta0NebentypusChar_smul_slash_eq
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave8.coe_heckeTStar_embed_eq_smul
 open ModularFormsKB ModularFormsKB.Headlines in #check @Miyake.Wave8.coeff_prime_eq_zero_of_factorization_conductor_lt
@@ -1203,6 +1245,14 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @OnePoint.smul_infty_eq_i
 open ModularFormsKB ModularFormsKB.Headlines in #check @PeriodPair.G
 open ModularFormsKB ModularFormsKB.Headlines in #check @PeriodPair.lattice
 open ModularFormsKB ModularFormsKB.Headlines in #check @PhragmenLindelof.vertical_strip
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.continuousOn_eisensteinReg
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.differentiable_eisensteinReg
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.eisensteinStar
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.eisensteinStar_eq_lattice
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.eisensteinStar_eq_reg
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.eisensteinStar_one_sub
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.norm_eisensteinReg_le
+open ModularFormsKB ModularFormsKB.Headlines in #check @RankinSelberg.tendsto_eisensteinStar_residue
 open ModularFormsKB ModularFormsKB.Headlines in #check @Shimura2007.CohenCovarianceStatement
 open ModularFormsKB ModularFormsKB.Headlines in #check @Shimura2007.EulerFourierStatement
 open ModularFormsKB ModularFormsKB.Headlines in #check @Shimura2007.HalfRangeEulerFourStatement
@@ -1273,6 +1323,7 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @TauCeti.card_orderTwoEll
 open ModularFormsKB ModularFormsKB.Headlines in #check @TauCeti.finrank_eisensteinSubspace
 open ModularFormsKB ModularFormsKB.Headlines in #check @TauCeti.isCompl_eisensteinSubspace_range_cuspToModFormCharSpace
 open ModularFormsKB ModularFormsKB.Headlines in #check @TauCeti.weightOneEisensteinSubspace_eq_comap_span_range_weightOneForm
+open ModularFormsKB ModularFormsKB.Headlines in #check @ThetaGenus.thetaGram_fricke
 open ModularFormsKB ModularFormsKB.Headlines in #check @TopCat.Presheaf
 open ModularFormsKB ModularFormsKB.Headlines in #check @TopCat.Sheaf
 open ModularFormsKB ModularFormsKB.Headlines in #check @TopCat.sheafToTop
@@ -1282,6 +1333,7 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @UpperHalfPlane.isPretran
 open ModularFormsKB ModularFormsKB.Headlines in #check @UpperHalfPlane.peterssonInner_slash_left_adjugate
 open ModularFormsKB ModularFormsKB.Headlines in #check @UpperHalfPlane.peterssonInner_slash_right_adjugate
 open ModularFormsKB ModularFormsKB.Headlines in #check @UpperHalfPlane.weierstrassCurve_j_periodPair
+open ModularFormsKB ModularFormsKB.Headlines in #check @WeierstrassCurve.LFunction
 open ModularFormsKB ModularFormsKB.Headlines in #check @WeierstrassCurve.map
 open ModularFormsKB ModularFormsKB.Headlines in #check @WeierstrassCurve.map_j
 open ModularFormsKB ModularFormsKB.Headlines in #check @WeierstrassCurve.two_le_algorithmicOggExponent_iff

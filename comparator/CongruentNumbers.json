@@ -10,7 +10,12 @@
     "ModularFormsKB.Headlines.congruent_not_isCongruent_of_even",
     "ModularFormsKB.Headlines.congruent_not_isCongruent_one_three_eleven",
     "ModularFormsKB.Headlines.congruent_isCongruent_iff_odd",
-    "ModularFormsKB.Headlines.congruent_isCongruent_iff_even"
+    "ModularFormsKB.Headlines.congruent_isCongruent_iff_even",
+    "ModularFormsKB.Headlines.congruent_curve_modular",
+    "ModularFormsKB.Headlines.congruent_not_isCongruent_odd_trueL",
+    "ModularFormsKB.Headlines.congruent_not_isCongruent_even_trueL",
+    "ModularFormsKB.Headlines.congruent_isCongruent_iff_odd_trueL",
+    "ModularFormsKB.Headlines.congruent_isCongruent_iff_even_trueL"
   ],
   "definition_names": [],
   "permitted_axioms": [

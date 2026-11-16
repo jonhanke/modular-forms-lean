@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jonathan Hanke
 -/
 import ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
+import ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.Criterion
 
 /-!
-# Headline statements of modular-forms-lean 0.3.1: Congruent numbers and Tunnell's criterion, proved
+# Headline statements of modular-forms-lean 0.5.0: Congruent numbers and Tunnell's criterion, proved
 
 The statements of `Challenge_CongruentNumbers.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/CongruentNumbers.json`) checks that each statement here is exactly the one in
@@ -41,8 +42,39 @@ proved the conclusion. All locators below (theorem or page numbers) are unverifi
   multiplication by `ℤ[i]`, if `L(E_n, 1) ≠ 0` then `E_n(ℚ)` is finite, so it consists of the four points of order
   dividing 2 and has no point with `y ≠ 0`.
 
-Mathlib has no L-functions of elliptic curves. The value `L(E_n, 1)` enters only through the abstract function
-`Lval : ℕ → ℝ`, which is constrained only by the named inputs (jointly): it is not defined from the curve.
+In the theorems of 0.3.0 the value `L(E_n, 1)` enters only through the abstract function `Lval : ℕ → ℝ`, which is
+constrained only by the named inputs (jointly): it is not defined from the curve. The theorems new in 0.5.0 (section
+`CongruentCurves` below) use instead the true L-function: the L-series of Mathlib's `WeierstrassCurve.LFunction` of
+`E_n`, which the library continues to an entire function (`congruent_curve_modular`), and its value at `1`.
+
+## Named inputs of the 0.5.0 theorems with the true L-function (assumed, not proved here)
+
+The structure `ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.TunnellInputs` bundles:
+
+* `WaldspurgerSquareClassFull thetaMultiplierSystem 1 32 χ` for the trivial character and for `(2/·)` modulo 128:
+  Waldspurger's theorem on square classes (J.-L. Waldspurger, J. Math. Pures Appl. 60 (1981), Corollaire 2) at level
+  128 and weight 3/2, for all squarefree `n₁, n₂` in one square class at the primes dividing 128;
+* `TunnellEigenforms`: Tunnell's eigenform proposition (Tunnell 1983): Shimura's `T(p²)`, `p` odd, acts on the
+  coefficients of Tunnell's two forms `η(8τ)η(16τ)θ(2τ)` and `η(8τ)η(16τ)θ(4τ)` by the `p`-th coefficient of `f₃₂`
+  (checked numerically);
+* `TunnellConstants`: Tunnell's four central values `L(E_1, 1) = β/4`, `L(E_3, 1) = β/√3`, `L(E_2, 1) = β/(2√2)`,
+  `L(E_10, 1) = 2β/√10` (Tunnell 1983; exact values of Hecke L-functions of `ℚ(i)`; checked numerically).
+
+and, separately:
+
+* `CoatesWilesCM`: the theorem of Coates and Wiles (J. Coates and A. Wiles, *On the conjecture of Birch and
+  Swinnerton-Dyer*, Invent. Math. 39 (1977), Theorem 1): an elliptic curve `E` over `ℚ` with complex multiplication by
+  the maximal order of an imaginary quadratic field (over `ℚ`: `j(E)` is one of the nine values `cmMaximalJ`) and
+  `L(E, 1) ≠ 0` (for a continuation of the true L-series of Mathlib's `E.LFunction` to a connected open set containing
+  `1`) has finitely many rational points. The library applies it to `E_n`, whose `j`-invariant is `1728`.
+
+Two former inputs are proved in the library and are no longer fields of `TunnellInputs`: Tunnell's two `q`-series
+`η(8τ)η(16τ)θ(2τ)` and `η(8τ)η(16τ)θ(4τ)` are cusp forms of weight 3/2 on `Γ₀(128)` (`tunnellMembership`), and the
+functional equation of `L(E_{2m}, s)` with its sign (`heckeCharacterRootNumber`).
+
+The equivalences `congruent_isCongruent_iff_odd_trueL` and `..._even_trueL` assume in addition Tau Ceti's statement
+of the Birch and Swinnerton-Dyer conjecture for `E_n` (`WeierstrassCurve.BirchSwinnertonDyer`), a conjecture and not
+a theorem; nothing in this file asserts it.
 
 ## Conditional on the weak Birch and Swinnerton-Dyer conjecture (a conjecture, not a theorem)
 
@@ -63,6 +95,16 @@ Besides Mathlib, the statements use these definitions of the library, in the nam
 * `repCount α β m` (the number of `(x, y, z) ∈ ℤ³` with `x² + α y² + β z² = m`, counted in a box that contains every
   solution), `tunnellA`, `tunnellB`, `tunnellC`, `tunnellD`;
 * the named inputs `TunnellFormula`, `CoatesWiles` and `WeakBSD`.
+
+and (0.5.0), in the namespace `ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves`:
+
+* `congruentCurve n` (Mathlib's Weierstrass curve `y² = x³ - n²x` over `ℚ`), `f32Coeff m` (`b(m)`, the sum of
+  `Re α` over the Gaussian integers `α = a + ci` with `a² + c² = m`, `a` odd, `c` even, `a + c ≡ 1 mod 4`), `f32`
+  (the function `τ ↦ Σ b(m) e^{2πimτ}`), `congruentCoeff n m = (n/m) b(m)` (Jacobi symbol), `lCoeff n m` (the
+  `m`-th coefficient of `(congruentCurve n).LFunction`, as a complex number);
+* `cmMaximalJ` (the nine `j`-invariants `0, 1728, -3375, 8000, -32768, -884736, -884736000, -147197952000,
+  -262537412640768000` of the maximal orders of class number one);
+* the named inputs `TunnellInputs` and `CoatesWilesCM`.
 -/
 
 namespace ModularFormsKB.Headlines
@@ -136,5 +178,59 @@ theorem congruent_isCongruent_iff_even {Lval : ℕ → ℝ} {β : ℝ} (hT : Tun
   exact ModularFormsKB.HalfIntegral.Waldspurger.Tunnell.isCongruent_iff_even hT hCW hBSD hn hsq heven
 
 end CongruentNumbers
+
+/-! ## New in 0.5.0: the true L-function of `E_n` -/
+
+section CongruentCurves
+
+open Complex WeierstrassCurve ModularFormsKB.HalfIntegral.Waldspurger.Tunnell
+open ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves
+open scoped Real
+
+/-- **The congruent number curves are modular, with an entire L-function** (unconditional; new in 0.5.0). The
+`q`-series `f₃₂ = Σ b(m) qᵐ`, `b(m) = Σ_{α primary, N(α) = m} Re α` over the Gaussian integers `α ≡ 1 mod (2 + 2i)`,
+is a cusp form of weight 2 on `Γ₀(32)` (as a theta series of `ℤ[i]` with a harmonic polynomial and a
+characteristic). For squarefree `n ≥ 1`, the coefficients of Mathlib's L-function of `E_n : y² = x³ - n²x` are
+`(n/m) b(m)`, and its L-series has an entire extension. -/
+theorem congruent_curve_modular :
+    (∃ f : CuspForm ((CongruenceSubgroup.Gamma0 32).map (Matrix.SpecialLinearGroup.mapGL ℝ)) 2, ⇑f = f32) ∧
+      ∀ (n : ℕ) [NeZero n], Squarefree n →
+        (∀ m : ℕ, (congruentCurve n).LFunction m = congruentCoeff n m) ∧
+          LSeries.HasEntireExtension (lCoeff n) := by
+  exact ⟨ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.f32Modular.exists_cuspForm, fun n _ hn ↦ ⟨ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.LFunction_congruentCurve_eq hn, ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.hasEntireExtension_lCoeff ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.f32Modular hn⟩⟩
+
+/-- **Tunnell's criterion with the true L-function, the direction without the Birch and Swinnerton-Dyer conjecture,
+odd `n`** (new in 0.5.0; conditional on the named inputs bundled in `TunnellInputs` and on `CoatesWilesCM`): an odd
+squarefree `n` with `A(n) ≠ 2B(n)` is not congruent. Here `L(E_n, 1)` is the value at 1 of the continuation of the
+L-series of Mathlib's `E_n`, not an abstract function. -/
+theorem congruent_not_isCongruent_odd_trueL (h : TunnellInputs) (hCW : CoatesWilesCM) {n : ℕ} (hn : 0 < n)
+    (hsq : Squarefree n) (hodd : Odd n) (hAB : tunnellA n ≠ 2 * tunnellB n) : ¬ IsCongruent n := by
+  exact ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.not_isCongruent_odd_trueL h hCW hn hsq hodd hAB
+
+/-- **Tunnell's criterion with the true L-function, the direction without the Birch and Swinnerton-Dyer conjecture,
+even `n`** (new in 0.5.0; conditional on `TunnellInputs` and `CoatesWilesCM`): an even squarefree `n` with
+`C(n) ≠ 2D(n)` is not congruent. -/
+theorem congruent_not_isCongruent_even_trueL (h : TunnellInputs) (hCW : CoatesWilesCM) {n : ℕ} (hn : 0 < n)
+    (hsq : Squarefree n) (heven : Even n) (hCD : tunnellC n ≠ 2 * tunnellD n) : ¬ IsCongruent n := by
+  exact ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.not_isCongruent_even_trueL h hCW hn hsq heven hCD
+
+/-- **Tunnell's criterion with the true L-function, odd `n`, conditional on the Birch and Swinnerton-Dyer conjecture
+for `E_n`** (new in 0.5.0; the conjecture is Tau Ceti's statement `WeierstrassCurve.BirchSwinnertonDyer`, a
+hypothesis, in addition to `TunnellInputs` and `CoatesWilesCM`): an odd squarefree `n` is congruent iff
+`A(n) = 2B(n)`. -/
+theorem congruent_isCongruent_iff_odd_trueL (h : TunnellInputs) (hCW : CoatesWilesCM) {n : ℕ} [NeZero n]
+    (hsq : Squarefree n) (hodd : Odd n) (hBSD : (congruentCurve n).BirchSwinnertonDyer) :
+    IsCongruent n ↔ tunnellA n = 2 * tunnellB n := by
+  exact ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.isCongruent_iff_odd_trueL h hCW hsq hodd hBSD
+
+/-- **Tunnell's criterion with the true L-function, even `n`, conditional on the Birch and Swinnerton-Dyer conjecture
+for `E_n`** (new in 0.5.0; as `congruent_isCongruent_iff_odd_trueL`): an even squarefree `n` is congruent iff
+`C(n) = 2D(n)`. -/
+theorem congruent_isCongruent_iff_even_trueL (h : TunnellInputs) (hCW : CoatesWilesCM) {n : ℕ} [NeZero n]
+    (hsq : Squarefree n) (heven : Even n) (hBSD : (congruentCurve n).BirchSwinnertonDyer) :
+    IsCongruent n ↔ tunnellC n = 2 * tunnellD n := by
+  exact ModularFormsKB.HalfIntegral.Waldspurger.CongruentCurves.isCongruent_iff_even_trueL h hCW hsq heven hBSD
+
+end CongruentCurves
 
 end ModularFormsKB.Headlines

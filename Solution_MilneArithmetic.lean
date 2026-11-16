@@ -10,7 +10,7 @@ import ModularFormsKB.Milne.Wave7.OggTame
 import ModularFormsKB.Milne.Wave9.ClassGroupActionAll
 
 /-!
-# Headline statements of modular-forms-lean 0.4.0: Milne, *Modular Functions and Modular Forms*, sections 11 and 12, proved
+# Headline statements of modular-forms-lean 0.5.0: Milne, *Modular Functions and Modular Forms*, sections 11 and 12, proved
 
 The statements of `Challenge_MilneArithmetic.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/MilneArithmetic.json`) checks that each statement here is exactly the one in

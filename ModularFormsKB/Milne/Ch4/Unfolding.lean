@@ -810,7 +810,7 @@ theorem unfolding_core [Γ.FiniteIndex] (F : ℍ → ℂ)
     ← hsum.tsum_eq,← integral_tsum_of_summable_integral_norm hint_x hsumm]
   exact tsum_congr fun x => (hcv x F).symm
 
-/-- **The unfolding, termwise** (job mf-040-shimura): under the hypotheses of `unfolding_core`, each term
+/-- **The unfolding, termwise**: under the hypotheses of `unfolding_core`, each term
 `z ↦ F(γ_x z)` is integrable on the coset domain, the integrals of their norms are summable, and the sum of the
 integrals is the strip integral. -/
 theorem unfolding_terms [Γ.FiniteIndex] (F : ℍ → ℂ)

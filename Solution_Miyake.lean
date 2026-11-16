@@ -15,7 +15,7 @@ import ModularFormsKB.Miyake.HeckeTrick.HeckeLimit
 import ModularFormsKB.Miyake.Sec4_6.HeckeLemma
 
 /-!
-# Headline statements of modular-forms-lean 0.4.0: Miyake, *Modular Forms*, proved
+# Headline statements of modular-forms-lean 0.5.0: Miyake, *Modular Forms*, proved
 
 The statements of `Challenge_Miyake.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Miyake.json`) checks that each statement here is exactly the one in

@@ -12,8 +12,10 @@ A positive integer $n$ is **congruent** if it is the area of a right triangle wi
 **Tunnell's counts** (odd $n$): $A(n) = \#\{x^2 + 2y^2 + 8z^2 = n\}$, $B(n) = \#\{x^2 + 2y^2 + 32z^2 = n\}$; (even $n$):
 $C(n) = \#\{x^2 + 4y^2 + 8z^2 = n/2\}$, $D(n) = \#\{x^2 + 4y^2 + 32z^2 = n/2\}$, all over $\mathbb Z^3$ (`tunnellA`, ...,
 computable; small values by `decide`). Tunnell proves, from Waldspurger's theorem applied to the weight $3/2$ forms
-$\theta_{1,2,8} - \tfrac12\theta_{1,2,32}$ (level $128$) and its even analogue, whose Shimura lift is the weight $2$ newform of
-$E_1 : y^2 = x^3 - x$ (conductor $32$):
+$\eta(8\tau)\eta(16\tau)\theta(2\tau)$ (level $128$; its coefficient at odd $n$ is $B(n) - \tfrac12A(n)$, so it is the odd
+part of $\theta_{1,2,32} - \tfrac12\theta_{1,2,8}$) and its even analogue $\eta(8\tau)\eta(16\tau)\theta(4\tau)$, whose
+Shimura lift is the weight $2$ newform of $E_1 : y^2 = x^3 - x$ (conductor $32$) (checked numerically; an earlier version of this docstring named $\theta_{1,2,8} - \tfrac12\theta_{1,2,32}$,
+whose coefficients are $A - \tfrac12B$):
 $$ L(E_n, 1) = \frac{\beta\,(A(n) - 2B(n))^2}{16\sqrt n}\ (n \text{ odd}),\qquad L(E_n,1) = \frac{\beta\,(C(n) - 2D(n))^2}{8\sqrt n}\ (n\text{ even}),$$
 $n$ squarefree, $\beta = \int_1^\infty dx/\sqrt{x^3 - x}$ (`TunnellFormula`, a named input; both constants checked
 numerically for all squarefree $n \le 59$). With Coates–Wiles (`CoatesWiles`:
@@ -22,8 +24,10 @@ $A(n) \ne 2B(n) \Rightarrow n$ not congruent (`not_isCongruent_of_odd`); **condi
 Swinnerton-Dyer conjecture** for $E_n$ (`WeakBSD`): $A(n) = 2B(n) \Rightarrow n$ congruent, so the criterion is an
 equivalence (`isCongruent_iff_odd`, `isCongruent_iff_even`).
 
-The value $L(E_n, 1)$ enters only through the abstract function `Lval` (Mathlib has no $L$-functions of elliptic curves);
-the named inputs pin it down jointly.
+The value $L(E_n, 1)$ enters here only through the abstract function `Lval`, which the named inputs pin down jointly
+(LE-MF-0257). `CongruentCurves/Criterion.lean` replaces it by the value at $1$ of the
+continuation of Mathlib's `WeierstrassCurve.LFunction` of $E_n$ and derives `TunnellFormula` for that value
+(`tunnellFormula_trueL`) from Waldspurger's theorem and separate named inputs.
 -/
 import Mathlib.Algebra.Order.Ring.Star
 import Mathlib.Algebra.Order.Star.Int

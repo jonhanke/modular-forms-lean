@@ -3,7 +3,7 @@ import ModularFormsKB.Miyake.Sec4_9.Spherical.Unary
 /-!
 # Shimura's twisted theta law for every character (Miyake, Corollary 4.9.7 (1))
 
-Job `mf-040-theta`, rows 9 and 10. For every `r ≥ 1`, every Dirichlet character `ψ` modulo `r`
+For every `r ≥ 1`, every Dirichlet character `ψ` modulo `r`
 (primitive or not) of parity `ν`, `t ≥ 1` and `γ ∈ Γ₀(4 t r²)`:
 
 `θ_{ψ,t}(γτ) = ψ̄(d) (t / |d|) (cτ + d)^ν j(γ, τ) θ_{ψ,t}(τ)`

@@ -1,4 +1,5 @@
 import ModularFormsKB.Milne.Ch3.EllipticFunctions
+import TauCeti.Analysis.Calculus.LogDeriv
 import TauCeti.Analysis.Contour.Residue.Cycle
 import TauCeti.Analysis.Contour.Residue.LogDeriv
 import TauCeti.Analysis.Contour.Winding.StarConvex
@@ -746,7 +747,7 @@ theorem residue_id_mul_logDeriv {g : ℂ → ℂ} {z : ℂ} {n : ℤ} (hg : Mero
     (hn : meromorphicOrderAt g z = n) :
     TauCeti.Contour.residue (fun w ↦ w * logDeriv g w) z = z * n := by
   obtain ⟨G, hG_an, hG_ne, hgerm⟩ := logDeriv_eventuallyEq_principalPart hg hn
-  have hlG : AnalyticAt ℂ (logDeriv G) z := analyticAt_logDeriv_of_analyticAt hG_an hG_ne
+  have hlG : AnalyticAt ℂ (logDeriv G) z := hG_an.logDeriv hG_ne
   have h2 : (fun w ↦ w * logDeriv g w) =ᶠ[𝓝[≠] z]
       (fun w ↦ (z * n) * (w - z)⁻¹) + (fun w ↦ (n : ℂ) + w * logDeriv G w) := by
     filter_upwards [hgerm, self_mem_nhdsWithin] with w hw hwz
@@ -830,7 +831,7 @@ theorem doublyPeriodicSumsStatement : DoublyPeriodicSumsStatement := by
   set φ := logDeriv g
   have hφM : MeromorphicOn φ univ := fun z _ ↦ (hgM z).deriv.div (hgM z)
   have hφbd : ∀ z ∈ frontier D, AnalyticAt ℂ φ z := fun z hz ↦
-    analyticAt_logDeriv_of_analyticAt (hbdg z hz).1 (hbdg z hz).2
+    (hbdg z hz).1.logDeriv (hbdg z hz).2
   have hφ₁ : ∀ z, φ (z + L.ω₁) = φ z := logDeriv_add_period hg₁
   have hφ₂ : ∀ z, φ (z + L.ω₂) = φ z := logDeriv_add_period hg₂
   have hφc : ContinuousOn φ (pgCurve L z₀ '' Icc 0 4) := fun z hz ↦

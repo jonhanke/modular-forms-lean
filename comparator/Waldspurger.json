@@ -28,7 +28,8 @@
     "ModularFormsKB.Headlines.gross_grossCoeff_eq_zero_iff",
     "ModularFormsKB.Headlines.eisensteinLattice_functionalEquation",
     "ModularFormsKB.Headlines.rankin_unfolding",
-    "ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding"
+    "ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding",
+    "ModularFormsKB.Headlines.shimuraLift_theta_of_frickeKernel"
   ],
   "definition_names": [],
   "permitted_axioms": [

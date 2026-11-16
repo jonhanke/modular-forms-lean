@@ -9,9 +9,10 @@ import ModularFormsKB.HalfIntegral.Waldspurger.Gross
 import ModularFormsKB.HalfIntegral.Rankin.ThetaShimura
 import ModularFormsKB.HalfIntegral.Rankin.Unfolding
 import ModularFormsKB.Miyake.HeckeTrick.LatticeInversion
+import ModularFormsKB.HalfIntegral.Rankin.FrickeKernel
 
 /-!
-# Headline statements of modular-forms-lean 0.4.0: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11
+# Headline statements of modular-forms-lean 0.5.0: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11
 
 The main results of the library for Waldspurger's theorems on the Shimura correspondence, Kohnen's formula for odd
 squarefree level, and Gross's weight 3/2 form for the prime 11, one theorem each (a few closely related concrete facts
@@ -75,6 +76,15 @@ were not checked.
   other than `∞`, twisted by every primitive character `ψ` of odd prime conductor prime to `4N`, is
   `i^{2k}` (times Weil's constant) times the completed Dirichlet series of one sequence `b` (and of its twist by
   `ψ̄`). It is the input of `shimuraLift_theta_of_dualUnfolding`, Shimura's theorem for the theta multiplier.
+* (0.5.0) `ModularFormsKB.HalfIntegral.ShimuraFrickeKernelUnfolding`: a smaller input than `ShimuraDualUnfolding`,
+  from the same proof of Shimura (1973; locator unverified). The library now proves that `f|W_{4N}` is a cusp form for
+  the conjugate character, with a `q`-expansion, and rewrites the dual Rankin integral as an integral over
+  `Γ₀(L)\ℍ` of an explicit kernel built from `f|W_{4N}`, the theta series `θ_ψ̄` and an Eisenstein series at `∞`
+  (`frickeKernelIntegral`). The input is the unfolding of that integral: for `k ≥ 2`, squarefree `t ≥ 1` and every
+  cusp form `f` with coefficients `a`, there is one sequence `b` of polynomial growth with `b(0) = 0` such that, for
+  `ψ = 1` and for every primitive `ψ` of odd prime conductor prime to `4N`, the kernel integral times its gamma
+  factor is `i^{2k}` (times Weil's constant) times the completed Dirichlet series of `b` (and of its twist by `ψ̄`). It
+  is the input of `shimuraLift_theta_of_frickeKernel`.
 
 Mathlib has no L-functions of elliptic curves or of modular forms of half-integral weight in this setting. The central
 values enter only through abstract functions (`L` in `KohnenSquarefree`, `Lval` in `GrossRatio`, and the entire
@@ -361,6 +371,20 @@ is a cusp form `F` of weight `2k` on `Γ₀(4N)` with character `χ²` whose coe
 `∑_{d ∣ n} χ_t(d) d^{k-1} a(tn²/d²)` (`shimuraCoeff`). -/
 theorem shimuraLift_theta_of_dualUnfolding (k N : ℕ) (χ : DirichletCharacter ℂ (4 * N)) (hN : 0 < N)
     (hD : ShimuraDualUnfolding thetaMultiplierSystem k N χ) :
+    2 ≤ k → ∀ t : ℕ, 1 ≤ t → Squarefree t → ∀ f ∈ thetaMultiplierSystem.cuspForms k N χ, ∀ a : ℕ → ℂ,
+      Abstract.HasQExp f a →
+      ∃ F : ℍ → ℂ, IsIntCuspForm (2 * k) (4 * N) (χ ^ 2) F ∧
+        ∃ c : ℕ → ℂ, Abstract.HasQExp F c ∧ ∀ n, 1 ≤ n → c n = shimuraCoeff k N χ t a n := by
+  sorry
+
+/-- **Shimura's theorem for the theta multiplier, conditional on the unfolding of the Fricke kernel** (Shimura 1973,
+Main Theorem; new in 0.5.0). Assume the named input `ShimuraFrickeKernelUnfolding thetaMultiplierSystem k N χ`, a
+smaller input than the `ShimuraDualUnfolding` of `shimuraLift_theta_of_dualUnfolding` (the part of the dual side
+before the unfolding is now proved). Then for `k ≥ 2`, squarefree `t ≥ 1` and every cusp form `f` of weight `k + 1/2`
+on `Γ₀(4N)` with character `χ` (theta multiplier) and coefficients `a`, there is a cusp form `F` of weight `2k` on
+`Γ₀(4N)` with character `χ²` whose coefficients `c(n)`, `n ≥ 1`, are `∑_{d ∣ n} χ_t(d) d^{k-1} a(tn²/d²)`. -/
+theorem shimuraLift_theta_of_frickeKernel (k N : ℕ) (χ : DirichletCharacter ℂ (4 * N)) (hN : 0 < N)
+    (hK : ShimuraFrickeKernelUnfolding thetaMultiplierSystem k N χ) :
     2 ≤ k → ∀ t : ℕ, 1 ≤ t → Squarefree t → ∀ f ∈ thetaMultiplierSystem.cuspForms k N χ, ∀ a : ℕ → ℂ,
       Abstract.HasQExp f a →
       ∃ F : ℍ → ℂ, IsIntCuspForm (2 * k) (4 * N) (χ ^ 2) F ∧

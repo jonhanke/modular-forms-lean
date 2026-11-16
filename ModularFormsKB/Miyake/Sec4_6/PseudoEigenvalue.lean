@@ -554,10 +554,14 @@ lemma prim_facts (k : ℤ) (hQ : q ∥ N) (ψ : DirichletCharacter ℂ q)
     _).mp hU
   rw [hF] at hU'
   refine ⟨hU', ?_⟩
-  have hχ' : ¬ ∃ χ₀ : (ZMod (N / q))ˣ →* ℂˣ,
-      F.χ = χ₀.comp (ZMod.unitsMap (Nat.div_dvd_of_dvd hqN)) := by
-    rw [hχ]; exact not_exists_comp hQ ψ φ hψ
-  have hn := F.norm_qExpansion_coeff_prime_sq_of_not_exists_eq_comp hq hqN hχ'
+  have hχ' : ¬ F.dirichletLift.FactorsThrough (N / q) := by
+    intro hft
+    apply not_exists_comp hQ ψ φ hψ
+    refine ⟨hft.χ₀.toUnitHom, ?_⟩
+    rw [← hχ, ← F.dirichletLift_toUnitHom]
+    exact (congrArg MulChar.toUnitHom hft.eq_changeLevel).trans
+      (DirichletCharacter.changeLevel_toUnitHom _ _)
+  have hn := F.sq_norm_qExpansion_coeff_prime_of_not_factorsThrough hq hqN hχ'
   rw [hF] at hn
   change (qExpansion 1 (f : CuspForm ((Gamma1 N).map (mapGL ℝ)) k)).coeff q *
     starRingEnd ℂ ((qExpansion 1 (f : CuspForm ((Gamma1 N).map (mapGL ℝ)) k)).coeff q) = _

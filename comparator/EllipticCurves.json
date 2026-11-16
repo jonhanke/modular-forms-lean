@@ -1,0 +1,19 @@
+{
+  "challenge_module": "Challenge_EllipticCurves",
+  "solution_module": "Solution_EllipticCurves",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.elliptic_hasNewform_functionalEquation",
+    "ModularFormsKB.Headlines.elliptic_hasNewform_strongHasseWeil",
+    "ModularFormsKB.Headlines.elliptic_congruentCurve_one_hasNewform",
+    "ModularFormsKB.Headlines.elliptic_congruentCurve_hasNewform",
+    "ModularFormsKB.Headlines.elliptic_modularity_consequences",
+    "ModularFormsKB.Headlines.elliptic_newform_iff_strongHasseWeil"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

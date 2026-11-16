@@ -14,7 +14,9 @@ theorems, Gross's example and congruent numbers, by a search of its sources for 
 group, Brandt matrices, maximal orders, congruent numbers and Tunnell) and with the Mathlib commit `1b1ccf4` that
 this library pins (Mathlib master was not searched again for them). The headlines new in 0.3.1 were compared on 2026-11-14 with
 Mathlib master at commit `a647c99f` and Tau Ceti main at commit `71ce0a33`. The headlines new in 0.4.0 were compared
-on 2026-11-15 with Mathlib master and Tau Ceti main of that day (section "Headlines new in 0.4.0").
+on 2026-11-15 with Mathlib master and Tau Ceti main of that day (section "Headlines new in 0.4.0"). Since 0.5.0
+the library is built on Tau Ceti `1ff5324` (Tau Ceti main of 2026-11-16) and the same Mathlib commit `e8ba86f`; the
+headlines new in 0.5.0 were compared on 2026-11-16 (section "Headlines new in 0.5.0").
 
 The last column of the headline table and the column *Also in* of the book maps credit results that are also
 proved elsewhere: in Mathlib, in Tau Ceti, or in the Stacks Project formalization by Axiom
@@ -129,6 +131,27 @@ and reading the statements found.
 | `shimuraLift_theta_of_dualUnfolding` (Shimura 1973; conditional on `ShimuraDualUnfolding`) | — (no half-integral weight forms) | — | new, conditional: Shimura's lift of a cusp form of weight $k + 1/2$ for the theta multiplier is a cusp form of weight $2k$ | none found |
 | `jacobi_triple_product` (Jacobi 1829, § 64) | `jacobiTheta₂`; no product formula | — | new | none found |
 
+## Headlines new in 0.5.0
+
+Compared on 2026-11-16 with Mathlib master at commit `98f73a9f` and Tau Ceti main at commit `f6105c5d`, by a search of
+both sources (Rankin–Selberg, symmetric square, newforms and elliptic curves, modularity, strong Hasse–Weil, the
+curve $y^2 = x^3 - x$, genus and theta series, half-integral weight and the plus space, partition congruences,
+Ramanujan's $\tau$, Jacobi's cube and quartic identities, $E_2$) and reading the statements found. The two headlines on the newforms of the
+congruent number curves were checked again on the same date with Tau Ceti main at commit `5751803d` and Mathlib
+master at commit `c1ab7892` (newforms of elliptic curves, modularity, the curve $y^2 = x^3 - x$ and its twists): neither
+relates an elliptic curve to a newform.
+
+| headline | Mathlib | Tau Ceti | this release | other formalizations and related results |
+|---|---|---|---|---|
+| `rankinSelberg_levelOne`, `petersson_eq_symSq` (Rankin 1939, Selberg 1940; Zagier 1977) | the Riemann zeta function, Dirichlet series, $q$-expansions | the Petersson product (`CuspForm.peterssonInnerFd`), newforms and their Satake parameters; no Rankin–Selberg integral and no symmetric square | new: continuation, pole and functional equation of $L(f \times \bar g, s)$ at level one; $\langle f, f\rangle$ as a value of $L(\mathrm{Sym}^2 f, s)$ | none found |
+| `elliptic_hasNewform_functionalEquation`, `elliptic_hasNewform_strongHasseWeil`, `elliptic_modularity_consequences`, `elliptic_newform_iff_strongHasseWeil` (Milne, section 11) | the $L$-series of an elliptic curve (`WeierstrassCurve.LFunction`) | newforms, the Fricke functional equation and the root number of a newform, Tate's algorithm, a statement of the Birch and Swinnerton-Dyer conjecture; nothing that relates an elliptic curve to a newform | new: functional equation, parity and strong Hasse–Weil for a curve with a newform; for every curve from the modularity theorem; Weil's converse in Milne's form 11.19 | none found |
+| `thetaGenus_sub_cuspForm_even`, `thetaGenus_sub_cuspForm_odd`, `gross_form_mem_plusCuspForms` (Siegel 1935; Gross 1987) | — | theta series of even lattices and their transformation law at every level, the genus of integral lattices, the even unimodular lattices of ranks 8, 16, 24; no cuspidality of differences in a genus, no odd rank | new: the difference of the theta series of two forms in one genus is a cusp form, every rank (half-integral weight for odd rank); Gross's form in Kohnen's plus space | none found |
+| `plus_heckeT_selfAdjoint`, `kohnen_isomorphism`, `kohnen_zagier`, `waldspurger_plus`, `kohnen_zagier_twistedL_nonneg` (Shimura 1973; Kohnen 1980; Kohnen and Zagier 1981) | — (no half-integral weight forms) | the Petersson product and Hecke operators in integral weight; no half-integral weight | new: self-adjointness of $T(p^2)$ on the plus space; and, conditional on named inputs, Kohnen's isomorphism and the Kohnen–Zagier formula | none found |
+| `elliptic_congruentCurve_one_hasNewform`, `elliptic_congruentCurve_hasNewform` (Atkin and Li 1978, Theorem 3.1, for the twists of $f_{32}$) | the $L$-series of an elliptic curve | newforms, the primitive twist of a newform with a level dividing $Nr^2$ (its exact level is not determined), the curve $y^2 = x^3 - x$ | new: $E_1$ has the newform $f_{32}$ of level 32, and $E_n$, $n$ odd squarefree, the newform $f_{32} \otimes (\cdot/n)$ of level exactly $32n^2$ | none found |
+| `congruent_curve_modular`, `congruent_*_trueL` (Tunnell 1983) | the $L$-series of an elliptic curve | the curve $y^2 = x^3 - x$ and its rational points (`CurveX3SubX.lean`), quadratic twists of curves | new: $f_{32}$ is a cusp form of weight 2 on $\Gamma_0(32)$ and the $L$-series of $E_n$ is that of its twist, hence entire; Tunnell's theorem with the true $L$-function, conditional | none found |
+| `shimuraLift_theta_of_frickeKernel` (Shimura 1973; conditional on `ShimuraFrickeKernelUnfolding`) | — | — | new, conditional on a smaller input than in 0.4.0 | none found |
+| `jacobi_cube`, `ramanujan_partition_congruences`, `ramanujan_tau_congruences`, `ramanujan_question387`, `jacobi_quartic_weber_eighth_powers`, `kronecker_theta_E2` | Euler's pentagonal theorem, partitions, `jacobiTheta₂`, $E_2$ and its transformation, the derivatives of $E_2, E_4, E_6$; no partition or $\tau$ congruences, no cube or quartic identity | the discriminant form and its $q$-expansion | new | none found |
+
 ## Overlap with algebraic-number-theory-lean
 
 The algebraic number theory library [algebraic-number-theory-lean](https://github.com/jonhanke/algebraic-number-theory-lean)
@@ -161,14 +184,14 @@ Ceti (dependencies of this library) already have, and how many this library prov
 | 8 | 9 | 0 | 0 | 6 | 3 | 0 | 0 | 0 |
 | 9 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | 1 |
 | 10 | 2 | 0 | 0 | 1 | 0 | 0 | 1 | 1 |
-| 11 | 22 | 0 | 0 | 9 | 0 | 5 | 8 | 1 |
+| 11 | 22 | 0 | 0 | 10 | 1 | 4 | 7 | 1 |
 | 12 | 116 | 21 | 4 | 41 | 4 | 1 | 45 | 4 |
 
 ### T. Miyake, *Modular Forms* (Springer, 1989)
 
 | chapter | rows | in Mathlib | in Tau Ceti | proved here | proved in part | conditional | other | proved here, also elsewhere |
 |---|---|---|---|---|---|---|---|---|
-| 0 | 272 | 17 | 33 | 105 | 40 | 0 | 77 | 2 |
+| 0 | 272 | 17 | 33 | 106 | 41 | 0 | 75 | 2 |
 
 ### Dimension bounds for modular forms on $\Gamma_0(N)$, $\Gamma_1(N)$ and with a character (Sturm)
 

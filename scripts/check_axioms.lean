@@ -12,6 +12,10 @@ import Solution_HeegnerStark
 import Solution_Waldspurger
 import Solution_CongruentNumbers
 import Solution_Historical
+import Solution_RankinSelberg
+import Solution_EllipticCurves
+import Solution_ThetaGenus
+import Solution_KohnenPlusSpace
 
 #print axioms ModularFormsKB.Headlines.kronecker_modularEquation
 #print axioms ModularFormsKB.Headlines.doublyPeriodic_sums
@@ -77,6 +81,7 @@ import Solution_Historical
 #print axioms ModularFormsKB.Headlines.eisensteinLattice_functionalEquation
 #print axioms ModularFormsKB.Headlines.rankin_unfolding
 #print axioms ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding
+#print axioms ModularFormsKB.Headlines.shimuraLift_theta_of_frickeKernel
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_point
 #print axioms ModularFormsKB.Headlines.congruent_five_six_seven_fortyOne
 #print axioms ModularFormsKB.Headlines.congruent_tunnell_counts
@@ -86,9 +91,36 @@ import Solution_Historical
 #print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_one_three_eleven
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_odd
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_even
+#print axioms ModularFormsKB.Headlines.congruent_curve_modular
+#print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_odd_trueL
+#print axioms ModularFormsKB.Headlines.congruent_not_isCongruent_even_trueL
+#print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_odd_trueL
+#print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_even_trueL
 #print axioms ModularFormsKB.Headlines.jacobi_modular_equation_ode
 #print axioms ModularFormsKB.Headlines.jacobi_theta_fourier
 #print axioms ModularFormsKB.Headlines.jacobi_triple_product
+#print axioms ModularFormsKB.Headlines.jacobi_cube
 #print axioms ModularFormsKB.Headlines.ramanujan_differential_equations
+#print axioms ModularFormsKB.Headlines.ramanujan_partition_congruences
+#print axioms ModularFormsKB.Headlines.ramanujan_tau_congruences
+#print axioms ModularFormsKB.Headlines.ramanujan_question387
 #print axioms ModularFormsKB.Headlines.weber_theta_eta
+#print axioms ModularFormsKB.Headlines.jacobi_quartic_weber_eighth_powers
 #print axioms ModularFormsKB.Headlines.kronecker_ser_transformation
+#print axioms ModularFormsKB.Headlines.kronecker_theta_E2
+#print axioms ModularFormsKB.Headlines.rankinSelberg_levelOne
+#print axioms ModularFormsKB.Headlines.petersson_eq_symSq
+#print axioms ModularFormsKB.Headlines.elliptic_hasNewform_functionalEquation
+#print axioms ModularFormsKB.Headlines.elliptic_hasNewform_strongHasseWeil
+#print axioms ModularFormsKB.Headlines.elliptic_congruentCurve_one_hasNewform
+#print axioms ModularFormsKB.Headlines.elliptic_congruentCurve_hasNewform
+#print axioms ModularFormsKB.Headlines.elliptic_modularity_consequences
+#print axioms ModularFormsKB.Headlines.elliptic_newform_iff_strongHasseWeil
+#print axioms ModularFormsKB.Headlines.thetaGenus_sub_cuspForm_even
+#print axioms ModularFormsKB.Headlines.thetaGenus_sub_cuspForm_odd
+#print axioms ModularFormsKB.Headlines.gross_form_mem_plusCuspForms
+#print axioms ModularFormsKB.Headlines.plus_heckeT_selfAdjoint
+#print axioms ModularFormsKB.Headlines.kohnen_isomorphism
+#print axioms ModularFormsKB.Headlines.kohnen_zagier
+#print axioms ModularFormsKB.Headlines.waldspurger_plus
+#print axioms ModularFormsKB.Headlines.kohnen_zagier_twistedL_nonneg

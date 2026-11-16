@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge_RankinSelberg",
+  "solution_module": "Solution_RankinSelberg",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.rankinSelberg_levelOne",
+    "ModularFormsKB.Headlines.petersson_eq_symSq"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
