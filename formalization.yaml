@@ -33,7 +33,7 @@ project:
     Gamma_0(N) is a polynomial ring) and Theorem 4.5.4 (2) (T(n) and T*(n) adjoint for every n); and historical
     theorems of Jacobi (the differential equation of modular equations, the Fourier series of Theta and H),
     Ramanujan (his differential equations for P, Q, R), Weber (theta functions as eta times his functions f,
-    conditional on the Jacobi triple product) and Kronecker (the transformation law of Ser_rho for rho >= 2). Release 0.4.0 adds the existence theorem and the Riemann-Roch theorem on every compact Riemann surface, the dimension and genus formulas for every subgroup of finite index of SL_2(Z), the triviality of holomorphic line bundles on the upper half plane, theta series with spherical functions in every rank (half-integral weight for odd rank), Shimura's twisted theta law for every character, Hecke's continuation of Eisenstein series in s and his limits in weights two and one, Hecke's lemma, Hecke's functional equation of the lattice Eisenstein series, the Rankin-Selberg unfolding, Shimura's theorem for the theta multiplier conditional on one named input (ShimuraDualUnfolding), and the Jacobi triple product, with which Weber's formulas become unconditional. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
+    conditional on the Jacobi triple product) and Kronecker (the transformation law of Ser_rho for rho >= 2). Release 0.4.0 adds the existence theorem and the Riemann-Roch theorem on every compact Riemann surface, the dimension and genus formulas for every subgroup of finite index of SL_2(Z), the triviality of holomorphic line bundles on the upper half plane, theta series with spherical functions in every rank (half-integral weight for odd rank), Shimura's twisted theta law for every character, Hecke's continuation of Eisenstein series in s and his limits in weights two and one, Hecke's lemma, Hecke's functional equation of the lattice Eisenstein series, the Rankin-Selberg unfolding, Shimura's theorem for the theta multiplier conditional on one named input (ShimuraDualUnfolding), and the Jacobi triple product, with which Weber's formulas become unconditional. Release 0.5.0 adds the Rankin-Selberg method at level one (continuation, simple pole with residue a multiple of the Petersson product, functional equation) and the Petersson norm of a normalized eigenform as a value of its symmetric square L-function; for elliptic curves over Q with a newform, the entire L-function, the functional equation with sign w = +-1, parity and Milne's strong Hasse-Weil conjecture, and the same for every elliptic curve conditional on the modularity theorem; theta series of quadratic forms in one genus differ by a cusp form, in every rank (half-integral weight for odd rank), and Gross's form of level 11 lies in Kohnen's plus space; the self-adjointness of T(p^2) on Kohnen's plus space, and, conditional on named inputs, Kohnen's isomorphism, the Kohnen-Zagier formula, Waldspurger's theorem on the plus space and the nonnegativity of L(F, D, k); the modularity of the congruent number curves y^2 = x^3 - n^2 x with an entire L-function, and Tunnell's theorem with this true L-function, conditional on named inputs; Shimura's theorem for the theta multiplier conditional on a smaller input (ShimuraFrickeKernelUnfolding); and Jacobi's cube and quartic identities, Ramanujan's congruences for p(n) and tau(n) and his Question 387, Weber's f^8 = f_1^8 + f_2^8 and Kronecker's identity theta'''(0, w) = -pi^2 E_2(w) theta'(0, w). Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
     credits the results proved here that Mathlib, Tau Ceti or the Stacks Project formalization (Axiom) also prove.
   authors:
     - "Jonathan Hanke"
@@ -49,7 +49,9 @@ classification:
   # 03B35 mechanization of proofs and logical operations.
   # 11F37 forms of half-integer weight; 11G05 elliptic curves over global fields (congruent numbers); 11R52 quaternion
   # algebras; 11F27 theta series; 30F10 compact Riemann surfaces; 14H55 Riemann surfaces (Riemann-Roch).
-  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "11R29", "11G15", "11F37", "11G05", "11R52", "11F27", "30F10", "14H55", "03B35"]
+  # 11F67 special values of automorphic L-series; 11P83 partitions, congruences (Ramanujan); 11E12 quadratic forms over
+  # global rings and fields (genus).
+  msc2020: ["11F03", "11F11", "11F25", "11F66", "14G15", "14H52", "33E05", "11R29", "11G15", "11F37", "11G05", "11R52", "11F27", "30F10", "14H55", "11F67", "11P83", "11E12", "03B35"]
 
 sources:
   - title: "Modular Functions and Modular Forms (version 1.31)"
@@ -194,16 +196,17 @@ sources:
 related_formalizations:
   - id: "https://github.com/leanprover-community/mathlib4"
     relationship: "builds-on"
-    note: "Built on Mathlib at commit e8ba86f (the commit Tau Ceti ca32605 pins; until 0.3.1: 1b1ccf4). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
+    note: "Built on Mathlib at commit e8ba86f (the commit Tau Ceti 1ff5324 and, until 0.4.0, ca32605 pin; until 0.3.1: 1b1ccf4); the headlines new in 0.5.0 were compared with Mathlib master 98f73a9f (2026-11-16). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
   - id: "https://github.com/TauCetiProject/TauCeti"
     relationship: "builds-on"
     note: >-
-      A Lake dependency at commit ca32605 (Tau Ceti main of 2026-11-14; until 0.3.1: 4908b03; built from source): Fuchsian groups and the compactified modular curves as
+      A Lake dependency at commit 1ff5324 (Tau Ceti main of 2026-11-16; 0.4.0: ca32605; until 0.3.1: 4908b03; built from source): Fuchsian groups and the compactified modular curves as
       compact Riemann surfaces, the j-function, Hecke operators and newforms at level N, function fields over finite
       fields and their genus, elliptic-curve schemes and the fine moduli variety Y_1(N). Tau Ceti also has the
       Kronecker-Weber theorem and the addition theorem for the Weierstrass function, which are proved here too but
       are not headlines. docs/results/comparison.md compares each headline with Tau Ceti main (686d0d7f, 2026-11-07; 71ce0a33,
-      2026-11-14, for the headlines new in 0.3.1; main of 2026-11-15 for those new in 0.4.0;
+      2026-11-14, for the headlines new in 0.3.1; main of 2026-11-15 for those new in 0.4.0; f6105c5d, 2026-11-16, for those
+      new in 0.5.0;
       a5f657a8, 2026-11-12, for the class number one theorem: Tau Ceti proves that the nine fields have class number
       one and the classification for discriminants above -51; the Diophantine and numerical steps of Heegner's proof
       in this library are ported from Tau Ceti).
@@ -213,7 +216,7 @@ related_formalizations:
 
 status:
   scope: >-
-    Release 0.4.0. Formalized (the 79 statements of the Challenge_<book>.lean files, proved in the
+    Release 0.5.0. Formalized (the 107 statements of the Challenge_<book>.lean files, proved in the
     Solution_<book>.lean files):
     Milne sections 0 to 10, 13 (Theorem 6.1, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4 and 8.6,
     Example 2.23; new in 0.3.1: Remark 2.25; new in 0.4.0: Theorems 1.17, 1.20, 4.9, 2.22, Remark 4.26), Milne
@@ -226,10 +229,16 @@ status:
     WeberHeegnerStarkInputs, and the second also QuadraticDiscriminantInput, as hypotheses), Waldspurger 27
     (17 unconditional, of which 2 new in 0.4.0; 10 conditional on the named inputs WaldspurgerSquareClass,
     KohnenSquarefree, WaldspurgerCoefficients, WaldspurgerFibreDimension, GrossRatio or, new in 0.4.0,
-    ShimuraDualUnfolding) and CongruentNumbers 9 (4 unconditional; 3
-    conditional on TunnellFormula and CoatesWiles; 2 conditional in addition on WeakBSD, the weak Birch and
-    Swinnerton-Dyer conjecture), and Historical 6 (new in 0.3.1: Jacobi 2, Ramanujan 1, Weber 1, Kronecker 1; new in 0.4.0:
-    the Jacobi triple product; all unconditional since 0.4.0). The book maps
+    ShimuraDualUnfolding; new in 0.5.0: 1 more conditional on ShimuraFrickeKernelUnfolding) and CongruentNumbers 14
+    (4 unconditional; 3 conditional on TunnellFormula and CoatesWiles; 2 conditional in addition on WeakBSD, the weak
+    Birch and Swinnerton-Dyer conjecture; new in 0.5.0: 1 unconditional, 2 conditional on TunnellInputs and
+    CoatesWilesCM, 2 conditional in addition on Tau Ceti's statement of the Birch and Swinnerton-Dyer conjecture for
+    E_n), Historical 12 (new in 0.3.1: Jacobi 2, Ramanujan 1, Weber 1, Kronecker 1; new in 0.4.0: the Jacobi triple
+    product; new in 0.5.0: Jacobi 1, Ramanujan 3, Jacobi-Weber 1, Kronecker 1; all unconditional), and, new in 0.5.0,
+    RankinSelberg 2 (unconditional), EllipticCurves 6 (4 unconditional, among them the newforms of the congruent number curves E_1 and E_n, n odd
+    squarefree; 1 conditional on ModularityTheorem, 1 on
+    NewformOfConductor), ThetaGenus 3 (unconditional) and KohnenPlusSpace 5 (1 unconditional; 1 conditional on
+    KohnenTraceIdentity, 3 on KohnenTraceIdentity, KohnenKernelModular and ZagierKernelUnfolding). The book maps
     give the status of every item of Milne and Miyake; the statement maps give the status of the central results of
     Shimura, Iwaniec and Andrianov-Zhuravlev, and of the papers on Waldspurger's theorems and the historical papers, that are stated in Lean. Some library files state
     named results of the books without proof (named statements); no unconditional headline depends on them.
@@ -287,10 +296,18 @@ fidelity:
     polynomials is not formalized); in odd rank the level is 4N and the character is not identified with
     Miyake's formula. Shimura's theorem is conditional on ShimuraDualUnfolding and stated for the theta
     multiplier only. Riemann-Roch is stated as in Milne, with an integer g; Corollary 1.21 identifies it with the
-    genus but is not part of the headline. See the README, Known restrictions.
+    genus but is not part of the headline. (11) New in 0.5.0: Rankin-Selberg at level one only, the series identity
+    for Re s > 2; normalized eigenforms given by conditions on their coefficients; L(Sym^2 f, w) continued to
+    Re w >= k only. Elliptic curves: the conductor is the norm of Tau Ceti's conductor from Tate's algorithm (Ogg's
+    formula not formalized); the converse of Milne 11.19 uses a uniform sign; the newforms of the congruent number curves E_n are proved for
+    n = 1 and odd squarefree n only. Theta
+    series of one genus: Gram (Hessian) convention, genus by congruences, positive definite forms and the trivial
+    spherical function. Kohnen's plus space at level 4 and for the theta multiplier only; Kohnen's trace identity in a
+    reformulated form. Tunnell with the true L-function: four cited theorems are assumed (Waldspurger, Tunnell's
+    eigenforms and central values, Coates-Wiles). See the README, Known restrictions.
 
 review:
-  status: "not yet reviewed: the 79 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 107 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
@@ -687,6 +704,147 @@ alignment:
       module: "Challenge_Historical / Solution_Historical"
       status: "proved"
       note: "New in 0.4.0."
+
+    - source: "Jacobi, Fundamenta nova (1829), section 66, 5) (the cube of Euler's product)"
+      lean: "ModularFormsKB.Headlines.jacobi_cube"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.0."
+    - source: "Ramanujan, Some properties of p(n) (1919), Collected Papers No. 25, (1)-(3)"
+      lean: "ModularFormsKB.Headlines.ramanujan_partition_congruences"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.0. Moduli 5, 7 and 35, from Jacobi's cube identity."
+    - source: "Ramanujan, Congruence properties of partitions, Collected Papers No. 28, p. 230"
+      lean: "ModularFormsKB.Headlines.ramanujan_tau_congruences"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.0. tau(5n) mod 5 and tau(n) mod 7 for n = 0, 3, 5, 6 mod 7; tau defined by the formal product."
+    - source: "Ramanujan, Question 387, J. Indian Math. Soc. 4 (1912); Collected Papers p. 326"
+      lean: "ModularFormsKB.Headlines.ramanujan_question387"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.0."
+    - source: "Jacobi, Fundamenta nova (1829), section 36; Weber (1891), section 34 [unverified locators]"
+      lean: "ModularFormsKB.Headlines.jacobi_quartic_weber_eighth_powers"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.0."
+    - source: "Kronecker, Werke 5, II, article IV, pp. 146-147"
+      lean: "ModularFormsKB.Headlines.kronecker_theta_E2"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.0. Mathlib's E_2."
+    - source: "Rankin (1939), Selberg (1940): the Rankin-Selberg method at level one"
+      lean: "ModularFormsKB.Headlines.rankinSelberg_levelOne"
+      module: "Challenge_RankinSelberg / Solution_RankinSelberg"
+      status: "proved"
+      note: "New in 0.5.0. Level one; agreement with the series for Re s > 2."
+    - source: "Zagier (1977): the Petersson norm and L(Sym^2 f, k)"
+      lean: "ModularFormsKB.Headlines.petersson_eq_symSq"
+      module: "Challenge_RankinSelberg / Solution_RankinSelberg"
+      status: "proved"
+      note: "New in 0.5.0. Normalized eigenforms given by their coefficients; continuation to Re w >= k."
+    - source: "Milne, Modular Functions and Modular Forms, section 11 (functional equation and parity of a modular elliptic curve)"
+      lean: "ModularFormsKB.Headlines.elliptic_hasNewform_functionalEquation"
+      module: "Challenge_EllipticCurves / Solution_EllipticCurves"
+      status: "proved"
+      note: "New in 0.5.0. For a curve with a newform (a condition, not an input)."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 11.19 (modular implies Conjecture 11.17)"
+      lean: "ModularFormsKB.Headlines.elliptic_hasNewform_strongHasseWeil"
+      module: "Challenge_EllipticCurves / Solution_EllipticCurves"
+      status: "proved"
+      note: "New in 0.5.0. Analytic form."
+    - source: "The congruent number curve y^2 = x^3 - x has the newform f_32 of level 32 (Miyake, Theorem 4.8.2, for the Hecke character of Q(i))"
+      lean: "ModularFormsKB.Headlines.elliptic_congruentCurve_one_hasNewform"
+      module: "Challenge_EllipticCurves / Solution_EllipticCurves"
+      status: "proved"
+      note: "New in 0.5.0."
+    - source: "Atkin-Li (1978), Theorem 3.1, for the twists of f_32: y^2 = x^3 - n^2 x, n odd squarefree, has the newform f_32 twisted by (./n), of level 32 n^2"
+      lean: "ModularFormsKB.Headlines.elliptic_congruentCurve_hasNewform"
+      module: "Challenge_EllipticCurves / Solution_EllipticCurves"
+      status: "proved"
+      note: "New in 0.5.0. Odd n only."
+    - source: "Wiles (1995), Taylor-Wiles (1995), Breuil-Conrad-Diamond-Taylor (2001); Milne, Theorem 11.24"
+      lean: "ModularFormsKB.Headlines.elliptic_modularity_consequences"
+      module: "Challenge_EllipticCurves / Solution_EllipticCurves"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on ModularityTheorem (assumed)."
+    - source: "Milne, Modular Functions and Modular Forms, Theorem 11.19 (both directions); Weil's converse theorem"
+      lean: "ModularFormsKB.Headlines.elliptic_newform_iff_strongHasseWeil"
+      module: "Challenge_EllipticCurves / Solution_EllipticCurves"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on NewformOfConductor (assumed); the uniform-sign form of the conjecture."
+    - source: "Siegel (1935): theta series of one genus differ by a cusp form (even rank)"
+      lean: "ModularFormsKB.Headlines.thetaGenus_sub_cuspForm_even"
+      module: "Challenge_ThetaGenus / Solution_ThetaGenus"
+      status: "proved"
+      note: "New in 0.5.0. Gram-matrix form, Gamma_1(N)."
+    - source: "Siegel (1935): theta series of one genus differ by a cusp form (odd rank, half-integral weight)"
+      lean: "ModularFormsKB.Headlines.thetaGenus_sub_cuspForm_odd"
+      module: "Challenge_ThetaGenus / Solution_ThetaGenus"
+      status: "proved"
+      note: "New in 0.5.0. Shimura's S_{k+1/2}(4N, chi), chi(d) = (2 det H / d)."
+    - source: "Gross (1987): the weight 3/2 form of level 11 is a cusp form in Kohnen's plus space of level 44"
+      lean: "ModularFormsKB.Headlines.gross_form_mem_plusCuspForms"
+      module: "Challenge_ThetaGenus / Solution_ThetaGenus"
+      status: "proved"
+      note: "New in 0.5.0."
+    - source: "Shimura (1973), section 1; Kohnen (1980), section 1: T(p^2) is self-adjoint on the plus space"
+      lean: "ModularFormsKB.Headlines.plus_heckeT_selfAdjoint"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.0."
+    - source: "Kohnen, Math. Ann. 248 (1980), Theorem 1 (Kohnen's isomorphism)"
+      lean: "ModularFormsKB.Headlines.kohnen_isomorphism"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on KohnenTraceIdentity (assumed)."
+    - source: "Kohnen and Zagier, Invent. Math. 64 (1981), Theorem 1"
+      lean: "ModularFormsKB.Headlines.kohnen_zagier"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on KohnenTraceIdentity, KohnenKernelModular, ZagierKernelUnfolding (assumed)."
+    - source: "Waldspurger (1981) on the plus space, in the form of Kohnen and Zagier (1981)"
+      lean: "ModularFormsKB.Headlines.waldspurger_plus"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on the three inputs of kohnen_zagier."
+    - source: "Kohnen and Zagier, Invent. Math. 64 (1981), Corollary 1 (L(F, D, k) >= 0)"
+      lean: "ModularFormsKB.Headlines.kohnen_zagier_twistedL_nonneg"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on the three inputs of kohnen_zagier."
+    - source: "Shimura (1973), Main Theorem, for the theta multiplier"
+      lean: "ModularFormsKB.Headlines.shimuraLift_theta_of_frickeKernel"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on ShimuraFrickeKernelUnfolding (assumed), a smaller input than ShimuraDualUnfolding."
+    - source: "The congruent number curves are modular: f_32 in S_2(Gamma_0(32)) and L(E_n, s) = L(f_32 twisted by (n/.), s)"
+      lean: "ModularFormsKB.Headlines.congruent_curve_modular"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.5.0. Mathlib's L-function of E_n; squarefree n."
+    - source: "Tunnell, Invent. Math. 72 (1983), with the true L-function (odd n)"
+      lean: "ModularFormsKB.Headlines.congruent_not_isCongruent_odd_trueL"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on TunnellInputs and CoatesWilesCM (assumed)."
+    - source: "Tunnell, Invent. Math. 72 (1983), with the true L-function (even n)"
+      lean: "ModularFormsKB.Headlines.congruent_not_isCongruent_even_trueL"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on TunnellInputs and CoatesWilesCM (assumed)."
+    - source: "Tunnell's criterion as an equivalence, odd n, with the true L-function"
+      lean: "ModularFormsKB.Headlines.congruent_isCongruent_iff_odd_trueL"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on TunnellInputs, CoatesWilesCM and on Tau Ceti's statement of the Birch and Swinnerton-Dyer conjecture for E_n (a conjecture)."
+    - source: "Tunnell's criterion as an equivalence, even n, with the true L-function"
+      lean: "ModularFormsKB.Headlines.congruent_isCongruent_iff_even_trueL"
+      module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
+      status: "proved"
+      note: "New in 0.5.0. Conditional on TunnellInputs, CoatesWilesCM and on Tau Ceti's statement of the Birch and Swinnerton-Dyer conjecture for E_n (a conjecture)."
 
 acknowledgements: >-
   Mathlib and its contributors; the Tau Ceti contributors, on whose library this one is built; the Lean FRO for

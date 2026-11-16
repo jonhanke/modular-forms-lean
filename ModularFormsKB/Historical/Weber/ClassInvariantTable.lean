@@ -10,8 +10,8 @@ values, for `m = 1, …, 1848`, of a power of `f(√-m)` or `f₁(√-m)` (times
 of an equation over a small quadratic field.
 
 This file states the first nine rows of Tabelle VI (p. 721), `m = 1, …, 9`, each as a named proposition, and
-collects them in `WeberTableVIFirstRows`. Rows 1, 2 and 4 are proved (`tableRow1`, `tableRow2`, `tableRow4`),
-using only Mathlib's `η` inversion formula, `η(z+1) = e^{2πi/24} η(z)` and Weber's `f f₁ f₂ = √2`. The other
+collects them in `WeberTableVIFirstRows`. Rows 1, 2 and 4 are proved here (`tableRow1`, `tableRow2`, `tableRow4`), and row 3 in `TableRow3.lean`
+(`tableRow3`), using only Mathlib's `η` inversion formula, `η(z+1) = e^{2πi/24} η(z)` and Weber's `f f₁ f₂ = √2`. The other
 rows are not proved: each is a special value of an `η`-quotient at a CM point, which needs either the theory of
 complex multiplication (Weber's route: the value is a class invariant, a root of an explicit equation, located
 numerically) or further explicit evaluations of `η` at CM points, none of which is in Mathlib. The rows have

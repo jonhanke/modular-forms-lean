@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge_KohnenPlusSpace",
+  "solution_module": "Solution_KohnenPlusSpace",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.plus_heckeT_selfAdjoint",
+    "ModularFormsKB.Headlines.kohnen_isomorphism",
+    "ModularFormsKB.Headlines.kohnen_zagier",
+    "ModularFormsKB.Headlines.waldspurger_plus",
+    "ModularFormsKB.Headlines.kohnen_zagier_twistedL_nonneg"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

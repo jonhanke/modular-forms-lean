@@ -5,21 +5,20 @@ import ModularFormsKB.Citation
 /-!
 # Weber: the theta constants as `η` times squares of Weber's functions
 
-Weber, *Elliptische Functionen und algebraische Zahlen* (1891), § 21, (9)–(10), p. 63 (also the
-pilot row WA-05, § 29, p. 87; *Lehrbuch der Algebra* III (1908), § 24, p. 85 and § 34, p. 114). With
+Weber, *Elliptische Functionen und algebraische Zahlen* (1891), § 21, (9)–(10), p. 63 (also
+§ 29, p. 87; *Lehrbuch der Algebra* III (1908), § 24, p. 85 and § 34, p. 114). With
 `q = e^{πiω}`:
 
   `ϑ₀₀ = η f²`, `ϑ₀₁ = η f₁²`, `ϑ₁₀ = η f₂²`,
 
 where `η(ω) = q^{1/12} ∏ (1 - q^{2ν})`, `f(ω) = q^{-1/24} ∏ (1 + q^{2ν-1})`, `f₁(ω) = q^{-1/24} ∏ (1 - q^{2ν-1})`,
-`f₂(ω) = √2 q^{1/12} ∏ (1 + q^{2ν})`.
+`f₂(ω) = √2 q^{1/12} ∏ (1 + q^{2ν})` (Weber § 21).
 
 Weber obtains (9) from the product formulas § 21 (1)–(5): `ϑ₀₀(v) = Q ∏ (1 + q^{2ν-1} e^{2πiv})(1 + q^{2ν-1} e^{-2πiv})`
 with `Q` independent of `v` (two functions with the same zeros and multipliers, § 17), and `Q = q^{-1/12} η(ω)`
 (§ 21 (6)–(8), from Jacobi's `ϑ₁₁' = π ϑ₀₀ ϑ₀₁ ϑ₁₀`). Together these are **Jacobi's triple product identity**
 (Jacobi, *Fundamenta nova* 1829, § 64), which is neither in Mathlib nor in Tau Ceti. It is stated here as
-`JacobiTripleProduct` and proved (`jacobiTripleProduct`, from `Historical.Jacobi.jacobiTheta₂_eq_tprod`, job
-mf-hist-2); Weber's (9) is therefore unconditional (`weberTheta00_eq`, `weberTheta01_eq`, `weberTheta10_eq`).
+`JacobiTripleProduct` and proved (`jacobiTripleProduct`, from `Historical.Jacobi.jacobiTheta₂_eq_tprod`); Weber's (9) is therefore unconditional (`weberTheta00_eq`, `weberTheta01_eq`, `weberTheta10_eq`).
 
 `f` and `f₂` are the definitions `weberF`, `weberF₂` of the Weber–Heegner–Stark pilot (via Mathlib's `η`);
 `f₁ = η(ω/2)/η(ω)` is new here.
@@ -216,7 +215,7 @@ lemma weberF₂_eq_q {ω q s : ℂ} (hω : 0 < ω.im) (hq : q = cexp (π * I * �
 
 end Products
 
-/-- **Weber § 21 (9), first formula**: `ϑ₀₀ = η f²`, from the triple product. -/
+/-- **Weber § 21 (9), first formula**: `ϑ₀₀ = η f²`, via the triple product. -/
 @[kb "weber1891" "§ 21, (9), p. 63"]
 theorem weberTheta00_eq {ω : ℂ} (hω : 0 < ω.im) :
     weberTheta00 ω = ModularForm.eta ω * weberF ω ^ 2 := by

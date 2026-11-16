@@ -189,9 +189,17 @@ theorem exists_cuspSpace_coeff_eq_ite_coprime {k : ℤ} {χ : DirichletCharacter
           else 0 := by
     intro M _ hNM hM
     subst hM
-    obtain ⟨g, hg, hgq⟩ := TauCeti.exists_mem_cuspFormCharSpace_qExpansion_coeff_eq_ite_coprime
+    have h1 : (N * ∏ p ∈ L.primeFactors, if p ∣ N then 1 else p) * ∏ p ∈ L.primeFactors, p ∣
+        L.primeFactors.prod id * (N * ∏ p ∈ L.primeFactors, if p ∣ N then 1 else p) := by
+      rw [mul_comm]
+      exact dvd_rfl
+    have h2 : (∏ p ∈ L.primeFactors, p) ^ 2 ∣
+        L.primeFactors.prod id * (N * ∏ p ∈ L.primeFactors, if p ∣ N then 1 else p) := by
+      rw [sq]
+      exact mul_dvd_mul dvd_rfl (Nat.prod_dvd_of_subset_primeFactors hLN)
+    obtain ⟨g, hg, hgq⟩ := TauCeti.exists_mem_cuspFormCharSpace_qExpansion_coeff_eq_ite_coprime_of_dvd
       (χ.toUnitHom.comp (ZMod.unitsMap hNN'))
-      (TauCeti.CuspForm.restrict_mem_cuspFormCharSpace χ.toUnitHom hNN' f.2) hLN
+      (TauCeti.CuspForm.restrict_mem_cuspFormCharSpace χ.toUnitHom hNN' f.2) h1 h2
     refine ⟨g, ?_, fun n ↦ ?_⟩
     · rw [MonoidHom.comp_assoc, ZMod.unitsMap_comp] at hg
       exact hg

@@ -179,12 +179,12 @@ noncomputable def heckeTIntLin (w M : ℕ) (ψ : DirichletCharacter ℂ M) (p : 
 /-! The proof of the Hecke equivariance repeats the divisor-sum manipulations of `ShimuraLift.lean` (private there). -/
 
 /-- Divisor-antidiagonal sum $\sum_{de = n} f(d)g(e)$. -/
-private noncomputable def dsum (f g : ℕ → ℂ) (n : ℕ) : ℂ :=
+noncomputable def liftDsum(f g : ℕ → ℂ) (n : ℕ) : ℂ :=
   ∑ x ∈ n.divisorsAntidiagonal, f x.1 * g x.2
 
 private theorem dsum_filter_dvd (f g : ℕ → ℂ) {p : ℕ} (hp : 0 < p) (n : ℕ) :
-    ∑ x ∈ (p * n).divisorsAntidiagonal with p ∣ x.2, f x.1 * g x.2 = dsum f (fun m ↦ g (p * m)) n := by
-  unfold dsum
+    ∑ x ∈ (p * n).divisorsAntidiagonal with p ∣ x.2, f x.1 * g x.2 = liftDsum f (fun m ↦ g (p * m)) n := by
+  unfold liftDsum
   refine Finset.sum_nbij' (fun x ↦ (x.1, x.2 / p)) (fun y ↦ (y.1, p * y.2)) ?_ ?_ ?_ ?_ ?_
   · rintro ⟨d, e⟩ hx
     simp only [Finset.mem_filter, Nat.mem_divisorsAntidiagonal] at hx ⊢
@@ -239,27 +239,27 @@ private theorem dsum_filter_not_dvd (f g : ℕ → ℂ) {p : ℕ} (hp : p.Prime)
     have hd : p ∣ d := ((Nat.Prime.dvd_mul hp).1 ⟨n, hde⟩).resolve_right he
     simp [Nat.mul_div_cancel' hd]
 
-private theorem dsum_mul_prime (f g : ℕ → ℂ) {p : ℕ} (hp : p.Prime)
+theorem liftDsum_mul_prime(f g : ℕ → ℂ) {p : ℕ} (hp : p.Prime)
     (hf : ∀ d, d ≠ 0 → f (p * d) = f p * f d) (n : ℕ) :
-    dsum f g (p * n) = dsum f (fun m ↦ g (p * m)) n +
-      f p * dsum f (fun m ↦ if p ∣ m then 0 else g m) n := by
-  rw [dsum, ← Finset.sum_filter_add_sum_filter_not _ (fun x ↦ p ∣ x.2),
+    liftDsum f g (p * n) = liftDsum f (fun m ↦ g (p * m)) n +
+      f p * liftDsum f (fun m ↦ if p ∣ m then 0 else g m) n := by
+  rw [liftDsum, ← Finset.sum_filter_add_sum_filter_not _ (fun x ↦ p ∣ x.2),
     dsum_filter_dvd f g hp.pos, dsum_filter_not_dvd f g hp]
   congr 1
-  rw [dsum, Finset.mul_sum, Finset.sum_filter]
+  rw [liftDsum, Finset.mul_sum, Finset.sum_filter]
   refine Finset.sum_congr rfl fun x hx ↦ ?_
   have hx1 : x.1 ≠ 0 := by
     rw [Nat.mem_divisorsAntidiagonal] at hx
     rintro h; exact hx.2 (by rw [← hx.1, h, zero_mul])
   split_ifs <;> simp [hf _ hx1]; ring
 
-private theorem dsum_V (f g : ℕ → ℂ) {p : ℕ} (hp : 0 < p) (n : ℕ) :
-    dsum f (fun m ↦ if p ∣ m then g (m / p) else 0) n = if p ∣ n then dsum f g (n / p) else 0 := by
+theorem liftDsum_V(f g : ℕ → ℂ) {p : ℕ} (hp : 0 < p) (n : ℕ) :
+    liftDsum f (fun m ↦ if p ∣ m then g (m / p) else 0) n = if p ∣ n then liftDsum f g (n / p) else 0 := by
   split_ifs with hn
   · obtain ⟨n', rfl⟩ := hn
     have h := dsum_filter_dvd f (fun m ↦ g (m / p)) hp n'
     simp only [Nat.mul_div_cancel_left _ hp] at h
-    rw [Nat.mul_div_cancel_left _ hp, dsum, ← h, Finset.sum_filter]
+    rw [Nat.mul_div_cancel_left _ hp, liftDsum, ← h, Finset.sum_filter]
     refine Finset.sum_congr rfl fun x _ ↦ ?_
     split_ifs with h
     · simp
@@ -269,9 +269,9 @@ private theorem dsum_V (f g : ℕ → ℂ) {p : ℕ} (hp : 0 < p) (n : ℕ) :
     have : ¬ p ∣ x.2 := fun h ↦ hn (hx.1 ▸ dvd_mul_of_dvd_right h _)
     simp [this]
 
-private theorem kohnenLiftCoeff_eq_dsum (k : ℕ) (D : ℤ) (a : ℕ → ℂ) (n : ℕ) :
+theorem kohnenLiftCoeff_eq_dsum(k : ℕ) (D : ℤ) (a : ℕ → ℂ) (n : ℕ) :
     kohnenLiftCoeff k D a n =
-      dsum (fun d ↦ (kroneckerDisc D d : ℂ) * (d : ℂ) ^ ((k : ℤ) - 1)) (fun m ↦ a (D.natAbs * m ^ 2)) n :=
+      liftDsum (fun d ↦ (kroneckerDisc D d : ℂ) * (d : ℂ) ^ ((k : ℤ) - 1)) (fun m ↦ a (D.natAbs * m ^ 2)) n :=
   (Nat.sum_divisorsAntidiagonal
     (fun d e ↦ (kroneckerDisc D d : ℂ) * (d : ℂ) ^ ((k : ℤ) - 1) * a (D.natAbs * e ^ 2))).symm
 
@@ -351,8 +351,8 @@ theorem kohnenLiftCoeff_heckeT (k : ℕ) {D : ℤ} (hD : 0 < (-1) ^ k * D) {p : 
     ring
   have hψ : (1 : DirichletCharacter ℂ 1) p = 1 := MulChar.one_apply (isUnit_of_subsingleton _)
   simp only [heckeTInt, kohnenLiftCoeff_eq_dsum, ← hF, ← hB, hψ]
-  rw [dsum_mul_prime F B hp hFmul, ← mul_ite_zero, ← dsum_V F B hp.pos]
-  unfold dsum
+  rw [liftDsum_mul_prime F B hp hFmul, ← mul_ite_zero, ← liftDsum_V F B hp.pos]
+  unfold liftDsum
   simp only [hB, heckeT_Dsq k hDabs hp hp2 ht' a, mul_add, Finset.sum_add_distrib, Finset.mul_sum]
   push_cast
   congr 1

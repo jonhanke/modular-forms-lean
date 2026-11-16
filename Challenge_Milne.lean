@@ -15,7 +15,7 @@ import ModularFormsKB.Milne.Wave14.LineBundles
 import ModularFormsKB.Milne.Wave15.Corollaries
 
 /-!
-# Headline statements of modular-forms-lean 0.4.0: Milne, *Modular Functions and Modular Forms*, sections 0 to 10
+# Headline statements of modular-forms-lean 0.5.0: Milne, *Modular Functions and Modular Forms*, sections 0 to 10
 
 The main results of the library for sections 0 to 10 of Milne's *Modular Functions and Modular Forms* (version 1.31), one theorem each, with every proof a deliberate `sorry`: to check what
 is claimed, read this file. `Solution_Milne.lean` proves the same statements from the library, and `lake comparator`

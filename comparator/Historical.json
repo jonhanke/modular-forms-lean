@@ -5,9 +5,15 @@
     "ModularFormsKB.Headlines.jacobi_modular_equation_ode",
     "ModularFormsKB.Headlines.jacobi_theta_fourier",
     "ModularFormsKB.Headlines.jacobi_triple_product",
+    "ModularFormsKB.Headlines.jacobi_cube",
     "ModularFormsKB.Headlines.ramanujan_differential_equations",
+    "ModularFormsKB.Headlines.ramanujan_partition_congruences",
+    "ModularFormsKB.Headlines.ramanujan_tau_congruences",
+    "ModularFormsKB.Headlines.ramanujan_question387",
     "ModularFormsKB.Headlines.weber_theta_eta",
-    "ModularFormsKB.Headlines.kronecker_ser_transformation"
+    "ModularFormsKB.Headlines.jacobi_quartic_weber_eighth_powers",
+    "ModularFormsKB.Headlines.kronecker_ser_transformation",
+    "ModularFormsKB.Headlines.kronecker_theta_E2"
   ],
   "definition_names": [],
   "permitted_axioms": [

@@ -1,6 +1,6 @@
 name = "modular_forms_lean"
-version = "0.4.0"
-defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_MilneArithmetic", "Solution_MilneArithmetic", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers", "Challenge_Historical", "Solution_Historical", "MapNameDeps"]
+version = "0.5.0"
+defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_MilneArithmetic", "Solution_MilneArithmetic", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers", "Challenge_Historical", "Solution_Historical", "Challenge_RankinSelberg", "Solution_RankinSelberg", "Challenge_EllipticCurves", "Solution_EllipticCurves", "Challenge_ThetaGenus", "Solution_ThetaGenus", "Challenge_KohnenPlusSpace", "Solution_KohnenPlusSpace", "MapNameDeps"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -11,7 +11,7 @@ autoImplicit = false
 [[require]]
 name = "TauCeti"
 git = "https://github.com/TauCetiProject/TauCeti.git"
-rev = "ca32605ff53921fa0689dd312618b7cfaafa7e43"
+rev = "1ff53249699b7c424afd3a2df742800406435ec5"
 
 # Mathlib last so that its dependency versions take precedence; rev = Tau Ceti's lake-manifest.json.
 [[require]]
@@ -101,6 +101,38 @@ roots = ["Challenge_Historical"]
 [[lean_lib]]
 name = "Solution_Historical"
 roots = ["Solution_Historical"]
+
+[[lean_lib]]
+name = "Challenge_RankinSelberg"
+roots = ["Challenge_RankinSelberg"]
+
+[[lean_lib]]
+name = "Solution_RankinSelberg"
+roots = ["Solution_RankinSelberg"]
+
+[[lean_lib]]
+name = "Challenge_EllipticCurves"
+roots = ["Challenge_EllipticCurves"]
+
+[[lean_lib]]
+name = "Solution_EllipticCurves"
+roots = ["Solution_EllipticCurves"]
+
+[[lean_lib]]
+name = "Challenge_ThetaGenus"
+roots = ["Challenge_ThetaGenus"]
+
+[[lean_lib]]
+name = "Solution_ThetaGenus"
+roots = ["Solution_ThetaGenus"]
+
+[[lean_lib]]
+name = "Challenge_KohnenPlusSpace"
+roots = ["Challenge_KohnenPlusSpace"]
+
+[[lean_lib]]
+name = "Solution_KohnenPlusSpace"
+roots = ["Solution_KohnenPlusSpace"]
 
 [[lean_lib]]
 name = "MapNameDeps"

@@ -28,7 +28,7 @@ theorem shimuraTheorem_theta_of_eisensteinFE_of_dualUnfolding (k N : ℕ) (χ : 
     RankinUnfold.rankinUnfolding hD
 
 /-- **Shimura's theorem for the theta multiplier, conditional on the dual unfolding alone** (Shimura 1973
-`shimura1973`, Main Theorem; headline 5 of the 0.4.0 plan in its second form): `ThetaTwistLaw`, `EisensteinFE` and
+`shimura1973`, Main Theorem): `ThetaTwistLaw`, `EisensteinFE` and
 `RankinUnfolding` are proved; the only named input left is `ShimuraDualUnfolding thetaMultiplierSystem k N χ`. -/
 @[kb "shimura1973" "Main Theorem for the theta multiplier, conditional on ShimuraDualUnfolding alone [unverified]"]
 theorem shimuraTheorem_theta_of_dualUnfolding (k N : ℕ) (χ : DirichletCharacter ℂ (4 * N)) (hN : 0 < N)

@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenge_ThetaGenus",
+  "solution_module": "Solution_ThetaGenus",
+  "theorem_names": [
+    "ModularFormsKB.Headlines.thetaGenus_sub_cuspForm_even",
+    "ModularFormsKB.Headlines.thetaGenus_sub_cuspForm_odd",
+    "ModularFormsKB.Headlines.gross_form_mem_plusCuspForms"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

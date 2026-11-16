@@ -50,7 +50,7 @@ noncomputable def thetaTwist {r : ℕ} (ψ : DirichletCharacter ℂ r) (t : ℕ)
   ∑' n : ℤ, ψ⁻¹ (n : ZMod r) * (n : ℂ) ^ charParity ψ * cexp (2 * π * I * t * (n : ℂ) ^ 2 * z)
 
 /-- **The transformation law of the twisted theta series, for the multiplier `M.j`** (Shimura 1973 `shimura1973`,
-Prop. 2.2): for every $r \ge 1$ (job mf-040-theta removed the earlier restriction to $r = 1$ or an odd prime), $t \ge 1$
+Prop. 2.2): for every $r \ge 1$ (an earlier restriction to $r = 1$ or an odd prime has been removed), $t \ge 1$
 and $\gamma \in \Gamma_0(4tr^2)$,
 $\theta_{\psi,t}(\gamma z) = \bar\psi(d)\,(t/|d|)\,(cz+d)^\nu\,j(\gamma,z)\,\theta_{\psi,t}(z)$; and the multiplier squares to the
 weight-one factor, $j(\gamma,z)^2 = (\tfrac{-1}{d})(cz+d)$ on $\Gamma_0(4)$. For the theta multiplier both fields are

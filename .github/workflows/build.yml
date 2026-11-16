@@ -114,7 +114,7 @@ jobs:
       fail-fast: false
       matrix:
         book: [Milne, MilneArithmetic, Miyake, Shimura, Iwaniec, AndrianovZhuravlev, HeegnerStark, Waldspurger,
-               CongruentNumbers, Historical]
+               CongruentNumbers, Historical, RankinSelberg, EllipticCurves, ThetaGenus, KohnenPlusSpace]
     steps:
       - name: Free disk space (the comparator exports need it)
         run: |

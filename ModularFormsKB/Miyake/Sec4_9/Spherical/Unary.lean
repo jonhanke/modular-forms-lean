@@ -4,7 +4,7 @@ import ModularFormsKB.HalfIntegral.Abstract.ShimuraRankin
 /-!
 # The twisted theta series as a combination of coset theta series (Miyake, Corollary 4.9.7)
 
-Job `mf-040-theta`, rows 9 to 11. For a Dirichlet character `ψ` modulo `r ≥ 1` of parity `ν`
+For a Dirichlet character `ψ` modulo `r ≥ 1` of parity `ν`
 (`HalfIntegral.charParity`) and `t ≥ 1`, Shimura's twisted theta series is
 `θ_{ψ,t}(z) = ∑_{n ∈ ℤ} ψ̄(n) n^ν e(t n² z)` (`HalfIntegral.thetaTwist`). Splitting `n` by its
 class `a` modulo `r` and writing `√(2t) n = √(2t) a + m √(2t) r`,

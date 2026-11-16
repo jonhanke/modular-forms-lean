@@ -6,7 +6,7 @@ import Mathlib.NumberTheory.LSeries.AbstractFuncEq
 /-!
 # Hecke's functional equation `EisensteinFE` from the lattice theta inversion
 
-Row 22 of the 0.4.0 plan. The named input `ModularFormsKB.HalfIntegral.EisensteinFE` (Hecke 1927 `hecke1927`;
+The named input `ModularFormsKB.HalfIntegral.EisensteinFE` (Hecke 1927 `hecke1927`;
 Miyake 1989 `miyake1989`, §7.2) is reduced here to a smaller analytic statement, the inversion formula of the lattice
 theta series (`LatticeThetaInversion`), which is two-dimensional Poisson summation for $v^\lambda e^{-\pi u|v|^2}$
 ($v^\lambda$ is a harmonic polynomial, so its Fourier transform is $(-i)^\lambda u^{-1-\lambda}\xi^\lambda

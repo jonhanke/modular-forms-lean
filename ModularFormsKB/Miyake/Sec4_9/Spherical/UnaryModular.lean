@@ -2,9 +2,9 @@ import ModularFormsKB.Miyake.Sec4_9.Spherical.UnaryLaw
 import ModularFormsKB.HalfIntegral.SerreStark
 
 /-!
-# The unary theta series are modular forms of half-integral weight (row 11)
+# The unary theta series are modular forms of half-integral weight
 
-Job `mf-040-theta`, row 11 (`HalfIntegral.UnaryThetaModular`). For `(Φ, t) ∈ Ω_ν(4N, χ)`
+The statement `HalfIntegral.UnaryThetaModular`. For `(Φ, t) ∈ Ω_ν(4N, χ)`
 (`HalfIntegral.unaryIndex`), the unary theta series `θ_{Φ*,t}` lies in `M_{ν+1/2}(4N, χ)`
 (`unaryThetaOf_mem`), and for `ν = 1` in `S_{3/2}(4N, χ)` (`unaryThetaOf_mem_cusp_of_one`). Both are
 proved with no input: the law is `thetaTwist_law` (every character), holomorphy and the cusp

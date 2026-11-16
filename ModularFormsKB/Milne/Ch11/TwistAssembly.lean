@@ -163,7 +163,7 @@ theorem exists_lowerBound_of_galois {k : Type u} {F : Type v} {E : Type v} [Fiel
   have hΓ : fixedField (fixingSubgroup MK) = MK := fixedField_fixingSubgroup_of_isGalois MK hKMK
   have hHf : fixedField (fixingSubgroup MF) = MF := fixedField_fixingSubgroup_of_isGalois MF hKMF
   have hK0 : genus k₁ (fixedField (fixingSubgroup MK)) = 0 := by
-    rw [hΓ]; exact genus_adjoin_simple_eq_zero hyt
+    rw [hΓ]; exact genus_adjoin_simple_eq_zero
   have hcount : ∀ n, 1 ≤ n → curvePointCount k₁ (fixedField (fixingSubgroup MF)) n =
       curvePointCount k F (finrank k k₁ * n) := by
     intro n hn

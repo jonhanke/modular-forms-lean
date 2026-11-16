@@ -73,7 +73,7 @@ noncomputable def thetaSphForm (hL : ZLattice.IsEven L) (hk : finrank ℝ E = 2 
   slash_action_eq' A hA := by
     borelize E
     obtain ⟨A, hA, rfl⟩ := hA
-    rw [← TauCeti.Matrix.SpecialLinearGroup.coe_GL_eq_mapGL, ← ModularForm.SL_slash,
+    rw [← Matrix.SpecialLinearGroup.coe_GL_eq_mapGL, ← ModularForm.SL_slash,
       IsEvenSph.thetaSph_slash_of_mem_Gamma0 hL hk hsph
         (CongruenceSubgroup.Gamma1_in_Gamma0 _ hA)]
     have hd := (CongruenceSubgroup.mem_Gamma1_iff.mp hA).2
@@ -101,7 +101,7 @@ theorem thetaSphForm_mem_modFormCharSpace (hL : ZLattice.IsEven L) (hk : finrank
   intro A
   simpa only [coe_thetaSphForm, MulChar.coe_equivToUnitHom,
     MonoidHom.coe_toHomUnits, CongruenceSubgroup.Gamma0Map_apply, ModularForm.SL_slash,
-    TauCeti.Matrix.SpecialLinearGroup.coe_GL_eq_mapGL] using
+    Matrix.SpecialLinearGroup.coe_GL_eq_mapGL] using
     IsEvenSph.thetaSph_slash_of_mem_Gamma0 hL hk hsph A.property
 
 /-- **Miyake, Corollary 4.9.4: a cusp form when `ν ≥ 1`** (even rank, lattice form). -/

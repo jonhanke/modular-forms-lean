@@ -11,7 +11,7 @@ import ModularFormsKB.Citation
 
 Miyake, *Modular Forms* (Springer 1989), Theorem 4.8.2, p. 183.
 
-The statement `ModularFormsKB.Miyake.Wave11.ImaginaryQuadraticThetaStatement` (job mf-miyake-w11)
+The statement `ModularFormsKB.Miyake.Wave11.ImaginaryQuadraticThetaStatement`
 asks for a form `f ∈ 𝒢_{u+1}(N, χ)` all of whose coefficients, **including the constant one**,
 are those of `Σ_𝔞 ξ(𝔞) N(𝔞)^{u/2} e(N(𝔞) z)` (the sum over the nonzero integral ideals, so the
 constant coefficient is `0`); and, for `ξ` primitive, that `f` is a primitive form (a cusp form).

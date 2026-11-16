@@ -63,7 +63,7 @@
       "config": "comparator/Waldspurger.json",
       "challenge_module": "Challenge_Waldspurger",
       "solution_module": "Solution_Waldspurger",
-      "theorems": 27
+      "theorems": 28
     },
     {
       "book": "CongruentNumbers",
@@ -71,7 +71,7 @@
       "config": "comparator/CongruentNumbers.json",
       "challenge_module": "Challenge_CongruentNumbers",
       "solution_module": "Solution_CongruentNumbers",
-      "theorems": 9
+      "theorems": 14
     },
     {
       "book": "Historical",
@@ -79,7 +79,39 @@
       "config": "comparator/Historical.json",
       "challenge_module": "Challenge_Historical",
       "solution_module": "Solution_Historical",
+      "theorems": 12
+    },
+    {
+      "book": "RankinSelberg",
+      "title": "The Rankin-Selberg method at level one and the symmetric square L-function (unconditional)",
+      "config": "comparator/RankinSelberg.json",
+      "challenge_module": "Challenge_RankinSelberg",
+      "solution_module": "Solution_RankinSelberg",
+      "theorems": 2
+    },
+    {
+      "book": "EllipticCurves",
+      "title": "Modular elliptic curves: functional equation, parity, strong Hasse-Weil (unconditional, and conditional on the modularity theorem)",
+      "config": "comparator/EllipticCurves.json",
+      "challenge_module": "Challenge_EllipticCurves",
+      "solution_module": "Solution_EllipticCurves",
       "theorems": 6
+    },
+    {
+      "book": "ThetaGenus",
+      "title": "Theta series of quadratic forms in one genus differ by a cusp form, every rank; Gross's form of level 11 in the plus space (unconditional)",
+      "config": "comparator/ThetaGenus.json",
+      "challenge_module": "Challenge_ThetaGenus",
+      "solution_module": "Solution_ThetaGenus",
+      "theorems": 3
+    },
+    {
+      "book": "KohnenPlusSpace",
+      "title": "Kohnen's plus space: Kohnen's isomorphism, the Kohnen-Zagier formula and Waldspurger's theorem on the plus space (conditional on named inputs)",
+      "config": "comparator/KohnenPlusSpace.json",
+      "challenge_module": "Challenge_KohnenPlusSpace",
+      "solution_module": "Solution_KohnenPlusSpace",
+      "theorems": 5
     }
   ],
   "permitted_axioms": [

@@ -5,8 +5,7 @@ import Mathlib.LinearAlgebra.Matrix.FixedDetMatrices
 # Spherical theta series at the cusps (every rank)
 
 Miyake, *Modular Forms* (Springer 1989), Corollary 4.9.4, p. 192: the theta series with a
-spherical function is holomorphic at every cusp, and vanishes there when `ν ≥ 1` (job
-`mf-040-theta`, row 7).
+spherical function is holomorphic at every cusp, and vanishes there when `ν ≥ 1`.
 
 The statement is made with absolute values, so that it applies in every rank, integral or
 half-integral weight `w = n/2 + ν`: for every `A ∈ SL(2, ℤ)` the function

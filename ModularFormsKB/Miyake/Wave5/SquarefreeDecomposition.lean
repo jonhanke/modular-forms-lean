@@ -28,11 +28,8 @@ open ModularFormsKB.Miyake.Wave4
 
 variable {N : ℕ} [NeZero N]
 
-instance (N l : ℕ) [NeZero N] [NeZero l] : NeZero (N * l ^ 2) :=
-  ⟨Nat.mul_ne_zero (NeZero.ne N) (pow_ne_zero 2 (NeZero.ne l))⟩
-
-instance (N l : ℕ) [NeZero N] [NeZero l] : NeZero (N * l) :=
-  ⟨Nat.mul_ne_zero (NeZero.ne N) (NeZero.ne l)⟩
+-- `NeZero (N * l ^ 2)` and `NeZero (N * l)` come from Mathlib's `NeZero.mul` and `NeZero.pow` (the copies declared
+-- here until release 0.5.0 duplicated them and were removed).
 
 /-- **Miyake, Lemma 4.6.7** (cusp forms): for squarefree `l > 1` and `f ∈ 𝒮_k(N, χ)` with
 `aₙ(f) = 0` for all `n` prime to `l`, there are `g_p ∈ 𝒮_k(N l², χ)` (`p ∣ l` prime) with
@@ -115,14 +112,14 @@ private theorem exists_pieces_of_squarefree_primeFactors_subset {k : ℤ} (m : �
     have : NeZero (q * M) := ⟨hMne⟩
     have hNM : M ∣ q * M := Nat.dvd_mul_left M q
     -- the complementary filter at `q`, at level `q M`
-    have hprod : q.primeFactors.prod id = q := by simp [hqp.primeFactors]
     have key : ∃ h : CuspForm ((Gamma1 (q * M)).map (mapGL ℝ)) k,
         h ∈ cuspFormCharSpace k (χ.comp (ZMod.unitsMap hNM)) ∧
         ∀ n, (qExpansion 1 h).coeff n =
           if Nat.Coprime n q then 0 else (qExpansion 1 f).coeff n := by
-      have := exists_mem_cuspFormCharSpace_qExpansion_coeff_eq_ite_coprime_zero χ hf
-        (L := q) (Nat.primeFactors_mono (Nat.dvd_of_mem_primeFactors hqM) (NeZero.ne M))
-      rwa [hprod] at this
+      have hq1 : ∏ p ∈ q.primeFactors, p = q := by simp [hqp.primeFactors]
+      exact exists_mem_cuspFormCharSpace_qExpansion_coeff_eq_ite_coprime_zero_of_dvd χ hf
+        (L := q) (M := q * M) (by rw [hq1, mul_comm])
+        (by rw [hq1, sq]; exact mul_dvd_mul_left q (Nat.dvd_of_mem_primeFactors hqM))
     obtain ⟨h, hhχ, hhc⟩ := key
     have hsupp : QExpansionSupportedOnDvd q h := by
       rw [qExpansionSupportedOnDvd_iff, PowerSeries.isSupportedOnDvd_iff]
