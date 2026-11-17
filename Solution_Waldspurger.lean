@@ -10,9 +10,10 @@ import ModularFormsKB.HalfIntegral.Rankin.ThetaShimura
 import ModularFormsKB.HalfIntegral.Rankin.Unfolding
 import ModularFormsKB.Miyake.HeckeTrick.LatticeInversion
 import ModularFormsKB.HalfIntegral.Rankin.FrickeKernel
+import ModularFormsKB.HalfIntegral.Rankin.FrickeCoset
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11, proved
+# Headline statements of modular-forms-lean 0.5.1: Waldspurger's theorems, the Shimura lift and Gross's example for p = 11, proved
 
 The statements of `Challenge_Waldspurger.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Waldspurger.json`) checks that each statement here is exactly the one in
@@ -35,7 +36,8 @@ standard axioms):
   stated row sums, symmetry and eigenvectors;
 * (0.4.0) two former named inputs of Shimura's theorem, now proved: Hecke's functional equation of the lattice
   Eisenstein series with a character (`eisensteinLattice_functionalEquation`) and the Rankin–Selberg unfolding
-  (`rankin_unfolding`).
+  (`rankin_unfolding`);
+* (0.5.1) the Rankin–Selberg unfolding at every cusp, coset by coset (`rankin_unfolding_cosets`).
 
 **Conditional theorems.** Each has the form *(named inputs) → statement*: its first hypothesis is a named `Prop`
 structure whose fields are classical theorems that the library does not prove, each with its source. The inputs are
@@ -83,6 +85,15 @@ were not checked.
   `ψ = 1` and for every primitive `ψ` of odd prime conductor prime to `4N`, the kernel integral times its gamma
   factor is `i^{2k}` (times Weil's constant) times the completed Dirichlet series of `b` (and of its twist by `ψ̄`). It
   is the input of `shimuraLift_theta_of_frickeKernel`.
+* (0.5.1) `ModularFormsKB.HalfIntegral.ShimuraCosetIdentity`: a smaller input than `ShimuraFrickeKernelUnfolding`,
+  from the same proof of Shimura (1973, §§ 3–5; locator unverified). The library now proves the unfolding of the
+  Fricke-side kernel integral at every cusp of `Γ₀(L)`, `L = 16Ntr²` (`frickeKernelIntegral = frickeCosetSum` for
+  `Re s > 1`): the integral becomes the sum over right coset representatives `ρ` of `Γ₀(L)` of `c_ρ(s)` times the
+  Mellin transform of the constant term of the kernel at the cusp `ρ∞`. The input is the identification of that sum
+  (`frickeCosetSum`) with the completed Dirichlet series of one sequence `b` of polynomial growth with `b(0) = 0`, for
+  `ψ = 1` and for every primitive `ψ` of odd prime conductor prime to `4N` (with its twist by `ψ̄`), as in
+  `ShimuraFrickeKernelUnfolding`. It needs the expansions of `f|W_{4N}` and of the twisted theta series at the cusps
+  of `Γ₀(L)`. It is the input of `shimuraLift_theta_of_cosetIdentity`.
 
 Mathlib has no L-functions of elliptic curves or of modular forms of half-integral weight in this setting. The central
 values enter only through abstract functions (`L` in `KohnenSquarefree`, `Lval` in `GrossRatio`, and the entire
@@ -113,6 +124,10 @@ too (all in the namespace `ModularFormsKB.HalfIntegral.Waldspurger` unless noted
   `repsIntegral`, `stripMellin` (the unfolding), `thetaMultiplierSystem`, `MultiplierSystem.cuspForms`,
   `Abstract.HasQExp`, `IsIntCuspForm`, `shimuraCoeff`, and in the input `ShimuraDualUnfolding`: `CoeffGrowth`,
   `rankinLevel`, `rankinDualFactor`, `rankinDual`, `rankinS`, `gammaFactor`, `weilConstant`, `twist`.
+* (0.5.1) in the namespace `ModularFormsKB.HalfIntegral`, for the unfolding at every cusp: `DualReps.rowAct` (the right
+  action `p ↦ pγ` of `SL₂(ℤ)` on row vectors), `CosetUnfold.latticeSeries`, `CosetUnfold.cosetCoeff`,
+  `CosetUnfold.uFac` (`(|j_ρ|/j_ρ)^λ`), and in the input `ShimuraCosetIdentity`: `frickeCosetSum` (with the kernel
+  `frickeG` it sums over the cosets).
 -/
 
 namespace ModularFormsKB.Headlines
@@ -388,6 +403,46 @@ theorem shimuraLift_theta_of_frickeKernel (k N : ℕ) (χ : DirichletCharacter �
       ∃ F : ℍ → ℂ, IsIntCuspForm (2 * k) (4 * N) (χ ^ 2) F ∧
         ∃ c : ℕ → ℂ, Abstract.HasQExp F c ∧ ∀ n, 1 ≤ n → c n = shimuraCoeff k N χ t a n := by
   exact (ModularFormsKB.HalfIntegral.shimuraTheorem_theta_of_frickeKernel k N χ hN hK).lift
+
+/-- **The Rankin–Selberg unfolding at every cusp, coset by coset** (Rankin 1939; the cusps other than `∞` as in
+Shimura 1973, proof of the Main Theorem), unconditional, new in 0.5.1. Let `L, λ ≥ 1`, `R` a list of right coset
+representatives of `Γ₀(L)` in `SL₂(ℤ)`, `G` continuous on `ℍ` with the unitary weight-`λ` law with character `ω` on
+`Γ₀(L)`, and `Φ : ℤ² → ℂ` bounded with `Φ(pγ) = ω(d_γ) Φ(p)` for `γ ∈ Γ₀(L)` (`p` a row vector). Let
+`S_Φ(z, s) = y^s ∑_{p ∈ ℤ²} Φ(p) (p₁z + p₂)^λ |p₁z + p₂|^{-λ-2s}` (`latticeSeries`). For `Re s > 1`, if for every
+`ρ ∈ R` the integrand is integrable on the fundamental domain and `|G(ρ(x + iy))| y^{Re s - 2}` is integrable on the
+strip, then `∑_{ρ ∈ R} ∫_𝓕 G(ρτ) S_Φ(ρτ, s) dμ(τ) = ∑_{ρ ∈ R} c_ρ(s) ∫_0^∞ ∫_0^1 (|j_ρ|/j_ρ)^λ G(ρz) y^{s-2} dx dy`,
+with `j_ρ(z) = cz + d` the automorphy factor of `ρ` and
+`c_ρ(s) = ∑_{n ≥ 1} n^{-2s} (Φ(n r_ρ) + (-1)^λ Φ(-n r_ρ))`, `r_ρ = (0, 1)ρ⁻¹` (`cosetCoeff`). Each term on the right
+is the Mellin transform of the constant term of `G` at the cusp `ρ∞`; no classification of the cusps is needed. -/
+theorem rankin_unfolding_cosets {L lam : ℕ} [NeZero L] (hlam : 1 ≤ lam) {R : List SL(2, ℤ)}
+    (hR : IsGamma0Reps L R) {ω : DirichletCharacter ℂ L} {G : ℍ → ℂ} (hG : Continuous G)
+    (hU : UnitaryLaw L lam ω G) {Φ : ℤ × ℤ → ℂ}
+    (hΦ : ∀ γ ∈ Gamma0 L, ∀ p, Φ (DualReps.rowAct γ p) = ω (γ 1 1 : ZMod L) * Φ p) {C : ℝ}
+    (hΦC : ∀ p, ‖Φ p‖ ≤ C) {s : ℂ} (hs : 1 < s.re)
+    (hfd : ∀ ρ ∈ R, IntegrableOn (fun τ ↦ G (ρ • τ) * CosetUnfold.latticeSeries lam Φ (ρ • τ) s)
+      ModularGroup.fd)
+    (hint : ∀ ρ ∈ R, IntegrableOn (fun p : ℝ × ℝ ↦ ‖G (ρ • stripPt p.1 p.2)‖ * p.2 ^ (s.re - 2))
+      (Icc 0 1 ×ˢ Ioi 0)) :
+    repsIntegral R (fun τ ↦ G τ * CosetUnfold.latticeSeries lam Φ τ s) =
+      (R.map fun ρ ↦ CosetUnfold.cosetCoeff lam Φ ρ s *
+        stripMellin (fun v ↦ CosetUnfold.uFac lam ρ v * G (ρ • v)) s).sum := by
+  exact ModularFormsKB.HalfIntegral.CosetUnfold.repsIntegral_mul_latticeSeries hlam hR hG hU hΦ hΦC hs hfd hint
+
+/-- **Shimura's theorem for the theta multiplier, conditional on the coset identity** (Shimura 1973, Main Theorem;
+new in 0.5.1). Assume the named input `ShimuraCosetIdentity thetaMultiplierSystem k N χ`, a smaller input than the
+`ShimuraFrickeKernelUnfolding` of `shimuraLift_theta_of_frickeKernel`: the library now proves the unfolding of the
+Fricke-side kernel integral at every cusp (`rankin_unfolding_cosets`), and what remains assumed is the identification
+of the resulting sum over the cosets with one Dirichlet series. Then for `k ≥ 2`, squarefree `t ≥ 1` and every cusp
+form `f` of weight `k + 1/2` on `Γ₀(4N)` with character `χ` (theta multiplier) and coefficients `a`, there is a cusp
+form `F` of weight `2k` on `Γ₀(4N)` with character `χ²` whose coefficients `c(n)`, `n ≥ 1`, are
+`∑_{d ∣ n} χ_t(d) d^{k-1} a(tn²/d²)`. -/
+theorem shimuraLift_theta_of_cosetIdentity (k N : ℕ) (χ : DirichletCharacter ℂ (4 * N)) (hN : 0 < N)
+    (hC : ShimuraCosetIdentity thetaMultiplierSystem k N χ) :
+    2 ≤ k → ∀ t : ℕ, 1 ≤ t → Squarefree t → ∀ f ∈ thetaMultiplierSystem.cuspForms k N χ, ∀ a : ℕ → ℂ,
+      Abstract.HasQExp f a →
+      ∃ F : ℍ → ℂ, IsIntCuspForm (2 * k) (4 * N) (χ ^ 2) F ∧
+        ∃ c : ℕ → ℂ, Abstract.HasQExp F c ∧ ∀ n, 1 ≤ n → c n = shimuraCoeff k N χ t a n := by
+  exact (ModularFormsKB.HalfIntegral.shimuraTheorem_theta_of_cosetIdentity k N χ hN hC).lift
 
 end ShimuraTheta
 

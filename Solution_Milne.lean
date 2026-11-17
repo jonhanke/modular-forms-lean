@@ -15,7 +15,7 @@ import ModularFormsKB.Milne.Wave14.LineBundles
 import ModularFormsKB.Milne.Wave15.Corollaries
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: Milne, *Modular Functions and Modular Forms*, sections 0 to 10, proved
+# Headline statements of modular-forms-lean 0.5.1: Milne, *Modular Functions and Modular Forms*, sections 0 to 10, proved
 
 The statements of `Challenge_Milne.lean`, each proved by appeal to the library theorem. `lake comparator`
 (configured by `comparator/Milne.json`) checks that each statement here is exactly the one in

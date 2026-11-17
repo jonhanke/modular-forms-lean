@@ -7,7 +7,7 @@ import ModularFormsKB.RankinSelberg.LevelOne
 import ModularFormsKB.RankinSelberg.SymmetricSquareValue
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: the Rankin–Selberg method at level one, proved
+# Headline statements of modular-forms-lean 0.5.1: the Rankin–Selberg method at level one, proved
 
 A topic, not a book: the Rankin–Selberg integral of two cusp forms of level one (R. A. Rankin, *Contributions to the
 theory of Ramanujan's function τ(n) and similar arithmetical functions*, 1939; A. Selberg, 1940) and the Petersson

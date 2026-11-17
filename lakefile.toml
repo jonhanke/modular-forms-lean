@@ -1,5 +1,5 @@
 name = "modular_forms_lean"
-version = "0.5.0"
+version = "0.5.1"
 defaultTargets = ["ModularFormsKB", "Challenge_Milne", "Solution_Milne", "Challenge_MilneArithmetic", "Solution_MilneArithmetic", "Challenge_Miyake", "Solution_Miyake", "Challenge_Shimura", "Solution_Shimura", "Challenge_Iwaniec", "Solution_Iwaniec", "Challenge_AndrianovZhuravlev", "Solution_AndrianovZhuravlev", "Challenge_HeegnerStark", "Solution_HeegnerStark", "Challenge_Waldspurger", "Solution_Waldspurger", "Challenge_CongruentNumbers", "Solution_CongruentNumbers", "Challenge_Historical", "Solution_Historical", "Challenge_RankinSelberg", "Solution_RankinSelberg", "Challenge_EllipticCurves", "Solution_EllipticCurves", "Challenge_ThetaGenus", "Solution_ThetaGenus", "Challenge_KohnenPlusSpace", "Solution_KohnenPlusSpace", "MapNameDeps"]
 
 [leanOptions]

@@ -63,7 +63,7 @@
       "config": "comparator/Waldspurger.json",
       "challenge_module": "Challenge_Waldspurger",
       "solution_module": "Solution_Waldspurger",
-      "theorems": 28
+      "theorems": 30
     },
     {
       "book": "CongruentNumbers",
@@ -79,7 +79,7 @@
       "config": "comparator/Historical.json",
       "challenge_module": "Challenge_Historical",
       "solution_module": "Solution_Historical",
-      "theorems": 12
+      "theorems": 13
     },
     {
       "book": "RankinSelberg",
@@ -111,7 +111,7 @@
       "config": "comparator/KohnenPlusSpace.json",
       "challenge_module": "Challenge_KohnenPlusSpace",
       "solution_module": "Solution_KohnenPlusSpace",
-      "theorems": 5
+      "theorems": 7
     }
   ],
   "permitted_axioms": [

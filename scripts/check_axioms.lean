@@ -82,6 +82,8 @@ import Solution_KohnenPlusSpace
 #print axioms ModularFormsKB.Headlines.rankin_unfolding
 #print axioms ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding
 #print axioms ModularFormsKB.Headlines.shimuraLift_theta_of_frickeKernel
+#print axioms ModularFormsKB.Headlines.rankin_unfolding_cosets
+#print axioms ModularFormsKB.Headlines.shimuraLift_theta_of_cosetIdentity
 #print axioms ModularFormsKB.Headlines.congruent_isCongruent_iff_point
 #print axioms ModularFormsKB.Headlines.congruent_five_six_seven_fortyOne
 #print axioms ModularFormsKB.Headlines.congruent_tunnell_counts
@@ -100,6 +102,7 @@ import Solution_KohnenPlusSpace
 #print axioms ModularFormsKB.Headlines.jacobi_theta_fourier
 #print axioms ModularFormsKB.Headlines.jacobi_triple_product
 #print axioms ModularFormsKB.Headlines.jacobi_cube
+#print axioms ModularFormsKB.Headlines.jacobi_theta_constants
 #print axioms ModularFormsKB.Headlines.ramanujan_differential_equations
 #print axioms ModularFormsKB.Headlines.ramanujan_partition_congruences
 #print axioms ModularFormsKB.Headlines.ramanujan_tau_congruences
@@ -124,3 +127,5 @@ import Solution_KohnenPlusSpace
 #print axioms ModularFormsKB.Headlines.kohnen_zagier
 #print axioms ModularFormsKB.Headlines.waldspurger_plus
 #print axioms ModularFormsKB.Headlines.kohnen_zagier_twistedL_nonneg
+#print axioms ModularFormsKB.Headlines.kohnen_plus_eigenbasis
+#print axioms ModularFormsKB.Headlines.kohnen_isomorphism_of_inputs

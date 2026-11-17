@@ -6,9 +6,10 @@ Authors: Jonathan Hanke
 import ModularFormsKB.HalfIntegral.KohnenLUFourProof
 import ModularFormsKB.HalfIntegral.PlusHeckeAdjoint
 import ModularFormsKB.HalfIntegral.ZagierKernel.KohnenKernelSquare
+import ModularFormsKB.HalfIntegral.KohnenTraceReduction
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: Kohnen's plus space and the Kohnen–Zagier formula, proved
+# Headline statements of modular-forms-lean 0.5.1: Kohnen's plus space and the Kohnen–Zagier formula, proved
 
 A topic, not a book: Kohnen's plus space `S⁺_{k+1/2}(4)` of cusp forms of weight `k + 1/2` on `Γ₀(4)` (W. Kohnen,
 *Modular forms of half-integral weight on Γ₀(4)*, Math. Ann. 248 (1980)), Kohnen's isomorphism with
@@ -24,8 +25,9 @@ and `Quot.sound`.
 Each statement is the library's statement, copied, except that a named statement in the conclusion is unfolded. The
 statements were not yet reviewed by a human (see the README).
 
-**Unconditional theorem**: `plus_heckeT_selfAdjoint`, the self-adjointness of Shimura's `T(p²)`, `p` odd, on the plus
-space for the Petersson product (a former named input).
+**Unconditional theorems**: `plus_heckeT_selfAdjoint`, the self-adjointness of Shimura's `T(p²)`, `p` odd, on the
+plus space for the Petersson product (a former named input); and, new in 0.5.1, `kohnen_plus_eigenbasis`, a basis of
+`S⁺_{k+1/2}(4)` of eigenforms of all `T(p²)`, `p` odd (a former named input, `KohnenPlusEigenbasis`).
 
 Two former named inputs of the conditional theorems are proved in the library and are no longer hypotheses: Kohnen's
 `U(4)` identity on the plus space (`KohnenLUFour`, `kohnenLUFour_theta`) and the cycle integrals at square
@@ -50,6 +52,19 @@ papers were not checked.
   cycle integral `r_{k,D}(G; m)` (the sum over the binary quadratic forms of discriminant `D|D|m` of the integrals of
   `G` along their closed geodesics, weighted by the genus character of `D`).
 
+New in 0.5.1, the three inputs of `kohnen_isomorphism_of_inputs`, each a consequence of `KohnenTraceIdentity` (the
+library proves the three implications), and together equivalent to it:
+
+* `ModularFormsKB.HalfIntegral.KohnenDLift thetaMultiplierSystem k D` (Kohnen 1980, Theorem 1), for every fundamental
+  discriminant `D` with `(-1)^k D > 0` (`KohnenDisc k D`): for `k ≥ 1` and every `g ∈ S⁺_{k+1/2}(4)` with coefficients
+  `a`, the `q`-series with the coefficients of the `D`-th lift (`kohnenLiftCoeff k D a`) is a cusp form of weight `2k`
+  on `SL₂(ℤ)`;
+* `ModularFormsKB.HalfIntegral.KohnenDimensionLe thetaMultiplierSystem k` (Kohnen 1980, §§ 2–3): for `k ≥ 1`,
+  `dim S_{2k}(SL₂(ℤ)) ≤ dim S⁺_{k+1/2}(4)` (proved in the library for `k ≤ 5` and `k = 7`, where the left side is `0`);
+* `ModularFormsKB.HalfIntegral.KohnenPlusMultOne thetaMultiplierSystem k` (Kohnen 1980, Theorem 1 and its corollary):
+  for `k ≥ 1`, two eigenforms in `S⁺_{k+1/2}(4)` with the same eigenvalues of `T(p²)` at all odd primes `p`, the first
+  nonzero, are proportional.
+
 ## Definitions used
 
 Besides Mathlib (`CuspForm`, `LSeries`, `jacobiSym`) and the theta multiplier system of this library
@@ -70,7 +85,11 @@ statements use these definitions of the library:
   prime `p`;
 * `ModularFormsKB.HalfIntegral.IsFundamentalDiscriminant D`, `ModularFormsKB.HalfIntegral.kroneckerDisc D n` (the
   Kronecker symbol `(D/n)`), and `ModularFormsKB.HalfIntegral.IsEntireLSeries b σ L` (`L` is entire and equals the
-  L-series of `b` on `Re s > σ`).
+  L-series of `b` on `Re s > σ`);
+* (0.5.1) `ModularFormsKB.HalfIntegral.IsPlusEigenform M k g μ`: `g ∈ S⁺_{k+1/2}(4)` has coefficients `c` with
+  `T(p²) c = μ(p) c` for every odd prime `p`; and, in the inputs, `ModularFormsKB.HalfIntegral.KohnenDisc k D`
+  (`D` fundamental, `(-1)^k D > 0`) and `ModularFormsKB.HalfIntegral.kohnenLiftCoeff k D a` (the coefficients
+  `∑_{d ∣ n} (D/d) d^{k-1} a(|D| n²/d²)` of the `D`-th lift).
 -/
 
 namespace ModularFormsKB.Headlines
@@ -145,6 +164,30 @@ theorem kohnen_zagier_twistedL_nonneg (k : ℕ) (hk : 1 ≤ k) (h : KohnenTraceI
     (hL' : IsEntireLSeries (fun n ↦ (kroneckerDisc D n : ℂ) * b n) ((k : ℝ) + 1) L) :
     (L k).im = 0 ∧ 0 ≤ (L k).re := by
   exact ModularFormsKB.HalfIntegral.twistedL_nonneg_of_kernel_square k hk h hK hU F b hb h1 heig hD hsign hL'
+
+/-- **`S⁺_{k+1/2}(4)` has a basis of Hecke eigenforms** (Kohnen 1980, § 1), unconditional, new in 0.5.1 (a former
+named input): for `k ≥ 1` there are finitely many linearly independent `g₁, …, g_r ∈ S⁺_{k+1/2}(4)`, each an
+eigenform of `T(p²)` for every odd prime `p` (with eigenvalues `μᵢ(p)`), spanning the plus space. The library proves
+it from the self-adjointness of the `T(p²)` (`plus_heckeT_selfAdjoint`): commuting symmetric operators on a finite
+dimensional inner product space are simultaneously diagonalizable. -/
+theorem kohnen_plus_eigenbasis (k : ℕ) :
+    1 ≤ k → ∃ (r : ℕ) (g : Fin r → ℍ → ℂ) (μ : Fin r → ℕ → ℂ),
+      (∀ i, IsPlusEigenform thetaMultiplierSystem k (g i) (μ i)) ∧ LinearIndependent ℂ g ∧
+        thetaMultiplierSystem.plusCuspForms k 1 1 ≤ Submodule.span ℂ (Set.range g) := by
+  exact (ModularFormsKB.HalfIntegral.kohnenPlusEigenbasis_theta k).basis
+
+/-- **Kohnen's isomorphism, conditional on three of Kohnen's lemmas** (Kohnen 1980, Theorem 1; new in 0.5.1; named
+inputs `KohnenDLift` for every admissible `D`, `KohnenDimensionLe`, `KohnenPlusMultOne`, which together are equivalent
+to the `KohnenTraceIdentity` of `kohnen_isomorphism`): for `k ≥ 1` there is a `ℂ`-linear isomorphism
+`Φ : S⁺_{k+1/2}(4) ≅ S_{2k}(SL₂(ℤ))` with `Φ ∘ T(p²) = T(p) ∘ Φ` on `q`-expansions for every odd prime `p`. -/
+theorem kohnen_isomorphism_of_inputs (k : ℕ)
+    (hL : ∀ D, KohnenDisc k D → KohnenDLift thetaMultiplierSystem k D)
+    (hdim : KohnenDimensionLe thetaMultiplierSystem k) (h1 : KohnenPlusMultOne thetaMultiplierSystem k) :
+    1 ≤ k → ∃ Φ : thetaMultiplierSystem.plusCuspForms k 1 1 ≃ₗ[ℂ] CuspForm 𝒮ℒ (2 * k : ℕ),
+      ∀ p : ℕ, p.Prime → p ≠ 2 → ∀ f f' : thetaMultiplierSystem.plusCuspForms k 1 1, ∀ a b : ℕ → ℂ,
+        Abstract.HasQExp f a → Abstract.HasQExp f' (heckeT k 1 1 p a) → Abstract.HasQExp (Φ f) b →
+          Abstract.HasQExp (Φ f') (heckeTInt (2 * k) 1 1 p b) := by
+  exact (ModularFormsKB.HalfIntegral.kohnenIsomorphism_theta_of_inputs k hL hdim h1).iso
 
 end KohnenPlusSpace
 

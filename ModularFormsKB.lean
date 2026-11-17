@@ -98,6 +98,7 @@ import ModularFormsKB.HalfIntegral.KohnenTPlusFourLU
 import ModularFormsKB.HalfIntegral.KohnenTheta
 import ModularFormsKB.HalfIntegral.KohnenTrace
 import ModularFormsKB.HalfIntegral.KohnenTraceAlgebra
+import ModularFormsKB.HalfIntegral.KohnenTraceReduction
 import ModularFormsKB.HalfIntegral.KohnenTwoLift
 import ModularFormsKB.HalfIntegral.KohnenU4
 import ModularFormsKB.HalfIntegral.KohnenW4U4
@@ -110,10 +111,13 @@ import ModularFormsKB.HalfIntegral.Products
 import ModularFormsKB.HalfIntegral.QExpUnique
 import ModularFormsKB.HalfIntegral.Rankin.Assembly
 import ModularFormsKB.HalfIntegral.Rankin.Character
+import ModularFormsKB.HalfIntegral.Rankin.CosetUnfolding
 import ModularFormsKB.HalfIntegral.Rankin.Decay
+import ModularFormsKB.HalfIntegral.Rankin.DecayStrip
 import ModularFormsKB.HalfIntegral.Rankin.DualFricke
 import ModularFormsKB.HalfIntegral.Rankin.DualReps
 import ModularFormsKB.HalfIntegral.Rankin.Factors
+import ModularFormsKB.HalfIntegral.Rankin.FrickeCoset
 import ModularFormsKB.HalfIntegral.Rankin.FrickeHalf
 import ModularFormsKB.HalfIntegral.Rankin.FrickeKernel
 import ModularFormsKB.HalfIntegral.Rankin.FrickeReduction
@@ -204,7 +208,9 @@ import ModularFormsKB.Historical.Eisenstein.ThetaProducts
 import ModularFormsKB.Historical.Eisenstein.WeierstrassRelations
 import ModularFormsKB.Historical.Jacobi
 import ModularFormsKB.Historical.Jacobi.Clausen
+import ModularFormsKB.Historical.Jacobi.EulerExpansions
 import ModularFormsKB.Historical.Jacobi.LambertSeries
+import ModularFormsKB.Historical.Jacobi.ModularEquationForms
 import ModularFormsKB.Historical.Jacobi.ModularEquationK
 import ModularFormsKB.Historical.Jacobi.ModularEquationODE
 import ModularFormsKB.Historical.Jacobi.Multipliers
@@ -212,6 +218,8 @@ import ModularFormsKB.Historical.Jacobi.Section66
 import ModularFormsKB.Historical.Jacobi.Section66Proofs
 import ModularFormsKB.Historical.Jacobi.ThetaFourier
 import ModularFormsKB.Historical.Jacobi.ThetaIdentification
+import ModularFormsKB.Historical.Jacobi.ThetaNullwerte
+import ModularFormsKB.Historical.Jacobi.ThetaProducts
 import ModularFormsKB.Historical.Jacobi.TripleProduct
 import ModularFormsKB.Historical.Kronecker
 import ModularFormsKB.Historical.Kronecker.AInvariance
@@ -779,7 +787,7 @@ import ModularFormsKB.ThetaGenus.GramFricke
 import ModularFormsKB.ThetaGenus.Gross
 
 /-!
-# ModularFormsKB (modular-forms-lean 0.5.0)
+# ModularFormsKB (modular-forms-lean 0.5.1)
 
 Milne, *Modular Functions and Modular Forms* (`ModularFormsKB.Milne`), Miyake, *Modular Forms*
 (`ModularFormsKB.Miyake`), the dimension bounds (`ModularFormsKB.Dimension`), and statements from Shimura,

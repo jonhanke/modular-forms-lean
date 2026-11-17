@@ -21,90 +21,50 @@ value of the symmetric square $`L`$-function, the functional equation and parity
 the modularity of the congruent number curves with their true $`L`$-functions and their newforms (of level $`32n^2`$
 for odd squarefree $`n`$), theta series of quadratic forms in one genus differing by a cusp form in every rank,
 Ramanujan's partition and $`\tau`$ congruences, and, conditional on named inputs, Kohnen's isomorphism (from Kohnen's
-trace identity alone), the Kohnen–Zagier formula and Tunnell's theorem with the true $`L`$-function. The Lean
-library is called `ModularFormsKB`.
+trace identity alone), the Kohnen–Zagier formula and Tunnell's theorem with the true $`L`$-function. Since 0.5.1 it
+proves the Rankin–Selberg unfolding at every cusp, a basis of Hecke eigenforms of Kohnen's plus space and Jacobi's
+theta constants through the complete elliptic integral, and has Shimura's theorem for the theta multiplier and
+Kohnen's isomorphism conditional on smaller named inputs. The Lean library is called `ModularFormsKB`.
 
-## What's new in 0.5.0
+## What's new in 0.5.1
 
-- **Twenty-eight new headlines** (107 in all; the 79 of 0.4.0 are kept), each a result that neither Mathlib master nor
-  Tau Ceti main (both checked on 2026-11-16) has, in **four new challenge files** (fourteen in all) and four extended
-  ones:
-  - [`Challenge_RankinSelberg.lean`](Challenge_RankinSelberg.lean) (2, new): for cusp forms $`f, g`$ of weight
-    $`k`$ on $`\mathrm{SL}_2(\mathbb Z)`$, the Rankin–Selberg function
-    $`L(f \times \bar g, s) = \zeta(2s)\sum a_n\bar b_n n^{-(s+k-1)}`$ continues to $`\mathbb C \setminus \{1\}`$ with
-    a simple pole at $`s = 1`$ of residue a multiple of $`\langle g, f\rangle`$ and a functional equation under
-    $`s \mapsto 1 - s`$; for a normalized Hecke eigenform, $`\langle f, f\rangle = 2\Gamma(k)/(\pi(4\pi)^k)\,L(\mathrm{Sym}^2 f, k)`$.
-  - [`Challenge_EllipticCurves.lean`](Challenge_EllipticCurves.lean) (6, new): an elliptic curve over $`\mathbb Q`$
-    whose $`L`$-function is that of a newform of weight 2 has an entire $`L`$-function, a functional equation with
-    sign $`w = \pm 1`$, $`L(E, 1) = 0`$ when $`w = -1`$, and satisfies Milne's strong Hasse–Weil conjecture
-    (Conjecture 11.17); **the congruent number curve $`E_1 : y^2 = x^3 - x`$ has the newform $`f_{32}`$ of level 32,
-    and $`E_n : y^2 = x^3 - n^2x`$, $`n`$ odd squarefree, has the newform $`f_{32} \otimes (\cdot/n)`$ of level
-    $`32n^2`$** (unconditional; the level of the twist is computed, Atkin–Li's Theorem 3.1 for this twist); for every
-    elliptic curve over $`\mathbb Q`$ the same consequences, conditional on the modularity theorem; and Milne's
-    Theorem 11.19 in analytic form (both directions, the converse by Weil's converse theorem), conditional on newness
-    from the conductor.
-  - [`Challenge_ThetaGenus.lean`](Challenge_ThetaGenus.lean) (3, new): theta series of positive definite even
-    integral quadratic forms in one genus differ by a cusp form, in every rank (weight $`n/2`$ on $`\Gamma_1(N)`$ for
-    even $`n`$, Shimura's $`S_{k+1/2}(4N, \chi)`$ for odd $`n = 2k + 1`$), in Gram-matrix form; Gross's weight-$`3/2`$
-    form for the prime 11 lies in Kohnen's plus space of level 44.
-  - [`Challenge_KohnenPlusSpace.lean`](Challenge_KohnenPlusSpace.lean) (5, new): Shimura's $`T(p^2)`$ is self-adjoint
-    on Kohnen's plus space (unconditional); and, in [Conditional theorems](#conditional-theorems), Kohnen's isomorphism
-    $`S^+_{k+1/2}(4) \cong S_{2k}(\mathrm{SL}_2(\mathbb Z))`$ (from one named input, Kohnen's trace identity), and the
-    Kohnen–Zagier formula, Waldspurger's theorem on the plus space and the nonnegativity of the central twisted values
-    $`L(F, D, k) \ge 0`$ (through Zagier's kernel, from three named inputs). Kohnen's $`U(4)`$ identity on the plus
-    space and the cycle integrals at square discriminants, named inputs in earlier drafts, are proved.
-  - [`Challenge_CongruentNumbers.lean`](Challenge_CongruentNumbers.lean) (14, was 9): **the congruent number curves
-    $`E_n : y^2 = x^3 - n^2x`$ are modular with an entire $`L`$-function** (unconditional: the $`q`$-series $`f_{32}`$
-    is a cusp form of weight 2 on $`\Gamma_0(32)`$, and Mathlib's $`L`$-function of $`E_n`$ has coefficients
-    $`(n/m)\,b(m)`$); and Tunnell's theorem with this true $`L`$-function in place of an abstract one, conditional on
-    cited theorems only (Waldspurger, Tunnell's eigenform proposition and central values, Coates–Wiles; and, for the
-    converse, Tau Ceti's statement of the Birch and Swinnerton-Dyer conjecture). That Tunnell's two series are cusp
-    forms of weight $`3/2`$ on $`\Gamma_0(128)`$ and the root number of $`L(E_{2m}, s)`$ are proved.
-  - [`Challenge_Waldspurger.lean`](Challenge_Waldspurger.lean) (28, was 27): Shimura's theorem for the theta
-    multiplier conditional on a smaller named input, the unfolding of an explicit kernel built from $`f|W_{4N}`$
-    (`ShimuraFrickeKernelUnfolding`).
-  - [`Challenge_Historical.lean`](Challenge_Historical.lean) (12, was 6): Jacobi's identity for the cube of Euler's
-    product; Ramanujan's partition congruences $`p(5m + 4) \equiv 0 \pmod 5`$, $`p(7m + 5) \equiv 0 \pmod 7`$,
-    $`p(35m + 19) \equiv 0 \pmod{35}`$; his congruences $`\tau(5n) \equiv 0 \pmod 5`$ and $`\tau(n) \equiv 0
-    \pmod 7`$ for $`n \equiv 0, 3, 5, 6 \pmod 7`$; his Question 387,
-    $`\sum_{n \ge 1} n/(e^{2\pi n} - 1) = 1/24 - 1/(8\pi)`$; Jacobi's quartic identity
-    $`\vartheta_{00}^4 = \vartheta_{01}^4 + \vartheta_{10}^4`$ with Weber's $`\mathfrak f^8 = \mathfrak f_1^8 + \mathfrak f_2^8`$;
-    and Kronecker's $`\vartheta'''(0, w) = -\pi^2 E_2(w)\,\vartheta'(0, w)`$.
-- **New in the library** since 0.4.0 (beyond the headlines):
-  - Half-integral weight: the Petersson product on $`S_{k+1/2}(4N, \chi)`$ for every $`N`$, the change of variables
-    for $`\Gamma_0(L)`$-invariant integrands, the Hecke operators $`T(p^2)`$ as commuting linear operators,
-    $`f|W_{4N}`$ with its $`q`$-expansion, the theta series $`\theta_{\psi,t}`$ at the cusp 0 (Miyake, Corollary
-    4.9.7 (2)), the expansion of theta series at every cusp, Kohnen's projection, $`U(4)`$ and $`W(4)`$ on the plus
-    space with Kohnen's $`U(4)`$ identity, Kohnen's $`D`$-th lift derived from his trace identity, and Zagier's kernel
-    function with its coefficients and the cycle integrals of Shintani's lift, evaluated at square discriminants
-    through the classes of binary quadratic forms of discriminant $`D^2`$ and Gauss's sign of the quadratic Gauss sum
-    (`HalfIntegral/`, `HalfIntegral/ZagierKernel/`).
-  - Congruent numbers: the coefficients of Mathlib's $`L`$-function of $`E_n`$ (point counts, Gauss's count for
-    $`y^2 = x^3 - x`$), $`f_{32}`$ as a theta series of $`\mathbb Z[i]`$ with a characteristic, its Fricke involution,
-    the root number of $`L(E_n, s)`$ for every squarefree $`n`$ (for even $`n`$ through $`f_{64}`$ as a coset theta
-    series), Tunnell's two forms as products of theta series, the torsion of $`E_n(\mathbb Q)`$, and the Coates–Wiles
-    theorem for $`E_n`$ from its general form for curves with complex multiplication by a maximal order
-    (`HalfIntegral/Waldspurger/CongruentCurves/`); $`S_2(\Gamma_0(16)) = 0`$, $`f_{32}`$ as a Tau Ceti newform, and
-    the Fricke involution on $`q`$-series dilations (`Elliptic/`).
-  - Modular elliptic curves (`Elliptic/`): the Hasse bound for the coefficients of $`L(E, s)`$, Milne's Proposition
-    11.21 (the bijection between isogeny classes of conductor $`N`$ and rational newforms of level $`N`$) from named
-    inputs, and the degree of a modular parametrization stated.
-  - Theta series of quadratic forms (`ThetaGenus/`): Miyake's Theorem 4.9.3, Corollaries 4.9.4 and 4.9.5 (3) in
-    Gram-matrix form, the odd-rank character $`(2\det H/\cdot)`$, constant terms at every cusp as local Gauss sums.
-  - Rankin–Selberg (`RankinSelberg/`): the weight-0 Eisenstein series of level one as a Mellin transform, Hecke's
-    bounds, the unfolding at level one and the Euler product of $`L(f \times \bar f, s)`$.
-  - Historical: more of Jacobi's § 66 (with Clausen's transformation), Ramanujan's recurrence for $`\tau(n)`$,
-    Kronecker's class number relations (some conditional on a named input), some of Eisenstein's lattice sums in
-    terms of $`\wp`$, the duplication formulas of the theta constants, a new library for H. J. S. Smith's
-    *Report on the Theory of Numbers* (`Historical/Smith/`); Ramanujan's Table I (the Eisenstein series up to weight
-    32 as polynomials in $`Q`$, $`R`$) and Dirichlet series, Eisenstein's Dirichlet series for the cubic residue
-    character, his reduced matrices and lattices with multiplication by $`i`$, and Jacobi's multipliers of the
-    transformations of orders 3 and 5.
-  - Pins: Mathlib `e8ba86f` (unchanged) and Tau Ceti `1ff5324` (Tau Ceti main of 2026-11-16), was `ca32605`.
-- **Book maps regenerated** (rows of each status, 0.4.0 → 0.5.0): Milne 179 proved (was 178), 19 in part (was 18),
-  6 conditional (was 7); Miyake 106 proved (was 105), 41 in part (was 40); four rows formalized in files that were
-  outside the 0.4.0 release are now in it. The Waldspurger statement map has 22 rows (was 17): 7 proved, 2 in part,
-  12 conditional, 1 stated.
+A small release: what was finished after 0.5.0.
+
+- **Five new headlines** (112 in all; the 107 of 0.5.0 are kept, with identical statements), each a result that
+  neither Mathlib master nor Tau Ceti main (both checked on 2026-11-17) has, in three of the existing challenge files
+  (still fourteen):
+  - [`Challenge_Waldspurger.lean`](Challenge_Waldspurger.lean) (30, was 28): **the Rankin–Selberg unfolding at every
+    cusp, coset by coset** (`rankin_unfolding_cosets`, unconditional): for right coset representatives $`R`$ of
+    $`\Gamma_0(L)`$, a continuous $`G`$ with the unitary weight-$`\lambda`$ law and a bounded $`\Phi`$ on $`\mathbb Z^2`$
+    with $`\Phi(p\gamma) = \omega(d_\gamma)\Phi(p)`$, the integral over $`\Gamma_0(L)\backslash\mathbb H`$ of $`G`$ times
+    the full-lattice series $`S_\Phi(z, s)`$ is $`\sum_{\rho \in R} c_\rho(s)`$ times the Mellin transform of the
+    constant term of $`G`$ at the cusp $`\rho\infty`$, with explicit Dirichlet series $`c_\rho(s)`$; no classification
+    of the cusps is needed. With it, **Shimura's theorem for the theta multiplier** is conditional on a smaller named
+    input, `ShimuraCosetIdentity` (`shimuraLift_theta_of_cosetIdentity`; see
+    [Conditional theorems](#conditional-theorems)).
+  - [`Challenge_KohnenPlusSpace.lean`](Challenge_KohnenPlusSpace.lean) (7, was 5): **$`S^+_{k+1/2}(4)`$ has a basis
+    of eigenforms of all $`T(p^2)`$, $`p`$ odd** (`kohnen_plus_eigenbasis`, unconditional; a named input in 0.5.0),
+    from the self-adjointness of the $`T(p^2)`$; and **Kohnen's isomorphism** from three of Kohnen's lemmas (the
+    $`D`$-th lifts land in level one, $`\dim S_{2k}(\mathrm{SL}_2(\mathbb Z)) \le \dim S^+_{k+1/2}(4)`$, multiplicity
+    one in the plus space) instead of Kohnen's trace identity (`kohnen_isomorphism_of_inputs`; each of the three
+    follows from the trace identity, and together they imply it).
+  - [`Challenge_Historical.lean`](Challenge_Historical.lean) (13, was 12): **Jacobi's theta constants**: for
+    $`0 < k < 1`$, at the nome $`q = e^{-\pi K'/K}`$, $`\vartheta_3 = \sqrt{2K/\pi}`$,
+    $`\vartheta_2 = \sqrt{2kK/\pi}`$, $`\vartheta_4 = \sqrt{2k'K/\pi}`$ and $`k = \vartheta_2^2/\vartheta_3^2`$
+    (`jacobi_theta_constants`; *Fundamenta nova* §§ 63, 65), by Gauss's arithmetic–geometric mean.
+- **New in the library** since 0.5.0 (beyond the headlines):
+  - Half-integral weight: the decay of the Rankin kernel on vertical half-strips at every cusp, the Fricke-side
+    Rankin integral of Shimura's proof unfolded at every cusp of $`\Gamma_0(L)`$ (`frickeKernelIntegral_eq_cosetSum`),
+    Kohnen's trace identity reduced to the three lemmas above (`kohnenTraceIdentity_of_inputs`) and derived from
+    Kohnen's isomorphism together with the lifts (`HalfIntegral/Rankin/`, `HalfIntegral/KohnenTraceReduction.lean`).
+  - Historical: Jacobi's theta constants also in the variable $`y`$ of the nome $`e^{-\pi y}`$, his normalization of
+    $`\Theta`$ and $`H`$, his product formulas for the complete integral (*Fundamenta nova* § 36), the modular equations
+    of orders 3 and 5 in his other forms with their symmetries, Legendre's relation and the multiplier formulas (on
+    non-singular branches), the first of his Euler-type expansions (§ 64), and Eisenstein's lattices for
+    $`\varpi = -i`$.
+  - Pins unchanged: Mathlib `e8ba86f`, Tau Ceti `1ff5324`.
+- **Book maps** regenerated: the counts are unchanged (Milne 179 rows proved,
+  19 in part, 6 conditional; Miyake 106 proved, 41 in part; the Waldspurger statement map 22 rows).
 - **[Known restrictions](#known-restrictions)** of the new headlines.
 
 - **Book maps**: for Milne and Miyake, a table from every item (theorem, proposition, lemma, corollary, definition) to
@@ -153,8 +113,8 @@ library is called `ModularFormsKB`.
 Every result listed here is a headline theorem of a `Challenge_<book>.lean` file: it is checked by the Lean kernel
 with only the standard axioms and depends on no unproved input. Headlines are only results that are in neither Mathlib
 nor Tau Ceti (main branch, checked on 2026-11-10 for the headlines new in 0.2.0, on 2026-11-12 for those new in
-0.3.0, on 2026-11-14 for those new in 0.3.1, on 2026-11-15 for those new in 0.4.0 and on 2026-11-16 for those new in
-0.5.0), or that are stronger here
+0.3.0, on 2026-11-14 for those new in 0.3.1, on 2026-11-15 for those new in 0.4.0, on 2026-11-16 for those new in
+0.5.0 and on 2026-11-17 for those new in 0.5.1), or that are stronger here
 ([comparison](docs/results/comparison.md)). One of them, Weil's Riemann hypothesis for curves, is also proved in the
 Stacks Project formalization by Axiom, in another form; it is labelled below. Related results of other libraries are
 cited next to the headlines, and the book maps credit, in their column *Also in*, every result proved here that is
@@ -210,6 +170,7 @@ a human** (see Provenance).
 - **Gross's example for $`p = 11`$:** for the ternary forms $`Q_1 = 4x_0^2 + 4x_0x_2 + 11x_1^2 + 12x_2^2`$ and $`Q_2 = 3x_0^2 + 4x_0x_2 + 44x_1^2 + 44x_1x_2 + 16x_2^2`$ of the two classes of maximal orders of the quaternion algebra ramified at $`\{11, \infty\}`$, the coefficients $`c(n) = (r_{Q_1}(n) - r_{Q_2}(n))/2`$ of $`g = \tfrac12(\theta_1 - \theta_2)`$ vanish for $`n \equiv 1, 2 \bmod 4`$ (Kohnen's plus condition) and whenever $`11`$ splits in $`\mathbb Q(\sqrt{-n})`$ (`gross_grossCoeff_eq_zero_of_mod_four`, `gross_grossCoeff_eq_zero_of_split`), and $`g = -q^3 + q^4 + q^{11} + q^{12} - q^{15} - 2q^{16} + \cdots`$ (`gross_grossCoeff_values`, computed by the kernel); the Brandt matrices $`B(2), B(3), B(5)`$ have row sums $`\sigma(m)`$, the symmetry $`w_jB_{ij} = w_iB_{ji}`$, the eigenvector $`(1, 1)`$ with eigenvalue $`\sigma(m)`$, and the eigenvector $`(1, -1)`$ of the transposes with the eigenvalues $`a_2 = -2`$, $`a_3 = -1`$, $`a_5 = 1`$ of the elliptic curve of conductor $`11`$ (`gross_brandt_rowSum_symm`, `gross_brandt_eisenstein`, `gross_brandt_eigen`). The forms and the matrices are entered explicitly; their identification with Gross's quaternionic objects was checked numerically, not in Lean.
 - **Gross's form is modular** (new in 0.5.0): $`g = \tfrac12(\theta_1 - \theta_2)`$ is a cusp form of weight $`3/2`$ on $`\Gamma_0(44)`$ in Kohnen's plus space, because $`Q_1`$ and $`Q_2`$ lie in one genus (`gross_form_mem_plusCuspForms`, in [`Challenge_ThetaGenus.lean`](Challenge_ThetaGenus.lean)).
 - **Hecke's functional equation and the Rankin–Selberg unfolding** (new in 0.4.0; both were named inputs of Shimura's theorem in 0.3.1): the lattice Eisenstein series $`E(z, s) = y^s\sum_{(c,d) \in L\mathbb Z \times \mathbb Z}\omega(d)(cz+d)^\lambda|cz+d|^{-\lambda-2s}`$ with $`\omega(-1) = (-1)^\lambda`$ has a completion $`L^s\pi^{-s}\Gamma(s + \lambda/2)E(z, s)`$ that is entire in $`s`$, bounded on vertical strips, and equal to the completed dual series at $`1 - s`$ (`eisensteinLattice_functionalEquation`); and for $`G`$ with the unitary weight-$`\lambda`$ law on $`\Gamma_0(L)`$, $`\int_{\Gamma_0(L)\backslash\mathbb H} G\,E(\cdot, s)\,d\mu = 2L(2s, \omega)\int_0^\infty\!\int_0^1 G(x + iy)\,y^{s-2}\,dx\,dy`$ (`rankin_unfolding`).
+- **The Rankin–Selberg unfolding at every cusp, coset by coset** (new in 0.5.1): for right coset representatives $`R`$ of $`\Gamma_0(L)`$, $`G`$ continuous with the unitary weight-$`\lambda`$ law with character $`\omega`$, and a bounded $`\Phi : \mathbb Z^2 \to \mathbb C`$ with $`\Phi(p\gamma) = \omega(d_\gamma)\Phi(p)`$ on $`\Gamma_0(L)`$, the full-lattice series $`S_\Phi(z, s) = y^s\sum_{p}\Phi(p)(p_1z + p_2)^\lambda|p_1z + p_2|^{-\lambda-2s}`$ satisfies, for $`\operatorname{Re} s > 1`$, $`\sum_{\rho \in R}\int_{\mathcal F} G(\rho\tau)S_\Phi(\rho\tau, s)\,d\mu = \sum_{\rho \in R} c_\rho(s)\int_0^\infty\!\int_0^1 (|j_\rho|/j_\rho)^\lambda G(\rho z)\,y^{s-2}\,dx\,dy`$ with $`c_\rho(s) = \sum_{n \ge 1} n^{-2s}(\Phi(nr_\rho) + (-1)^\lambda\Phi(-nr_\rho))`$, $`r_\rho = (0, 1)\rho^{-1}`$ (`rankin_unfolding_cosets`; Rankin 1939, Shimura 1973), given the integrability of both sides. Every cusp at once, without a classification of the cusps: the cosets of a cusp of width $`h`$ are $`\rho, \rho T, \ldots, \rho T^{h-1}`$.
 
 Neither Mathlib (at the pinned commit) nor Tau Ceti (main, checked on 2026-11-12) has half-integral weight forms, Waldspurger's theorems or Brandt matrices.
 
@@ -222,7 +183,7 @@ Neither Mathlib (at the pinned commit) nor Tau Ceti (main, checked on 2026-11-12
 
 Neither Mathlib (at the pinned commit) nor Tau Ceti (main, checked on 2026-11-12) defines congruent numbers; neither has the modularity of $`y^2 = x^3 - x`$ or of its twists (checked again on 2026-11-16; Tau Ceti has the curve and its rational points).
 
-**Historical theorems: Jacobi, Ramanujan, Weber, Kronecker** ([`Challenge_Historical.lean`](Challenge_Historical.lean)) (new in 0.3.1; all unconditional since 0.4.0; six more in 0.5.0)
+**Historical theorems: Jacobi, Ramanujan, Weber, Kronecker** ([`Challenge_Historical.lean`](Challenge_Historical.lean)) (new in 0.3.1; all unconditional since 0.4.0; six more in 0.5.0, one more in 0.5.1)
 
 - **Jacobi's differential equation of the modular equations** (*Fundamenta nova*, 1829, § 33): if $`\lambda(k)`$ is related to $`k`$ by a modular equation $`B(\lambda)/A(\lambda) = (aB(k)/A(k) + b)/(cB(k)/A(k) + d)`$, $`ad - bc \ne 0`$, for solutions $`A`$, $`B`$ of Legendre's equation with nonzero Wronskian, then $`3\lambda''^2 - 2\lambda'\lambda''' + \lambda'^2\big[\big(\tfrac{1+k^2}{k-k^3}\big)^2 - \big(\tfrac{1+\lambda^2}{\lambda-\lambda^3}\big)^2\lambda'^2\big] = 0`$ (`jacobi_modular_equation_ode`); and the Fourier series of $`\Theta`$ and $`H`$ (§ 62, `jacobi_theta_fourier`).
 - **Ramanujan's differential equations** in his variable $`x`$, $`|x| < 1`$: $`x\,P' = (P^2 - Q)/12`$, $`x\,Q' = (PQ - R)/3`$, $`x\,R' = (PR - Q^2)/2`$ (`ramanujan_differential_equations`). Mathlib proves them in the variable $`\tau`$ for the normalized Eisenstein series.
@@ -231,8 +192,9 @@ Neither Mathlib (at the pinned commit) nor Tau Ceti (main, checked on 2026-11-12
 - **Weber's theta functions as products of $`\eta`$ and his functions $`\mathfrak f`$** (Weber 1891, § 21, (9)): $`\vartheta_{00} = \eta\,\mathfrak f^2`$, $`\vartheta_{01} = \eta\,\mathfrak f_1^2`$, $`\vartheta_{10} = \eta\,\mathfrak f_2^2`$ on $`\mathbb H`$ (`weber_theta_eta`; new in 0.3.1, where it was conditional on the triple product; unconditional since 0.4.0).
 
 - **New in 0.5.0:** Jacobi's identity $`\prod_{n \ge 1}(1 - q^n)^3 = \sum_{n \ge 0}(-1)^n(2n + 1)q^{n(n+1)/2}`$ (§ 66, `jacobi_cube`); Ramanujan's partition congruences $`p(5m + 4) \equiv 0 \pmod 5`$, $`p(7m + 5) \equiv 0 \pmod 7`$, $`p(35m + 19) \equiv 0 \pmod{35}`$ (`ramanujan_partition_congruences`), proved as Ramanujan did, from Jacobi's identity; his congruences $`\tau(5n) \equiv 0 \pmod 5`$ and $`\tau(n) \equiv 0 \pmod 7`$ for $`n \equiv 0, 3, 5, 6 \pmod 7`$ (`ramanujan_tau_congruences`); his Question 387, $`\sum_{n \ge 1} n/(e^{2\pi n} - 1) = 1/24 - 1/(8\pi)`$ (`ramanujan_question387`); Jacobi's quartic identity $`\vartheta_{00}^4 = \vartheta_{01}^4 + \vartheta_{10}^4`$ and Weber's $`\mathfrak f^8 = \mathfrak f_1^8 + \mathfrak f_2^8`$ (`jacobi_quartic_weber_eighth_powers`); and Kronecker's $`\vartheta'''(0, w) = -\pi^2E_2(w)\vartheta'(0, w)`$ for his odd theta function (`kronecker_theta_E2`).
+- **New in 0.5.1: Jacobi's theta constants** (*Fundamenta nova* § 63, p. 180 and § 65, p. 184): for $`0 < k < 1`$, at the nome $`q = e^{-\pi K'/K}`$, $`\vartheta_3 = 1 + 2q + 2q^4 + \cdots = \sqrt{2K/\pi}`$, $`\vartheta_2 = 2q^{1/4} + 2q^{9/4} + \cdots = \sqrt{2kK/\pi}`$, $`\vartheta_4 = 1 - 2q + 2q^4 - \cdots = \sqrt{2k'K/\pi}`$, and $`k = \vartheta_2^2/\vartheta_3^2`$ (`jacobi_theta_constants`), with $`K`$ Tau Ceti's complete elliptic integral. Proved by Gauss's route: Weber's duplication formulas make $`(\vartheta_3(q^{2^n})^2, \vartheta_4(q^{2^n})^2)`$ the arithmetic–geometric sequence of $`(\vartheta_3^2, \vartheta_4^2)`$, and Tau Ceti's theorem of Gauss on the arithmetic–geometric mean gives $`K = \pi\vartheta_3^2/2`$.
 
-Neither Mathlib (at the pinned commit; master checked on 2026-11-14) nor Tau Ceti (main, checked on 2026-11-14) has Jacobi's equation, the theta functions $`\Theta`$, $`H`$ in Jacobi's form, Ramanujan's equations in the variable $`x`$, or Kronecker's series; neither has the Jacobi triple product (master and main checked again on 2026-11-15), Ramanujan's congruences for $`p(n)`$ or $`\tau(n)`$, Jacobi's cube or quartic identities, or Kronecker's identity (checked again on 2026-11-16; Mathlib has Euler's pentagonal theorem and the transformation of $`E_2`$).
+Neither Mathlib (at the pinned commit; master checked on 2026-11-14) nor Tau Ceti (main, checked on 2026-11-14) has Jacobi's equation, the theta functions $`\Theta`$, $`H`$ in Jacobi's form, Ramanujan's equations in the variable $`x`$, or Kronecker's series; neither has the Jacobi triple product (master and main checked again on 2026-11-15), Ramanujan's congruences for $`p(n)`$ or $`\tau(n)`$, Jacobi's cube or quartic identities, or Kronecker's identity (checked again on 2026-11-16; Mathlib has Euler's pentagonal theorem and the transformation of $`E_2`$), nor the theta constants through $`K`$ (checked on 2026-11-17; Tau Ceti has $`K`$ and Gauss's arithmetic–geometric mean).
 
 **The Rankin–Selberg method at level one** ([`Challenge_RankinSelberg.lean`](Challenge_RankinSelberg.lean)) (new in 0.5.0)
 
@@ -258,6 +220,7 @@ Tau Ceti (main, checked on 2026-11-16) has theta series of even lattices, their 
 **Kohnen's plus space** ([`Challenge_KohnenPlusSpace.lean`](Challenge_KohnenPlusSpace.lean)) (new in 0.5.0; Kohnen's isomorphism and the Kohnen–Zagier formula are in [Conditional theorems](#conditional-theorems))
 
 - **$`T(p^2)`$ is self-adjoint on the plus space:** for an odd prime $`p`$, Shimura's $`T(p^2)`$ is self-adjoint on $`S^+_{k+1/2}(4)`$ for the Petersson product (`plus_heckeT_selfAdjoint`; Shimura 1973, Kohnen 1980), by the double coset change of variables.
+- **A basis of Hecke eigenforms** (new in 0.5.1): for $`k \ge 1`$, $`S^+_{k+1/2}(4)`$ has a basis of simultaneous eigenforms of all $`T(p^2)`$, $`p`$ odd (`kohnen_plus_eigenbasis`; Kohnen 1980, § 1), since commuting self-adjoint operators on a finite-dimensional inner product space are simultaneously diagonalizable. It was a named input of Kohnen's isomorphism in 0.5.0.
 
 ## Conditional theorems
 
@@ -404,6 +367,16 @@ reviewed by a human**.
   as the integral over $`\Gamma_0(L)\backslash\mathbb H`$ of an explicit kernel built from $`f|W_{4N}`$, the theta series
   $`\theta_{\bar\psi}`$ and an Eisenstein series at $`\infty`$. The named input is the unfolding of that integral into
   the completed Dirichlet series of one sequence $`b`$ (and of its twists), from the same proof of Shimura.
+- **New in 0.5.1, a smaller input:** `ShimuraCosetIdentity thetaMultiplierSystem k N χ → (the statement)`
+  (`shimuraLift_theta_of_cosetIdentity`). The library now proves the unfolding of that kernel integral at every cusp
+  of $`\Gamma_0(L)`$, $`L = 16Ntr^2`$ (the unconditional `rankin_unfolding_cosets`, with the integrability of the
+  kernel on every coset strip and its law): the integral is the sum over right coset representatives $`\rho`$ of
+  $`\Gamma_0(L)`$ of an explicit Dirichlet series $`c_\rho(s)`$ times the Mellin transform of the constant term of the
+  kernel at the cusp $`\rho\infty`$. The named input `ShimuraCosetIdentity` is the identification of that sum with the
+  completed Dirichlet series of one sequence $`b`$ (and of its twists by $`\bar\psi`$), Shimura 1973, §§ 3–5
+  (locator unverified). Proving it needs the expansions of $`f|W_{4N}`$ and of the twisted theta series at the cusps
+  of $`\Gamma_0(L)`$; for $`N > 1`$ the expansions of $`f`$ at cusps of $`\Gamma_0(4N)`$ other than $`0`$ and $`\infty`$
+  are not determined by $`f`$ and $`f|W_{4N}`$.
 
 **Tunnell's theorem with the true $`L`$-function** ([`Challenge_CongruentNumbers.lean`](Challenge_CongruentNumbers.lean)) (new in 0.5.0)
 
@@ -455,7 +428,23 @@ reviewed by a human**.
   which makes $`T^+(4)`$ an operator on the plus space (Kohnen 1980, § 2 and Proposition 2; formerly the named input
   `KohnenLUFour`); the cycle integrals at the square discriminant $`D^2`$ give $`L(G, D, k)`$ (Kohnen and Zagier 1981,
   § II; formerly the named input `KohnenSquareCycle`); and, from the trace identity (formerly separate inputs),
-  Kohnen's $`D`$-th lift to level one and multiplicity one on the plus space.
+  Kohnen's $`D`$-th lift to level one and multiplicity one on the plus space. **Since 0.5.1** also the basis of
+  eigenforms of the plus space (`kohnen_plus_eigenbasis`, unconditional; formerly the named input
+  `KohnenPlusEigenbasis`).
+- **New in 0.5.1, Kohnen's isomorphism from three smaller inputs:**
+  `(∀ D, KohnenDisc k D → KohnenDLift …) → KohnenDimensionLe … → KohnenPlusMultOne … → (the isomorphism)`
+  (`kohnen_isomorphism_of_inputs`). Each of the three is a consequence of `KohnenTraceIdentity` (proved in the
+  library), and the three together imply it (`kohnenTraceIdentity_of_inputs`), so they carry the same content in
+  smaller pieces:
+
+  | Lean structure | classical theorem | source |
+  |---|---|---|
+  | `KohnenDLift` | for every fundamental $`D`$ with $`(-1)^kD > 0`$, the $`D`$-th lift $`\sum_{d \mid n}(D/d)d^{k-1}c(\lvert D\rvert n^2/d^2)`$ of $`g \in S^+_{k+1/2}(4)`$ is the coefficient sequence of a cusp form of weight $`2k`$ on $`\mathrm{SL}_2(\mathbb Z)`$ | Kohnen 1980, Theorem 1 |
+  | `KohnenDimensionLe` | $`\dim S_{2k}(\mathrm{SL}_2(\mathbb Z)) \le \dim S^+_{k+1/2}(4)`$ (proved here for $`k \le 5`$ and $`k = 7`$) | Kohnen 1980, §§ 2–3 |
+  | `KohnenPlusMultOne` | two eigenforms in $`S^+_{k+1/2}(4)`$ with the same eigenvalues of $`T(p^2)`$ at all odd $`p`$ are proportional | Kohnen 1980, Theorem 1 and its corollary |
+
+  The Kohnen–Zagier headlines still take `KohnenTraceIdentity`; with `kohnenTraceIdentity_of_inputs` they hold under
+  the three inputs as well (not a separate headline).
 
 **Modular elliptic curves** ([`Challenge_EllipticCurves.lean`](Challenge_EllipticCurves.lean)) (new in 0.5.0)
 
@@ -482,6 +471,21 @@ triple product (`JacobiTripleProduct`), **unconditional since 0.4.0** (the ident
 both are now in [Highlights](#highlights).
 
 ## Known restrictions
+
+Of the headlines new in 0.5.1:
+
+- **The unfolding at every cusp** (`rankin_unfolding_cosets`): the integrability of the integrand on each translated
+  fundamental domain and of $`|G(\rho z)|y^{\sigma - 2}`$ on the strip are hypotheses (the library proves them for the
+  kernel of Shimura's proof, not in general); $`\lambda \ge 1`$; the normalizations are the library's.
+- **Shimura's theorem** (`shimuraLift_theta_of_cosetIdentity`): conditional on `ShimuraCosetIdentity`, assumed; only
+  for the theta multiplier and $`k \ge 2`$.
+- **Kohnen's plus space** (`kohnen_plus_eigenbasis`, `kohnen_isomorphism_of_inputs`): level 4 and the theta multiplier
+  only; eigenforms of the $`T(p^2)`$ for odd $`p`$ ($`T^+(4)`$ is not included in the eigenbasis). The three inputs of
+  the isomorphism are assumed; `KohnenDimensionLe` is proved only where $`S_{2k}(\mathrm{SL}_2(\mathbb Z)) = 0`$.
+- **Jacobi's theta constants** (`jacobi_theta_constants`): $`\vartheta_2, \vartheta_3, \vartheta_4`$ are defined as
+  real series in the variable $`y`$ of the nome $`q = e^{-\pi y}`$; Jacobi's own analytic $`\Theta`$ and $`H`$ (through
+  the elliptic functions) are not identified with them in this headline, and $`K`$ is Tau Ceti's complete elliptic
+  integral of the first kind.
 
 Of the headlines new in 0.5.0:
 
@@ -697,15 +701,15 @@ lake env lean scripts/check_axioms.lean   # axioms of the headline theorems
 
 Mathlib comes prebuilt from its cache; Tau Ceti and this library are built from source (about 22,600 build jobs
 besides Mathlib's cache; no file imports all of Mathlib, so only the parts of Tau Ceti that the library uses are
-built). A cold build took about 63 minutes on 8 cores (2026-11-16), with at most 8.2 GB of memory in use besides the
-page cache and a largest single Lean process of 8.0 GB. One `lake comparator` check per book or topic (build, export,
-and the Lean, NanoDa and con-ron kernels; measured without the bubblewrap sandbox, 2026-11-16): Milne, sections 0–10,
+built). A cold build took about 66 minutes on 8 cores (2026-11-17), with at most 8.1 GB of memory in use besides the
+page cache and a largest single Lean process of 8.2 GB. One `lake comparator` check per book or topic (build, export,
+and the Lean, NanoDa and con-ron kernels; measured without the bubblewrap sandbox, 2026-11-17): Milne, sections 0–10,
 31 minutes, at most 9.2 GB in use (largest process `leanexport`, 7.5 GB; most of the time is Lean's own kernel);
-Milne, sections 11–12, 20 minutes, 6.5 GB; Miyake 12.5 minutes, 4.9 GB; Shimura 5 minutes, 3.2 GB; Iwaniec 1.2
-minutes, 1.8 GB; Andrianov–Zhuravlev 2.7 minutes, 2.4 GB; Heegner–Stark 7 minutes, 6.8 GB (largest process `con-ron`,
-4.3 GB); Waldspurger 12 minutes, 4.8 GB; congruent numbers 18 minutes, 9.3 GB (largest process `leanexport`, 6.2 GB);
-historical theorems 6.5 minutes, 3.7 GB; Rankin–Selberg 7.3 minutes, 3.8 GB; modular elliptic curves 20 minutes,
-5.7 GB; theta series in one genus 9 minutes, 4.1 GB; Kohnen's plus space 10.5 minutes, 4.5 GB. GitHub's standard
+Milne, sections 11–12, 19 minutes, 6.5 GB; Miyake 13.5 minutes, 4.9 GB; Shimura 5.5 minutes, 3.2 GB; Iwaniec 1.4
+minutes, 1.8 GB; Andrianov–Zhuravlev 2.8 minutes, 2.3 GB; Heegner–Stark 7 minutes, 6.8 GB (largest process `con-ron`,
+4.3 GB); Waldspurger 13 minutes, 4.8 GB; congruent numbers 18 minutes, 9.3 GB (largest process `leanexport`, 6.2 GB);
+historical theorems 7 minutes, 3.7 GB; Rankin–Selberg 7.5 minutes, 3.8 GB; modular elliptic curves 20 minutes,
+6.5 GB; theta series in one genus 9 minutes, 4.1 GB; Kohnen's plus space 11.5 minutes, 4.5 GB. GitHub's standard
 runner has 4 cores and 16 GB; the CI workflow adds swap space and saves partial builds, so a first run may need to be
 re-run to finish.
 
@@ -714,7 +718,7 @@ re-run to finish.
 ModularFormsKB was written by AI, with Claude Code (Anthropic): almost entirely by Claude Opus 5.5, with a share by
 Claude Sonnet 5.5, in October and November 2026. Jonathan Hanke designed and directed it: he chose the books, the
 results, the conventions and the proof routes. The proofs are checked by the Lean kernel, and CI checks that the
-headline theorems use only the standard axioms. The 107 headline statements of this release in the
+headline theorems use only the standard axioms. The 112 headline statements of this release in the
 `Challenge_<book>.lean` files, and the definitions they use, have **not yet been reviewed** by a human; that review is
 planned for a later release. `lake comparator` checks that each `Solution_<book>.lean` proves exactly the statements
 of its `Challenge_<book>.lean`. The rest of the library (its other definitions and intermediate results, and the
@@ -725,6 +729,7 @@ against the literature. Corrections and reports of mis-formalizations are very w
 
 Releases are tagged with semantic versions; `main` continues to develop. The DOI [10.5281/zenodo.24069385](https://doi.org/10.5281/zenodo.24069385) always resolves to the latest release. To cite a specific version, use its release page or the "Cite this repository" button.
 
+- **[v0.5.1](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.5.1)** (Lean v4.36.0-rc2, Mathlib `e8ba86f`, Tau Ceti `1ff5324`), archived on Zenodo as [doi:ZENODO-DOI-v0.5.1](https://doi.org/ZENODO-DOI-v0.5.1): what was finished since v0.5.0. Five new headlines (112 in all, the 107 of v0.5.0 unchanged), in the existing challenge files: the Rankin–Selberg unfolding at every cusp of $`\Gamma_0(L)`$, coset by coset, and Shimura's theorem for the theta multiplier conditional on a smaller input, the coset identity `ShimuraCosetIdentity` (`Challenge_Waldspurger.lean`); a basis of Hecke eigenforms of Kohnen's plus space (formerly a named input), and Kohnen's isomorphism conditional on three of Kohnen's lemmas (the lifts to level one, a dimension inequality, multiplicity one) instead of his trace identity (`Challenge_KohnenPlusSpace.lean`); Jacobi's theta constants $`\vartheta_3 = \sqrt{2K/\pi}`$, $`\vartheta_2 = \sqrt{2kK/\pi}`$, $`\vartheta_4 = \sqrt{2k'K/\pi}`$ (`Challenge_Historical.lean`). Pins unchanged; book maps regenerated, counts unchanged.
 - **[v0.5.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.5.0)** (Lean v4.36.0-rc2, Mathlib `e8ba86f`, Tau Ceti `1ff5324`), archived on Zenodo as [doi:10.5281/zenodo.24289630](https://doi.org/10.5281/zenodo.24289630): twenty-eight new headlines (107 in all, the 79 of v0.4.0 kept) and four new challenge files (fourteen in all): the Rankin–Selberg method at level one, with the Petersson norm of a normalized eigenform as a value of its symmetric square $`L`$-function (`Challenge_RankinSelberg.lean`); elliptic curves with a newform, their functional equation, parity and Milne's strong Hasse–Weil conjecture, the newforms of the congruent number curves $`E_1`$ (level 32) and $`E_n`$, $`n`$ odd squarefree (level $`32n^2`$), and for every elliptic curve over $`\mathbb Q`$ conditional on the modularity theorem (`Challenge_EllipticCurves.lean`); theta series of quadratic forms in one genus differ by a cusp form, in every rank, and Gross's form of level 11 lies in Kohnen's plus space (`Challenge_ThetaGenus.lean`); the self-adjointness of $`T(p^2)`$ on Kohnen's plus space, and, conditional on named inputs, Kohnen's isomorphism (from Kohnen's trace identity alone), the Kohnen–Zagier formula, Waldspurger's theorem on the plus space and $`L(F, D, k) \ge 0`$ (`Challenge_KohnenPlusSpace.lean`); the modularity of the congruent number curves with an entire $`L`$-function, and Tunnell's theorem with the true $`L`$-function, conditional on cited theorems only; Shimura's theorem for the theta multiplier conditional on a smaller input; and Jacobi's cube and quartic identities, Ramanujan's congruences for $`p(n)`$ and $`\tau(n)`$ and his Question 387, Weber's $`\mathfrak f^8 = \mathfrak f_1^8 + \mathfrak f_2^8`$ and an identity of Kronecker for $`E_2`$. Tau Ceti pin moved to Tau Ceti main; book maps regenerated (Milne 179 rows proved and 19 in part, was 178 and 18; Miyake 106 proved and 41 in part, was 105 and 40; the Waldspurger statement map has 22 rows, was 17).
 - **[v0.4.0](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.4.0)** (Lean v4.36.0-rc2, Mathlib `e8ba86f`, Tau Ceti `ca32605`), archived on Zenodo as [doi:10.5281/zenodo.24257645](https://doi.org/10.5281/zenodo.24257645): sixteen new headlines (79 in all, the 63 of v0.3.1 kept): for Milne, the existence theorem and the Riemann–Roch theorem on every compact Riemann surface, the dimension and genus formulas for every subgroup of finite index of $`\mathrm{SL}_2(\mathbb Z)`$, and the triviality of holomorphic line bundles on $`\mathbb H`$; for Miyake, theta series with spherical functions in every rank (Theorem 4.9.3, Corollary 4.9.4, half-integral weight for odd rank), Shimura's twisted theta law for every character, Hecke's continuation of Eisenstein series in $`s`$ and his limits in weights two and one (Theorems 7.2.9, 7.2.12, 7.2.13), and Hecke's lemma; Hecke's functional equation of the lattice Eisenstein series and the Rankin–Selberg unfolding, and Shimura's theorem for the theta multiplier conditional on one named input (`ShimuraDualUnfolding`); the Jacobi triple product, with which Weber's formulas $`\vartheta = \eta\,\mathfrak f^2`$ become unconditional. Milne's headlines are split into two challenge files (sections 0 to 10, and 11 and 12), ten in all. Mathlib and Tau Ceti pins moved to Tau Ceti main; book maps regenerated (Milne 178 rows proved and 18 in part, was 170 and 22; Miyake 105 proved and 40 in part, was 83 and 41).
 - **[v0.3.1](https://github.com/jonhanke/modular-forms-lean/releases/tag/v0.3.1)** (Lean v4.36.0-rc2, Mathlib `1b1ccf4`, Tau Ceti `4908b03`), archived on Zenodo as [doi:10.5281/zenodo.24223180](https://doi.org/10.5281/zenodo.24223180): what was finished since v0.3.0. Eleven new headlines (63 in all, the 52 of v0.3.0 unchanged): for Milne, the little Picard theorem (Remark 2.25), Proposition 12.21 (the class group of an imaginary quadratic order acting on the $`j`$-invariants with complex multiplication, over every algebraically closed field of characteristic zero), Proposition 11.5 (the Betti, $`\ell`$-adic and tangent representations of an elliptic curve over $`\mathbb C`$) and the conductor exponent $`2`$ at additive primes $`p \ne 2, 3`$; for Miyake, Theorem 4.5.9 (the Hecke ring of $`\Gamma_0(N)`$ is a polynomial ring) and Theorem 4.5.4 (2) ($`T(n)`$ and $`T^*(n)`$ are adjoint for every $`n`$); and a ninth challenge file, `Challenge_Historical.lean`, with theorems of Jacobi, Ramanujan, Weber (conditional on the Jacobi triple product) and Kronecker, and its statement map. The book maps of Milne (170 rows proved and 22 in part, was 155 and 28) and Miyake (83 proved and 41 in part, was 56 and 29) are regenerated; the other statement maps are unchanged.
@@ -758,8 +763,9 @@ Releases are tagged with semantic versions; `main` continues to develop. The DOI
 **Not in this release** (planned for a later release): the rest of the half-integral weight library (Zagier's
 Eisenstein series, Kohnen's newform theory) beyond the files used by the headlines, Hurwitz class numbers and mock
 modular forms; the items of Shimura, Iwaniec and Andrianov–Zhuravlev not yet stated; proofs of the named inputs of the
-conditional theorems (the theory of complex multiplication; Waldspurger's theorems; the unfolding in Shimura's proof;
-Kohnen's trace identity and Zagier's kernel; the modularity theorem). This release is standalone: it does not depend
+conditional theorems (the theory of complex multiplication; Waldspurger's theorems; the coset identity in Shimura's
+proof; Kohnen's lifts, dimension inequality and multiplicity one, or his trace identity, and Zagier's kernel; the
+modularity theorem). This release is standalone: it does not depend
 on the algebraic number theory library
 [algebraic-number-theory-lean](https://github.com/jonhanke/algebraic-number-theory-lean), which is on a different
 Mathlib; the [comparison](docs/results/comparison.md) lists the results the two libraries share.

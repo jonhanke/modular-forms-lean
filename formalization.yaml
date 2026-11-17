@@ -33,7 +33,7 @@ project:
     Gamma_0(N) is a polynomial ring) and Theorem 4.5.4 (2) (T(n) and T*(n) adjoint for every n); and historical
     theorems of Jacobi (the differential equation of modular equations, the Fourier series of Theta and H),
     Ramanujan (his differential equations for P, Q, R), Weber (theta functions as eta times his functions f,
-    conditional on the Jacobi triple product) and Kronecker (the transformation law of Ser_rho for rho >= 2). Release 0.4.0 adds the existence theorem and the Riemann-Roch theorem on every compact Riemann surface, the dimension and genus formulas for every subgroup of finite index of SL_2(Z), the triviality of holomorphic line bundles on the upper half plane, theta series with spherical functions in every rank (half-integral weight for odd rank), Shimura's twisted theta law for every character, Hecke's continuation of Eisenstein series in s and his limits in weights two and one, Hecke's lemma, Hecke's functional equation of the lattice Eisenstein series, the Rankin-Selberg unfolding, Shimura's theorem for the theta multiplier conditional on one named input (ShimuraDualUnfolding), and the Jacobi triple product, with which Weber's formulas become unconditional. Release 0.5.0 adds the Rankin-Selberg method at level one (continuation, simple pole with residue a multiple of the Petersson product, functional equation) and the Petersson norm of a normalized eigenform as a value of its symmetric square L-function; for elliptic curves over Q with a newform, the entire L-function, the functional equation with sign w = +-1, parity and Milne's strong Hasse-Weil conjecture, and the same for every elliptic curve conditional on the modularity theorem; theta series of quadratic forms in one genus differ by a cusp form, in every rank (half-integral weight for odd rank), and Gross's form of level 11 lies in Kohnen's plus space; the self-adjointness of T(p^2) on Kohnen's plus space, and, conditional on named inputs, Kohnen's isomorphism, the Kohnen-Zagier formula, Waldspurger's theorem on the plus space and the nonnegativity of L(F, D, k); the modularity of the congruent number curves y^2 = x^3 - n^2 x with an entire L-function, and Tunnell's theorem with this true L-function, conditional on named inputs; Shimura's theorem for the theta multiplier conditional on a smaller input (ShimuraFrickeKernelUnfolding); and Jacobi's cube and quartic identities, Ramanujan's congruences for p(n) and tau(n) and his Question 387, Weber's f^8 = f_1^8 + f_2^8 and Kronecker's identity theta'''(0, w) = -pi^2 E_2(w) theta'(0, w). Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
+    conditional on the Jacobi triple product) and Kronecker (the transformation law of Ser_rho for rho >= 2). Release 0.4.0 adds the existence theorem and the Riemann-Roch theorem on every compact Riemann surface, the dimension and genus formulas for every subgroup of finite index of SL_2(Z), the triviality of holomorphic line bundles on the upper half plane, theta series with spherical functions in every rank (half-integral weight for odd rank), Shimura's twisted theta law for every character, Hecke's continuation of Eisenstein series in s and his limits in weights two and one, Hecke's lemma, Hecke's functional equation of the lattice Eisenstein series, the Rankin-Selberg unfolding, Shimura's theorem for the theta multiplier conditional on one named input (ShimuraDualUnfolding), and the Jacobi triple product, with which Weber's formulas become unconditional. Release 0.5.0 adds the Rankin-Selberg method at level one (continuation, simple pole with residue a multiple of the Petersson product, functional equation) and the Petersson norm of a normalized eigenform as a value of its symmetric square L-function; for elliptic curves over Q with a newform, the entire L-function, the functional equation with sign w = +-1, parity and Milne's strong Hasse-Weil conjecture, and the same for every elliptic curve conditional on the modularity theorem; theta series of quadratic forms in one genus differ by a cusp form, in every rank (half-integral weight for odd rank), and Gross's form of level 11 lies in Kohnen's plus space; the self-adjointness of T(p^2) on Kohnen's plus space, and, conditional on named inputs, Kohnen's isomorphism, the Kohnen-Zagier formula, Waldspurger's theorem on the plus space and the nonnegativity of L(F, D, k); the modularity of the congruent number curves y^2 = x^3 - n^2 x with an entire L-function, and Tunnell's theorem with this true L-function, conditional on named inputs; Shimura's theorem for the theta multiplier conditional on a smaller input (ShimuraFrickeKernelUnfolding); and Jacobi's cube and quartic identities, Ramanujan's congruences for p(n) and tau(n) and his Question 387, Weber's f^8 = f_1^8 + f_2^8 and Kronecker's identity theta'''(0, w) = -pi^2 E_2(w) theta'(0, w). Release 0.5.1 adds the Rankin-Selberg unfolding at every cusp of Gamma_0(L), coset by coset, with which Shimura's theorem for the theta multiplier is conditional on a smaller input (ShimuraCosetIdentity); a basis of Hecke eigenforms of Kohnen's plus space (formerly a named input) and Kohnen's isomorphism conditional on three of Kohnen's lemmas instead of his trace identity; and Jacobi's theta constants theta_3^2 = 2K/pi, theta_2^2 = 2kK/pi, theta_4^2 = 2k'K/pi. Each item of the books is mapped to its Lean declaration and status in docs/results/books/, which also
     credits the results proved here that Mathlib, Tau Ceti or the Stacks Project formalization (Axiom) also prove.
   authors:
     - "Jonathan Hanke"
@@ -196,7 +196,7 @@ sources:
 related_formalizations:
   - id: "https://github.com/leanprover-community/mathlib4"
     relationship: "builds-on"
-    note: "Built on Mathlib at commit e8ba86f (the commit Tau Ceti 1ff5324 and, until 0.4.0, ca32605 pin; until 0.3.1: 1b1ccf4); the headlines new in 0.5.0 were compared with Mathlib master 98f73a9f (2026-11-16). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
+    note: "Built on Mathlib at commit e8ba86f (the commit Tau Ceti 1ff5324 and, until 0.4.0, ca32605 pin; until 0.3.1: 1b1ccf4); the headlines new in 0.5.0 were compared with Mathlib master 98f73a9f (2026-11-16), those new in 0.5.1 with Mathlib master d9a73ae1 (2026-11-17). docs/results/comparison.md says what each headline adds to Mathlib master (df6966d0d, 2026-11-07)."
   - id: "https://github.com/TauCetiProject/TauCeti"
     relationship: "builds-on"
     note: >-
@@ -206,7 +206,7 @@ related_formalizations:
       Kronecker-Weber theorem and the addition theorem for the Weierstrass function, which are proved here too but
       are not headlines. docs/results/comparison.md compares each headline with Tau Ceti main (686d0d7f, 2026-11-07; 71ce0a33,
       2026-11-14, for the headlines new in 0.3.1; main of 2026-11-15 for those new in 0.4.0; f6105c5d, 2026-11-16, for those
-      new in 0.5.0;
+      new in 0.5.0; 7b4d5f70, 2026-11-17, for those new in 0.5.1;
       a5f657a8, 2026-11-12, for the class number one theorem: Tau Ceti proves that the nine fields have class number
       one and the classification for discriminants above -51; the Diophantine and numerical steps of Heegner's proof
       in this library are ported from Tau Ceti).
@@ -216,7 +216,7 @@ related_formalizations:
 
 status:
   scope: >-
-    Release 0.5.0. Formalized (the 107 statements of the Challenge_<book>.lean files, proved in the
+    Release 0.5.1. Formalized (the 112 statements of the Challenge_<book>.lean files, proved in the
     Solution_<book>.lean files):
     Milne sections 0 to 10, 13 (Theorem 6.1, Proposition 3.1, Theorem 3.8, Proposition 3.11, Theorems 8.4 and 8.6,
     Example 2.23; new in 0.3.1: Remark 2.25; new in 0.4.0: Theorems 1.17, 1.20, 4.9, 2.22, Remark 4.26), Milne
@@ -226,19 +226,23 @@ status:
     in even and odd rank, Corollary 4.9.7 (1), Theorems 7.2.9, 7.2.12, 7.2.13, Lemma 4.6.3), Shimura 1
     (Theorem 4.14 (i)), Iwaniec 2 ((4.12), (4.23)), Andrianov-Zhuravlev 1 (Chapter 1, Proposition 1.3), and the
     class number one theorem in two forms, conditional (HeegnerStark 2: each takes the named inputs
-    WeberHeegnerStarkInputs, and the second also QuadraticDiscriminantInput, as hypotheses), Waldspurger 27
+    WeberHeegnerStarkInputs, and the second also QuadraticDiscriminantInput, as hypotheses), Waldspurger 30
     (17 unconditional, of which 2 new in 0.4.0; 10 conditional on the named inputs WaldspurgerSquareClass,
     KohnenSquarefree, WaldspurgerCoefficients, WaldspurgerFibreDimension, GrossRatio or, new in 0.4.0,
-    ShimuraDualUnfolding; new in 0.5.0: 1 more conditional on ShimuraFrickeKernelUnfolding) and CongruentNumbers 14
+    ShimuraDualUnfolding; new in 0.5.0: 1 more conditional on ShimuraFrickeKernelUnfolding; new in 0.5.1: 1 unconditional, the
+    Rankin-Selberg unfolding at every cusp, and 1 conditional on ShimuraCosetIdentity) and CongruentNumbers 14
     (4 unconditional; 3 conditional on TunnellFormula and CoatesWiles; 2 conditional in addition on WeakBSD, the weak
     Birch and Swinnerton-Dyer conjecture; new in 0.5.0: 1 unconditional, 2 conditional on TunnellInputs and
     CoatesWilesCM, 2 conditional in addition on Tau Ceti's statement of the Birch and Swinnerton-Dyer conjecture for
-    E_n), Historical 12 (new in 0.3.1: Jacobi 2, Ramanujan 1, Weber 1, Kronecker 1; new in 0.4.0: the Jacobi triple
-    product; new in 0.5.0: Jacobi 1, Ramanujan 3, Jacobi-Weber 1, Kronecker 1; all unconditional), and, new in 0.5.0,
+    E_n), Historical 13 (new in 0.3.1: Jacobi 2, Ramanujan 1, Weber 1, Kronecker 1; new in 0.4.0: the Jacobi triple
+    product; new in 0.5.0: Jacobi 1, Ramanujan 3, Jacobi-Weber 1, Kronecker 1; new in 0.5.1: Jacobi's theta constants; all
+    unconditional), and, new in 0.5.0,
     RankinSelberg 2 (unconditional), EllipticCurves 6 (4 unconditional, among them the newforms of the congruent number curves E_1 and E_n, n odd
     squarefree; 1 conditional on ModularityTheorem, 1 on
-    NewformOfConductor), ThetaGenus 3 (unconditional) and KohnenPlusSpace 5 (1 unconditional; 1 conditional on
-    KohnenTraceIdentity, 3 on KohnenTraceIdentity, KohnenKernelModular and ZagierKernelUnfolding). The book maps
+    NewformOfConductor), ThetaGenus 3 (unconditional) and KohnenPlusSpace 7 (1 unconditional; 1 conditional on
+    KohnenTraceIdentity, 3 on KohnenTraceIdentity, KohnenKernelModular and ZagierKernelUnfolding; new in 0.5.1: 1
+    unconditional, the eigenbasis of the plus space, and 1 conditional on KohnenDLift, KohnenDimensionLe and
+    KohnenPlusMultOne). The book maps
     give the status of every item of Milne and Miyake; the statement maps give the status of the central results of
     Shimura, Iwaniec and Andrianov-Zhuravlev, and of the papers on Waldspurger's theorems and the historical papers, that are stated in Lean. Some library files state
     named results of the books without proof (named statements); no unconditional headline depends on them.
@@ -304,10 +308,15 @@ fidelity:
     series of one genus: Gram (Hessian) convention, genus by congruences, positive definite forms and the trivial
     spherical function. Kohnen's plus space at level 4 and for the theta multiplier only; Kohnen's trace identity in a
     reformulated form. Tunnell with the true L-function: four cited theorems are assumed (Waldspurger, Tunnell's
-    eigenforms and central values, Coates-Wiles). See the README, Known restrictions.
+    eigenforms and central values, Coates-Wiles). (12) New in 0.5.1: the unfolding at every cusp takes the
+    integrability of both sides as hypotheses; Shimura's theorem is conditional on ShimuraCosetIdentity; the
+    eigenbasis of the plus space is for the T(p^2), p odd, at level 4 and the theta multiplier; Kohnen's isomorphism is
+    conditional on three of Kohnen's lemmas (KohnenDimensionLe proved only where S_2k(SL_2(Z)) = 0); Jacobi's theta
+    constants are real series in y, the nome being exp(-pi y), with Tau Ceti's complete elliptic integral K. See the
+    README, Known restrictions.
 
 review:
-  status: "not yet reviewed: the 107 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
+  status: "not yet reviewed: the 112 headline statements of the Challenge_<book>.lean files and the definitions they use have not yet been reviewed by a human"
   reviewers: []
   notes: >-
     The headline statements and the definitions they use have not yet been reviewed by a human; that review is
@@ -820,6 +829,31 @@ alignment:
       module: "Challenge_Waldspurger / Solution_Waldspurger"
       status: "proved"
       note: "New in 0.5.0. Conditional on ShimuraFrickeKernelUnfolding (assumed), a smaller input than ShimuraDualUnfolding."
+    - source: "Rankin (1939); Shimura (1973), proof of the Main Theorem: the unfolding of a full-lattice Eisenstein series at every cusp of Gamma_0(L), coset by coset"
+      lean: "ModularFormsKB.Headlines.rankin_unfolding_cosets"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.5.1. The integrability of both sides is a hypothesis."
+    - source: "Shimura (1973), Main Theorem, for the theta multiplier"
+      lean: "ModularFormsKB.Headlines.shimuraLift_theta_of_cosetIdentity"
+      module: "Challenge_Waldspurger / Solution_Waldspurger"
+      status: "proved"
+      note: "New in 0.5.1. Conditional on ShimuraCosetIdentity (assumed), a smaller input than ShimuraFrickeKernelUnfolding."
+    - source: "Kohnen, Math. Ann. 248 (1980), section 1: S+_{k+1/2}(4) has a basis of eigenforms of the T(p^2), p odd"
+      lean: "ModularFormsKB.Headlines.kohnen_plus_eigenbasis"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.1. Formerly a named input (KohnenPlusEigenbasis)."
+    - source: "Kohnen, Math. Ann. 248 (1980), Theorem 1 (Kohnen's isomorphism), from three of its lemmas"
+      lean: "ModularFormsKB.Headlines.kohnen_isomorphism_of_inputs"
+      module: "Challenge_KohnenPlusSpace / Solution_KohnenPlusSpace"
+      status: "proved"
+      note: "New in 0.5.1. Conditional on KohnenDLift, KohnenDimensionLe, KohnenPlusMultOne (assumed; together equivalent to KohnenTraceIdentity)."
+    - source: "Jacobi, Fundamenta nova (1829), section 63, p. 180 and section 65, p. 184 (the theta constants through K)"
+      lean: "ModularFormsKB.Headlines.jacobi_theta_constants"
+      module: "Challenge_Historical / Solution_Historical"
+      status: "proved"
+      note: "New in 0.5.1. Real theta series in y (nome exp(-pi y)); Tau Ceti's complete elliptic integral K."
     - source: "The congruent number curves are modular: f_32 in S_2(Gamma_0(32)) and L(E_n, s) = L(f_32 twisted by (n/.), s)"
       lean: "ModularFormsKB.Headlines.congruent_curve_modular"
       module: "Challenge_CongruentNumbers / Solution_CongruentNumbers"
