@@ -6,7 +6,9 @@
     "ModularFormsKB.Headlines.kohnen_isomorphism",
     "ModularFormsKB.Headlines.kohnen_zagier",
     "ModularFormsKB.Headlines.waldspurger_plus",
-    "ModularFormsKB.Headlines.kohnen_zagier_twistedL_nonneg"
+    "ModularFormsKB.Headlines.kohnen_zagier_twistedL_nonneg",
+    "ModularFormsKB.Headlines.kohnen_plus_eigenbasis",
+    "ModularFormsKB.Headlines.kohnen_isomorphism_of_inputs"
   ],
   "definition_names": [],
   "permitted_axioms": [

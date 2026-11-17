@@ -7,7 +7,7 @@ import ModularFormsKB.ThetaGenus.Gram
 import ModularFormsKB.ThetaGenus.Gross
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: theta series of quadratic forms in one genus
+# Headline statements of modular-forms-lean 0.5.1: theta series of quadratic forms in one genus
 
 A topic, not a book: theta series of positive definite integral quadratic forms in one genus differ by a cusp form
 (the classical consequence of Siegel's main theorem, C. L. Siegel, *Über die analytische Theorie der quadratischen

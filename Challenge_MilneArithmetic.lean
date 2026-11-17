@@ -10,7 +10,7 @@ import ModularFormsKB.Milne.Wave7.OggTame
 import ModularFormsKB.Milne.Wave9.ClassGroupActionAll
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: Milne, *Modular Functions and Modular Forms*, sections 11 and 12
+# Headline statements of modular-forms-lean 0.5.1: Milne, *Modular Functions and Modular Forms*, sections 11 and 12
 
 The main results of the library for sections 11 (curves over finite fields, elliptic curves) and 12 (complex
 multiplication) of Milne's *Modular Functions and Modular Forms* (version 1.31), one theorem each, with every proof a deliberate `sorry`: to check what

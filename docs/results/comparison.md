@@ -16,7 +16,8 @@ this library pins (Mathlib master was not searched again for them). The headline
 Mathlib master at commit `a647c99f` and Tau Ceti main at commit `71ce0a33`. The headlines new in 0.4.0 were compared
 on 2026-11-15 with Mathlib master and Tau Ceti main of that day (section "Headlines new in 0.4.0"). Since 0.5.0
 the library is built on Tau Ceti `1ff5324` (Tau Ceti main of 2026-11-16) and the same Mathlib commit `e8ba86f`; the
-headlines new in 0.5.0 were compared on 2026-11-16 (section "Headlines new in 0.5.0").
+headlines new in 0.5.0 were compared on 2026-11-16 (section "Headlines new in 0.5.0"), those new in 0.5.1 on
+2026-11-17 (section "Headlines new in 0.5.1").
 
 The last column of the headline table and the column *Also in* of the book maps credit results that are also
 proved elsewhere: in Mathlib, in Tau Ceti, or in the Stacks Project formalization by Axiom
@@ -151,6 +152,20 @@ relates an elliptic curve to a newform.
 | `congruent_curve_modular`, `congruent_*_trueL` (Tunnell 1983) | the $L$-series of an elliptic curve | the curve $y^2 = x^3 - x$ and its rational points (`CurveX3SubX.lean`), quadratic twists of curves | new: $f_{32}$ is a cusp form of weight 2 on $\Gamma_0(32)$ and the $L$-series of $E_n$ is that of its twist, hence entire; Tunnell's theorem with the true $L$-function, conditional | none found |
 | `shimuraLift_theta_of_frickeKernel` (Shimura 1973; conditional on `ShimuraFrickeKernelUnfolding`) | — | — | new, conditional on a smaller input than in 0.4.0 | none found |
 | `jacobi_cube`, `ramanujan_partition_congruences`, `ramanujan_tau_congruences`, `ramanujan_question387`, `jacobi_quartic_weber_eighth_powers`, `kronecker_theta_E2` | Euler's pentagonal theorem, partitions, `jacobiTheta₂`, $E_2$ and its transformation, the derivatives of $E_2, E_4, E_6$; no partition or $\tau$ congruences, no cube or quartic identity | the discriminant form and its $q$-expansion | new | none found |
+
+## Headlines new in 0.5.1
+
+Compared on 2026-11-17 with Mathlib master at commit `d9a73ae1` and Tau Ceti main at commit `7b4d5f70`, by a search of
+both sources (half-integral weight, the plus space, Kohnen, Shimura, Rankin and unfolding, the theta multiplier; the
+complete elliptic integral `legendreK` with theta functions, nomes and the arithmetic–geometric mean) and reading the
+statements found.
+
+| headline | Mathlib | Tau Ceti | this release | other formalizations and related results |
+|---|---|---|---|---|
+| `rankin_unfolding_cosets` (Rankin 1939; Shimura 1973) | — | the Petersson product over the standard fundamental domain; no unfolding of Eisenstein series | new: the unfolding of a full-lattice Eisenstein series against a $\Gamma_0(L)$-invariant function at every cusp, coset by coset | none found |
+| `shimuraLift_theta_of_cosetIdentity` (Shimura 1973; conditional on `ShimuraCosetIdentity`) | — | — | new, conditional on a smaller input than in 0.5.0 | none found |
+| `kohnen_plus_eigenbasis`, `kohnen_isomorphism_of_inputs` (Kohnen 1980) | — (no half-integral weight forms; the semisimplicity of symmetric operators, `LinearMap.IsSymmetric.isFinitelySemisimple`, is used here) | — (no half-integral weight) | new: the eigenbasis of the plus space; Kohnen's isomorphism conditional on three of his lemmas | none found |
+| `jacobi_theta_constants` (Jacobi 1829, §§ 63, 65) | `jacobiTheta₂` and its functional equation; no complete elliptic integral | the complete elliptic integrals $K$, $E$, Legendre's relation and Gauss's arithmetic–geometric mean formula for $K$ (`Analysis/SpecialFunctions/EllipticIntegral/`); no theta functions in terms of $K$ | new: $\vartheta_3^2 = 2K/\pi$, $\vartheta_2^2 = 2kK/\pi$, $\vartheta_4^2 = 2k'K/\pi$ at the nome $e^{-\pi K'/K}$ | none found |
 
 ## Overlap with algebraic-number-theory-lean
 

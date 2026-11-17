@@ -11,9 +11,9 @@ factors `≡ 1 (mod 4)`, and `ν` is divisible neither by `4` nor by a prime `�
 factorization `λ² + 1 = (-μ) ν` gives a solution. The value set is stable under `ω ↦ (-λ ∓ i)/(-μ)`, the two
 partners having product `1`.
 
-Formalized for `ϖ = i` (the case `ϖ = -i` is its complex conjugate): `eisensteinLatticeI` (the derivation from
-`ϖ = i`), `eisensteinLatticeIConverse` (every factorization gives a solution, and the partner), and the arithmetic
-of `ν` in `eisensteinNuDivisibility`.
+Formalized: `eisensteinLatticeI` (the derivation from `ϖ = i`), `eisensteinLatticeIConverse` (every factorization
+gives a solution, and the partner), their complex conjugates for `ϖ = -i` (`eisensteinLatticeNegI`,
+`eisensteinLatticeNegIConverse`), and the arithmetic of `ν` in `eisensteinNuDivisibility`.
 -/
 
 noncomputable section
@@ -125,6 +125,68 @@ theorem eisensteinLatticeIConverse : EisensteinLatticeIConverse := by
     have := congrArg Complex.im h0
     simp at this
   refine ⟨by linear_combination h, ?_, ?_, ?_, ?_⟩
+  · rw [Complex.div_im]
+    simp
+    exact hn
+  · field_simp
+    ring
+  · field_simp
+    linear_combination (-1 : ℂ) * hc - Complex.I_sq
+  · rw [div_mul_div_comm, div_eq_one_iff_eq (mul_ne_zero hn' (neg_ne_zero.2 hm'))]
+    linear_combination (-1 : ℂ) * hc - Complex.I_sq
+
+/-- **Eisenstein, `ϖ = -i`** (1847, the derivation): if `λ ρ - μ ν = 1`, `ω` is not
+real, and `λ + ν ω = -i = μ/ω + ρ`, then `ρ = -λ`, `ν ≠ 0`, `-μ ν = λ² + 1` and `ω = (-λ - i)/ν`. -/
+@[kb "eisenstein1847" "Abhandlungen, complex multiplication"]
+def EisensteinLatticeNegI : Prop :=
+  ∀ (l m n r : ℤ) (ω : ℂ), l * r - m * n = 1 → ω.im ≠ 0 →
+    (l : ℂ) + n * ω = -I → (m : ℂ) / ω + r = -I →
+      r = -l ∧ n ≠ 0 ∧ -m * n = l ^ 2 + 1 ∧ ω = (-l - I) / n
+
+/-- **Eisenstein, `ϖ = -i`** (1847, the converse and the partner): if
+`-μ ν = λ² + 1`, then `ω = (-λ - i)/ν` is not real and satisfies `λ + ν ω = -i = μ/ω - λ`, and its partner
+`ω' = (-λ + i)/(-μ)` satisfies `ω ω' = 1`. -/
+@[kb "eisenstein1847" "Abhandlungen, complex multiplication"]
+def EisensteinLatticeNegIConverse : Prop :=
+  ∀ l m n : ℤ, -m * n = l ^ 2 + 1 →
+    ((-l - I) / n).im ≠ 0 ∧ (l : ℂ) + n * ((-l - I) / n) = -I ∧
+      (m : ℂ) / ((-l - I) / n) - l = -I ∧ ((-l - I) / n) * ((-l + I) / (-m)) = 1
+
+/-- **Eisenstein, `ϖ = -i`**: the complex conjugate of the case `ϖ = i`
+(`eisensteinLatticeI` applied to `ω̄`; the integers `λ, μ, ν, ρ` are fixed by conjugation). -/
+@[kb "eisenstein1847" "Abhandlungen, complex multiplication"]
+theorem eisensteinLatticeNegI : EisensteinLatticeNegI := by
+  intro l m n r ω hdet hω h1 h2
+  have h1' := congrArg (starRingEnd ℂ) h1
+  have h2' := congrArg (starRingEnd ℂ) h2
+  simp only [map_add, map_mul, map_intCast, map_div₀, map_neg, Complex.conj_I] at h1' h2'
+  obtain ⟨hr, hn, hc, he⟩ := eisensteinLatticeI l m n r (starRingEnd ℂ ω) hdet
+    (by simpa using hω) h1' h2'
+  refine ⟨hr, hn, hc, ?_⟩
+  have := congrArg (starRingEnd ℂ) he
+  simp only [map_div₀, map_add, map_neg, map_intCast, Complex.conj_I, Complex.conj_conj] at this
+  rw [this]
+  ring
+
+/-- **Eisenstein, `ϖ = -i`** (the converse and the partner): the complex conjugate of
+`eisensteinLatticeIConverse`. -/
+@[kb "eisenstein1847" "Abhandlungen, complex multiplication"]
+theorem eisensteinLatticeNegIConverse : EisensteinLatticeNegIConverse := by
+  intro l m n h
+  have hn : n ≠ 0 := by
+    rintro rfl
+    nlinarith [sq_nonneg l]
+  have hm : m ≠ 0 := by
+    rintro rfl
+    nlinarith [sq_nonneg l]
+  have hn' : (n : ℂ) ≠ 0 := by exact_mod_cast hn
+  have hm' : (m : ℂ) ≠ 0 := by exact_mod_cast hm
+  have hc : -(m : ℂ) * n = l ^ 2 + 1 := by exact_mod_cast h
+  have hI : (-(l : ℂ) - I) ≠ 0 := by
+    intro h0
+    have := congrArg Complex.im h0
+    simp at this
+  refine ⟨?_, ?_, ?_, ?_⟩
   · rw [Complex.div_im]
     simp
     exact hn

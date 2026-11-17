@@ -29,7 +29,9 @@
     "ModularFormsKB.Headlines.eisensteinLattice_functionalEquation",
     "ModularFormsKB.Headlines.rankin_unfolding",
     "ModularFormsKB.Headlines.shimuraLift_theta_of_dualUnfolding",
-    "ModularFormsKB.Headlines.shimuraLift_theta_of_frickeKernel"
+    "ModularFormsKB.Headlines.shimuraLift_theta_of_frickeKernel",
+    "ModularFormsKB.Headlines.rankin_unfolding_cosets",
+    "ModularFormsKB.Headlines.shimuraLift_theta_of_cosetIdentity"
   ],
   "definition_names": [],
   "permitted_axioms": [

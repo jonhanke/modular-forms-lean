@@ -7,7 +7,7 @@ import ModularFormsKB.Elliptic.WeilConverse
 import ModularFormsKB.Elliptic.TwistLevel
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: modular elliptic curves, proved
+# Headline statements of modular-forms-lean 0.5.1: modular elliptic curves, proved
 
 A topic, not a book: elliptic curves over `ℚ` whose L-function is that of a newform of weight 2 (Milne, *Modular
 Functions and Modular Forms*, section 11: Conjecture 11.17, Theorem 11.19, Theorem 11.24), the functional equation and

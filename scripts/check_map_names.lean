@@ -226,6 +226,7 @@ open ModularFormsKB ModularFormsKB.Headlines in #check @Iwaniec1997.thetaCongrue
 open ModularFormsKB ModularFormsKB.Headlines in #check @Iwaniec1997.thetaCongruent_add_two
 open ModularFormsKB ModularFormsKB.Headlines in #check @Iwaniec1997.thetaCongruent_congr
 open ModularFormsKB ModularFormsKB.Headlines in #check @Iwaniec1997.thetaCongruent_neg
+open ModularFormsKB ModularFormsKB.Headlines in #check @LinearMap.IsSymmetric.isFinitelySemisimple
 open ModularFormsKB ModularFormsKB.Headlines in #check @Matrix.GeneralLinearGroup.IsElliptic.smul_ne_self
 open ModularFormsKB ModularFormsKB.Headlines in #check @Matrix.IsElliptic
 open ModularFormsKB ModularFormsKB.Headlines in #check @Matrix.IsHyperbolic

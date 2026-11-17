@@ -9,14 +9,14 @@ import ModularFormsKB.Historical.Weber
 import ModularFormsKB.Historical.Kronecker
 
 /-!
-# Headline statements of modular-forms-lean 0.5.0: historical theorems of Jacobi, Ramanujan, Weber and Kronecker
+# Headline statements of modular-forms-lean 0.5.1: historical theorems of Jacobi, Ramanujan, Weber and Kronecker
 
 A topic, not a book: theorems read in the original papers (Jacobi, *Fundamenta nova*, 1829; Ramanujan, *On certain
 arithmetical functions*, 1916, *Some properties of p(n)*, 1919, *Congruence properties of partitions*, and
 Question 387, 1912: papers 18, 25 and 28 and a question of his *Collected Papers*, 1927; Weber, *Elliptische Functionen
 und algebraische Zahlen*, 1891; Kronecker, *Zur Theorie der elliptischen Functionen*, Werke 5). New in 0.5.0:
 `jacobi_cube`, `ramanujan_partition_congruences`, `ramanujan_tau_congruences`, `ramanujan_question387`,
-`jacobi_quartic_weber_eighth_powers` and `kronecker_theta_E2`.
+`jacobi_quartic_weber_eighth_powers` and `kronecker_theta_E2`. New in 0.5.1: `jacobi_theta_constants`.
 
 The main results of the library for these papers, one theorem each, with every proof a deliberate `sorry`: to check
 what is claimed, read this file. `Solution_Historical.lean` proves the same statements from the library, and
@@ -49,6 +49,11 @@ these too:
   `Nat.Partition n`), `ModularFormsKB.Historical.Ramanujan.tau` (the coefficient of `xⁿ` in the formal power series
   `x ∏_{n ≥ 1} (1 - xⁿ)²⁴` over `ℤ`), `ModularFormsKB.Historical.Kronecker.kroneckerTheta` (Kronecker's odd theta
   function `ϑ(ζ, w) = ∑_{n ∈ ℤ} e^{((2n+1)² w + 4(2n+1)ζ - 2(2n+1)) πi/4}`)
+* (0.5.1) `ModularFormsKB.Historical.Jacobi.thetaNull3`, `.thetaNull2`, `.thetaNull4` (the theta constants
+  `ϑ₃(y) = ∑_{n ∈ ℤ} e^{-πn²y}`, `ϑ₂(y) = ∑_{n ∈ ℤ} e^{-π(n + 1/2)²y}`, `ϑ₄(y) = ∑_{n ∈ ℤ} (-1)ⁿ e^{-πn²y}`, real
+  functions of `y > 0`, the nome being `q = e^{-πy}`), `ModularFormsKB.Historical.Jacobi.jacobiModulusOf`
+  (`y ↦ ϑ₂(y)²/ϑ₃(y)²`), `ModularFormsKB.Historical.Jacobi.legendreK'` (`K'(k) = K(√(1 - k²))`), and Tau Ceti's
+  `TauCeti.Real.legendreK` (the complete elliptic integral `K(k) = ∫₀^{π/2} (1 - k² sin² φ)^{-1/2} dφ`)
 -/
 
 namespace ModularFormsKB.Headlines
@@ -100,6 +105,20 @@ library derives it from the triple product identity. -/
 theorem jacobi_cube {q : ℂ} (hq : ‖q‖ < 1) :
     HasSum (fun n : ℕ ↦ (-1 : ℂ) ^ n * (2 * n + 1) * q ^ (n * (n + 1) / 2))
       ((∏' n : ℕ, (1 - q ^ (n + 1))) ^ 3) := by
+  sorry
+
+/-- **Jacobi's theta constants through the complete integral** (Jacobi, *Fundamenta nova*, § 63, p. 180 and § 65,
+p. 184; new in 0.5.1): for a modulus `0 < k < 1`, at the nome `q = e^{-πK'/K}` (that is `y = K'/K`),
+`ϑ₃ = √(2K/π)`, `ϑ₂ = √(2kK/π)` and `ϑ₄ = √(2k'K/π)` with `k' = √(1 - k²)`, and `k = ϑ₂²/ϑ₃²`. The library proves it
+by Gauss's route: Weber's duplication formulas make `(ϑ₃(q^{2ⁿ})², ϑ₄(q^{2ⁿ})²)` the arithmetic–geometric sequence
+of `(ϑ₃², ϑ₄²)`, Tau Ceti's theorem of Gauss gives `K = πϑ₃²/2`, and the theta transformation formula gives
+`K'/K = y`. -/
+theorem jacobi_theta_constants {k : ℝ} (hk0 : 0 < k) (hk1 : k < 1) :
+    jacobiModulusOf (legendreK' k / TauCeti.Real.legendreK k) = k ∧
+      thetaNull3 (legendreK' k / TauCeti.Real.legendreK k) = √(2 * TauCeti.Real.legendreK k / π) ∧
+      thetaNull2 (legendreK' k / TauCeti.Real.legendreK k) = √(2 * k * TauCeti.Real.legendreK k / π) ∧
+      thetaNull4 (legendreK' k / TauCeti.Real.legendreK k) =
+        √(2 * √(1 - k ^ 2) * TauCeti.Real.legendreK k / π) := by
   sorry
 
 end Jacobi
