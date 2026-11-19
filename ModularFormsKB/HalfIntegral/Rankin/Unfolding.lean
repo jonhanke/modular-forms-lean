@@ -482,7 +482,10 @@ lemma Fs_stab (hpar : ω (-1) * (-1 : ℂ) ^ lam = 1) (hU : UnitaryLaw L lam ω 
   · simp only [Int.cast_neg, Int.cast_one, Int.cast_zero, zero_mul, zero_add, norm_neg, norm_one, Complex.ofReal_one, div_one]
     rw [hpar, one_mul]
 
-/-- The function $H(z) = \sum_{\Gamma_\infty\backslash\Gamma_0(L)}F(\gamma z)$. -/
+/-- The function $H(z) = \sum_{\Gamma_\infty\backslash\Gamma_0(L)}F(\gamma z)$.
+**Restriction:** the coset sum converges absolutely for $\operatorname{Re} s > 1$ when $G$ is bounded (the series is
+of Eisenstein type). Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an analytic
+continuation or the intended value. -/
 noncomputable def Hs (G : ℍ → ℂ) (s : ℂ) (z : ℍ) : ℂ := ∑' x : X L, Fs G s (rep L x • z)
 
 /-- Right multiplication by `γ ∈ Γ₀(L)` permutes `Γ_∞\Γ₀(L)`. -/

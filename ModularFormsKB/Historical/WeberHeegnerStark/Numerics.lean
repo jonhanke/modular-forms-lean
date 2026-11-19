@@ -41,7 +41,9 @@ namespace ModularFormsKB.WeberHeegnerStark
 /-- `q = e^{2πiz}`. -/
 abbrev qOf (z : ℂ) : ℂ := cexp (2 * π * I * z)
 
-/-- `P(w) = ∏_{n ≥ 1} (1 - wⁿ)`. -/
+/-- `P(w) = ∏_{n ≥ 1} (1 - wⁿ)`.
+**Restriction:** the product converges (is multipliable) for `‖w‖ < 1`. Elsewhere the product is `1` by Lean's
+convention for a non-multipliable `∏'`, not the intended value. -/
 def etaProd (w : ℂ) : ℂ := ∏' n : ℕ, (1 - w ^ (n + 1))
 
 private lemma tprod_eta_q_eq (z : ℂ) : (∏' n : ℕ, (1 - eta_q n z)) = etaProd (qOf z) := by

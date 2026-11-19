@@ -28,7 +28,10 @@ noncomputable def ellipticPointCount (W : WeierstrassCurve ℤ) (p : ℕ) : ℕ 
 noncomputable def ellipticAp (W : WeierstrassCurve ℤ) (p : ℕ) : ℤ :=
   (p : ℤ) + 1 - ellipticPointCount W p
 
-/-- **The good part of $L(E, s)$** (p. 69): $\prod_{p \nmid \Delta(W)}(1 - a(p)p^{-s} + p^{1-2s})^{-1}$. -/
+/-- **The good part of $L(E, s)$** (p. 69): $\prod_{p \nmid \Delta(W)}(1 - a(p)p^{-s} + p^{1-2s})^{-1}$.
+**Restriction:** the Euler product converges (is multipliable) for $\operatorname{Re} s > 3/2$ (by the Hasse bound
+$|a(p)| \le 2\sqrt p$). Elsewhere the product is `1` by Lean's convention for a non-multipliable `∏'`, not the
+intended value. -/
 @[kb "milne2017mf" "Section 5, the L-function of an elliptic curve (pdf p. 69); good primes only"]
 noncomputable def ellipticLGood (W : WeierstrassCurve ℤ) (s : ℂ) : ℂ :=
   ∏' p : {p : Nat.Primes // ¬ (p : ℤ) ∣ W.Δ},

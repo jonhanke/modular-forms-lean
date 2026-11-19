@@ -118,7 +118,10 @@ noncomputable def thetaTerm (Q : Matrix (Fin m) (Fin m) ℤ) (Z : Matrix (Fin n)
   eTr ((zc N)ᵀ * zc Q * zc N * Z)
 
 /-- **Andrianov–Zhuravlev (1.13).** The theta series of degree `n` of `Q`:
-`θ^n(Z, Q) = ∑_{N ∈ M_{m,n}} e{ᵗN Q N Z}`. -/
+`θ^n(Z, Q) = ∑_{N ∈ M_{m,n}} e{ᵗN Q N Z}`.
+**Restriction:** the series converges for `Z` in the Siegel space when the form `xᵀQx` is positive definite (and, for
+`n ≥ 1`, only then), a hypothesis the type (an arbitrary integer matrix) does not enforce. Elsewhere the value is `0` by
+Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 @[kb "andrianovzhuravlev1995" "Chapter 1, (1.13), p. 16"]
 noncomputable def thetaSeries (Q : Matrix (Fin m) (Fin m) ℤ) (Z : SiegelSpace n) : ℂ :=
   ∑' N : Matrix (Fin m) (Fin n) ℤ, thetaTerm Q Z N

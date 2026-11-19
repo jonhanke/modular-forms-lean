@@ -33,7 +33,11 @@ noncomputable section
 namespace ModularFormsKB.Milne
 
 /-- Milne's $\Phi(s) = (2\pi/\lambda)^{-s}\Gamma(s)\varphi(s)$, $\varphi(s) = \sum_{n\ge1}a_nn^{-s}$
-(Theorem 9.3 (b)). -/
+(Theorem 9.3 (b)).
+**Restriction:** the factor `LSeries a s` is Mathlib's $\sum_n a_n n^{-s}$, which equals $\varphi(s)$ only where the
+Dirichlet series converges absolutely (e.g. for $\operatorname{Re} s > 1 + \sigma$ if $a_n = O(n^\sigma)$). Elsewhere,
+including where it converges only conditionally, that factor, and hence $\Phi(s)$, is $0$ by Lean's convention for a
+non-summable `∑'`, not an analytic continuation or the intended value. -/
 def heckePhi (lam : ℝ) (a : ℕ → ℂ) (s : ℂ) : ℂ :=
   ((2 * π / lam : ℝ) : ℂ) ^ (-s) * Gamma s * LSeries a s
 

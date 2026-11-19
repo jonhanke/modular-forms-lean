@@ -179,7 +179,10 @@ theorem gauss_triangular {x : ℂ} (hx : ‖x‖ < 1) :
   exact hg.hasSum
 
 /-- Eisenstein's theta-type product (formula (V.) of *Beiträge* VI, § 4):
-`χ(ζ) = (ζ - ζ⁻¹) ∏_{n ≥ 1} (1 - q^{2n} ζ²)(1 - q^{2n} ζ⁻²)` (index shifted to start at `0`). -/
+`χ(ζ) = (ζ - ζ⁻¹) ∏_{n ≥ 1} (1 - q^{2n} ζ²)(1 - q^{2n} ζ⁻²)` (index shifted to start at `0`).
+**Restriction:** the infinite product converges (is multipliable) for `‖q‖ < 1`; for `‖q‖ ≥ 1` it is in general not
+multipliable (the product factor is then `1` by Lean's convention for a non-multipliable `∏'`, so `χ(ζ)` reduces to
+`ζ - ζ⁻¹`). The value there is Lean's junk value, not the intended one. -/
 @[kb "eisenstein1847" "Beiträge VI, § 4, (V.), p. 275"]
 def eisensteinChi (q ζ : ℂ) : ℂ :=
   (ζ - ζ⁻¹) * ∏' n : ℕ, (1 - q ^ (2 * n + 2) * ζ ^ 2) * (1 - q ^ (2 * n + 2) * ζ⁻¹ ^ 2)

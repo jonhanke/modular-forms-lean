@@ -21,7 +21,10 @@ namespace ModularFormsKB.Milne.Wave13
 
 variable (Γ : Subgroup SL(2, ℤ)) (u : ℍ) (k : ℕ)
 
-/-- **The Poincaré series with a pole at `u`**: `S_u(z) = ∑_{ξ ∈ Γ} ((az + b) - u(cz + d))^{-2k}`. -/
+/-- **The Poincaré series with a pole at `u`**: `S_u(z) = ∑_{ξ ∈ Γ} ((az + b) - u(cz + d))^{-2k}`.
+**Restriction:** the series converges absolutely for `k ≥ 2` (weight `2k ≥ 4`); for `k ≤ 1` and `Γ` of finite index it
+does not converge absolutely, which `∑'` requires. Elsewhere the value is `0` by Lean's convention for a non-summable
+`∑'`, not an analytic continuation or the intended value. -/
 def S (z : ℍ) : ℂ := ∑' ξ : Γ, term u k ξ z
 
 theorem denom_zpow (γ : SL(2, ℤ)) (z : ℍ) :

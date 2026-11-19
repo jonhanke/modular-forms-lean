@@ -29,7 +29,10 @@ open scoped Real
 local notation "ℍ" => UpperHalfPlane
 
 /-- **The unary theta series** $\theta_{\psi,t}(z) = \sum_{n\in\mathbb Z}\psi(n)n^\nu e(tn^2z)$, $\nu$ the parity of $\psi$
-(Serre–Stark 1977 `serrestark1977`, §2; Shimura 1973 `shimura1973`, §2 [unverified]). -/
+(Serre–Stark 1977 `serrestark1977`, §2; Shimura 1973 `shimura1973`, §2 [unverified]).
+**Restriction:** the series converges for $\operatorname{Im} z > 0$ and $t \ge 1$; for $r \ge 1$ it diverges when
+$\operatorname{Im} z \le 0$ or $t = 0$. Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an
+analytic continuation or the intended value. -/
 noncomputable def unaryTheta {r : ℕ} (ψ : DirichletCharacter ℂ r) (t : ℕ) (z : ℂ) : ℂ :=
   ∑' n : ℤ, ψ (n : ZMod r) * (n : ℂ) ^ charParity ψ * cexp (2 * π * I * t * (n : ℂ) ^ 2 * z)
 

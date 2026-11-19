@@ -69,7 +69,10 @@ lemma summable_norm_heckeSummand {k : ℤ} {s : ℂ} (hks : 2 < (k : ℝ) + 2 * 
   · rw [norm_heckeSummand k s hv]
 
 /-- **Miyake (7.2.1).** The Eisenstein series with parameter $s$,
-$E_k(z,s;\chi,\psi) = \sum'_{m,n}\chi(m)\psi(n)(mz+n)^{-k}|mz+n|^{-2s}$. -/
+$E_k(z,s;\chi,\psi) = \sum'_{m,n}\chi(m)\psi(n)(mz+n)^{-k}|mz+n|^{-2s}$.
+**Restriction:** the series converges absolutely for $k + 2\operatorname{Re}(s) > 2$ (see `summable_eisensteinCharS`).
+Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended
+value. -/
 @[kb "miyake1989" "(7.2.1), p. 274"]
 def eisensteinCharS (k : ℤ) (s : ℂ) {L M : ℕ} (χ : DirichletCharacter ℂ L)
     (ψ : DirichletCharacter ℂ M) (z : ℍ) : ℂ :=

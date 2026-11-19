@@ -66,7 +66,10 @@ def thetaAP (A : Matrix (Fin r) (Fin r) ℝ) (P : MvPolynomial (Fin r) ℂ) (z :
   ∑' m : Fin r → ℤ, eval (intVec m) P * cexp (2 * π * I * (quadValue A (intVec m) / 2 * z))
 
 /-- **The congruent theta function (10.3)**: for an integral $A$, $N \ge 1$ and $h \in \mathbb Z^r$,
-$\Theta(z; h) = \sum_{m \equiv h\ (\mathrm{mod}\ N)} P(m)\, e\big(A[m] z / 2N^2\big)$. -/
+$\Theta(z; h) = \sum_{m \equiv h\ (\mathrm{mod}\ N)} P(m)\, e\big(A[m] z / 2N^2\big)$.
+**Restriction:** the series converges for $\operatorname{Im} z > 0$ when $A$ is positive definite and $N \ge 1$,
+hypotheses the types do not enforce. Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an
+analytic continuation or the intended value. -/
 @[kb "iwaniec1997" "Section 10.1, (10.3), p. 165"]
 def thetaCongruent (A : Matrix (Fin r) (Fin r) ℤ) (P : MvPolynomial (Fin r) ℂ) (N : ℕ) (h : Fin r → ℤ) (z : ℂ) :
     ℂ :=

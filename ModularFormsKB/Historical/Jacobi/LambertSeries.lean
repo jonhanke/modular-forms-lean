@@ -31,7 +31,9 @@ open Complex Finset
 
 namespace ModularFormsKB.Historical.Jacobi
 
-/-- `ϑ₃(q) = ∑_{n ∈ ℤ} q^{n²}`. -/
+/-- `ϑ₃(q) = ∑_{n ∈ ℤ} q^{n²}`.
+**Restriction:** the series converges for `‖q‖ < 1`; for `‖q‖ ≥ 1` the terms do not tend to `0`. Elsewhere the value
+is `0` by Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 def nomeTheta3 (q : ℂ) : ℂ := ∑' n : ℤ, q ^ (n.natAbs ^ 2)
 
 /-- `ϑ₄(q) = ∑_{n ∈ ℤ} (-1)ⁿ q^{n²}`. -/

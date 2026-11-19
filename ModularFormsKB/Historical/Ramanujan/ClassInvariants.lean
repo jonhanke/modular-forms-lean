@@ -33,7 +33,10 @@ open ModularFormsKB.WeberHeegnerStark (weberF weberF₂)
 open ModularFormsKB.Historical.Weber (weberF₁)
 
 /-- **Ramanujan's `G_n`** (No. 6, § 1, (1), p. 23):
-`G_n = 2^{-1/4} q^{-1/24} ∏_{k ≥ 1} (1 + q^{2k-1})`, `q = e^{-π√n}` (the product indexed from `k = 0` as `2k + 1`). -/
+`G_n = 2^{-1/4} q^{-1/24} ∏_{k ≥ 1} (1 + q^{2k-1})`, `q = e^{-π√n}` (the product indexed from `k = 0` as `2k + 1`).
+**Restriction:** the product converges for `n > 0` (so that `q = e^{-π√n} < 1`); for `n ≤ 0` Lean's `√n` is `0`, so
+`q = 1` and the product is not multipliable. There the product is `1` by Lean's convention for a non-multipliable
+`∏'`, so `ramanujanG n = 2^{-1/4}`, not the intended value. -/
 @[kb "ramanujan1927" "No. 6, § 1, (1), p. 23"]
 def ramanujanG (n : ℝ) : ℝ :=
   (2 : ℝ) ^ (-(1 / 4 : ℝ)) * Real.exp (π * √n / 24) *

@@ -44,7 +44,9 @@ namespace ModularFormsKB.Historical.Jacobi
 
 open ModularFormsKB.Historical.Weber (weberTheta00 weberTheta01 weberTheta10)
 
-/-- `ϑ₃ = ∑_{n ∈ ℤ} q^{n²}` at `q = e^{-πy}`. -/
+/-- `ϑ₃ = ∑_{n ∈ ℤ} q^{n²}` at `q = e^{-πy}`.
+**Restriction:** the series converges for `y > 0`; for `y ≤ 0` it diverges. Elsewhere the value is `0` by Lean's
+convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 def thetaNull3 (y : ℝ) : ℝ := ∑' n : ℤ, Real.exp (-π * (n : ℝ) ^ 2 * y)
 
 /-- `ϑ₄ = ∑_{n ∈ ℤ} (-1)ⁿ q^{n²}` at `q = e^{-πy}`. -/

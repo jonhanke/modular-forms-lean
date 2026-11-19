@@ -31,7 +31,10 @@ open UpperHalfPlane (coe_im)
 
 local notation "ℍ" => UpperHalfPlane
 
-/-- **The theta function** $\theta(z) = \sum_{n\in\mathbb Z} e(n^2 z) = \vartheta(2z)$, with $\vartheta$ = Mathlib's `jacobiTheta`. -/
+/-- **The theta function** $\theta(z) = \sum_{n\in\mathbb Z} e(n^2 z) = \vartheta(2z)$, with $\vartheta$ = Mathlib's `jacobiTheta`.
+**Restriction:** the series converges only for $\operatorname{Im} z > 0$; for $\operatorname{Im} z \le 0$ it is not
+summable and `theta z` (Mathlib's `jacobiTheta`, itself a `∑'`) is $0$ by Lean's convention for a non-summable `∑'`,
+not an analytic continuation or the intended value. -/
 noncomputable def theta (z : ℂ) : ℂ := jacobiTheta (2 * z)
 
 /-- $\theta(z) = \sum_{n \in \mathbb Z} e^{2\pi i n^2 z}$. -/

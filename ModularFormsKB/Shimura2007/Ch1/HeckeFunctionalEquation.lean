@@ -28,7 +28,10 @@ open scoped Real
 
 namespace ModularFormsKB.Shimura2007
 
-/-- The Dirichlet series $D(s,f) = \sum_{\xi > 0}a_\xi\xi^{-s}$ of (3.3), with $\xi = n/h$. -/
+/-- The Dirichlet series $D(s,f) = \sum_{\xi > 0}a_\xi\xi^{-s}$ of (3.3), with $\xi = n/h$.
+**Restriction:** the series converges absolutely for $\operatorname{Re} s > \alpha + 1$ when $a_n = O(n^\alpha)$ (and
+$h \ge 1$); for faster-growing $a_n$ it need not converge anywhere. Elsewhere the value is $0$ by Lean's convention for
+a non-summable `∑'`, not an analytic continuation or the intended value. -/
 noncomputable def heckeD (h : ℕ) (a : ℕ → ℂ) (s : ℂ) : ℂ :=
   ∑' n : ℕ, if n = 0 then 0 else a n * ((n : ℂ) / h) ^ (-s)
 
@@ -36,7 +39,10 @@ noncomputable def heckeD (h : ℕ) (a : ℕ → ℂ) (s : ℂ) : ℂ :=
 noncomputable def heckeR (h : ℕ) (a : ℕ → ℂ) (s : ℂ) : ℂ :=
   (2 * π : ℂ) ^ (-s) * Gamma s * heckeD h a s
 
-/-- The $q$-series $\sum_{n \ge 0} a_n\,\mathbf e(nz/h)$ of (3.1). -/
+/-- The $q$-series $\sum_{n \ge 0} a_n\,\mathbf e(nz/h)$ of (3.1).
+**Restriction:** the series converges for $\operatorname{Im} z > 0$ when $h \ge 1$ and $a_n$ grows at most
+polynomially. Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an analytic continuation or
+the intended value. -/
 noncomputable def heckeSeries (h : ℕ) (a : ℕ → ℂ) (z : ℂ) : ℂ :=
   ∑' n : ℕ, a n * cexp (2 * π * I * (n / h) * z)
 

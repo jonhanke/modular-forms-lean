@@ -24,7 +24,9 @@ open Complex
 
 namespace ModularFormsKB.Historical.Smith
 
-/-- `E(q) = ∏_{m ≥ 1} (1 + qᵐ)`. -/
+/-- `E(q) = ∏_{m ≥ 1} (1 + qᵐ)`.
+**Restriction:** the product converges (is multipliable) for `‖q‖ < 1`. Elsewhere the product is `1` by Lean's
+convention for a non-multipliable `∏'`, not the intended value. -/
 def distinctPartsProduct (q : ℂ) : ℂ := ∏' m : ℕ, (1 + q ^ (m + 1))
 
 /-- **Smith, Report, art. 129** (*Collected Papers* I, p. 318):

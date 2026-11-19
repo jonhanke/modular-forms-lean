@@ -185,7 +185,10 @@ theorem exp_neg_eq_contour_integral_Gamma {c x : ℝ} (hc : 0 < c) (hx : 0 < x) 
   push_cast
   field_simp
 
-/-- The function $f(x) = \sum_{n \ge 1} a_n e^{-nx}$ of Theorem 9.2 (the term `a 0` is not used). -/
+/-- The function $f(x) = \sum_{n \ge 1} a_n e^{-nx}$ of Theorem 9.2 (the term `a 0` is not used).
+**Restriction:** the series converges for $x > 0$ when the coefficients $a_n$ grow at most polynomially (otherwise it
+need not converge). Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`,
+not an analytic continuation or the intended value. -/
 def expSeries (a : ℕ → ℂ) (x : ℝ) : ℂ :=
   ∑' n : ℕ, (if n = 0 then 0 else a n) * Real.exp (-(n * x))
 

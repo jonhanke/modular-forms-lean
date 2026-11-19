@@ -34,7 +34,10 @@ open scoped ArithmeticFunction.sigma
 namespace ModularFormsKB.Historical.Ramanujan
 
 /-- Ramanujan's `P(x) = 1 - 24 ∑_{n ≥ 1} σ₁(n) xⁿ` (Ramanujan 1916, No. 18; the series appear in the
-differential equations (30), p. 142); the normalized Eisenstein series `E₂` in `x = e^{2πiτ}`. -/
+differential equations (30), p. 142); the normalized Eisenstein series `E₂` in `x = e^{2πiτ}`.
+**Restriction:** the series converges absolutely for `‖x‖ < 1`; for `‖x‖ ≥ 1` its terms do not tend to `0`. Elsewhere
+the series is `0` by Lean's convention for a non-summable `∑'`, so `P x = 1`, not an analytic continuation or the
+intended value. -/
 @[kb "ramanujan1927" "No. 18, § 7, (30), p. 142"]
 def P (x : ℂ) : ℂ := 1 - 24 * ∑' n : ℕ+, (σ 1 n : ℂ) * x ^ (n : ℕ)
 
@@ -42,7 +45,10 @@ def P (x : ℂ) : ℂ := 1 - 24 * ∑' n : ℕ+, (σ 1 n : ℂ) * x ^ (n : ℕ)
 @[kb "ramanujan1927" "No. 18, § 7, (30), p. 142"]
 def Q (x : ℂ) : ℂ := 1 + 240 * ∑' n : ℕ+, (σ 3 n : ℂ) * x ^ (n : ℕ)
 
-/-- Ramanujan's `R(x) = 1 - 504 ∑_{n ≥ 1} σ₅(n) xⁿ`, i.e. `E₆`. -/
+/-- Ramanujan's `R(x) = 1 - 504 ∑_{n ≥ 1} σ₅(n) xⁿ`, i.e. `E₆`.
+**Restriction:** the series converges absolutely for `‖x‖ < 1`; for `‖x‖ ≥ 1` its terms do not tend to `0`. Elsewhere
+the series is `0` by Lean's convention for a non-summable `∑'`, so `R x = 1`, not an analytic continuation or the
+intended value. -/
 @[kb "ramanujan1927" "No. 18, § 7, (30), p. 142"]
 def R (x : ℂ) : ℂ := 1 - 504 * ∑' n : ℕ+, (σ 5 n : ℂ) * x ^ (n : ℕ)
 

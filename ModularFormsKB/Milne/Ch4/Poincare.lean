@@ -163,7 +163,10 @@ def poincareTerm (k n : ℕ) (x : StabInftyCosets Γ) (z : ℍ) : ℂ :=
       exact this.symm) x
 
 /-- **Definition 4.27**: the Poincaré series of weight $2k$ and character $n$ for $\Gamma$,
-$\varphi_n(z) = \sum_{\gamma \in \Gamma_0\backslash\Gamma'} \exp(2\pi i n\,\gamma(z)/h)\,(cz+d)^{-2k}$. -/
+$\varphi_n(z) = \sum_{\gamma \in \Gamma_0\backslash\Gamma'} \exp(2\pi i n\,\gamma(z)/h)\,(cz+d)^{-2k}$.
+**Restriction:** the series converges absolutely for $k \ge 2$ (weight $2k \ge 4$); for $k \le 1$ and $\Gamma$ of finite
+index it does not converge absolutely, which `∑'` requires. Elsewhere the value is $0$ by Lean's convention for a
+non-summable `∑'`, not an analytic continuation or the intended value. -/
 @[kb "milne2017mf" "Section 4, Definition 4.27 (pdf p. 61)"]
 def poincareSeries (k n : ℕ) (z : ℍ) : ℂ := ∑' x : StabInftyCosets Γ, poincareTerm Γ k n x z
 

@@ -23,7 +23,10 @@ open ModularFormsKB.Miyake.Wave2B
 
 variable {L M : ℕ}
 
-/-- The row $R(c) = \sum_n\chi(c)\psi(n)(cz+n)^{-k}|cz+n|^{-2s}$ of (7.2.1). -/
+/-- The row $R(c) = \sum_n\chi(c)\psi(n)(cz+n)^{-k}|cz+n|^{-2s}$ of (7.2.1).
+**Restriction:** the row converges absolutely for $k + 2\operatorname{Re}(s) > 1$ (terms of size $|cz +
+n|^{-k-2\operatorname{Re}(s)}$). Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an
+analytic continuation or the intended value. -/
 def heckeRow (k : ℤ) (s : ℂ) (χ : DirichletCharacter ℂ L) (ψ : DirichletCharacter ℂ M) (z : ℍ) (c : ℤ) : ℂ :=
   ∑' n : ℤ, χ (c : ZMod L) * ψ (n : ZMod M) * heckeSummand k s ![c, n] z
 

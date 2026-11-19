@@ -57,7 +57,10 @@ structure IsEvenGram (H : Matrix (Fin n) (Fin n) ℤ) : Prop where
   even_diag : ∀ i, Even (H i i)
   posDef : (H.map (Int.cast : ℤ → ℝ)).PosDef
 
-/-- **The theta series** `θ_H(τ) = ∑_{x ∈ ℤⁿ} exp (π i xᵀHx τ) = ∑_x q^{Q(x)}`. -/
+/-- **The theta series** `θ_H(τ) = ∑_{x ∈ ℤⁿ} exp (π i xᵀHx τ) = ∑_x q^{Q(x)}`.
+**Restriction:** the series converges for `τ ∈ ℍ` exactly when the form `xᵀHx` is positive definite (e.g. under
+`IsEvenGram H`), a hypothesis the type (an arbitrary integer matrix) does not enforce. Elsewhere the value is `0` by
+Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 noncomputable def thetaGram (H : Matrix (Fin n) (Fin n) ℤ) (τ : ℍ) : ℂ :=
   ∑' x : Fin n → ℤ, cexp (π * I * (gramNorm H x : ℂ) * τ)
 

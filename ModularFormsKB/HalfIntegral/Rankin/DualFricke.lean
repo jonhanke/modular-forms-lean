@@ -32,7 +32,10 @@ local notation "ℍ" => UpperHalfPlane
 namespace DualFricke
 
 /-- **The Eisenstein series at $\infty$ with Gauss-sum coefficients**
-$E^G(z,s) = y^s\sum_{(c,d)\in\mathbb Z^2}G(\omega,d)\,(Lcz+d)^\lambda|Lcz+d|^{-\lambda-2s}$. -/
+$E^G(z,s) = y^s\sum_{(c,d)\in\mathbb Z^2}G(\omega,d)\,(Lcz+d)^\lambda|Lcz+d|^{-\lambda-2s}$.
+**Restriction:** the lattice sum converges absolutely for $\operatorname{Re} s > 1$ (the terms have size $|Lcz +
+d|^{-2\operatorname{Re} s}$ and the Gauss-sum coefficients are bounded). Elsewhere the value is $0$ by Lean's
+convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 noncomputable def eisensteinGauss (L lam : ℕ) (ω : DirichletCharacter ℂ L) (z : ℍ) (s : ℂ) : ℂ :=
   ((z.im : ℂ) ^ s) * ∑' p : ℤ × ℤ, gaussAt L ω p.2 * eisTerm lam s ((L : ℂ) * p.1 * z + p.2)
 

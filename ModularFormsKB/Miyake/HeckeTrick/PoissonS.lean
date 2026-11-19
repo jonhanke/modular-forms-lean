@@ -21,7 +21,10 @@ noncomputable section
 
 namespace ModularFormsKB.Miyake.HeckeTrick
 
-/-- **Miyake (7.2.7).** $S(z;\alpha,\beta) = \sum_{n}(z+n)^{-\alpha}(\bar z+n)^{-\beta}$. -/
+/-- **Miyake (7.2.7).** $S(z;\alpha,\beta) = \sum_{n}(z+n)^{-\alpha}(\bar z+n)^{-\beta}$.
+**Restriction:** the series converges absolutely only for $\operatorname{Re}(\alpha + \beta) > 1$ (the continuation is
+`heckeSCont`). Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an analytic continuation
+or the intended value. -/
 @[kb "miyake1989" "(7.2.7), p. 275"]
 def heckeS (z α β : ℂ) : ℂ :=
   ∑' n : ℤ, (z + n) ^ (-α) * ((starRingEnd ℂ) z + n) ^ (-β)
