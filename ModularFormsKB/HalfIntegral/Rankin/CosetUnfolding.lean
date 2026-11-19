@@ -168,7 +168,9 @@ lemma sum_reps_mul {L : ℕ} {R : List SL(2, ℤ)} (hR : IsGamma0Reps L R) (f : 
 
 /-! ### The full-lattice series and the coset coefficients -/
 
-/-- **The full-lattice series** $S_\Phi(z,s) = y^s\sum_{p\in\mathbb Z^2}\Phi(p)\,(p_1z+p_2)^\lambda|p_1z+p_2|^{-\lambda-2s}$. -/
+/-- **The full-lattice series** $S_\Phi(z,s) = y^s\sum_{p\in\mathbb Z^2}\Phi(p)\,(p_1z+p_2)^\lambda|p_1z+p_2|^{-\lambda-2s}$.
+**Restriction:** the lattice sum converges absolutely for $\operatorname{Re} s > 1$ when $\Phi$ is bounded. Elsewhere
+the value is $0$ by Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 noncomputable def latticeSeries (lam : ℕ) (Φ : ℤ × ℤ → ℂ) (z : ℍ) (s : ℂ) : ℂ :=
   ((z.im : ℂ) ^ s) * ∑' p : ℤ × ℤ, Φ p * eisTerm lam s ((p.1 : ℂ) * z + p.2)
 

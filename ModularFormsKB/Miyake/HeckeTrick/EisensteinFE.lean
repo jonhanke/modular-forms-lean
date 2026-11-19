@@ -35,7 +35,9 @@ namespace ModularFormsKB.Miyake.HeckeTrick
 
 open ModularFormsKB.HalfIntegral
 
-/-- The lattice theta series $\Theta(z,u) = \sum_{(c,d)}\omega(d)\,v^\lambda e^{-\pi u|v|^2}$, $v = Lcz+d$. -/
+/-- The lattice theta series $\Theta(z,u) = \sum_{(c,d)}\omega(d)\,v^\lambda e^{-\pi u|v|^2}$, $v = Lcz+d$.
+**Restriction:** the series converges for $u > 0$ and $L \ge 1$; it diverges for $u \le 0$. Elsewhere the value is $0$
+by Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 def latticeTheta (L lam : ℕ) (ω : DirichletCharacter ℂ L) (z : ℍ) (u : ℝ) : ℂ :=
   ∑' p : ℤ × ℤ, ω (p.2 : ZMod L) * ((L : ℂ) * p.1 * z + p.2) ^ lam *
     ((Real.exp (-π * u * ‖(L : ℂ) * p.1 * z + p.2‖ ^ 2) : ℝ) : ℂ)

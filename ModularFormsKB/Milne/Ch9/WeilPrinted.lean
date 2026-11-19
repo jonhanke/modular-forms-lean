@@ -53,7 +53,10 @@ lemma pow_mul_exp_neg_two_pi_le (k : ℕ) {u : ℝ} (hu : 0 ≤ u) :
 def qSeriesMajorantTerm (k : ℕ) (a : ℕ → ℂ) (t : ℝ) (n : ℕ) : ℝ :=
   t ^ k * (‖a n‖ * Real.exp (-(2 * π * n * t)))
 
-/-- The majorant $h(t) = \sum_n t^k|a_n|e^{-2\pi nt}$. -/
+/-- The majorant $h(t) = \sum_n t^k|a_n|e^{-2\pi nt}$.
+**Restriction:** the series converges for $t > 0$ when the coefficients $a_n$ grow at most polynomially (otherwise it
+need not converge). Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`,
+not an analytic continuation or the intended value. -/
 def qSeriesMajorant (k : ℕ) (a : ℕ → ℂ) (t : ℝ) : ℝ :=
   ∑' n, qSeriesMajorantTerm k a t n
 

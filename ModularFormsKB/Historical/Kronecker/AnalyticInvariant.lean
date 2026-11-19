@@ -38,7 +38,9 @@ open scoped Real
 namespace ModularFormsKB.Historical.Kronecker
 
 /-- Kronecker's odd theta function `ϑ(ζ, ω) = ∑_{ν odd} e^{(ν²ω + 4νζ - 2ν)πi/4}` (Werke 4, XXXI, § I,
-p. 347), summed as `ν = 2n + 1`, `n ∈ ℤ`. -/
+p. 347), summed as `ν = 2n + 1`, `n ∈ ℤ`.
+**Restriction:** the series converges for `Im ω > 0` (the terms are of size `exp(-π(ν² Im ω + 4ν Im ζ) / 4)`). Elsewhere
+the value is `0` by Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 @[kb "kronecker1929" "XXXI, § I, p. 347"]
 def kroneckerTheta (ζ ω : ℂ) : ℂ :=
   ∑' n : ℤ, cexp ((((2 * n + 1 : ℤ) : ℂ) ^ 2 * ω + 4 * ((2 * n + 1 : ℤ) : ℂ) * ζ -
@@ -80,7 +82,10 @@ def KroneckerAFormInvariance : Prop :=
         ((-f'.2.1 + I) / (2 * f'.2.2)) ((f'.2.1 + I) / (2 * f'.2.2))
 
 /-- Kronecker's lattice sum `∑'_{(m,n) ≠ 0} e^{2(mσ + nτ)πi} (a₀m² + b₀mn + c₀n²)^{-1-ρ}`
-(Werke 4, XXXI, § IV, (T₀), p. 360; the origin is omitted). -/
+(Werke 4, XXXI, § IV, (T₀), p. 360; the origin is omitted).
+**Restriction:** the series converges absolutely when the quadratic form `a₀m² + b₀mn + c₀n²` is positive definite and
+`ρ > 0`, hypotheses the type (arbitrary reals) does not enforce. Elsewhere the value is `0` by Lean's convention for a
+non-summable `∑'`, not an analytic continuation or the intended value. -/
 @[kb "kronecker1929" "XXXI, § IV, (T₀), p. 360"]
 def latticeSum (σ τ : ℝ) (a₀ b₀ c₀ ρ : ℝ) : ℂ :=
   ∑' p : ℤ × ℤ, if p = 0 then 0 else

@@ -32,7 +32,10 @@ noncomputable section
 namespace ModularFormsKB.Miyake.Wave2B
 
 /-- The lattice series $\sum_{v \in \mathbb Z^2} f(v)\,(v_0 z + v_1)^{-k}$ with weight
-$f : \mathbb Z^2 \to \mathbb C$ (the term $v = 0$ is $0$ for $k \ne 0$). -/
+$f : \mathbb Z^2 \to \mathbb C$ (the term $v = 0$ is $0$ for $k \ne 0$).
+**Restriction:** the series converges absolutely for $k \ge 3$ (that is, $k > 2$) when the weight `f` is bounded; for
+$k \le 2$ it does not converge in general. Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`,
+not an analytic continuation or the intended value. -/
 def latticeSeries (k : ℤ) (f : (Fin 2 → ℤ) → ℂ) (z : ℍ) : ℂ :=
   ∑' v : Fin 2 → ℤ, f v * eisSummand k v z
 
@@ -186,7 +189,10 @@ theorem eisensteinChar_eq_zero_of_parity (k : ℤ) {L M : ℕ} (χ : DirichletCh
 /-! ### Theorem 7.1.3: the Fourier expansion of $E_k(z;\chi,\psi)$ -/
 
 /-- Miyake's constant term $C$ of Theorem 7.1.3: $2L_M(k,\psi) = 2\sum_{n \ge 1}\psi(n)n^{-k}$ if
-$\chi$ is the principal character $\chi_0$ (the character mod $1$), and $0$ otherwise. -/
+$\chi$ is the principal character $\chi_0$ (the character mod $1$), and $0$ otherwise.
+**Restriction:** when $L = 1$ the series $\sum_n \psi(n)n^{-k}$ converges absolutely for $k \ge 2$; for $k \le 1$
+(and $M \ge 1$) it does not converge absolutely, which `∑'` requires. There the sum, and hence the constant, is $0$ by
+Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 def eisensteinCharConst (k : ℕ) {L M : ℕ} (ψ : DirichletCharacter ℂ M) : ℂ :=
   if L = 1 then 2 * ∑' n : ℕ+, ψ (n : ℕ) * ((n : ℕ) : ℂ) ^ (-(k : ℤ)) else 0
 

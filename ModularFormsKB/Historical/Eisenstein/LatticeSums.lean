@@ -565,7 +565,10 @@ theorem eisenstein_cot_formula {α β γ : ℂ} (hα : α ≠ 0) (h : (β / α).
   have hf : (k ! : ℂ) ≠ 0 := by exact_mod_cast Nat.factorial_ne_zero k
   field_simp
 
-/-- Eisenstein's series `F_g(ω, ξ) = ∑_n ∂^{g-1}/∂ξ^{g-1} cot(nπω + ξ)` (§ 4, p. 273). -/
+/-- Eisenstein's series `F_g(ω, ξ) = ∑_n ∂^{g-1}/∂ξ^{g-1} cot(nπω + ξ)` (§ 4, p. 273).
+**Restriction:** the series converges absolutely for `Im ω ≠ 0` and `g ≥ 2` (the derivatives of `cot` decay
+exponentially in `n`); for `Im ω ≠ 0` and `g ≤ 1` it diverges (the terms tend to `∓i`). Elsewhere the value is `0` by
+Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 def eisensteinF (g : ℕ) (ω ξ : ℂ) : ℂ := ∑' n : ℤ, iteratedDeriv (g - 1) Complex.cot (n * π * ω + ξ)
 
 /-- Absolute summability of the shifted lattice sum of weight `g ≥ 3`. -/

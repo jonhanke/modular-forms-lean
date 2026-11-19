@@ -36,7 +36,10 @@ noncomputable section
 namespace ModularFormsKB.Milne
 
 /-- **Milne's Eisenstein series** $G_k(z) = \sum_{(m,n)\neq(0,0)} (mz+n)^{-2k}$ (weight $2k$ in Milne's convention).
-The term with $(m,n) = (0,0)$ is $0^{-2k} = 0$ in Lean, so the sum over all pairs is the sum over nonzero pairs. -/
+The term with $(m,n) = (0,0)$ is $0^{-2k} = 0$ in Lean, so the sum over all pairs is the sum over nonzero pairs.
+**Restriction:** the series converges absolutely for $k \ge 2$ (weight $2k \ge 4$). For $k = 1$ (weight $2$) it
+converges only conditionally (as an iterated sum), which `∑'` does not accept; for $k = 0$ it diverges. Elsewhere the
+value is $0$ by Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 @[kb "milne2017mf" "Section 4, proof of Proposition 4.7, the series G_k(z) (pdf p. 50)"]
 def G (k : ℕ) (z : ℍ) : ℂ := ∑' v : Fin 2 → ℤ, eisSummand (2 * k : ℕ) v z
 

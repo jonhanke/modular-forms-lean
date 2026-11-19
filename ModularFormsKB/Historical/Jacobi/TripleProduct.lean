@@ -302,7 +302,9 @@ lemma norm_gaussBinom_le (hQ : ‖Q‖ < 1) (m j : ℕ) :
       (mul_le_mul (norm_qPoch_ge hQ _) (norm_qPoch_ge hQ _) (Real.exp_pos _).le (norm_nonneg _))
   · simp only [norm_zero]; positivity
 
-/-- `E = ∏ (1 - Q^{i+1})`. -/
+/-- `E = ∏ (1 - Q^{i+1})`.
+**Restriction:** the product converges (is multipliable) for `‖Q‖ < 1`. Elsewhere the product is `1` by Lean's
+convention for a non-multipliable `∏'`, not the intended value. -/
 def eulerProd (Q : ℂ) : ℂ := ∏' i : ℕ, (1 - Q ^ (i + 1))
 
 lemma tendsto_qPoch (hQ : ‖Q‖ < 1) : Tendsto (qPoch Q) atTop (𝓝 (eulerProd Q)) :=

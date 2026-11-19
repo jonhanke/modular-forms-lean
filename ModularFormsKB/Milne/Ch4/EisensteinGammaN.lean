@@ -47,7 +47,10 @@ private lemma summable_norm_inv_zpow_nat {K : ℤ} (hK : 3 ≤ K) :
   simpa only [norm_inv, norm_zpow, Complex.norm_natCast, ← zpow_neg,
     ← Real.rpow_intCast, Int.cast_neg] using (Real.summable_nat_rpow.mpr hk')
 
-/-- The coefficient of the restricted series `E_c` in the general series `G_a`. -/
+/-- The coefficient of the restricted series `E_c` in the general series `G_a`.
+**Restriction:** the series converges absolutely for `K ≥ 2` (it is a sum of `r^(-K)` over an arithmetic progression);
+for `K ≤ 1` and infinitely many admissible `r` it diverges. Elsewhere the value is `0` by Lean's convention for a
+non-summable `∑'`, not an analytic continuation or the intended value. -/
 private def genCoeff (N : ℕ) (K : ℤ) (a c : Fin 2 → ZMod N) : ℂ :=
   ∑' r : ℕ, ((r : ℂ) ^ K)⁻¹ * (if r • c = a then 1 else 0)
 

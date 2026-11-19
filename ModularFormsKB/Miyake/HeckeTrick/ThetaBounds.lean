@@ -29,11 +29,17 @@ namespace ModularFormsKB.Miyake.HeckeTrick
 /-- The lattice vector $v_p = ap_1z + p_2$. -/
 def genVec (a : ℕ) (z : ℍ) (p : ℤ × ℤ) : ℂ := (a : ℂ) * p.1 * z + p.2
 
-/-- The theta series $\Theta(z,u) = \sum_p c(p)\,v_p^\lambda e^{-\pi u|v_p|^2}$. -/
+/-- The theta series $\Theta(z,u) = \sum_p c(p)\,v_p^\lambda e^{-\pi u|v_p|^2}$.
+**Restriction:** the series converges for $u > 0$ and $a \ge 1$ when $c$ has at most polynomial growth (for $u \le 0$ it
+diverges unless $c$ decays fast). Elsewhere the value is $0$ by Lean's convention for a non-summable `∑'`, not an
+analytic continuation or the intended value. -/
 def genTheta (a lam : ℕ) (c : ℤ × ℤ → ℂ) (z : ℍ) (u : ℝ) : ℂ :=
   ∑' p : ℤ × ℤ, c p * genVec a z p ^ lam * ((Real.exp (-π * u * ‖genVec a z p‖ ^ 2) : ℝ) : ℂ)
 
-/-- The lattice sum $S(z,\sigma) = \sum_p c(p)\,v_p^\lambda|v_p|^{-2\sigma}$. -/
+/-- The lattice sum $S(z,\sigma) = \sum_p c(p)\,v_p^\lambda|v_p|^{-2\sigma}$.
+**Restriction:** the lattice sum converges absolutely for $\operatorname{Re}\sigma > (\lambda + 2)/2$ when $c$ is
+bounded and $a \ge 1$ (terms of size $|v_p|^{\lambda - 2\operatorname{Re}\sigma}$). Elsewhere the value is $0$ by
+Lean's convention for a non-summable `∑'`, not an analytic continuation or the intended value. -/
 def genSeries (a lam : ℕ) (c : ℤ × ℤ → ℂ) (z : ℍ) (σ : ℂ) : ℂ :=
   ∑' p : ℤ × ℤ, c p * genVec a z p ^ lam * ((‖genVec a z p‖ : ℝ) : ℂ) ^ (-2 * σ)
 

@@ -37,7 +37,10 @@ theorem smith_triple_product {q v : ℂ} (hq : ‖q‖ < 1) (hv : v ≠ 0) :
   Jacobi.triple_product hq hv
 
 /-- Smith's odd theta function `ϑ(x, ω) = 2 ∑_{n ≥ 0} (-1)ⁿ q^{(n+1/2)²} sin((2n+1)πx)`, `q^{(n+1/2)²} =
-e^{iπω(n+1/2)²}` (Jacobi's `ϑ₁(πx | ω)`; Smith's `(1/i) θ_{1,1}(2Kx, ω)`). -/
+e^{iπω(n+1/2)²}` (Jacobi's `ϑ₁(πx | ω)`; Smith's `(1/i) θ_{1,1}(2Kx, ω)`).
+**Restriction:** the series converges for `Im ω > 0` (for every `x`); for `Im ω ≤ 0` it diverges except in degenerate
+cases such as `x ∈ ℤ` (every term `0`). Elsewhere the value is `0` by Lean's convention for a non-summable `∑'`, not an
+analytic continuation or the intended value. -/
 def smithTheta (x ω : ℂ) : ℂ :=
   2 * ∑' n : ℕ, (-1) ^ n * cexp (π * I * ω * ((n : ℂ) + 1 / 2) ^ 2) * Complex.sin ((2 * n + 1) * π * x)
 
